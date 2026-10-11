@@ -1,0 +1,5 @@
+# Existing environment versions are recorded per run. Install torch with the
+# official wheel index for the chosen CUDA platform; do not upgrade blindly.
+numpy
+opencv-python
+torch

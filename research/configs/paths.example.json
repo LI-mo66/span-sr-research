@@ -1,0 +1,11 @@
+{
+  "train": {"hr": "D:/datasets/DF2K/HR", "lr": "D:/datasets/DF2K/LR_bicubic/X4", "lr_suffix": "x4"},
+  "validation": {
+    "DIV2K_valid": {"hr": "D:/datasets/DIV2K/DIV2K_valid_HR", "lr": "D:/datasets/DIV2K/DIV2K_valid_LR_bicubic/X4", "lr_suffix": "x4"},
+    "Set5": {"hr": "D:/datasets/Set5/HR", "lr": "D:/datasets/Set5/LR/X4", "lr_suffix": "x4"},
+    "Set14": {"hr": "D:/datasets/Set14/HR", "lr": "D:/datasets/Set14/LR/X4", "lr_suffix": "x4"},
+    "B100": {"hr": "D:/datasets/B100/HR", "lr": "D:/datasets/B100/LR/X4", "lr_suffix": "x4"},
+    "Urban100": {"hr": "D:/datasets/Urban100/HR", "lr": "D:/datasets/Urban100/LR/X4", "lr_suffix": "x4"},
+    "Manga109": {"hr": "D:/datasets/Manga109/HR", "lr": "D:/datasets/Manga109/LR/X4", "lr_suffix": "x4"}
+  }
+}

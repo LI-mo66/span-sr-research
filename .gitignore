@@ -1,4 +1,15 @@
 # ignored folders
+runs/
+weights/
+logs/
+research/configs/*.local.json
+paper-source.txt
+*.pt
+*.ckpt
+*.safetensors
+*.state
+*.npy
+*.npz
 datasets/*
 experiments/*
 results/*
