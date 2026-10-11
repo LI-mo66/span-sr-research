@@ -27,4 +27,4 @@ Engineering verification covers odd rectangular dimensions, finite full gradient
 
 ## Current blockers
 
-No data paths or bicubic provenance supplied. No baseline training/PSNR/SSIM exists. CLI not authenticated; connector identifies LI-mo66 but has no repository-create tool. Remote repository not created. Local GPU RTX4060 8GB; PyTorch2.9.1+cu128 available in dl environment. Long-run time and memory unknown until real-data preflight/profile.
+User supplied datasets/; DIV2K and five benchmark pair audit completed, Flickr2K download pending. Bicubic provenance still unverified. No baseline training/PSNR/SSIM exists. CLI not authenticated; connector identifies LI-mo66 but has no repository-create tool. Remote repository not created. Local GPU RTX4060 8GB; PyTorch2.9.1+cu128 available in dl environment. Synthetic resource profiles are in engineering-evidence.md; real-data long-run time and memory remain unknown.

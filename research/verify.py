@@ -5,6 +5,7 @@ import tempfile
 from pathlib import Path
 import torch
 from runtime import components
+from deploy import fused_copy
 
 def main():
     torch.set_num_threads(2)
@@ -30,12 +31,14 @@ def main():
         torch.save(model.state_dict(), path)
         clone.load_state_dict(torch.load(path, weights_only=True), strict=True)
     with torch.no_grad(): assert torch.equal(y, clone(x))
+    deployed=fused_copy(model, arch.Conv3XC)
+    with torch.no_grad(): torch.testing.assert_close(y,deployed(x),atol=1e-6,rtol=1e-5)
     # Structural reparameterization must agree before nonlinear SPAB paths.
     c = arch.Conv3XC(3, 5, gain1=2)
     with torch.no_grad():
         train_out = c(x)
         c.eval(); eval_out = c(x)
     torch.testing.assert_close(train_out, eval_out, atol=1e-6, rtol=1e-5)
-    print(json.dumps(dict(status='PASS', device='CPU', shape=list(y.shape), loss=float(loss.detach()), total_params=sum(p.numel() for p in model.parameters()), trainable_params=sum(p.numel() for p in model.parameters() if p.requires_grad), evidence='synthetic engineering verification only'), indent=2))
+    print(json.dumps(dict(status='PASS', device='CPU', shape=list(y.shape), loss=float(loss.detach()), total_params=sum(p.numel() for p in model.parameters()), trainable_params=sum(p.numel() for p in model.parameters() if p.requires_grad), deployed_params=sum(p.numel() for p in deployed.parameters()), evidence='synthetic engineering verification only'), indent=2))
 
 if __name__ == '__main__': main()

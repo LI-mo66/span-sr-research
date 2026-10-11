@@ -11,3 +11,9 @@ Data location supplied by user: datasets/. DIV2K800 train/100 valid, Set5 5, Set
 Flickr2K official archive: https://cv.snu.ac.kr/research/EDSR/Flickr2K.tar, Content-Length21,542,973,440. Windows curl TLS handshake failed; Python urllib with default TLS verification succeeded. A resumable download is running to datasets/downloads/Flickr2K.tar.part; full completion, SHA256 and extraction are not yet established. No incomplete archive is admitted to training.
 
 GitHub CLI remains unauthenticated. The connector identifies LI-mo66 but cannot create repositories through its currently supplied tools. Remote creation/push is pending authentication. Username alone is not an authentication credential.
+
+Synthetic CUDA integration run ENGINEERING-ONLY-7b42c83912 PASSED one real optimizer update, all six evaluation streams, per-image files, best/latest checkpoint serialization and fingerprint-checked resume. Its random image PSNR/SSIM values are deliberately excluded from research accuracy tables.
+
+Pre-fused deployment export PASSED full-network CPU equality within atol1e-6/rtol1e-5 on the odd rectangle. Deployed parameters426,288; first-round +10% budget permits at most42,628 extra deployed parameters. Preliminary deployed FP32 LR256×256 GPU benchmark, warmup20/repetitions100: median12.06095ms, mean12.132295ms, p95 12.7074ms; allocated254,945,792 bytes, reserved306,184,192 bytes. Convolution subtotal27,868,004,352 MACs. These are synthetic efficiency measurements, not trained-model accuracy or complete FLOPs. The two recorded latency paths use different image sizes and must not be directly compared.
+
+Existing data audit completed: all provided DIV2K and five benchmark pairs have x4-compatible dimensions; no exact-HR SHA256 overlap between DIV2K training and validation/test data. See data-audit.json. This cannot establish the original bicubic resampling kernel.

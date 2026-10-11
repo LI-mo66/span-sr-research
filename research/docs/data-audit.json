@@ -1,0 +1,87 @@
+{
+  "DIV2K_train": {
+    "count": 800,
+    "pair_shapes_checked": true,
+    "min_lr_hw": [
+      162,
+      279
+    ],
+    "max_lr_hw": [
+      510,
+      510
+    ]
+  },
+  "DIV2K_valid": {
+    "count": 100,
+    "pair_shapes_checked": true,
+    "min_lr_hw": [
+      204,
+      339
+    ],
+    "max_lr_hw": [
+      510,
+      510
+    ]
+  },
+  "Set5": {
+    "count": 5,
+    "pair_shapes_checked": true,
+    "min_lr_hw": [
+      64,
+      57
+    ],
+    "max_lr_hw": [
+      128,
+      128
+    ]
+  },
+  "Set14": {
+    "count": 14,
+    "pair_shapes_checked": true,
+    "min_lr_hw": [
+      69,
+      62
+    ],
+    "max_lr_hw": [
+      164,
+      192
+    ]
+  },
+  "B100": {
+    "count": 100,
+    "pair_shapes_checked": true,
+    "min_lr_hw": [
+      80,
+      80
+    ],
+    "max_lr_hw": [
+      120,
+      120
+    ]
+  },
+  "Urban100": {
+    "count": 100,
+    "pair_shapes_checked": true,
+    "min_lr_hw": [
+      143,
+      141
+    ],
+    "max_lr_hw": [
+      300,
+      320
+    ]
+  },
+  "Manga109": {
+    "count": 109,
+    "pair_shapes_checked": true,
+    "min_lr_hw": [
+      267,
+      183
+    ],
+    "max_lr_hw": [
+      291,
+      204
+    ]
+  },
+  "provenance": "User-provided existing data; bicubic kernel provenance not independently verified. Flickr2K pending."
+}
