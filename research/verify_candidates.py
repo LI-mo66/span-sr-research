@@ -9,9 +9,12 @@ def main():
     torch.set_num_threads(2);arch,_=components()
     cfg=json.loads((ROOT/'research/configs/baseline_x4.json').read_text())
     torch.manual_seed(cfg['seed']);baseline=build_model(arch,cfg).to(args.device)
+    expected_cpu_rng=torch.get_rng_state();expected_cuda_rng=torch.cuda.get_rng_state_all()
     cases=[[dict(name='fusion',position='fusion')],[dict(name='context',position='mid')],[dict(name='context',position='tail')],[dict(name='frequency',position='mid')],[dict(name='frequency',position='tail')],[dict(name='fusion',position='fusion'),dict(name='context',position='tail'),dict(name='frequency',position='mid')]]
     for variants in cases:
         option=copy.deepcopy(cfg);option['variants']=variants;torch.manual_seed(cfg['seed']);model=build_model(arch,option).to(args.device)
+        assert torch.equal(expected_cpu_rng,torch.get_rng_state())
+        assert all(torch.equal(a,b) for a,b in zip(expected_cuda_rng,torch.cuda.get_rng_state_all()))
         assert all(torch.equal(value,model.state_dict()[key]) for key,value in baseline.state_dict().items())
         optimizer=torch.optim.Adam((p for p in model.parameters() if p.requires_grad),lr=5e-4)
         x=torch.rand(2,3,13,17,device=args.device);hr=torch.rand(2,3,52,68,device=args.device)

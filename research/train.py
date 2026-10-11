@@ -130,7 +130,7 @@ def main():
         raise RuntimeError('Commit source changes before training')
     commit = subprocess.check_output(['git','rev-parse','HEAD'], cwd=ROOT, text=True).strip()
     # Screen/full are execution stopping caps, not different optimizer protocols.
-    environment=dict(torch=torch.__version__,cuda=torch.version.cuda,device=torch.cuda.get_device_name(),deterministic=True)
+    environment=dict(torch=torch.__version__,cuda=torch.version.cuda,device=torch.cuda.get_device_name(),deterministic=True,cudnn_allow_tf32=torch.backends.cudnn.allow_tf32,matmul_allow_tf32=torch.backends.cuda.matmul.allow_tf32)
     fingerprint = hashlib.sha256(json.dumps(dict(config=cfg, manifests=manifests, commit=commit,environment=environment), sort_keys=True).encode()).hexdigest()
     out = ROOT / 'runs' / args.id
     if out.exists() and not args.resume:
@@ -181,6 +181,7 @@ def main():
     else:
         metadata = dict(id=args.id, fingerprint=fingerprint, commit=commit, config=cfg, data=manifests, updates_per_epoch=updates_per_epoch, screen=args.screen, torch=torch.__version__, cuda=torch.version.cuda, device=torch.cuda.get_device_name(), parameters_total=sum(p.numel() for p in model.parameters()), parameters_trainable=sum(p.numel() for p in model.parameters() if p.requires_grad))
         metadata['python'] = sys.version
+        metadata['environment'] = environment
         metadata['extra_deployed_parameters'] = getattr(model,'extra_parameters',0)
         metadata['dependencies'] = subprocess.check_output([sys.executable, '-m', 'pip', 'freeze'], text=True).splitlines()
         (out / 'manifest.json').write_text(json.dumps(metadata, indent=2), encoding='utf8')

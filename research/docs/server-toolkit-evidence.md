@@ -11,3 +11,5 @@ An initial Windows test cleanup failed because a cached mmap still held a tempor
 Remote SSH currently closes the connection; no actual server queue started, no actual remote shutdown verified. Provider-specific shutdown executable must exist; launcher refuses if absent. Worker logs attempted shutdown and failure. AutoDL official guidance https://www.autodl.com/docs/save_money/ uses/usr/bin/shutdown, but the supplied SeetaCloud instance is not assumed empirically verified by that guidance.
 
 No true candidate PSNR, training time on4090, complete FLOPs or stable-gain result is claimed. All first-batch training starts from scratch with matched original weights/data streams; public pretrained checkpoints are not used as unfair short-screen baseline.
+
+Candidate-plus-npy-cache integration ENGINEERING-ONLY-dc63bcf414 PASSED: synthetic optimizer update, six evaluation streams, numbered atomic checkpoints, malformed/stale epoch-log recovery with preserved backups, resumed stopping-cap extension and exact equality with continuous training. Same-protocol screen-to-full resume succeeds. No real dataset PSNR inference follows from this synthetic fixture.

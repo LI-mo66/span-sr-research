@@ -1,7 +1,7 @@
 import argparse,json,statistics,time,torch
 from pathlib import Path
 from runtime import components
-from modules.candidates import build_model
+from modules.candidates import build_model,PartialContext
 from deploy import fused_copy
 
 def main():
@@ -22,6 +22,7 @@ def main():
         hooks=[m.register_forward_hook(hook) for m in deployed.modules() if isinstance(m,torch.nn.Conv2d)]
         deployed(x)
         for h in hooks:h.remove()
-    report.update(conv_module_MACs=macs[0],conv_module_FLOPs_2_per_MAC=2*macs[0],coverage='Convolution module subtotal only; functional dynamic convolution, pooling, sigmoid, softmax, pointwise/layout costs excluded. Not total FLOPs.')
+    dynamic_macs=sum(m.p*9*args.height*args.width for m in deployed.modules() if isinstance(m,PartialContext))
+    report.update(conv_module_MACs=macs[0],functional_dynamic_conv_MACs=dynamic_macs,all_convolution_MACs=macs[0]+dynamic_macs,convolution_FLOPs_2_per_MAC=2*(macs[0]+dynamic_macs),cudnn_allow_tf32=torch.backends.cudnn.allow_tf32,matmul_allow_tf32=torch.backends.cuda.matmul.allow_tf32,coverage='All convolution MACs including analytical functional dynamic convolution. Pooling, sigmoid, softmax, pointwise/layout costs excluded. Not full all-operator FLOPs.')
     Path(args.output).write_text(json.dumps(report,indent=2));print(json.dumps(report,indent=2))
 if __name__=='__main__':main()
