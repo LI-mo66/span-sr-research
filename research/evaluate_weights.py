@@ -18,7 +18,8 @@ class Tee:
 
 def main():
     p=argparse.ArgumentParser()
-    p.add_argument('--weights',default='weights/official/spanx4_ch48.pth')
+    p.add_argument('--weights',default='weights/official/spanx4_ch52.pth')
+    p.add_argument('--channels',type=int,choices=[48,52],default=52)
     p.add_argument('--key',default='params',choices=['params','params_ema'])
     p.add_argument('--paths',default='research/configs/paths.local.json')
     p.add_argument('--id',required=True)
@@ -31,13 +32,14 @@ def main():
     sys.stdout,sys.stderr=Tee(sys.stdout,log),Tee(sys.stderr,log)
     paths=json.loads((ROOT/args.paths).read_text(encoding='utf-8-sig'))
     arch,metrics=components()
-    model=arch.SPAN(3,3,feature_channels=48,upscale=4,img_range=255.).cuda().eval()
+    model=arch.SPAN(3,3,feature_channels=args.channels,upscale=4,img_range=255.).cuda().eval()
     weight=ROOT/args.weights
     state=torch.load(weight,map_location='cpu',weights_only=True)
     print(model.load_state_dict(state[args.key],strict=True),flush=True)
     names=('Set5','Set14','B100','Urban100','Manga109')
     dataset={name:pairs(paths['validation'][name]) for name in names}
     protocol=dict(id=args.id,checkpoint=str(weight),sha256=digest(weight),param_key=args.key,upstream_commit='c77a5917759f09e66fbc7124220c5afc5ee221e5',source_commit=subprocess.check_output(['git','rev-parse','HEAD'],cwd=ROOT,text=True).strip(),source_dirty=bool(subprocess.check_output(['git','status','--porcelain'],cwd=ROOT,text=True).strip()),model='SPAN x4 ch48 unmodified upstream',input='RGB NCHW float32 [0,1]',output='raw forward then clamp [0,1] and round uint8',crop_border=4,test_y_channel=True,metrics='pinned upstream BasicSR PSNR/SSIM',self_ensemble=False,inference='whole image; no chop; batch1; original eval including per-forward fusion',torch=torch.__version__,cuda=torch.version.cuda,python=platform.python_version(),device=torch.cuda.get_device_name(),data={name:[dict(hr=str(h),lr=str(l),hr_sha256=digest(h),lr_sha256=digest(l)) for h,l in values] for name,values in dataset.items()})
+    protocol['model']=f'SPAN x4 ch{args.channels} unmodified upstream'
     (out/'manifest.json').write_text(json.dumps(protocol,indent=2),encoding='utf8')
     summary={};start=time.perf_counter()
     with torch.inference_mode():

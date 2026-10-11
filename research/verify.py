@@ -11,7 +11,7 @@ def main():
     torch.set_num_threads(2)
     arch, _ = components()
     torch.manual_seed(10)
-    model = arch.SPAN(3, 3, upscale=4, feature_channels=48, img_range=255.)
+    model = arch.SPAN(3, 3, upscale=4, feature_channels=52, img_range=255.)
     optimizer = torch.optim.Adam((p for p in model.parameters() if p.requires_grad), lr=5e-4)
     before = model.conv_1.conv[0].weight.detach().clone()
     x = torch.rand(1, 3, 13, 17)

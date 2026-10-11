@@ -9,7 +9,7 @@ from deploy import fused_copy
 
 def main():
     p=argparse.ArgumentParser(); p.add_argument('--height',type=int,default=256); p.add_argument('--width',type=int,default=256); p.add_argument('--warmup',type=int,default=20); p.add_argument('--repeats',type=int,default=100); p.add_argument('--output',required=True); p.add_argument('--fused',action='store_true'); a=p.parse_args()
-    arch,_=components(); model=arch.SPAN(3,3,feature_channels=48,upscale=4).cuda().eval()
+    arch,_=components(); model=arch.SPAN(3,3,feature_channels=52,upscale=4).cuda().eval()
     if a.fused: model=fused_copy(model,arch.Conv3XC)
     x=torch.rand(1,3,a.height,a.width,device='cuda')
     times=[]; macs=[0]; handles=[]

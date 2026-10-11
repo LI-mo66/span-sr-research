@@ -101,6 +101,7 @@ def main():
     parser.add_argument('--id', required=True)
     parser.add_argument('--resume', action='store_true')
     parser.add_argument('--screen', action='store_true')
+    parser.add_argument('--screen-updates', type=int, choices=[5000,20000,100000])
     parser.add_argument('--preflight', action='store_true')
     args = parser.parse_args()
     if not args.id or any(c not in 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-_' for c in args.id):
@@ -132,7 +133,8 @@ def main():
     if subprocess.check_output(['git','status','--porcelain'], cwd=ROOT, text=True).strip():
         raise RuntimeError('Commit source changes before training')
     commit = subprocess.check_output(['git','rev-parse','HEAD'], cwd=ROOT, text=True).strip()
-    fingerprint = hashlib.sha256(json.dumps(dict(config=cfg, manifests=manifests, commit=commit, screen=args.screen), sort_keys=True).encode()).hexdigest()
+    # Screen/full are execution stopping caps, not different optimizer protocols.
+    fingerprint = hashlib.sha256(json.dumps(dict(config=cfg, manifests=manifests, commit=commit), sort_keys=True).encode()).hexdigest()
     out = ROOT / 'runs' / args.id
     if out.exists() and not args.resume:
         raise FileExistsError(f'Run ID already exists: {out}')
@@ -153,8 +155,10 @@ def main():
     model = arch.SPAN(**cfg['model']).cuda()
     opt = torch.optim.Adam((p for p in model.parameters() if p.requires_grad), lr=cfg['lr'], betas=tuple(cfg['adam_betas']), eps=cfg['adam_eps'])
     sched = torch.optim.lr_scheduler.MultiStepLR(opt, cfg['milestones'], gamma=cfg['gamma'])
-    updates_per_epoch = math.ceil(len(train) / cfg['effective_batch'])
-    stop = min(cfg['total_updates'], cfg['screen_epochs'] * updates_per_epoch) if args.screen else cfg['total_updates']
+    updates_per_epoch = cfg.get('record_updates', math.ceil(len(train) / cfg['effective_batch']))
+    if args.screen_updates is not None and not args.screen:
+        raise ValueError('--screen-updates requires --screen')
+    stop = min(cfg['total_updates'], args.screen_updates or cfg['screen_epochs'] * updates_per_epoch) if args.screen else cfg['total_updates']
     update, epoch, best = 0, 0, {}
     if args.resume:
         state = torch.load(out / 'latest.pt', map_location='cpu', weights_only=False)
@@ -201,6 +205,7 @@ def main():
         with open(out/'epochs.jsonl','a',encoding='utf8') as f: f.write(json.dumps(record)+'\n')
         state = dict(fingerprint=fingerprint, epoch=epoch, update=update, best=best, model=model.state_dict(), optimizer=opt.state_dict(), scheduler=sched.state_dict(), python_rng=random.getstate(), numpy_rng=np.random.get_state(), torch_rng=torch.get_rng_state(), cuda_rng=torch.cuda.get_rng_state_all())
         atomic_save(state, out/'latest.pt')
+        atomic_save(state, out/f'epoch{epoch:05d}_u{update}.pt')
         if selected: atomic_save(state, out/'best_validation.pt')
     print('Training complete. No stability or paper-value claim follows from a single run.', flush=True)
 

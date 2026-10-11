@@ -1,5 +1,7 @@
 # SPAN ×4 research
 
+Current decision (2026-10-11): main baseline is SPAN52, deployed498,208 params; previous48-channel runs are historical SPAN-S references and are not the main baseline. Original upstream defaults/source remain untouched. baseline_x4.json now uses52 channels, a recording epoch of5000 optimizer updates, full budget1M updates=200 cycles; screen20 cycles=100k updates. Stage screening accepts --screen-updates5000/20000/100000. A SAME --screen run may resume to a larger screening cap with config/source/data unchanged; scheduler never compresses. Epoch snapshots are retained for reuse. Earlier54-updates/epoch paragraphs below describe the historical harness and are superseded by this paragraph. See docs/SPAN52-research-plan.zh.md and docs/candidate-cards.zh.md for current strategy.
+
 Status: framework implemented; baseline accuracy reproduction NOT started. No measured PSNR gains.
 
 Upstream: https://github.com/hongyuanyu/SPAN, commit c77a5917759f09e66fbc7124220c5afc5ee221e5. `upstream-baseline` preserves the complete upstream history. `research/main` adds an isolated harness. The original README, LICENSE directory, LICENSE.txt, architecture, and metrics are unchanged. Cite Wan et al., CVPR Workshops 2024, pp. 6246–6256, as in the original README.

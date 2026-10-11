@@ -1,0 +1,21 @@
+{
+  "model": {"num_in_ch": 3, "num_out_ch": 3, "feature_channels": 48, "upscale": 4, "img_range": 255.0},
+  "seed": 10,
+  "total_updates": 1000000,
+  "screen_epochs": 20,
+  "hr_patch": 256,
+  "effective_batch": 64,
+  "micro_batch": 4,
+  "lr": 0.0005,
+  "adam_betas": [0.9, 0.999],
+  "adam_eps": 1e-8,
+  "milestones": [200000, 400000, 600000, 800000],
+  "gamma": 0.5,
+  "crop_border": 4,
+  "test_y_channel": true,
+  "self_ensemble": false,
+  "selection_dataset": "DIV2K_valid",
+  "protocol_status": "paper_aligned_stage1_pending_data_and_ambiguity_audit",
+  "official_unresolved": ["Adam betas/epsilon unspecified in paper", "number and reset semantics of repeated loaded-weight training stages", "release forward normalization/output range requires empirical audit"],
+  "paths_file": "research/configs/paths.local.json"
+}
