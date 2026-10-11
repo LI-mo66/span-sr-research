@@ -172,6 +172,7 @@ def main():
     while update < stop:
         epoch += 1
         start = time.perf_counter()
+        epoch_loss_sum, epoch_updates = 0., 0
         for _ in range(min(updates_per_epoch, stop-update)):
             opt.zero_grad(set_to_none=True)
             loss_value = 0.
@@ -182,8 +183,12 @@ def main():
                 if not torch.isfinite(loss): raise FloatingPointError('Nonfinite loss')
                 loss.backward(); loss_value += loss.item()
             opt.step(); sched.step(); update += 1
+            epoch_loss_sum += loss_value
+            epoch_updates += 1
             if update % 100 == 0: print(f'epoch={epoch} update={update} L1={loss_value:.8f} lr={sched.get_last_lr()[0]:.8g}', flush=True)
         scores = evaluate(model, val, metrics, cfg, out, epoch, update)
+        epoch_loss = epoch_loss_sum / epoch_updates
+        print(f'epoch={epoch} updates_in_epoch={epoch_updates} total_update={update} mean_train_L1={epoch_loss:.8f} last_train_L1={loss_value:.8f}', flush=True)
         selected = False
         for name, row in scores.items():
             for metric, value in row.items():
@@ -192,7 +197,7 @@ def main():
                     best[key] = dict(value=value, epoch=epoch, update=update)
                     if name == cfg['selection_dataset'] and metric == 'psnr': selected = True
             print(f'{name}: PSNR={row["psnr"]:.8f} SSIM={row["ssim"]:.8f}; best={best[name+"/psnr"]}, {best[name+"/ssim"]}', flush=True)
-        record = dict(epoch=epoch, update=update, metrics=scores, best=best, elapsed_seconds=time.perf_counter()-start)
+        record = dict(epoch=epoch, update=update, updates_in_epoch=epoch_updates, samples_in_epoch=epoch_updates*cfg['effective_batch'], train_l1_mean=epoch_loss, train_l1_last=loss_value, metrics=scores, best=best, elapsed_seconds=time.perf_counter()-start)
         with open(out/'epochs.jsonl','a',encoding='utf8') as f: f.write(json.dumps(record)+'\n')
         state = dict(fingerprint=fingerprint, epoch=epoch, update=update, best=best, model=model.state_dict(), optimizer=opt.state_dict(), scheduler=sched.state_dict(), python_rng=random.getstate(), numpy_rng=np.random.get_state(), torch_rng=torch.get_rng_state(), cuda_rng=torch.cuda.get_rng_state_all())
         atomic_save(state, out/'latest.pt')
