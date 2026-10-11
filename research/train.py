@@ -13,6 +13,8 @@ import cv2
 import numpy as np
 import torch
 from runtime import ROOT, components
+from modules.candidates import build_model
+from image_io import read,enable_cache
 
 def digest(p):
     h = hashlib.sha256()
@@ -39,12 +41,6 @@ def pairs(spec):
     if not result or len(result) != len(low):
         raise ValueError('Empty dataset or unmatched LR images')
     return result
-
-def read(p):
-    a = cv2.imdecode(np.fromfile(p, dtype=np.uint8), cv2.IMREAD_COLOR)
-    if a is None:
-        raise ValueError(f'Unreadable image {p}')
-    return a
 
 def tensor(a):
     return torch.from_numpy(np.ascontiguousarray(a[:, :, ::-1].transpose(2, 0, 1))).float() / 255.
@@ -134,7 +130,8 @@ def main():
         raise RuntimeError('Commit source changes before training')
     commit = subprocess.check_output(['git','rev-parse','HEAD'], cwd=ROOT, text=True).strip()
     # Screen/full are execution stopping caps, not different optimizer protocols.
-    fingerprint = hashlib.sha256(json.dumps(dict(config=cfg, manifests=manifests, commit=commit), sort_keys=True).encode()).hexdigest()
+    environment=dict(torch=torch.__version__,cuda=torch.version.cuda,device=torch.cuda.get_device_name(),deterministic=True)
+    fingerprint = hashlib.sha256(json.dumps(dict(config=cfg, manifests=manifests, commit=commit,environment=environment), sort_keys=True).encode()).hexdigest()
     out = ROOT / 'runs' / args.id
     if out.exists() and not args.resume:
         raise FileExistsError(f'Run ID already exists: {out}')
@@ -147,12 +144,14 @@ def main():
         def flush(self): self.stream.flush(); self.file.flush()
     log = open(out / 'console.log', 'a', encoding='utf8')
     sys.stdout, sys.stderr = Tee(sys.stdout, log), Tee(sys.stderr, log)
+    if cfg.get('image_backend','png')=='npy_mmap':enable_cache(manifests,ROOT/'datasets'/'image_cache')
+    elif cfg.get('image_backend','png')!='png':raise ValueError('Unknown image backend')
     random.seed(cfg['seed']); np.random.seed(cfg['seed']); torch.manual_seed(cfg['seed']); torch.cuda.manual_seed_all(cfg['seed'])
     torch.backends.cudnn.benchmark = False
     torch.backends.cudnn.deterministic = True
     torch.use_deterministic_algorithms(True)
     arch, metrics = components()
-    model = arch.SPAN(**cfg['model']).cuda()
+    model = build_model(arch,cfg).cuda()
     opt = torch.optim.Adam((p for p in model.parameters() if p.requires_grad), lr=cfg['lr'], betas=tuple(cfg['adam_betas']), eps=cfg['adam_eps'])
     sched = torch.optim.lr_scheduler.MultiStepLR(opt, cfg['milestones'], gamma=cfg['gamma'])
     updates_per_epoch = cfg.get('record_updates', math.ceil(len(train) / cfg['effective_batch']))
@@ -166,10 +165,23 @@ def main():
             raise ValueError('Resume protocol/source/data fingerprint mismatch')
         model.load_state_dict(state['model'], strict=True); opt.load_state_dict(state['optimizer']); sched.load_state_dict(state['scheduler'])
         update, epoch, best = state['update'], state['epoch'], state['best']
+        history=out/'epochs.jsonl'
+        records={}
+        if history.exists():
+            for line in history.read_text(encoding='utf8').splitlines():
+                try:row=json.loads(line)
+                except json.JSONDecodeError:continue  # Interrupted append, recovered below.
+                if row['update']<=update:records[row['update']]=row
+        if state.get('epoch_record'):records[update]=state['epoch_record']
+        restored=''.join(json.dumps(records[u])+'\n' for u in sorted(records))
+        if history.exists() and history.read_text(encoding='utf8')!=restored:
+            (out/f'epochs_before_resume_{time.time_ns()}.jsonl').write_text(history.read_text(encoding='utf8'),encoding='utf8')
+        tmp=history.with_suffix('.tmp');tmp.write_text(restored,encoding='utf8');os.replace(tmp,history)
         random.setstate(state['python_rng']); np.random.set_state(state['numpy_rng']); torch.set_rng_state(state['torch_rng']); torch.cuda.set_rng_state_all(state['cuda_rng'])
     else:
         metadata = dict(id=args.id, fingerprint=fingerprint, commit=commit, config=cfg, data=manifests, updates_per_epoch=updates_per_epoch, screen=args.screen, torch=torch.__version__, cuda=torch.version.cuda, device=torch.cuda.get_device_name(), parameters_total=sum(p.numel() for p in model.parameters()), parameters_trainable=sum(p.numel() for p in model.parameters() if p.requires_grad))
         metadata['python'] = sys.version
+        metadata['extra_deployed_parameters'] = getattr(model,'extra_parameters',0)
         metadata['dependencies'] = subprocess.check_output([sys.executable, '-m', 'pip', 'freeze'], text=True).splitlines()
         (out / 'manifest.json').write_text(json.dumps(metadata, indent=2), encoding='utf8')
     print(f'Run {args.id}; protocol {fingerprint}; stop {stop} updates; {updates_per_epoch} updates per research epoch', flush=True)
@@ -202,11 +214,11 @@ def main():
                     if name == cfg['selection_dataset'] and metric == 'psnr': selected = True
             print(f'{name}: PSNR={row["psnr"]:.8f} SSIM={row["ssim"]:.8f}; best={best[name+"/psnr"]}, {best[name+"/ssim"]}', flush=True)
         record = dict(epoch=epoch, update=update, updates_in_epoch=epoch_updates, samples_in_epoch=epoch_updates*cfg['effective_batch'], train_l1_mean=epoch_loss, train_l1_last=loss_value, metrics=scores, best=best, elapsed_seconds=time.perf_counter()-start)
-        with open(out/'epochs.jsonl','a',encoding='utf8') as f: f.write(json.dumps(record)+'\n')
-        state = dict(fingerprint=fingerprint, epoch=epoch, update=update, best=best, model=model.state_dict(), optimizer=opt.state_dict(), scheduler=sched.state_dict(), python_rng=random.getstate(), numpy_rng=np.random.get_state(), torch_rng=torch.get_rng_state(), cuda_rng=torch.cuda.get_rng_state_all())
+        state = dict(fingerprint=fingerprint, epoch=epoch, update=update, best=best, epoch_record=record, model=model.state_dict(), optimizer=opt.state_dict(), scheduler=sched.state_dict(), python_rng=random.getstate(), numpy_rng=np.random.get_state(), torch_rng=torch.get_rng_state(), cuda_rng=torch.cuda.get_rng_state_all())
         atomic_save(state, out/'latest.pt')
         atomic_save(state, out/f'epoch{epoch:05d}_u{update}.pt')
         if selected: atomic_save(state, out/'best_validation.pt')
+        with open(out/'epochs.jsonl','a',encoding='utf8') as f: f.write(json.dumps(record)+'\n')
     print('Training complete. No stability or paper-value claim follows from a single run.', flush=True)
 
 if __name__ == '__main__':

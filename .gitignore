@@ -1,5 +1,6 @@
 # ignored folders
 runs/
+server-upload/
 weights/
 logs/
 research/configs/*.local.json

@@ -1,5 +1,7 @@
 # SPAN ×4 research
 
+Complete Linux server toolkit: docs/server-full-run.zh.md. Use scripts/launch_nohup.sh for initial/confirm/fusion batches with persisted logs and shutdown on batch success/failure. Independent adapters now implemented and engineering-checked; no candidate accuracy gains measured. Image decode cache preserves exact pixel values and sampling. Current SSH server has not accepted a working connection; actual remote shutdown is not tested.
+
 Current decision (2026-10-11): main baseline is SPAN52, deployed498,208 params; previous48-channel runs are historical SPAN-S references and are not the main baseline. Original upstream defaults/source remain untouched. baseline_x4.json now uses52 channels, a recording epoch of5000 optimizer updates, full budget1M updates=200 cycles; screen20 cycles=100k updates. Stage screening accepts --screen-updates5000/20000/100000. A SAME --screen run may resume to a larger screening cap with config/source/data unchanged; scheduler never compresses. Epoch snapshots are retained for reuse. Earlier54-updates/epoch paragraphs below describe the historical harness and are superseded by this paragraph. See docs/SPAN52-research-plan.zh.md and docs/candidate-cards.zh.md for current strategy.
 
 Status: framework implemented; baseline accuracy reproduction NOT started. No measured PSNR gains.
