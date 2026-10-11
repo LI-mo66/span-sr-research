@@ -1,5 +1,7 @@
 # Baseline source and protocol audit
 
+Current scope update: user selected SPAN52 (deployed498208) as main baseline;48-channel material below is historical SPAN-S evidence. Current52 released-weight results: official-SPAN52-test.md. Current5000-update recording cycles and candidate screening rules: SPAN52-research-plan.zh.md. Neither historical nor current released-weight evaluation substitutes from-scratch baseline training.
+
 Evidence date: 2026-10-11 (Asia/Shanghai).
 
 ## Verified source facts

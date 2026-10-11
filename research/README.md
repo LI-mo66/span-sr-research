@@ -24,16 +24,13 @@ Use `E:/anaconda/envs/dl/python.exe`. This existing environment has PyTorch 2.9.
 2. `python research/verify.py`
 3. `python research/train.py --id B0-x4-s10-YYYYMMDD-unique --preflight`
 4. Commit all source/config changes. Set `CUBLAS_WORKSPACE_CONFIG=:4096:8` before Python when launching programmatically after CUDA has already initialized.
-5. `python research/train.py --id B0-x4-s10-YYYYMMDD-unique --screen` for 20 research epochs. Full training uses the same config without `--screen` and a new ID. Screen stops early without shortening the LR schedule.
-6. Continue the SAME run with identical arguments plus `--resume`. Resumes only at completed epoch checkpoints, restoring optimizer/scheduler/best/RNG state. An interruption loses unfinished epoch work; that epoch repeats. Latest checkpoint writes are atomic. Source/data/config fingerprint must match. Never change a screen run into a full run under the same ID.
+5. `python research/train.py --id B0-SPAN52-x4-s10-unique --screen --screen-updates 5000` starts screening. Extend to20000/100000 with the same --screen arguments plus --resume. Screen stops early without shortening the LR schedule.
+6. Continue the SAME run with --resume and without --screen to reach1M updates. Screen/full flags change only the stopping cap, not the protocol fingerprint. Resumes only at completed epoch checkpoints, restoring optimizer/scheduler/best/RNG state. An interruption loses unfinished epoch work; that epoch repeats. Latest checkpoint writes are atomic; numbered epoch snapshots retained. Source/data/config fingerprint must match.
 7. `python research/benchmark.py --output results/B0-x4-profile.json`
 
-Every research epoch comprises ceil(N/effective_batch) updates with paired images sampled with replacement, independently of BasicSR's dataset-enlargement epoch convention. Effective batch 64 is accumulated in microbatches of 4 to fit 8GB; hardware suitability must be measured. This sampler and accumulation are explicit reproduction deviations. No AMP, EMA, teacher, self-ensemble, or pretrained initialization.
+Every current recording epoch comprises5000 optimizer updates with paired images sampled with replacement, independently of BasicSR's dataset-enlargement epoch convention. Historical48 experiments usedceil(N/effective_batch); these are not the current main baseline. Effective batch64 is accumulated in microbatches of4 by default; server microbatch must be measured and frozen for all comparisons. This sampler and accumulation are explicit reproduction deviations. No AMP, EMA, teacher, self-ensemble, or pretrained initialization.
 
 Five public benchmarks are monitored every epoch as requested, but ONLY the separate holdout PSNR selects checkpoints or candidates. Per-dataset bests are descriptive; never select separate test-optimal checkpoints for the principal comparison. An independent holdout needs a fixed, documented source and exclusion from training. Preserve all failed runs. Training data and metric provenance must be approved by audit before interpreting accuracy.
 
-Remote creation, when CLI is authenticated:
-`gh repo create LI-mo66/span-sr-research --private --source . --remote origin`
-`git push origin research/main:main upstream-baseline`
-This creates an independent repository, retaining upstream commit ancestry. Do not squash away upstream history or initialize a new unrelated Git history.
+Independent private remote repository already created: https://github.com/LI-mo66/span-sr-research . main contains research changes; upstream-baseline preserves upstream ancestry. Do not squash away upstream history or initialize unrelated Git history.
 
