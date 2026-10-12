@@ -38,12 +38,15 @@ def validate_data(cfg):
             if len(datasets.get(name, [])) != count:
                 raise ValueError(f'{name}: expected {count} paired images')
     for name, pairs in datasets.items():
-        for hp, lp in pairs:
+        print(f'Data audit: {name}, {len(pairs)} pairs', flush=True)
+        for index, (hp, lp) in enumerate(pairs, 1):
             hr, lr = fs_runtime.trainer.aligned(hp, lp)
             if name == 'train' and min(lr.shape[:2]) < cfg['hr_patch'] // 4:
                 raise ValueError(f'Training image too small: {lp}')
             if name != 'train' and min(hr.shape[:2]) - 2 * cfg['crop_border'] < 11:
                 raise ValueError(f'Image too small for cropped SSIM: {hp}')
+            if index % 250 == 0:
+                print(f'Data audit: {name} decoded {index}/{len(pairs)} pairs', flush=True)
     print('All paired images decoded and x4 shapes checked.', flush=True)
 
 
@@ -61,6 +64,7 @@ def main():
     validate_data(cfg)
     # Replace only the factory bound in this process, never source files.
     fs_runtime.trainer.build_model = build_model
+    print('Shared trainer: hashing source images and checking train/evaluation overlap.', flush=True)
     fs_runtime.trainer.main()
 
 

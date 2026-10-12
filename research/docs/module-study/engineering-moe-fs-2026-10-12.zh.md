@@ -1,6 +1,6 @@
 # FusionGate4本地工程检查
 
-2026-10-12，代码提交ddc0f92242d2a290a3f3af6f08e2dde6a838c24f；后续提交仅补充记录和文档。环境：E:/anaconda/envs/dl/python.exe，PyTorch2.9.1+cu128，NVIDIA RTX4060 Laptop。没有真实数据PSNR对照，也没有4090实机证据。
+2026-10-12，核心代码检查提交ddc0f92242d2a290a3f3af6f08e2dde6a838c24f；后续补充记录、文档及数据扫描进度输出，模型和训练数学逻辑不变。环境：E:/anaconda/envs/dl/python.exe，PyTorch2.9.1+cu128，NVIDIA RTX4060 Laptop。没有真实数据PSNR对照，也没有4090实机证据。
 
 ## 已通过
 
@@ -18,5 +18,7 @@
 ## 保留限制
 
 尚未在服务器验证实际路径、数据退化来源、版本、磁盘、显存和速度。服务器首次执行须先跑CUDA verify和数据preflight；预检确认配对/尺寸/hash不能证明bicubic退化来源。首轮仅B0/A1-G4各5k，之后由结果决定是否续到20k/100k。不保证无任何运行错误，不宣称PSNR增益。
+
+额外本地全量真实数据preflight因扫描耗时主动中止，未算作PASS，未启动真实训练。生成配置保留在logs/moe_fs/LOCAL-MOEFS-PREFLIGHT-20261012；该group仅用于本地预检，不用于服务器训练。服务器执行自己的全量预检后再启动。
 
 原始SPAN源码与upstream c77a591比较无差异。本轮新代码位于research/moe_fs；共享训练器只在进程内替换模型工厂，源文件不修改。
