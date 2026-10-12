@@ -1,0 +1,15 @@
+{
+  "evidence_type": "model_construction_parameter_count_only",
+  "date": "2026-10-12",
+  "model": "SPAN52 x4",
+  "candidate": "existing FusionGate4 adaptation",
+  "runtime": "E:/anaconda/envs/dl/python.exe",
+  "baseline": {"stored": 2621964, "trainable": 2157136, "deployed": 498208},
+  "candidate_counts": {"stored": 2632988, "trainable": 2168160, "deployed": 509232},
+  "extra_parameters": 11024,
+  "extra_conv_MACs_batch1_LR64": 44302336,
+  "mac_coverage": "analytical four 52-to-52 1x1 convolutions only; excludes bias, softmax, multiplication, layout and memory traffic",
+  "training_started": false,
+  "psnr_measured": false,
+  "latency_measured_this_turn": false
+}

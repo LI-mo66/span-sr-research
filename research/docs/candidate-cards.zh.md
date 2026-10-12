@@ -1,5 +1,7 @@
 # 首轮三个候选：来源、位置、成本、风险
 
+> 历史设计（2026-10-11）。2026-10-12近期文献筛选与最新候选排序已登记在[module-study/README.zh.md](module-study/README.zh.md)及[module-study/candidates.zh.md](module-study/candidates.zh.md)。AdaIR已降为跨任务参考，SMFANet/EASA进入首轮讨论；旧训练队列尚未随排序变更。本文件保留用于追溯。
+
 2026-10-11检索；近两年已发表且有官方代码为范围，优先近一年。没有宣称以下机制在SPAN上有效。为保持目标相关性保留TIP/ICLR2025作为近两年备选；2026命中中生成式/真实退化/视频方法不能仅凭更新而优先。
 
 ## A：SSIU的MoE-FS思想——原四路融合前自适应门控，优先级1
