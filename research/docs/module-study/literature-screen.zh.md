@@ -60,4 +60,3 @@
 14. NTIRE2025挑战报告：https://openaccess.thecvf.com/content/CVPR2025W/NTIRE/papers/Ren_The_Tenth_NTIRE_2025_Efficient_Super-Resolution_Challenge_Report_CVPRW_2025_paper.pdf
 15. CVPR2026官方活动列表：https://cvpr.thecvf.com/Conferences/2026/Videos
 16. CUST作者预印本：https://arxiv.org/abs/2607.11088
-

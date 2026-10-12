@@ -9,6 +9,9 @@
 - `experiments.zh.md`：实验索引与结果汇总，包含失败和无增益结果。
 - `experiment-template.zh.md`：每次实际实验复制为`records/<run-id>.md`后填写。
 - `parameter-count-2026-10-12.json`：本次实际模型构造参数计数；不是训练或PSNR实验。
+- `engineering-moe-fs-2026-10-12.zh.md`：新独立实现的CPU/CUDA、队列和合成训练恢复检查证据。
+
+首个已确认候选的独立源码和服务器命令：`../../moe_fs/README.zh.md`；Git分支`research/moe-fs-g4`。训练期间服务器checkout保持源码commit不变，本目录结果在本地追加后另行提交，不直接改变正在训练的服务器指纹。
 
 详细检索报告已复制为本目录`literature-screen.zh.md`并随代码上传；工作区根目录保留原文件。此前`../candidate-cards.zh.md`为2026-10-11历史设计；特别是AdaIR排序已被本次文献筛选更新，不应直接按旧排序启动队列。
 

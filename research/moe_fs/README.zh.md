@@ -9,11 +9,14 @@
 - run.py：新训练入口，复用共享训练器的采样、评测、保存/恢复逻辑；仅在当前进程替换模型工厂。
 - screen.py：两组同预算短筛，冻结路径/seed/microbatch/backend配置，生成比较记录。
 - verify.py：CPU/CUDA工程验证，无真实数据精度结论。
+- check_queue.py：冻结配置、比较汇总与模拟工作进程退出/锁检查。
 - integration.py：合成两次更新，检查累积、缓存、评测、保存和恢复。
 - resources.py：复用统一资源测量口径，输出部署参数、延迟和显存。
 - launch.sh、worker.sh：Linux nohup后台执行、锁、退出码记录；不调用自动关机。
 
 方案与结果入口：`research/docs/module-study/README.zh.md`。
+
+本地CPU/CUDA与合成两步checkpoint恢复检查通过，证据见`research/docs/module-study/engineering-moe-fs-2026-10-12.zh.md`；尚无服务器实际数据训练或4090运行证据。
 
 ## 训练协议
 

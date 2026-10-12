@@ -8,3 +8,5 @@
 运行开始后追加一行；实验中断/失败也必须保留。逐图指标、日志和checkpoint放`runs/<run-id>/`，本表指向`records/<run-id>.md`。不同协议不直接填相对提升。
 
 工程计数记录（不属于PSNR实验）：2026-10-12，当前FusionGate4新增11024参数，详见moe-fs-plan.zh.md；准确代码commit/dirty与环境在真正实验冻结时另行记录。
+
+独立实现工程验证：代码ddc0f92，CPU/CUDA与合成两步恢复检查通过；见engineering-moe-fs-2026-10-12.zh.md。合成运行不填入真实数据PSNR主表。
