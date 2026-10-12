@@ -15,6 +15,7 @@ import torch
 from runtime import ROOT, components
 from modules.candidates import build_model
 from image_io import read,enable_cache
+from parallel_loader import PrefetchBatches
 
 def digest(p):
     h = hashlib.sha256()
@@ -52,17 +53,18 @@ def aligned(hp, lp):
         raise ValueError(f'Nonaligned x4 pair: {hp}, {lp}')
     return hr[:h, :w], lr
 
-def sample(pair, patch):
+def sample(pair, patch, rng=None):
+    rng = random if rng is None else rng
     hp, lp = pair
     hr, lr = aligned(hp, lp)
     n = patch // 4
-    y, x = random.randint(0, lr.shape[0] - n), random.randint(0, lr.shape[1] - n)
+    y, x = rng.randint(0, lr.shape[0] - n), rng.randint(0, lr.shape[1] - n)
     lr, hr = lr[y:y+n, x:x+n], hr[y*4:y*4+patch, x*4:x*4+patch]
-    if random.random() < .5:
+    if rng.random() < .5:
         lr, hr = lr[:, ::-1], hr[:, ::-1]
-    if random.random() < .5:
+    if rng.random() < .5:
         lr, hr = lr[::-1], hr[::-1]
-    if random.random() < .5:
+    if rng.random() < .5:
         lr, hr = lr.transpose(1, 0, 2), hr.transpose(1, 0, 2)
     return tensor(lr), tensor(hr)
 
@@ -103,6 +105,15 @@ def main():
     if not args.id or any(c not in 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-_' for c in args.id):
         raise ValueError('ID must contain only letters, digits, hyphen and underscore')
     cfg = json.loads(Path(args.config).read_text(encoding='utf8'))
+    workers = cfg.get('loader_workers', 0)
+    if workers < 0 or cfg.get('log_updates', 100) < 1:
+        raise ValueError('Invalid loader/log settings')
+    if workers and cfg.get('image_backend', 'png') != 'png':
+        raise ValueError('Threaded loader currently supports png only')
+    if workers:
+        cv2.setNumThreads(1)
+        torch.set_num_threads(cfg.get('cpu_threads', 4))
+    print('Checking dataset hashes and train/validation separation...', flush=True)
     if cfg['self_ensemble'] or cfg['model']['upscale'] != 4:
         raise ValueError('This development harness supports non-ensemble x4 only')
     paths = json.loads(Path(cfg['paths_file']).read_text(encoding='utf-8-sig'))
@@ -186,15 +197,25 @@ def main():
         metadata['dependencies'] = subprocess.check_output([sys.executable, '-m', 'pip', 'freeze'], text=True).splitlines()
         (out / 'manifest.json').write_text(json.dumps(metadata, indent=2), encoding='utf8')
     print(f'Run {args.id}; protocol {fingerprint}; stop {stop} updates; {updates_per_epoch} updates per research epoch', flush=True)
+    accum = cfg['effective_batch']//cfg['micro_batch']
+    loader = PrefetchBatches(train, cfg['hr_patch'], cfg['micro_batch'], cfg['seed'],
+                             update*accum, stop*accum, sample, workers,
+                             cfg.get('loader_prefetch', 2)) if workers else None
+    print(f'Loader workers={workers}; log every {cfg.get("log_updates",100)} updates; evaluation every {updates_per_epoch}', flush=True)
+    run_start, run_update = time.perf_counter(), update
     while update < stop:
         epoch += 1
         start = time.perf_counter()
         epoch_loss_sum, epoch_updates = 0., 0
         for _ in range(min(updates_per_epoch, stop-update)):
+            step_start = time.perf_counter()
+            data_seconds = 0.
             opt.zero_grad(set_to_none=True)
             loss_value = 0.
             for _ in range(cfg['effective_batch']//cfg['micro_batch']):
-                samples = [sample(random.choice(train), cfg['hr_patch']) for _ in range(cfg['micro_batch'])]
+                data_start = time.perf_counter()
+                samples = next(loader) if loader else [sample(random.choice(train), cfg['hr_patch']) for _ in range(cfg['micro_batch'])]
+                data_seconds += time.perf_counter()-data_start
                 lr = torch.stack([s[0] for s in samples]).cuda(); hr = torch.stack([s[1] for s in samples]).cuda()
                 loss = torch.nn.functional.l1_loss(model(lr), hr) / (cfg['effective_batch']//cfg['micro_batch'])
                 if not torch.isfinite(loss): raise FloatingPointError('Nonfinite loss')
@@ -202,7 +223,11 @@ def main():
             opt.step(); sched.step(); update += 1
             epoch_loss_sum += loss_value
             epoch_updates += 1
-            if update % 100 == 0: print(f'epoch={epoch} update={update} L1={loss_value:.8f} lr={sched.get_last_lr()[0]:.8g}', flush=True)
+            if update == run_update+1 or update % cfg.get('log_updates',100) == 0:
+                elapsed = time.perf_counter()-run_start
+                eta = elapsed/(update-run_update)*(stop-update)
+                print(f'epoch={epoch} update={update}/{stop} progress={100*update/stop:.2f}% L1={loss_value:.8f} lr={sched.get_last_lr()[0]:.8g} step_s={time.perf_counter()-step_start:.3f} data_wait_s={data_seconds:.3f} elapsed_min={elapsed/60:.1f} ETA_train_min={eta/60:.1f} (evaluation overhead not forecast)', flush=True)
+        print(f'Evaluation starting at update={update}...', flush=True)
         scores = evaluate(model, val, metrics, cfg, out, epoch, update)
         epoch_loss = epoch_loss_sum / epoch_updates
         print(f'epoch={epoch} updates_in_epoch={epoch_updates} total_update={update} mean_train_L1={epoch_loss:.8f} last_train_L1={loss_value:.8f}', flush=True)
@@ -220,6 +245,7 @@ def main():
         atomic_save(state, out/f'epoch{epoch:05d}_u{update}.pt')
         if selected: atomic_save(state, out/'best_validation.pt')
         with open(out/'epochs.jsonl','a',encoding='utf8') as f: f.write(json.dumps(record)+'\n')
+    if loader: loader.close()
     print('Training complete. No stability or paper-value claim follows from a single run.', flush=True)
 
 if __name__ == '__main__':
