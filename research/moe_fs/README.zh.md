@@ -1,5 +1,7 @@
 # SPAN52-FusionGate4独立短筛
 
+基线异常诊断入口：replay.py，从既有4k checkpoint只重放4001—4305更新，记录输入/激活/梯度/实际更新；严格校验环境、数据hash和逐步loss。原run只读、诊断写新work目录，不改变学习率或裁剪，不自动释放。详细方案见research/docs/module-study/baseline-replay-plan.zh.md。
+
 2026-10-13新增绘图与可选Featurize自动释放：独立trainer.py仅增加逐更新loss_steps.jsonl及恢复截断，原research/train.py和SPAN源码不修改。curves.py生成每步/周期loss、6个评测集PSNR/SSIM及同更新数两组对照/差值PNG与SVG。AUTO_RELEASE=1时worker在成功或训练错误退出后先将组日志、所有已有seed的run原始记录/全部checkpoint复制到BACKUP_ROOT并逐文件SHA256校验，生成曲线后调用featurize instance release。备份失败不释放，锁拒绝不释放；SIGKILL/系统崩溃不能执行退出处理。释放后本地数据可能消失，续训需恢复数据和备份。
 
 Featurize启动时显式传AUTO_RELEASE=1和BACKUP_ROOT=/home/featurize/work/span-x4-research/records；依赖matplotlib。默认AUTO_RELEASE=0仍不释放。绘图与备份完成前可能仍计费；平台实际释放结果需在控制台确认。
