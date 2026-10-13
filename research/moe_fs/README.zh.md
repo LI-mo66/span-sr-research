@@ -18,7 +18,7 @@ Featurize启动时显式传AUTO_RELEASE=1和BACKUP_ROOT=/home/featurize/work/spa
 - check_queue.py：冻结配置、比较汇总与模拟工作进程退出/锁检查。
 - integration.py：合成两次更新，检查累积、缓存、评测、保存和恢复。
 - resources.py：复用统一资源测量口径，输出部署参数、延迟和显存。
-- launch.sh、worker.sh：Linux nohup后台执行、锁、退出码记录；不调用自动关机。
+- launch.sh、worker.sh：Linux nohup、锁、退出码记录；默认不释放，AUTO_RELEASE=1启用先备份后释放。
 
 方案与结果入口：`research/docs/module-study/README.zh.md`。
 

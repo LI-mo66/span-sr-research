@@ -4,6 +4,8 @@
 
 2026-10-13更新：[Featurize重训/每1000更新评测](featurize-eval1k-2026-10-13.zh.md)。新服务器B0/A1从零、各5k短筛；实际服务器尚未启动。
 
+同日追加：[绘图与先备份后释放](curves-release-2026-10-13.zh.md)，每步loss记录和23张完整对照图；AUTO_RELEASE=1显式启用Featurize释放。
+
 本目录作为后续讨论和实验结果的统一入口：
 
 - `candidates.zh.md`：全部近期候选、文献来源、证据等级和最新优先级。
