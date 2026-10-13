@@ -172,6 +172,11 @@ def main():
                 print(f'update={update} loss={total:.8g}', flush=True)
     for handle in hooks:
         handle.remove()
+    # Normal epoch snapshots follow evaluation, which refreshes derived frozen
+    # Conv3XC deployment kernels. Match that state without changing training.
+    for module in model.modules():
+        if isinstance(module, arch.Conv3XC):
+            module.update_params()
     torch.save(dict(update=args.until, model=model.state_dict(), optimizer=optimizer.state_dict(),
                     scheduler=scheduler.state_dict()), args.output / 'diagnostic-final.pt')
     print('Replay complete; diagnostics:', args.output, flush=True)
