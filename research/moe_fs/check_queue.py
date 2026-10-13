@@ -35,9 +35,11 @@ def main():
             seed = 10
             micro_batch = 16
             image_backend = 'npy_mmap'
+            eval_every = 1000
         group, configs = screen.prepare(Options)
         a, b = [json.loads(configs[name].read_text()) for name in ('B0', 'A1-G4')]
         assert a.pop('moe_fs') is False and b.pop('moe_fs') is True and a == b
+        assert a['record_updates'] == 1000 and a['total_updates'] == 1000000
         screen.prepare(Options)
         Options.micro_batch = 8
         try:

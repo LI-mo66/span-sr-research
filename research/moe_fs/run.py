@@ -18,11 +18,13 @@ def validate_config(cfg):
     if cfg.get('engineering_only'):
         return
     reference = json.loads((fs_runtime.RESEARCH / 'configs/baseline_x4.json').read_text())
-    for key in ('model', 'total_updates', 'record_updates', 'hr_patch', 'effective_batch',
+    for key in ('model', 'total_updates', 'hr_patch', 'effective_batch',
                 'lr', 'adam_betas', 'adam_eps', 'milestones', 'gamma', 'crop_border',
                 'test_y_channel', 'self_ensemble', 'selection_dataset'):
         if cfg.get(key) != reference[key]:
             raise ValueError(f'Protocol differs from locked baseline: {key}')
+    if cfg.get('record_updates') not in (1000, 5000):
+        raise ValueError('Evaluation/recording interval must be 1000 or 5000 updates')
     if cfg['micro_batch'] not in (4, 8, 16, 32, 64):
         raise ValueError('Unsupported micro batch')
 

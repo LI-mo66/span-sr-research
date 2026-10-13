@@ -1,5 +1,7 @@
 # SPAN52-FusionGate4独立短筛
 
+2026-10-13更新：screen.py及launch.sh默认每1000更新评测/保存一次，两组一致；仍各5000更新短筛，不压缩百万更新LR时间轴。可用--eval-every 5000显式保留旧节奏；改变间隔必须新group，不能修改既有配置恢复。launch.sh第6个参数为评测间隔，默认1000。
+
 2026-10-12。仅B0基线与A1-G4候选；原始`basicsr/archs/span_arch.py`保持不变。层级门控受SSIU/TIP2025 MoE-FS启发，采用四路加权concat而非原文三路求和。代码为独立适配。
 
 ## 目录
@@ -22,7 +24,7 @@
 
 DF2K3450，独立DIV2K_valid100，Set5/Set14/B100/Urban100/Manga109共5/14/100/100/109对。LR必须来自已有可信bicubic×4数据，不由本脚本生成。HR256/LR64，effective batch64，默认服务器microbatch16累积4次。RGB L1、Adam、LR5e-4、完整1M更新中的200k/400k/600k/800k里程碑减半；FP32，无自集成/EMA/teacher。短筛改变停止上限，不改变scheduler。
 
-第一阶段B0和A1各5000更新，总10000；查看结果后才同group续到每组20000，必要时再到100000。5k是学习启动/初步对照，不据此证明最终精度。记录周期5000；第一阶段只有一个评测点；20k/100k汇总固定末3个点。只以独立DIV2K_valid作后续判断；公共测试只记录。
+第一阶段B0和A1各5000更新，总10000；查看结果后才同group续到每组20000，必要时再到100000。5k是学习启动/初步对照，不据此证明最终精度。默认记录周期1000；第一阶段5个评测点，比较固定末3个点（3k/4k/5k）。只以独立DIV2K_valid作后续判断；公共测试只记录。
 
 全部HR/LR先检查数量、解码、×4尺寸、训练patch可用性；共享训练器检查train/eval HR内容hash不重叠。不能仅靠尺寸检查证明退化来源正确。
 
@@ -93,6 +95,6 @@ bash research/moe_fs/launch.sh MOEFS-G4-01 /root/autodl-tmp/datasets 20000 16 np
 bash research/moe_fs/launch.sh MOEFS-G4-01 /root/autodl-tmp/datasets 100000 16 npy_mmap
 ```
 
-同group自动恢复latest.pt。每5000更新保存周期状态，未完成周期在中断恢复后重做。代码commit/数据hash/配置/环境必须一致；不强行跳过指纹检查。
+同group自动恢复latest.pt。默认每1000更新保存周期状态，未完成周期在中断恢复后重做。代码commit/数据hash/配置/环境必须一致；不强行跳过指纹检查。
 
 输出：`runs/MOEFS-G4-01-B0-s10/`和`runs/MOEFS-G4-01-A1-G4-s10/`的manifest、console.log、epochs.jsonl、逐图指标、latest/best_validation/周期checkpoint；`logs/moe_fs/MOEFS-G4-01/`的冻结配置、资源报告与comparison。将这些目录备份后把小型结论填入module-study实验记录。

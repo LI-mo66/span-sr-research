@@ -51,6 +51,7 @@ def prepare(args):
         cfg = json.loads((HERE / 'configs' / f'{label}.json').read_text())
         cfg.update(seed=args.seed, micro_batch=args.micro_batch,
                    paths_file=str(group / 'paths.json'), image_backend=args.image_backend)
+        cfg['record_updates'] = getattr(args, 'eval_every', 5000)
         path = group / f'{label}-s{args.seed}.json'
         immutable(path, cfg)
         configs[label] = path
@@ -92,6 +93,7 @@ def main():
     p.add_argument('--micro-batch', type=int, choices=(4, 8, 16, 32, 64), default=16)
     p.add_argument('--image-backend', choices=('png', 'npy_mmap'), default='npy_mmap')
     p.add_argument('--updates', type=int, choices=(5000, 20000, 100000), default=5000)
+    p.add_argument('--eval-every', type=int, choices=(1000, 5000), default=1000)
     p.add_argument('--prepare-only', action='store_true')
     p.add_argument('--preflight-only', action='store_true')
     args = p.parse_args()

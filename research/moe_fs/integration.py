@@ -1,10 +1,14 @@
 """Two-update synthetic CUDA run verifies entry point, artifacts and exact resume."""
 import importlib.util
 import json
+import os
 import subprocess
 import sys
 import uuid
 from pathlib import Path
+
+os.environ.setdefault('OMP_NUM_THREADS', '2')
+os.environ.setdefault('MKL_NUM_THREADS', '2')
 
 HERE = Path(__file__).resolve().parent
 spec = importlib.util.spec_from_file_location('fs_runtime', HERE / 'runtime.py')
@@ -48,7 +52,10 @@ def main():
     subprocess.run(command + ['--screen', '--screen-updates', '5000', '--resume'],
                    cwd=fs_runtime.ROOT, check=True)
     direct_id = run_id + '-continuous'
-    subprocess.run([sys.executable, '-u', str(HERE / 'run.py'), '--config', str(config),
+    direct_cfg = dict(cfg, record_updates=2)
+    direct_config = fixture / 'direct-config.json'
+    direct_config.write_text(json.dumps(direct_cfg))
+    subprocess.run([sys.executable, '-u', str(HERE / 'run.py'), '--config', str(direct_config),
                     '--id', direct_id, '--screen', '--screen-updates', '5000'],
                    cwd=fs_runtime.ROOT, check=True)
     resumed = torch.load(out / 'latest.pt', map_location='cpu', weights_only=False)
@@ -62,7 +69,7 @@ def main():
     assert list(out.glob('epochs_before_resume_*.jsonl'))
     manifest = json.loads((out / 'manifest.json').read_text())
     assert manifest['extra_deployed_parameters'] == 11024
-    print('PASS synthetic accumulation/cache/evaluation/checkpoint/resume equality:', run_id)
+    print('PASS synthetic accumulation/cache/checkpoint/resume and evaluation-cadence equality:', run_id)
     print('No real-data accuracy evidence. Fixture artifacts retained under tmp/ and runs/.')
 
 
