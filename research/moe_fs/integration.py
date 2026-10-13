@@ -49,6 +49,8 @@ def main():
     out = fs_runtime.ROOT / 'runs' / run_id
     with open(out / 'epochs.jsonl', 'a') as f:
         f.write('{"interrupted":')
+    with open(out / 'loss_steps.jsonl', 'a') as f:
+        f.write(json.dumps(dict(update=999, train_l1=999))+'\n'+ '{"interrupted":')
     subprocess.run(command + ['--screen', '--screen-updates', '5000', '--resume'],
                    cwd=fs_runtime.ROOT, check=True)
     direct_id = run_id + '-continuous'
@@ -65,6 +67,9 @@ def main():
     assert all(torch.equal(v, direct['model'][k]) for k, v in resumed['model'].items())
     assert resumed['scheduler'] == direct['scheduler']
     assert len((out / 'epochs.jsonl').read_text().splitlines()) == 2
+    step_rows = [json.loads(line) for line in (out / 'loss_steps.jsonl').read_text().splitlines()]
+    assert [row['update'] for row in step_rows] == [1, 2]
+    assert step_rows == [json.loads(line) for line in (fs_runtime.ROOT / 'runs' / direct_id / 'loss_steps.jsonl').read_text().splitlines()]
     assert (out / 'best_validation.pt').exists()
     assert list(out.glob('epochs_before_resume_*.jsonl'))
     manifest = json.loads((out / 'manifest.json').read_text())

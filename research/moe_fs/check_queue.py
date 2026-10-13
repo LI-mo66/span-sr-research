@@ -68,7 +68,8 @@ def main():
         fake.mkdir()
         (fake / 'flock').write_text('#!/usr/bin/env bash\nexit "${TEST_LOCK_CODE:-0}"\n')
         python = fake / 'fake_python'
-        python.write_text('#!/usr/bin/env bash\nexit "${TEST_EXIT_CODE:-0}"\n')
+        python.write_text('#!/usr/bin/env bash\ncase "$*" in *finalize.py*) exit "${TEST_BACKUP_CODE:-0}";; esac\nexit "${TEST_EXIT_CODE:-0}"\n')
+        (fake / 'featurize').write_text('#!/usr/bin/env bash\ngrep -q "backup_exit_code=0" "$TEST_JOB/status.txt" || exit 99\nprintf "mock release\\n" > "$TEST_JOB/release.called"\n')
         for executable in fake.iterdir():
             executable.chmod(0o755)
         for exit_code, lock_code in ((0, 0), (7, 0), (0, 1)):
@@ -83,7 +84,20 @@ def main():
             expected = 75 if lock_code else exit_code
             assert result.returncode == expected
             assert f'exit_code={expected}' in (job / 'status.txt').read_text()
-    print('PASS immutable paired configs, fixed-tail validation comparison, worker exit/lock status.')
+        for train_code, backup_code, lock_code in ((0, 0, 0), (7, 0, 0), (0, 9, 0), (0, 0, 1)):
+            job = root / f'release-{train_code}-{backup_code}-{lock_code}'
+            job.mkdir()
+            env = dict(os.environ, PYTHON_BIN=posix(python), TEST_EXIT_CODE=str(train_code),
+                       TEST_BACKUP_CODE=str(backup_code), TEST_LOCK_CODE=str(lock_code),
+                       AUTO_RELEASE='1', MOE_FS_GROUP='fixture', BACKUP_ROOT=posix(root / 'backups'),
+                       TEST_JOB=posix(job))
+            runner.write_text(f'#!/usr/bin/env bash\nexport PATH="{posix(fake)}:$PATH"\n'
+                              f'exec bash research/moe_fs/worker.sh "{posix(job)}"\n')
+            result = subprocess.run([args.bash, posix(runner)], cwd=original_root, env=env)
+            expected = 75 if lock_code else (74 if backup_code else train_code)
+            assert result.returncode == expected
+            assert (job / 'release.called').exists() == (backup_code == 0 and lock_code == 0)
+    print('PASS immutable configs, fixed-tail comparison, worker exit/lock and backup-before-release ordering. All release calls mocked.')
 
 
 if __name__ == '__main__':

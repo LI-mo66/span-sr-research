@@ -1,5 +1,9 @@
 # SPAN52-FusionGate4独立短筛
 
+2026-10-13新增绘图与可选Featurize自动释放：独立trainer.py仅增加逐更新loss_steps.jsonl及恢复截断，原research/train.py和SPAN源码不修改。curves.py生成每步/周期loss、6个评测集PSNR/SSIM及同更新数两组对照/差值PNG与SVG。AUTO_RELEASE=1时worker在成功或训练错误退出后先将组日志、所有已有seed的run原始记录/全部checkpoint复制到BACKUP_ROOT并逐文件SHA256校验，生成曲线后调用featurize instance release。备份失败不释放，锁拒绝不释放；SIGKILL/系统崩溃不能执行退出处理。释放后本地数据可能消失，续训需恢复数据和备份。
+
+Featurize启动时显式传AUTO_RELEASE=1和BACKUP_ROOT=/home/featurize/work/span-x4-research/records；依赖matplotlib。默认AUTO_RELEASE=0仍不释放。绘图与备份完成前可能仍计费；平台实际释放结果需在控制台确认。
+
 2026-10-13更新：screen.py及launch.sh默认每1000更新评测/保存一次，两组一致；仍各5000更新短筛，不压缩百万更新LR时间轴。可用--eval-every 5000显式保留旧节奏；改变间隔必须新group，不能修改既有配置恢复。launch.sh第6个参数为评测间隔，默认1000。
 
 2026-10-12。仅B0基线与A1-G4候选；原始`basicsr/archs/span_arch.py`保持不变。层级门控受SSIU/TIP2025 MoE-FS启发，采用四路加权concat而非原文三路求和。代码为独立适配。

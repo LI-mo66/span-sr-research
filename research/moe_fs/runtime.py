@@ -20,4 +20,4 @@ def load_shared(name, filename):
 
 shared_runtime = load_shared('runtime', 'runtime.py')
 components = shared_runtime.components
-trainer = load_shared('moe_fs_shared_trainer', 'train.py')
+trainer = load_shared('moe_fs_shared_trainer', 'moe_fs/trainer.py')
