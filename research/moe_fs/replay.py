@@ -70,7 +70,8 @@ def main():
         raise FileNotFoundError(checkpoint)
     old_root = args.original_data_root
     pairs = []
-    for row in info['data']['train']:
+    cache_rows = []
+    for index, row in enumerate(info['data']['train'], 1):
         mapped = {}
         for side in ('hr', 'lr'):
             original = Path(row[side])
@@ -81,6 +82,9 @@ def main():
                 raise ValueError(f'Data hash mismatch: {path}')
             mapped[side] = path
         pairs.append((mapped['hr'], mapped['lr']))
+        cache_rows.append(dict(row, hr=str(mapped['hr']), lr=str(mapped['lr'])))
+        if index % 250 == 0:
+            print(f'Data hash check: {index}/{len(info["data"]["train"])}', flush=True)
     print('Training data hashes and environment match; pairs:', len(pairs), flush=True)
     state = torch.load(checkpoint, map_location='cpu', weights_only=False)
     if state['fingerprint'] != info['fingerprint']:
@@ -93,6 +97,8 @@ def main():
         raise ValueError('A new --output directory is required; existing output is never overwritten')
     if not start < args.until <= start + 1000:
         raise ValueError('Replay cap must be above checkpoint and within 1000 updates')
+    if cfg.get('image_backend', 'png') == 'npy_mmap':
+        runtime.trainer.enable_cache({'train': cache_rows}, args.data_root / 'image_cache')
     args.output.mkdir(parents=True)
     torch.backends.cudnn.benchmark = False
     torch.backends.cudnn.deterministic = True
