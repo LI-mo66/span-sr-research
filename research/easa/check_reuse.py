@@ -84,6 +84,34 @@ class ReuseChecks(unittest.TestCase):
             with patch.object(sys, 'argv', args), self.assertRaises(ValueError):
                 compare.main()
 
+    def test_backup_hashes_and_required_weight(self):
+        finalize = load('easa_finalize_check', 'finalize_reuse.py')
+        root = HERE.parents[1] / 'tmp' / ('backup-test-' + uuid.uuid4().hex[:10])
+        group = root / 'logs/easa/group'
+        run = root / 'runs/E1-s10'
+        group.mkdir(parents=True)
+        run.mkdir(parents=True)
+        (group / 'comparison-50000.json').write_text(json.dumps(dict(
+            candidate_checkpoint='epoch00047_u47000.pt')))
+        for name in ('manifest.json', 'epochs.jsonl', 'loss_steps.jsonl', 'latest.pt',
+                     'best_validation.pt', 'epoch00047_u47000.pt'):
+            (run / name).write_text('engineering fixture')
+        output = finalize.backup(root, group, 'E1-s10', root / 'records')
+        self.assertTrue((output / 'BACKUP_COMPLETE').is_file())
+        inventory = json.loads((output / 'backup-manifest.json').read_text())
+        self.assertEqual(len(inventory['files']), 7)
+        for row in inventory['files']:
+            self.assertEqual(finalize.digest(output / row['path']), row['sha256'])
+        with self.assertRaises(FileNotFoundError):
+            finalize.backup(root, group, 'missing-run', root / 'records')
+        original_copy = finalize.shutil.copy2
+        def corrupt(source, target):
+            original_copy(source, target)
+            Path(target).write_text('corrupted')
+        with patch.object(finalize.shutil, 'copy2', corrupt), self.assertRaises(IOError):
+            finalize.backup(root, group, 'E1-s10', root / 'corrupt-records')
+        self.assertFalse(list((root / 'corrupt-records').glob('*/BACKUP_COMPLETE')))
+
 
 if __name__ == '__main__':
     unittest.main()

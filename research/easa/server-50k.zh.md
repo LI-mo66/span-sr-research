@@ -27,6 +27,14 @@ bash research/easa/launch_reuse.sh FEAT-EASA-MID-LR2E4-50K-01 /home/featurize/wo
 
 launch先核对B0、冻结配置、重跑目标服务器CUDA验证，再完整数据预检；全部通过才nohup启动一组EASA。不启动B0，也不调用旧MoE-FS队列。第一次哈希/解码/缓存可能较久。审查失败请保留日志并定位，不绕过数据或环境核验。不能在训练期间更新worktree源码。
 
+## nohup完成后自动释放实例
+
+用户已授权运行完自动关机。启动前设置 `export AUTO_RELEASE=1`，然后执行上面的launch命令。worker在50k训练和比较成功后，把本组日志、配置、所有周期权重、best_validation、逐图指标和comparison报告复制到 `/home/featurize/work/span-x4-research/records/<GROUP>-<timestamp>`，逐文件核对SHA256并写BACKUP_COMPLETE，然后调用项目已有的 `featurize instance release`。这是Featurize平台释放实例的方式，不能以仅关闭Linux来代替。
+
+备份位置记录在 `logs/easa/<GROUP>/backup-path.txt`；持久化备份中release-status.txt记录释放请求。训练/比较失败或备份失败时不会执行release；失败文件仍保留，避免未确认保存就释放。当前关机授权只适用于这次单组EASA任务。
+
+如果任务已经启动，不要更新其源码或重新启动另一份50k训练；运行中的worker不会读取后来在其它终端export的变量，应另外设置完成后收尾。上面的AUTO_RELEASE必须在launch前设置。
+
 进度：
 
 ```bash
