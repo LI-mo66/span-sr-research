@@ -1,0 +1,187 @@
+   "B0": {
+      "run_id": "FEAT-MOEFS-G4-LR2E4-20K-01-B0-s10",
+      "updates": 50000,
+      "selected_update": 48000,
+      "selected_epoch": 48,
+      "checkpoint": "/home/featurize/work/span-x4-research/code/span-sr-research/runs/FEAT-MOEFS-G4-LR2E4-20K-01-B0-s10/epoch00048_u48000.pt",
+      "metrics": {
+        "DIV2K_valid": {
+          "psnr": 30.15989124662389,
+          "ssim": 0.8310521433525326
+        },
+        "Set5": {
+          "psnr": 31.820548063043777,
+          "ssim": 0.8896147024060944
+        },
+        "Set14": {
+          "psnr": 28.36729279739073,
+          "ssim": 0.7760580478635397
+        },
+        "B100": {
+          "psnr": 27.419095382547262,
+          "ssim": 0.7308119529446396
+        },
+        "Urban100": {
+          "psnr": 25.57220348909937,
+          "ssim": 0.7680947190083123
+        },
+        "Manga109": {
+          "psnr": 29.772182272606813,
+          "ssim": 0.8975288255863011
+        }
+      },
+      "per_dataset_psnr_best": {
+        "DIV2K_valid": {
+          "update": 48000,
+          "epoch": 48,
+          "metrics": {
+            "psnr": 30.15989124662389,
+            "ssim": 0.8310521433525326
+          },
+          "checkpoint": "epoch00048_u48000.pt"
+        },
+        "Set5": {
+          "update": 48000,
+          "epoch": 48,
+          "metrics": {
+            "psnr": 31.820548063043777,
+            "ssim": 0.8896147024060944
+          },
+          "checkpoint": "epoch00048_u48000.pt"
+        },
+        "Set14": {
+          "update": 48000,
+          "epoch": 48,
+          "metrics": {
+            "psnr": 28.36729279739073,
+            "ssim": 0.7760580478635397
+          },
+          "checkpoint": "epoch00048_u48000.pt"
+        },
+        "B100": {
+          "update": 48000,
+          "epoch": 48,
+          "metrics": {
+            "psnr": 27.419095382547262,
+            "ssim": 0.7308119529446396
+          },
+          "checkpoint": "epoch00048_u48000.pt"
+        },
+        "Urban100": {
+          "update": 48000,
+          "epoch": 48,
+          "metrics": {
+            "psnr": 25.57220348909937,
+            "ssim": 0.7680947190083123
+          },
+          "checkpoint": "epoch00048_u48000.pt"
+        },
+        "Manga109": {
+          "update": 48000,
+          "epoch": 48,
+          "metrics": {
+            "psnr": 29.772182272606813,
+            "ssim": 0.8975288255863011
+          },
+          "checkpoint": "epoch00048_u48000.pt"
+        }
+      }
+    },
+    "A1-G4": {
+      "run_id": "FEAT-MOEFS-G4-LR2E4-20K-01-A1-G4-s10",
+      "updates": 50000,
+      "selected_update": 47000,
+      "selected_epoch": 47,
+      "checkpoint": "/home/featurize/work/span-x4-research/code/span-sr-research/runs/FEAT-MOEFS-G4-LR2E4-20K-01-A1-G4-s10/epoch00047_u47000.pt",
+      "metrics": {
+        "DIV2K_valid": {
+          "psnr": 30.136644037870514,
+          "ssim": 0.830498103467164
+        },
+        "Set5": {
+          "psnr": 31.731152520240407,
+          "ssim": 0.8886253360270382
+        },
+        "Set14": {
+          "psnr": 28.35626989272029,
+          "ssim": 0.7757959402664601
+        },
+        "B100": {
+          "psnr": 27.40702339018354,
+          "ssim": 0.7300712858975957
+        },
+        "Urban100": {
+          "psnr": 25.562727819115302,
+          "ssim": 0.767708178230359
+        },
+        "Manga109": {
+          "psnr": 29.68539109037285,
+          "ssim": 0.8971012941537768
+        }
+      },
+      "per_dataset_psnr_best": {
+        "DIV2K_valid": {
+          "update": 47000,
+          "epoch": 47,
+          "metrics": {
+            "psnr": 30.136644037870514,
+            "ssim": 0.830498103467164
+          },
+          "checkpoint": "epoch00047_u47000.pt"
+        },
+        "Set5": {
+          "update": 46000,
+          "epoch": 46,
+          "metrics": {
+            "psnr": 31.768135532010962,
+            "ssim": 0.8892125872480978
+          },
+          "checkpoint": "epoch00046_u46000.pt"
+        },
+        "Set14": {
+          "update": 46000,
+          "epoch": 46,
+          "metrics": {
+            "psnr": 28.358239349927207,
+            "ssim": 0.7755511638018112
+          },
+          "checkpoint": "epoch00046_u46000.pt"
+        },
+        "B100": {
+          "update": 47000,
+          "epoch": 47,
+          "metrics": {
+            "psnr": 27.40702339018354,
+            "ssim": 0.7300712858975957
+          },
+          "checkpoint": "epoch00047_u47000.pt"
+        },
+        "Urban100": {
+          "update": 49000,
+          "epoch": 49,
+          "metrics": {
+            "psnr": 25.572889013642698,
+            "ssim": 0.7689708694175702
+          },
+          "checkpoint": "epoch00049_u49000.pt"
+        },
+        "Manga109": {
+          "update": 48000,
+          "epoch": 48,
+          "metrics": {
+            "psnr": 29.731499261729425,
+            "ssim": 0.8975952061716569
+          },
+          "checkpoint": "epoch00048_u48000.pt"
+        }
+      }
+    }
+  },
+  "validation_delta": {
+    "psnr": -0.023247208753375048,
+    "ssim": -0.0005540398853686179
+  }
+}
+Compact curves saved: /home/featurize/work/span-x4-research/records/FEAT-MOEFS-G4-LR2E4-20K-01-1791983354063378494/curves/seed-10
+Verified backup: /home/featurize/work/span-x4-research/records/FEAT-MOEFS-G4-LR2E4-20K-01-1791983354063378494
+备份完成，服务器保留，需要你手动释放。
