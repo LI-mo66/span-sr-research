@@ -1,0 +1,121 @@
+{
+  "gate_statistics": {
+    "normalized_entropy": 0.2472932862201572,
+    "aggregation": "All validation spatial/channel sites pooled; quantiles use deterministic subsamples",
+    "features": {
+      "F0-shallow": {
+        "probability_mean": 0.026810988708203164,
+        "gain_mean_abs_deviation_from_one": 0.8927560453706854,
+        "winner_fraction": 0.0,
+        "feature_mean_abs": 3.2648055465148116,
+        "feature_rms": 7.069209425875878,
+        "gated_mean_abs": 0.8029554349066659,
+        "gated_rms": 2.8645285190052765,
+        "probability_quantiles_05_50_95": [
+          0.0017252027930226177,
+          0.014497389551252127,
+          0.10142204947769641
+        ]
+      },
+      "F6-conv2": {
+        "probability_mean": 0.32484343775924307,
+        "gain_mean_abs_deviation_from_one": 1.3753143693474459,
+        "winner_fraction": 0.3269230769230769,
+        "feature_mean_abs": 1.5201515293791181,
+        "feature_rms": 2.210770758358131,
+        "gated_mean_abs": 0.46842012002461164,
+        "gated_rms": 1.2575674793602325,
+        "probability_quantiles_05_50_95": [
+          0.0008080718893324956,
+          0.04262133315205574,
+          0.97491574883461
+        ]
+      },
+      "B1-block1": {
+        "probability_mean": 0.022923562039909706,
+        "gain_mean_abs_deviation_from_one": 0.908305746583326,
+        "winner_fraction": 0.0,
+        "feature_mean_abs": 1.756589425937293,
+        "feature_rms": 3.544418189108678,
+        "gated_mean_abs": 0.4035060314025734,
+        "gated_rms": 1.4857577410688951,
+        "probability_quantiles_05_50_95": [
+          0.0017513679689727724,
+          0.009681176394224167,
+          0.10919019617140294
+        ]
+      },
+      "T6-block6-first": {
+        "probability_mean": 0.6254220095509326,
+        "gain_mean_abs_deviation_from_one": 2.0250749632867655,
+        "winner_fraction": 0.6730769230769231,
+        "feature_mean_abs": 2.033536428814572,
+        "feature_rms": 3.8813366558468285,
+        "gated_mean_abs": 0.7313587835916815,
+        "gated_rms": 1.1302399612378855,
+        "probability_quantiles_05_50_95": [
+          0.0008160121826222167,
+          0.9285900294780731,
+          0.9951692283153534
+        ]
+      }
+    }
+  },
+  "validation_results": {
+    "B0-alpha1": {
+      "psnr": 30.15989124662389,
+      "ssim": 0.8310521433525326,
+      "checkpoint": "/home/featurize/work/span-x4-research/records/FEAT-MOEFS-G4-LR2E4-20K-01-1791983354063378494/runs/FEAT-MOEFS-G4-LR2E4-20K-01-B0-s10/epoch00048_u48000.pt",
+      "update": 48000,
+      "alpha": 1.0,
+      "delta_psnr_vs_original_A1": 0.023247208753375048,
+      "delta_psnr_vs_B0": 0.0
+    },
+    "A1-G4-alpha1": {
+      "psnr": 30.136644037870514,
+      "ssim": 0.830498103467164,
+      "checkpoint": "/home/featurize/work/span-x4-research/records/FEAT-MOEFS-G4-LR2E4-20K-01-1791983354063378494/runs/FEAT-MOEFS-G4-LR2E4-20K-01-A1-G4-s10/epoch00047_u47000.pt",
+      "update": 47000,
+      "alpha": 1.0,
+      "delta_psnr_vs_original_A1": 0.0,
+      "delta_psnr_vs_B0": -0.023247208753375048
+    },
+    "A1-G4-alpha0.75": {
+      "psnr": 19.728270036739204,
+      "ssim": 0.5668404477839704,
+      "checkpoint": "/home/featurize/work/span-x4-research/records/FEAT-MOEFS-G4-LR2E4-20K-01-1791983354063378494/runs/FEAT-MOEFS-G4-LR2E4-20K-01-A1-G4-s10/epoch00047_u47000.pt",
+      "update": 47000,
+      "alpha": 0.75,
+      "delta_psnr_vs_original_A1": -10.40837400113131,
+      "delta_psnr_vs_B0": -10.431621209884685
+    },
+    "A1-G4-alpha0.5": {
+      "psnr": 16.116807468056024,
+      "ssim": 0.41576524931121106,
+      "checkpoint": "/home/featurize/work/span-x4-research/records/FEAT-MOEFS-G4-LR2E4-20K-01-1791983354063378494/runs/FEAT-MOEFS-G4-LR2E4-20K-01-A1-G4-s10/epoch00047_u47000.pt",
+      "update": 47000,
+      "alpha": 0.5,
+      "delta_psnr_vs_original_A1": -14.01983656981449,
+      "delta_psnr_vs_B0": -14.043083778567865
+    },
+    "A1-G4-alpha0.25": {
+      "psnr": 14.404494121646989,
+      "ssim": 0.3556488291600062,
+      "checkpoint": "/home/featurize/work/span-x4-research/records/FEAT-MOEFS-G4-LR2E4-20K-01-1791983354063378494/runs/FEAT-MOEFS-G4-LR2E4-20K-01-A1-G4-s10/epoch00047_u47000.pt",
+      "update": 47000,
+      "alpha": 0.25,
+      "delta_psnr_vs_original_A1": -15.732149916223525,
+      "delta_psnr_vs_B0": -15.7553971249769
+    },
+    "A1-G4-alpha0": {
+      "psnr": 13.398178069471905,
+      "ssim": 0.32563386958111196,
+      "checkpoint": "/home/featurize/work/span-x4-research/records/FEAT-MOEFS-G4-LR2E4-20K-01-1791983354063378494/runs/FEAT-MOEFS-G4-LR2E4-20K-01-A1-G4-s10/epoch00047_u47000.pt",
+      "update": 47000,
+      "alpha": 0.0,
+      "delta_psnr_vs_original_A1": -16.738465968398607,
+      "delta_psnr_vs_B0": -16.761713177151982
+    }
+  },
+  "note": "Inference intervention on fixed learned weights; alpha0 retains A1 backbone and is not B0. No retraining or test-set selection."
+}

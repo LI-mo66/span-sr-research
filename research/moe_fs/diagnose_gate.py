@@ -97,7 +97,11 @@ def main():
                         flat = prob[i].flatten()
                         stride = max(1, math.ceil(flat.numel() / 2048))
                         samples[i].append(flat[::stride].cpu().numpy())
-                return [x * (1.0 + alpha * (weights[i]-1.0)) for i, x in enumerate(features)]
+                if alpha == 1.0:
+                    return [x * weights[i] for i, x in enumerate(features)]
+                if alpha == 0.0:
+                    return list(features)
+                return [x * ((1.0-alpha) + alpha*weights[i]) for i, x in enumerate(features)]
 
             gate.forward = types.MethodType(forward, gate)
             # Check original vs diagnostic implementation before any evaluation.
