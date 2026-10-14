@@ -1,0 +1,50 @@
+{
+  "model": {
+    "num_in_ch": 3,
+    "num_out_ch": 3,
+    "feature_channels": 52,
+    "upscale": 4,
+    "img_range": 255.0
+  },
+  "seed": 10,
+  "total_updates": 1000000,
+  "screen_epochs": 20,
+  "record_updates": 1000,
+  "deployed_baseline_parameters": 498208,
+  "max_extra_deployed_parameters": 49820,
+  "hr_patch": 256,
+  "effective_batch": 64,
+  "micro_batch": 4,
+  "lr": 0.0002,
+  "adam_betas": [
+    0.9,
+    0.999
+  ],
+  "adam_eps": 1E-08,
+  "milestones": [
+    200000,
+    400000,
+    600000,
+    800000
+  ],
+  "gamma": 0.5,
+  "crop_border": 4,
+  "test_y_channel": true,
+  "self_ensemble": false,
+  "selection_dataset": "DIV2K_valid",
+  "protocol_status": "SPAN52_stage1_research_protocol_pending_remote_baseline_training",
+  "official_unresolved": [
+    "Adam betas/epsilon unspecified in paper",
+    "number and reset semantics of repeated loaded-weight training stages",
+    "complete training provenance of released weights, including teacher/EMA"
+  ],
+  "paths_file": "research/configs/paths.local.json",
+  "experiment_version": "EASAResidual-v1",
+  "training_protocol": "multistep-lr2e4-v1",
+  "easa": true,
+  "easa_settings": {
+    "position": "mid",
+    "down_scale": 8,
+    "residual_init": 0.01
+  }
+}

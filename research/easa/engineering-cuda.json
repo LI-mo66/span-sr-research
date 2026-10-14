@@ -1,0 +1,95 @@
+{
+  "status": "PASS",
+  "device": "cuda",
+  "torch": "2.9.1+cu128",
+  "gpu": "NVIDIA GeForce RTX 4060 Laptop GPU",
+  "shapes": [
+    [
+      1,
+      3,
+      1,
+      1
+    ],
+    [
+      2,
+      3,
+      3,
+      5
+    ],
+    [
+      1,
+      3,
+      7,
+      9
+    ],
+    [
+      2,
+      3,
+      13,
+      17
+    ],
+    [
+      1,
+      3,
+      64,
+      64
+    ],
+    [
+      1,
+      3,
+      65,
+      71
+    ]
+  ],
+  "deterministic": true,
+  "extra_parameters": 8944,
+  "deployed_parameters": 507152,
+  "first_step_adapter_gradient_max": {
+    "alpha": 1.708646592268881e-11,
+    "beta": 6.882843904196245e-13,
+    "gamma": 6.860331325242441e-08,
+    "input_projection.weight": 7.820998709773264e-11,
+    "input_projection.bias": 1.8237239496343705e-10,
+    "depthwise.weight": 2.8070025470672277e-11,
+    "depthwise.bias": 8.645167914878016e-11,
+    "modulation_projection.weight": 7.37960803576243e-11,
+    "modulation_projection.bias": 1.9781737359281237e-10,
+    "output_projection.weight": 1.2471973453997975e-10,
+    "output_projection.bias": 6.788548834180119e-09
+  },
+  "adapter_updated": {
+    "alpha": true,
+    "beta": true,
+    "gamma": true,
+    "input_projection.weight": true,
+    "input_projection.bias": true,
+    "depthwise.weight": true,
+    "depthwise.bias": true,
+    "modulation_projection.weight": true,
+    "modulation_projection.bias": true,
+    "output_projection.weight": true,
+    "output_projection.bias": true
+  },
+  "synthetic_l1": [
+    6.327683925628662,
+    5.835264682769775,
+    5.424994945526123,
+    5.0610151290893555
+  ],
+  "checkpoint_missing": [],
+  "checkpoint_unexpected": [],
+  "checks": [
+    "native adaptive-max values/tie gradients",
+    "baseline weights/RNG",
+    "mid/tail baseline bypass wiring",
+    "tiny/odd/non-square NCHW train/eval",
+    "no input mutation",
+    "batch independence",
+    "zero/noncontiguous backward",
+    "full-loss finite gradients and all adapter updates",
+    "optimizer coverage",
+    "serialized strict reload",
+    "prefusion"
+  ],
+  "evidence": "engineering only; no real-data PSNR measured"
+}
