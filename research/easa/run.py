@@ -14,6 +14,20 @@ spec.loader.exec_module(easa_runtime)
 from model import build_model
 
 
+def train_main():
+    # Extend only the stopping-cap CLI; retain the shared 1M-update schedule.
+    original = argparse.ArgumentParser.add_argument
+    def add_argument(parser, *args, **kwargs):
+        if '--screen-updates' in args:
+            kwargs['choices'] = [5000, 20000, 50000, 100000]
+        return original(parser, *args, **kwargs)
+    argparse.ArgumentParser.add_argument = add_argument
+    try:
+        easa_runtime.trainer.main()
+    finally:
+        argparse.ArgumentParser.add_argument = original
+
+
 def validate_config(cfg):
     if cfg.get('variants') or cfg.get('moe_fs', False):
         raise ValueError('EASA cannot mix other candidates')
@@ -71,7 +85,7 @@ def validate_data(cfg):
 
 def main():
     if '--help' in sys.argv or '-h' in sys.argv:
-        easa_runtime.trainer.main()
+        train_main()
         return
     parser = argparse.ArgumentParser(add_help=False)
     parser.add_argument('--config', required=True)
@@ -84,7 +98,7 @@ def main():
     # Replace only the factory bound in this process, never source files.
     easa_runtime.trainer.build_model = build_model
     print('Shared trainer: hashing source images and checking train/evaluation overlap.', flush=True)
-    easa_runtime.trainer.main()
+    train_main()
 
 
 if __name__ == '__main__':

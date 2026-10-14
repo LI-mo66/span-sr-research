@@ -2,6 +2,8 @@
 
 独立分支 `research/easa-mid`，从 `d280dc5` 建立；原始SPAN、MoE-FS实现、既有队列和其他分支不修改。本目录新增一个模型工厂、训练入口、配对配置、工程验证与资源测试。工程PASS不等于PSNR上涨。
 
+2026-10-14：用户提供可复用B0记录b546036，当前任务只运行EASA50k。请使用[服务器单组入口](server-50k.zh.md)；从B0 manifest冻结microbatch16实际配置，不直接用下方microbatch4模板，也不执行B0训练命令。
+
 ## 结构与激活
 
 推荐E1：原SPAB3输出 → EASA残差适配器 → 原SPAB4。原六个SPAB、Conv3XC和四路融合顺序保留。block6的第一路返回值按原实际forward使用，不当作未激活卷积重新构造。可配置tail位置仅供以后独立位置对照，默认mid；不叠MoE-FS/其它模块。
