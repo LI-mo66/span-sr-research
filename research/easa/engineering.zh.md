@@ -10,8 +10,12 @@
 - 新参数全部进入optimizer且无重复；最终RGB L1反向有限；所有新增参数张量首步梯度非零、四步后均有真实更新。合成L1下降仅证明基本学习能力。
 - serialize/strict reload无missing/unexpected；预合并Conv3XC后输出一致；新增8944、合并部署507152。
 - CUDA确定性池化替代与CPU原生池化输出和梯度一致，含整除/非整除/并列最大值。
+- 真实训练入口的合成集成检查通过：ENGINEERING-EASA-16d4ebfb28，源码f38651d。两次CUDA更新（累积microbatch、npy缓存），第1步保存后恢复到第2步，与连续两步的完整模型state_dict逐元素一致、scheduler一致、每步loss一致；中断日志恢复、逐图评测、周期checkpoint与best_validation产物通过。
+- Python编译及训练CLI帮助检查通过。相对基点d280dc5只新增research/easa下文件，原SPAN、共享训练器及MoE-FS源码没有改动。
 
 机器可读原始结果：engineering-cpu.json、engineering-cuda.json；每个参数的首步梯度和真实更新均保留。尤其beta等分支首步梯度很小（约1e-12量级），并非结构性零梯度，但尚不能据此判定真实数据上的学习效率。后续短筛应监测修正幅值与更新，不自动放大gamma或改变分组学习率。
+
+工程检查对应model.py SHA256：038d416433d8d255aad158444799513319f2a6cdaef05fff961756bf2c9b2dc3。后续仅文档补记不改变模型文件；合成原始产物保存在本工作目录忽略的runs/与tmp/，没有作为真实精度结果上传。
 
 ## 失败与修复记录
 
