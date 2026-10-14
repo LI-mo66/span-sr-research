@@ -24,5 +24,5 @@ output = backup(fixture, group, fixture / 'durable', success=True)
 assert (output / 'BACKUP_COMPLETE').exists()
 manifest = json.loads((output / 'backup-manifest.json').read_text())
 assert all(sha256(output / row['path']) == row['sha256'] for row in manifest['files'])
-assert len(list((output / 'curves').rglob('*.png'))) == 23
-print('PASS verified backup and 23 PNG/SVG charts; fixture:', output)
+assert len(list((output / 'curves').rglob('*.png'))) == 2
+print('PASS verified backup and two loss/PSNR/SSIM overview PNG/SVG charts; fixture:', output)

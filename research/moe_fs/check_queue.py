@@ -36,10 +36,12 @@ def main():
             micro_batch = 16
             image_backend = 'npy_mmap'
             eval_every = 1000
+            protocol = 'lr2e4'
         group, configs = screen.prepare(Options)
         a, b = [json.loads(configs[name].read_text()) for name in ('B0', 'A1-G4')]
         assert a.pop('moe_fs') is False and b.pop('moe_fs') is True and a == b
         assert a['record_updates'] == 1000 and a['total_updates'] == 1000000
+        assert a['lr'] == 2e-4 and a['training_protocol'] == 'multistep-lr2e4-v1'
         screen.prepare(Options)
         Options.micro_batch = 8
         try:
@@ -52,16 +54,19 @@ def main():
         for label, run_id in run_ids.items():
             out = root / 'runs' / run_id
             out.mkdir(parents=True)
-            rows = [dict(update=u, metrics={'DIV2K_valid': {'psnr': v, 'ssim': .9},
+            rows = [dict(update=u, epoch=i, metrics={'DIV2K_valid': {'psnr': v, 'ssim': .9},
                                             'Set5': {'psnr': 99 if label == 'B0' else 1, 'ssim': .9}})
-                    for u, v in ((5000, 30), (10000, 31), (15000, 32), (20000, 33))]
+                    for i, (u, v) in enumerate(((5000, 30), (10000, 34), (15000, 32), (20000, 33)), 1)]
+            for row in rows:
+                (out / f'epoch{row["epoch"]:05d}_u{row["update"]}.pt').write_bytes(b'mock checkpoint')
             if label == 'A1-G4':
                 for row in rows:
                     row['metrics']['DIV2K_valid']['psnr'] += .1
             (out / 'epochs.jsonl').write_text('\n'.join(json.dumps(r) for r in rows) + '\n')
         screen.compare(group, run_ids, 20000)
         comparison = json.loads((group / 'comparison-s10-u20000.json').read_text())
-        assert comparison['rows']['B0']['tail_updates'] == [10000, 15000, 20000]
+        assert comparison['rows']['B0']['selected_update'] == 10000
+        assert comparison['rows']['B0']['metrics']['Set5']['psnr'] == 99
         assert abs(comparison['validation_delta']['psnr'] - .1) < 1e-10
         # All executable children are mocks: no GPU work, no shutdown.
         fake = root / 'bin'

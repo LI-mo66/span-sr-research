@@ -48,7 +48,8 @@ def prepare(args):
     immutable(group / 'paths.json', paths)
     configs = {}
     for label, enabled in (('B0', False), ('A1-G4', True)):
-        cfg = json.loads((HERE / 'configs' / f'{label}.json').read_text())
+        suffix = '-lr2e4' if getattr(args, 'protocol', 'original') == 'lr2e4' else ''
+        cfg = json.loads((HERE / 'configs' / f'{label}{suffix}.json').read_text())
         cfg.update(seed=args.seed, micro_batch=args.micro_batch,
                    paths_file=str(group / 'paths.json'), image_backend=args.image_backend)
         cfg['record_updates'] = getattr(args, 'eval_every', 5000)
@@ -66,14 +67,21 @@ def compare(group, run_ids, updates):
         records = sorted((r for r in records if r['update'] <= updates), key=lambda r: r['update'])
         if not records or records[-1]['update'] != updates:
             raise ValueError(f'Checkpoint budget missing for {run_id}')
-        tail = records[-3:]
+        best = max(records, key=lambda r: r['metrics']['DIV2K_valid']['psnr'])
+        checkpoint = ROOT / 'runs' / run_id / f'epoch{best["epoch"]:05d}_u{best["update"]}.pt'
+        if not checkpoint.is_file():
+            raise FileNotFoundError(f'Best-validation checkpoint missing: {checkpoint}')
+        per_dataset = {}
+        for name in best['metrics']:
+            row = max(records, key=lambda r: r['metrics'][name]['psnr'])
+            per_dataset[name] = dict(update=row['update'], epoch=row['epoch'], metrics=row['metrics'][name],
+                                     checkpoint=f'epoch{row["epoch"]:05d}_u{row["update"]}.pt')
         rows[label] = dict(run_id=run_id, updates=updates,
-                           tail_updates=[r['update'] for r in tail],
-                           metrics={name: {m: sum(r['metrics'][name][m] for r in tail) / len(tail)
-                                          for m in ('psnr', 'ssim')}
-                                    for name in tail[-1]['metrics']})
+                           selected_update=best['update'], selected_epoch=best['epoch'],
+                           checkpoint=str(checkpoint), metrics=best['metrics'],
+                           per_dataset_psnr_best=per_dataset)
     report = dict(status='short-screen evidence only; review required before extension',
-                  checkpoint_rule='mean of last up to 3 fixed recording points at common update cap',
+                  checkpoint_rule='highest DIV2K_valid PSNR within common budget; earliest checkpoint breaks ties; no temporal averaging',
                   rows=rows,
                   validation_delta={m: rows['A1-G4']['metrics']['DIV2K_valid'][m] -
                                      rows['B0']['metrics']['DIV2K_valid'][m]
@@ -92,7 +100,8 @@ def main():
     p.add_argument('--seed', type=int, default=10)
     p.add_argument('--micro-batch', type=int, choices=(4, 8, 16, 32, 64), default=16)
     p.add_argument('--image-backend', choices=('png', 'npy_mmap'), default='npy_mmap')
-    p.add_argument('--updates', type=int, choices=(5000, 20000, 100000), default=5000)
+    p.add_argument('--updates', type=int, choices=(5000, 20000, 100000), default=20000)
+    p.add_argument('--protocol', choices=('original', 'lr2e4'), default='lr2e4')
     p.add_argument('--eval-every', type=int, choices=(1000, 5000), default=1000)
     p.add_argument('--prepare-only', action='store_true')
     p.add_argument('--preflight-only', action='store_true')

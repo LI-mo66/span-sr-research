@@ -17,7 +17,7 @@ def records(folder):
     return [values[u] for u in sorted(values)]
 
 
-def generate(runs, output):
+def generate(runs, output, detailed=False):
     import matplotlib
     matplotlib.use('Agg')
     import matplotlib.pyplot as plt
@@ -31,6 +31,36 @@ def generate(runs, output):
         fig.savefig(output / (name + '.png'), dpi=180)
         fig.savefig(output / (name + '.svg'))
         plt.close(fig)
+    if not detailed:
+        for label, rows in data.items():
+            fig, axes = plt.subplots(1, 3, figsize=(14, 4))
+            steps = {}
+            step_path = runs[label] / 'loss_steps.jsonl'
+            if step_path.exists():
+                for line in step_path.read_text(encoding='utf8').splitlines():
+                    try:
+                        row = json.loads(line)
+                        if row['update'] <= rows[-1]['update']:
+                            steps[row['update']] = row['train_l1']
+                    except (ValueError, KeyError):
+                        continue
+            if steps:
+                axes[0].plot(sorted(steps), [steps[u] for u in sorted(steps)], lw=.7)
+                axes[0].set(ylabel='Training RGB L1 (raw steps)')
+            else:
+                axes[0].plot([r['update'] for r in rows], [r['train_l1_mean'] for r in rows], marker='o')
+                axes[0].set(ylabel='Training RGB L1 (period means)')
+            for ax, metric in zip(axes[1:], ('psnr', 'ssim')):
+                available = [r for r in rows if 'DIV2K_valid' in r['metrics']]
+                ax.plot([r['update'] for r in available], [r['metrics']['DIV2K_valid'][metric] for r in available], marker='o')
+                ax.set(ylabel='Validation PSNR (dB)' if metric == 'psnr' else 'Validation SSIM')
+            for ax in axes:
+                ax.set(xlabel='Optimizer updates'); ax.grid(alpha=.25)
+            fig.suptitle(label + ' / loss and DIV2K_valid metrics')
+            save(fig, label + '-overview')
+        (output / 'source-data.json').write_text(json.dumps(data, indent=2), encoding='utf8')
+        print('Compact curves saved:', output, flush=True)
+        return
     for label, rows in data.items():
         fig, ax = plt.subplots(figsize=(8, 4))
         ax.plot([r['update'] for r in rows], [r['train_l1_mean'] for r in rows], marker='o')
@@ -100,5 +130,6 @@ if __name__ == '__main__':
     parser.add_argument('--baseline', type=Path, required=True)
     parser.add_argument('--candidate', type=Path, required=True)
     parser.add_argument('--output', type=Path, required=True)
+    parser.add_argument('--detailed', action='store_true')
     args = parser.parse_args()
-    generate({'B0': args.baseline, 'A1-G4': args.candidate}, args.output)
+    generate({'B0': args.baseline, 'A1-G4': args.candidate}, args.output, detailed=args.detailed)

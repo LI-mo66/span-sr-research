@@ -19,10 +19,14 @@ def validate_config(cfg):
         return
     reference = json.loads((fs_runtime.RESEARCH / 'configs/baseline_x4.json').read_text())
     for key in ('model', 'total_updates', 'hr_patch', 'effective_batch',
-                'lr', 'adam_betas', 'adam_eps', 'milestones', 'gamma', 'crop_border',
+                'adam_betas', 'adam_eps', 'milestones', 'gamma', 'crop_border',
                 'test_y_channel', 'self_ensemble', 'selection_dataset'):
         if cfg.get(key) != reference[key]:
             raise ValueError(f'Protocol differs from locked baseline: {key}')
+    protocol = cfg.get('training_protocol', 'original')
+    expected_lr = {'original': 5e-4, 'multistep-lr2e4-v1': 2e-4}
+    if protocol not in expected_lr or cfg.get('lr') != expected_lr[protocol]:
+        raise ValueError('Learning rate does not match the declared training protocol')
     if cfg.get('record_updates') not in (1000, 5000):
         raise ValueError('Evaluation/recording interval must be 1000 or 5000 updates')
     if cfg['micro_batch'] not in (4, 8, 16, 32, 64):
