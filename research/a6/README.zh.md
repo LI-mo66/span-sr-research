@@ -34,6 +34,8 @@ NCHW，52通道进出，分支右/下补零到8倍数、输出裁回原H/W；8×
 
 下面在**新目录**克隆完整代码，原源码目录和归档B0保持原状：
 
+bundle同时包含候选分支与独立的`evidence/b0-b546036`记录分支；B0记录不是候选分支祖先，必须保留这条历史，不能只打包候选HEAD。
+
 ```bash
 cd /home/featurize/work/span-x4-research/code
 git clone -b research/a6-grid ./span-a6-server.bundle ./span-sr-a6

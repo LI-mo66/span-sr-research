@@ -16,7 +16,8 @@ export CUBLAS_WORKSPACE_CONFIG=:4096:8
 printf 'ENGINEERING_CHECK\n' > "$group_dir/status.txt"
 "$python_bin" research/a6/verify.py --device cuda --output "$group_dir/engineering-cuda.json" > "$group_dir/engineering-cuda.log" 2>&1
 "$python_bin" research/a6/run.py --config "$group_dir/A6-config.json" --id "$group-A6-s10" --preflight > "$group_dir/preflight.log" 2>&1
-git bundle create "$group_dir/source.bundle" HEAD
+# Include the separate b546036 evidence history as well as candidate history.
+git bundle create "$group_dir/source.bundle" --all
 PYTHON_BIN="$python_bin" nohup bash research/a6/worker.sh "$group_dir" "$group-A6-s10" > "$group_dir/nohup.log" 2>&1 < /dev/null &
 pid=$!
 printf '%s\n' "$pid" > "$group_dir/pid"
