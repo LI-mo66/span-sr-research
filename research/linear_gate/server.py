@@ -49,7 +49,7 @@ def audit_baseline(args, group):
     keys = ('model', 'seed', 'lr', 'adam_betas', 'adam_eps', 'milestones', 'gamma', 'total_updates',
             'hr_patch', 'effective_batch', 'micro_batch', 'record_updates', 'image_backend',
             'crop_border', 'test_y_channel', 'self_ensemble', 'selection_dataset')
-    for label in VARIANTS:
+    for label in args.variants:
         cfg = json.loads((group / (label + '.json')).read_text())
         for key in keys:
             if cfg.get(key) != reference.get(key):
@@ -84,7 +84,7 @@ def backup(args, group, code):
     from curves import generate
     dest = args.backup_root / (args.group + '-' + str(time.time_ns()))
     dest.mkdir(parents=True)
-    folders = {label: ROOT / 'runs' / f'{args.group}-{label}-s10' for label in VARIANTS}
+    folders = {label: ROOT / 'runs' / f'{args.group}-{label}-s10' for label in args.variants}
     sources = [(group, dest / 'logs')] + [(p, dest / 'runs' / p.name) for p in folders.values() if p.is_dir()]
     manifest = []
     for src, target in sources:
@@ -120,7 +120,16 @@ def main():
     p.add_argument('--baseline-backup', type=Path, required=True)
     p.add_argument('--backup-root', type=Path, required=True)
     p.add_argument('--job', type=Path, required=True)
+    p.add_argument('--variants', nargs='+', choices=VARIANTS, default=list(VARIANTS))
+    p.add_argument('--auto-release', action='store_true')
     args = p.parse_args()
+    if len(args.variants) != len(set(args.variants)):
+        p.error('Duplicate candidate labels')
+    if args.auto_release:
+        if not shutil.which('featurize'):
+            p.error('featurize executable unavailable')
+        if not str(args.backup_root.resolve()).startswith('/home/featurize/work/'):
+            p.error('Automatic release requires persistent work backup')
     args.backup_root.mkdir(parents=True, exist_ok=True)
     args.job.mkdir(parents=True, exist_ok=True)
     import fcntl
@@ -139,7 +148,7 @@ def main():
                             '--data-root', str(args.data_root)], cwd=ROOT, check=True)
             baseline = audit_baseline(args, group)
             results = {}
-            for label in VARIANTS:
+            for label in args.variants:
                 run_id = f'{args.group}-{label}-s10'
                 folder = ROOT / 'runs' / run_id
                 command = [sys.executable, '-u', str(HERE / 'entry.py'), '--config', str(group / (label+'.json')),
@@ -162,7 +171,7 @@ def main():
         except Exception as exc:
             code, error = 1, repr(exc)
             print('QUEUE ERROR:', error, flush=True)
-        status = dict(exit_code=code, error=error, auto_release=False)
+        status = dict(exit_code=code, error=error, auto_release=args.auto_release, variants=args.variants)
         (args.job / 'status.json').write_text(json.dumps(status, indent=2))
         try:
             dest = backup(args, group, code)
@@ -173,7 +182,22 @@ def main():
         (args.job / 'status.json').write_text(json.dumps(status, indent=2))
         (args.backup_root / (args.group+'-'+args.job.name+'-status.json')).write_text(json.dumps(status, indent=2))
         print(json.dumps(status, indent=2), flush=True)
-        print('Instance retained; no release command is called.', flush=True)
+        if args.auto_release and code == 0 and status.get('backup_exit_code') == 0:
+            status['release_requested'] = True
+            durable_status = args.backup_root / (args.group+'-'+args.job.name+'-status.json')
+            durable_status.write_text(json.dumps(status, indent=2))
+            (args.job / 'status.json').write_text(json.dumps(status, indent=2))
+            print('Training and verified backup complete; releasing instance.', flush=True)
+            import os
+            os.sync()
+            result = subprocess.run(['featurize', 'instance', 'release'], stdin=subprocess.DEVNULL, check=False)
+            status['release_command_exit_code'] = result.returncode
+            durable_status.write_text(json.dumps(status, indent=2))
+            if result.returncode:
+                code = 73
+                print('Release command failed; release manually through platform.', flush=True)
+        else:
+            print('Instance retained (release disabled, training failed or backup failed).', flush=True)
         raise SystemExit(code)
 
 

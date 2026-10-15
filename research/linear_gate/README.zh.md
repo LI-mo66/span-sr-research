@@ -99,3 +99,5 @@ flowchart LR
 工程验证明细见 engineering-2026-10-15.json。合成检查全部通过；服务器PyTorch2.2.2与本机不同，需要重新执行服务器verify，不能把本机通过等同于服务器已验证。
 
 服务器队列的峰值权重选择、两组备份SHA256和两张overview曲线已用隔离合成文件检查通过；Linux flock与真实服务器数据/环境核验须在服务器执行，不声称本机已完整跑过Linux队列。
+
+2026-10-15用户更新：先只运行 LG6-SiLU。server.py新增 --variants LG6-SiLU --auto-release；只在训练成功且备份校验完成后调用 featurize instance release。训练、备份或锁检查失败均不释放。单候选执行及成功/失败释放分支已通过mock检查，无实际释放调用。ReLU配置保留但不排入此次队列。自动释放为显式可选项，默认关闭。
