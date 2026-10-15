@@ -12,6 +12,9 @@ os.environ.setdefault('MKL_NUM_THREADS', '2')
 
 HERE = Path(__file__).resolve().parent
 from entry import existing
+import cv2
+import numpy as np
+import torch
 fs_runtime = existing.fs_runtime
 os.environ['LINEAR_GATE_ENGINEERING'] = '1'
 
