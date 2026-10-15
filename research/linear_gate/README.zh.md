@@ -73,7 +73,7 @@ python3 research/linear_gate/entry.py --config logs/linear_gate/FEAT-LG6-50K-01/
 python3 research/linear_gate/entry.py --config logs/linear_gate/FEAT-LG6-50K-01/LG6-SiLU.json --id FEAT-LG6-50K-01-LG6-SiLU-s10 --screen --screen-updates 50000
 ```
 
-ReLU候选替换config和id中的LG6-SiLU为LG6-ReLU即可。恢复同一run加--resume，严禁改冻结config。上述是同步入口用法，不会nohup、备份或释放；服务器完整后台队列需后续单独配置，不能误称当前已启动。无需重训B0。
+ReLU候选替换config和id中的LG6-SiLU为LG6-ReLU即可。恢复同一run加--resume，严禁改冻结config。上述是同步入口用法，不会nohup、备份或释放。新增server.py提供Linux候选队列、B0配置/数据哈希/环境核验、两组顺序50k训练、峰值结果、两张曲线和SHA256备份；它从不调用释放命令。用户通过nohup启动server.py；本轮没有启动真实服务器训练。无需重训B0。
 
 验证：verify.py为公式、形状、共有参数/RNG、有限梯度/真实更新、优化器覆盖、严格序列化续一步一致、部署转换；integration.py为真实入口的合成累积、缓存、scheduler/RNG断点恢复、评测频率不扰动训练，使用--variant选择候选。engineering_only只能在显式LINEAR_GATE_ENGINEERING=1的隔离fixture启用，不可用于真实实验逃过数据检查。
 
@@ -97,3 +97,5 @@ flowchart LR
 ```
 
 工程验证明细见 engineering-2026-10-15.json。合成检查全部通过；服务器PyTorch2.2.2与本机不同，需要重新执行服务器verify，不能把本机通过等同于服务器已验证。
+
+服务器队列的峰值权重选择、两组备份SHA256和两张overview曲线已用隔离合成文件检查通过；Linux flock与真实服务器数据/环境核验须在服务器执行，不声称本机已完整跑过Linux队列。
