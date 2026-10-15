@@ -1,0 +1,45 @@
+epoch=21 update=20400/50000 progress=40.80% L1=0.02887520 lr=0.0002 step_s=0.201 data_wait_s=0.058 elapsed_min=99.2 ETA_train_min=144.0 (evaluation overhead not forecast)
+epoch=21 update=20500/50000 progress=41.00% L1=0.03110710 lr=0.0002 step_s=0.201 data_wait_s=0.056 elapsed_min=99.6 ETA_train_min=143.3 (evaluation overhead not forecast)
+epoch=21 update=20600/50000 progress=41.20% L1=0.02663095 lr=0.0002 step_s=0.205 data_wait_s=0.057 elapsed_min=99.9 ETA_train_min=142.6 (evaluation overhead not forecast)
+epoch=21 update=20700/50000 progress=41.40% L1=0.02856570 lr=0.0002 step_s=0.203 data_wait_s=0.057 elapsed_min=100.4 ETA_train_min=142.1 (evaluation overhead not forecast)
+epoch=21 update=20800/50000 progress=41.60% L1=0.02893395 lr=0.0002 step_s=0.203 data_wait_s=0.058 elapsed_min=100.7 ETA_train_min=141.4 (evaluation overhead not forecast)
+epoch=21 update=20900/50000 progress=41.80% L1=0.02559418 lr=0.0002 step_s=0.198 data_wait_s=0.056 elapsed_min=101.1 ETA_train_min=140.8 (evaluation overhead not forecast)
+epoch=21 update=21000/50000 progress=42.00% L1=0.03711962 lr=0.0002 step_s=0.203 data_wait_s=0.058 elapsed_min=101.4 ETA_train_min=140.1 (evaluation overhead not forecast)
+Evaluation starting at update=21000...
+epoch=21 updates_in_epoch=1000 total_update=21000 mean_train_L1=0.02935623 last_train_L1=0.03711962
+DIV2K_valid: PSNR=29.50109531 SSIM=0.81512518; best={'value': 29.50109530826519, 'epoch': 21, 'update': 21000}, {'value': 0.8151251773645914, 'epoch': 21, 'update': 21000}
+Set5: PSNR=30.72722272 SSIM=0.86959273; best={'value': 30.727222724332307, 'epoch': 21, 'update': 21000}, {'value': 0.8695927331578431, 'epoch': 21, 'update': 21000}
+Set14: PSNR=27.69384997 SSIM=0.75945694; best={'value': 27.69384997116967, 'epoch': 21, 'update': 21000}, {'value': 0.7594569429991457, 'epoch': 21, 'update': 21000}
+B100: PSNR=26.99299546 SSIM=0.71632454; best={'value': 26.99299546343041, 'epoch': 21, 'update': 21000}, {'value': 0.7163245366716169, 'epoch': 21, 'update': 21000}
+Urban100: PSNR=24.62627805 SSIM=0.73080277; best={'value': 24.626278051120188, 'epoch': 21, 'update': 21000}, {'value': 0.7308027665289388, 'epoch': 21, 'update': 21000}
+Manga109: PSNR=27.84308715 SSIM=0.86246401; best={'value': 27.843087148111913, 'epoch': 21, 'update': 21000}, {'value': 0.8625674160623266, 'epoch': 20, 'update': 20000}
+epoch=22 update=21100/50000 progress=42.20% L1=0.03324578 lr=0.0002 step_s=0.202 data_wait_s=0.057 elapsed_min=102.8 ETA_train_min=140.8 (evaluation overhead not forecast)
+epoch=22 update=21200/50000 progress=42.40% L1=0.03224792 lr=0.0002 step_s=0.206 data_wait_s=0.058 elapsed_min=103.2 ETA_train_min=140.1 (evaluation overhead not forecast)
+epoch=22 update=21300/50000 progress=42.60% L1=0.02994080 lr=0.0002 step_s=0.215 data_wait_s=0.064 elapsed_min=103.5 ETA_train_min=139.5 (evaluation overhead not forecast)
+epoch=22 update=21400/50000 progress=42.80% L1=0.02762609 lr=0.0002 step_s=0.214 data_wait_s=0.065 elapsed_min=103.9 ETA_train_min=138.8 (evaluation overhead not forecast)
+epoch=22 update=21500/50000 progress=43.00% L1=0.02880486 lr=0.0002 step_s=0.214 data_wait_s=0.064 elapsed_min=104.2 ETA_train_min=138.2 (evaluation overhead not forecast)
+epoch=22 update=21600/50000 progress=43.20% L1=0.02992408 lr=0.0002 step_s=0.215 data_wait_s=0.065 elapsed_min=104.6 ETA_train_min=137.5 (evaluation overhead not forecast)
+epoch=22 update=21700/50000 progress=43.40% L1=0.08316622 lr=0.0002 step_s=0.215 data_wait_s=0.065 elapsed_min=105.1 ETA_train_min=137.1 (evaluation overhead not forecast)
+Traceback (most recent call last):
+  File "/home/featurize/work/span-x4-research/code/span-linear-gate6-relu/research/linear_gate/entry.py", line 48, in <module>
+    main()
+  File "/home/featurize/work/span-x4-research/code/span-linear-gate6-relu/research/linear_gate/entry.py", line 42, in main
+    existing.fs_runtime.trainer.main()
+  File "/home/featurize/work/span-x4-research/code/span-linear-gate6-relu/research/moe_fs/trainer.py", line 237, in main
+    if not torch.isfinite(loss): raise FloatingPointError('Nonfinite loss')
+                                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+FloatingPointError: Nonfinite loss
+QUEUE ERROR: CalledProcessError(1, ['/environment/miniconda3/bin/python3', '-u', '/home/featurize/work/span-x4-research/code/span-linear-gate6-relu/research/linear_gate/entry.py', '--config', '/home/featurize/work/span-x4-research/code/span-linear-gate6-relu/logs/linear_gate/FEAT-LG6-RELU-50K-01/LG6-ReLU.json', '--id', 'FEAT-LG6-RELU-50K-01-LG6-ReLU-s10', '--screen', '--screen-updates', '50000'])
+Compact curves saved: /home/featurize/work/span-x4-research/records/FEAT-LG6-RELU-50K-01-1792048089650350682/curves/seed-10
+Verified backup: /home/featurize/work/span-x4-research/records/FEAT-LG6-RELU-50K-01-1792048089650350682
+{
+  "exit_code": 1,
+  "error": "CalledProcessError(1, ['/environment/miniconda3/bin/python3', '-u', '/home/featurize/work/span-x4-research/code/span-linear-gate6-relu/research/linear_gate/entry.py', '--config', '/home/featurize/work/span-x4-research/code/span-linear-gate6-relu/logs/linear_gate/FEAT-LG6-RELU-50K-01/LG6-ReLU.json', '--id', 'FEAT-LG6-RELU-50K-01-LG6-ReLU-s10', '--screen', '--screen-updates', '50000'])",
+  "auto_release": true,
+  "variants": [
+    "LG6-ReLU"
+  ],
+  "backup_exit_code": 0,
+  "backup": "/home/featurize/work/span-x4-research/records/FEAT-LG6-RELU-50K-01-1792048089650350682"
+}
+Instance retained (release disabled, training failed or backup failed).
