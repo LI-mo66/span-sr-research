@@ -16,3 +16,6 @@
 
 
 2026-10-15服务器结果：LG6-SiLU seed10完成50k，验证最佳49k PSNR30.189747909，相对B0最佳48k +0.029856662 dB；统一验证选权重的六集PSNR/SSIM均正增益。保留为单seed正向候选，不宣称显著性或完全收敛。LG6-ReLU在217xx非有限loss退出，用户决定舍弃。详见 results/FEAT-LG6-SILU-50K-01 与 results/FEAT-LG6-RELU-50K-01。按约定提醒下一步讨论方案2图像旁路，未启动新训练。
+
+
+2026-10-15：按用户批准实施A+B候选LG6-SiLU-GB（A为已完成LG6-SiLU，B为2sigmoid空间门控RGB旁路）。新分支research/lg6-silu-gated-bypass，额外1372参数、总部署516116。CPU/CUDA20步、初始A恒等、分阶段梯度启动、真实入口断点恢复和合成备份绘图通过。没有真实A+B PSNR。方案2已进入设计与实施，不再作为遗忘提醒；后续以A+B>A筛选，详见research/gated_bypass/README.zh.md。

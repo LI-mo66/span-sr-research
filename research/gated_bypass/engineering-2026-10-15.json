@@ -1,0 +1,42 @@
+{
+  "date": "2026-10-15",
+  "implementation_commit": "e073825",
+  "scope": "Synthetic engineering only; no real-data PSNR or long-run stability evidence",
+  "environment": {
+    "python": "3.10.20 | packaged by Anaconda, Inc. | (main, Mar 11 2026, 17:42:35) [MSC v.1942 64 bit (AMD64)]",
+    "torch": "2.9.1+cu128",
+    "cuda_runtime": "12.8",
+    "gpu": "NVIDIA GeForce RTX 4060 Laptop GPU"
+  },
+  "checks": {
+    "cpu20steps": "PASS",
+    "cuda20steps": "PASS",
+    "initial_A_identity_train_eval": "PASS",
+    "shared_initial_parameters_and_rng": "PASS",
+    "RGB_phase_and_spatial_broadcast_oracle": "PASS",
+    "first_step_residual_gradient_and_later_gate_learning": "PASS",
+    "strict_serialization_equal_resumed_next_step": "PASS",
+    "deployment_agreement": "PASS",
+    "deployed_parameters": 516116,
+    "extra_over_A": 1372,
+    "extra_over_B0": 17908,
+    "entry_integration": "PASS",
+    "entry_fixture_run": "ENGINEERING-GB-98739bf569",
+    "entry_checks": [
+      "accumulation",
+      "npy cache",
+      "optimizer/scheduler/RNG resume vs continuous exact equality",
+      "interrupted JSON recovery",
+      "evaluation cadence invariance",
+      "50000 stop-cap parser"
+    ],
+    "synthetic_backup_hashes_and_single_plot": "PASS"
+  },
+  "baseline_A": "FEAT-LG6-SILU-50K-01-LG6-SiLU-s10",
+  "source_audit": "git diff e1be1bf -- basicsr research/moe_fs/trainer.py research/linear_gate/lg_model.py research/image_io.py research/parallel_loader.py research/runtime.py is empty",
+  "limitations": [
+    "Different local GPU/PyTorch from server; execute server CUDA verify before training",
+    "No server training launched",
+    "Linux queue lock and real baseline audit require server execution"
+  ]
+}
