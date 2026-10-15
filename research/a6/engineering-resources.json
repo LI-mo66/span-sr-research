@@ -1,0 +1,59 @@
+{
+  "evidence": "synthetic A6 only; no real images or PSNR evidence",
+  "torch": "2.9.1+cu128",
+  "gpu": "NVIDIA GeForce RTX 4060 Laptop GPU",
+  "precision": "FP32; cudnn TF32=true/matmul TF32=false",
+  "path": "original Conv3XC eval path, including per-forward weight fusion",
+  "training": {
+    "microbatch": 16,
+    "accumulation": 4,
+    "effective_batch": 64,
+    "seconds_per_update": [
+      0.9019451999997727,
+      0.8939706000001024,
+      0.8818719000000783
+    ],
+    "median_seconds_per_update": 0.8939706000001024,
+    "peak_allocated_bytes": 3072456192,
+    "peak_reserved_bytes": 3405774848
+  },
+  "inference": [
+    {
+      "LR": [
+        64,
+        64
+      ],
+      "median_ms": 25.56670000012673,
+      "min_ms": 23.88699999983146,
+      "max_ms": 28.20560000009209,
+      "peak_allocated_bytes": 91632128,
+      "peak_reserved_bytes": 115343360
+    },
+    {
+      "LR": [
+        256,
+        256
+      ],
+      "median_ms": 45.15670000000682,
+      "min_ms": 44.25059999994119,
+      "max_ms": 48.07859999982611,
+      "peak_allocated_bytes": 300299776,
+      "peak_reserved_bytes": 429916160
+    },
+    {
+      "LR": [
+        65,
+        71
+      ],
+      "median_ms": 24.824500000249827,
+      "min_ms": 23.45869999999195,
+      "max_ms": 29.234899999664776,
+      "peak_allocated_bytes": 106220032,
+      "peak_reserved_bytes": 429916160
+    }
+  ],
+  "extra_parameters": 45438,
+  "deployed_parameters": 543646,
+  "extra_64_MACs_linear_matmul_only": 269528064,
+  "excluded_MACs": "softmax/LN/elementwise/padding/indexing and memory traffic; not full FLOPs"
+}
