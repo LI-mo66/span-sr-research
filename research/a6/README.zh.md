@@ -24,7 +24,20 @@ NCHW，52通道进出，分支右/下补零到8倍数、输出裁回原H/W；8×
 
 生成A6配置与reuse-audit后，run再次检查当前配置、源码、环境和有序数据hash。原训练器的fingerprint仍覆盖源码/配置/数据/环境。baseline训练配置会被run和model工厂拒绝。工程verify会实例化随机B0用于初值/旁路等价检查，不执行真实B0训练。
 
-## 服务器安装：使用git bundle，无需先推送GitHub
+## 服务器安装：优先从GitHub拉取
+
+公开仓库分支为 `research/a6-grid`。在服务器执行：
+
+```bash
+cd /home/featurize/work/span-x4-research/code
+git clone -b research/a6-grid https://github.com/LI-mo66/span-sr-research.git span-sr-a6
+cd span-sr-a6
+git show b546036:research/docs/module-study/results/FEAT-MOEFS-G4-LR2E4-20K-01/B0-effective-config.json
+```
+
+请使用普通完整clone，不加`--depth`或`--single-branch`，因为审计需要原训练commit和独立B0记录历史。随后按下方“只启动A6”执行launch；无需上传bundle。
+
+## 可选离线安装：git bundle
 
 把交付的 `span-a6-server.bundle` 上传到服务器，例如：
 
