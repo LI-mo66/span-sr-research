@@ -81,6 +81,20 @@ class Checks(unittest.TestCase):
         (group/'comparison-50000.json').write_text(json.dumps(dict(candidate_checkpoint='epoch00047_u47000.pt')))
         run=root/'runs/A6-s10'; run.mkdir(parents=True)
         with self.assertRaises(FileNotFoundError): backup.backup(root,group,'A6-s10',root/'records')
+        for name in ('manifest.json','epochs.jsonl','loss_steps.jsonl','latest.pt',
+                     'best_validation.pt','epoch00047_u47000.pt'):
+            (run/name).write_text('synthetic backup fixture')
+        output = backup.backup(root,group,'A6-s10',root/'records')
+        self.assertTrue((output/'BACKUP_COMPLETE').is_file())
+        inventory=json.loads((output/'backup-manifest.json').read_text())
+        for entry in inventory['files']:
+            self.assertEqual(backup.digest(output/entry['path']),entry['sha256'])
+        real_copy=backup.shutil.copy2
+        def corrupt(source,target):
+            real_copy(source,target); Path(target).write_text('corrupt')
+        with patch.object(backup.shutil,'copy2',corrupt), self.assertRaises(IOError):
+            backup.backup(root,group,'A6-s10',root/'corrupt-records')
+        self.assertFalse(list((root/'corrupt-records').glob('*/BACKUP_COMPLETE')))
 
 
 if __name__ == '__main__': unittest.main()
