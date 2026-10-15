@@ -1,0 +1,171 @@
+{
+  "B0": {
+    "selected_update": 48000,
+    "checkpoint": "epoch00048_u48000.pt",
+    "metrics": {
+      "DIV2K_valid": {
+        "psnr": 30.15989124662389,
+        "ssim": 0.8310521433525326
+      },
+      "Set5": {
+        "psnr": 31.820548063043777,
+        "ssim": 0.8896147024060944
+      },
+      "Set14": {
+        "psnr": 28.36729279739073,
+        "ssim": 0.7760580478635397
+      },
+      "B100": {
+        "psnr": 27.419095382547262,
+        "ssim": 0.7308119529446396
+      },
+      "Urban100": {
+        "psnr": 25.57220348909937,
+        "ssim": 0.7680947190083123
+      },
+      "Manga109": {
+        "psnr": 29.772182272606813,
+        "ssim": 0.8975288255863011
+      }
+    },
+    "per_dataset_psnr_best": {
+      "DIV2K_valid": {
+        "update": 48000,
+        "checkpoint": "epoch00048_u48000.pt",
+        "metrics": {
+          "psnr": 30.15989124662389,
+          "ssim": 0.8310521433525326
+        }
+      },
+      "Set5": {
+        "update": 48000,
+        "checkpoint": "epoch00048_u48000.pt",
+        "metrics": {
+          "psnr": 31.820548063043777,
+          "ssim": 0.8896147024060944
+        }
+      },
+      "Set14": {
+        "update": 48000,
+        "checkpoint": "epoch00048_u48000.pt",
+        "metrics": {
+          "psnr": 28.36729279739073,
+          "ssim": 0.7760580478635397
+        }
+      },
+      "B100": {
+        "update": 48000,
+        "checkpoint": "epoch00048_u48000.pt",
+        "metrics": {
+          "psnr": 27.419095382547262,
+          "ssim": 0.7308119529446396
+        }
+      },
+      "Urban100": {
+        "update": 48000,
+        "checkpoint": "epoch00048_u48000.pt",
+        "metrics": {
+          "psnr": 25.57220348909937,
+          "ssim": 0.7680947190083123
+        }
+      },
+      "Manga109": {
+        "update": 48000,
+        "checkpoint": "epoch00048_u48000.pt",
+        "metrics": {
+          "psnr": 29.772182272606813,
+          "ssim": 0.8975288255863011
+        }
+      }
+    },
+    "checkpoint_sha256": "9fb64520554220649b979588d78ccd1ad6c6f4c8695e891bdb4af9302d8b6a1f",
+    "source": "/home/featurize/work/span-x4-research/records/FEAT-MOEFS-G4-LR2E4-20K-01-1791983354063378494/runs/FEAT-MOEFS-G4-LR2E4-20K-01-B0-s10"
+  },
+  "candidates": {
+    "LG6-SiLU": {
+      "selected_update": 49000,
+      "checkpoint": "epoch00049_u49000.pt",
+      "metrics": {
+        "DIV2K_valid": {
+          "psnr": 30.189747908588664,
+          "ssim": 0.8323726081665493
+        },
+        "Set5": {
+          "psnr": 31.854651377500666,
+          "ssim": 0.8907952291261338
+        },
+        "Set14": {
+          "psnr": 28.403203320261948,
+          "ssim": 0.7777543868171567
+        },
+        "B100": {
+          "psnr": 27.447363287427738,
+          "ssim": 0.7321378382953359
+        },
+        "Urban100": {
+          "psnr": 25.668409764250622,
+          "ssim": 0.7716448892827837
+        },
+        "Manga109": {
+          "psnr": 29.86850090980631,
+          "ssim": 0.899911555036035
+        }
+      },
+      "per_dataset_psnr_best": {
+        "DIV2K_valid": {
+          "update": 49000,
+          "checkpoint": "epoch00049_u49000.pt",
+          "metrics": {
+            "psnr": 30.189747908588664,
+            "ssim": 0.8323726081665493
+          }
+        },
+        "Set5": {
+          "update": 49000,
+          "checkpoint": "epoch00049_u49000.pt",
+          "metrics": {
+            "psnr": 31.854651377500666,
+            "ssim": 0.8907952291261338
+          }
+        },
+        "Set14": {
+          "update": 46000,
+          "checkpoint": "epoch00046_u46000.pt",
+          "metrics": {
+            "psnr": 28.414985281543498,
+            "ssim": 0.7772969136876992
+          }
+        },
+        "B100": {
+          "update": 44000,
+          "checkpoint": "epoch00044_u44000.pt",
+          "metrics": {
+            "psnr": 27.45083702698369,
+            "ssim": 0.7313814368787496
+          }
+        },
+        "Urban100": {
+          "update": 49000,
+          "checkpoint": "epoch00049_u49000.pt",
+          "metrics": {
+            "psnr": 25.668409764250622,
+            "ssim": 0.7716448892827837
+          }
+        },
+        "Manga109": {
+          "update": 49000,
+          "checkpoint": "epoch00049_u49000.pt",
+          "metrics": {
+            "psnr": 29.86850090980631,
+            "ssim": 0.899911555036035
+          }
+        }
+      },
+      "validation_delta_vs_B0": {
+        "psnr": 0.0298566619647751,
+        "ssim": 0.0013204648140167086
+      }
+    }
+  },
+  "checkpoint_rule": "Highest DIV2K validation PSNR; earliest tie; no temporal averaging"
+}

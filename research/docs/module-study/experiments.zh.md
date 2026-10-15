@@ -13,3 +13,6 @@
 
 
 2026-10-15：新分支 research/spab-linear-gate6，LG6-SiLU/LG6-ReLU 设计及独立实现完成。本机CPU/CUDA合成、入口累积/缓存/断点恢复检查通过；没有真实PSNR结果。见 research/linear_gate/README.zh.md 与 engineering-2026-10-15.json。A1-G4保持停止，复用基线指向 results/FEAT-MOEFS-G4-LR2E4-20K-01；本轮实验结束后提醒讨论方案2图像旁路。
+
+
+2026-10-15服务器结果：LG6-SiLU seed10完成50k，验证最佳49k PSNR30.189747909，相对B0最佳48k +0.029856662 dB；统一验证选权重的六集PSNR/SSIM均正增益。保留为单seed正向候选，不宣称显著性或完全收敛。LG6-ReLU在217xx非有限loss退出，用户决定舍弃。详见 results/FEAT-LG6-SILU-50K-01 与 results/FEAT-LG6-RELU-50K-01。按约定提醒下一步讨论方案2图像旁路，未启动新训练。
