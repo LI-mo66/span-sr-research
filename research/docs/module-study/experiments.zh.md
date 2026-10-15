@@ -10,3 +10,6 @@
 工程计数记录（不属于PSNR实验）：2026-10-12，当前FusionGate4新增11024参数，详见moe-fs-plan.zh.md；准确代码commit/dirty与环境在真正实验冻结时另行记录。
 
 独立实现工程验证：代码ddc0f92，CPU/CUDA与合成两步恢复检查通过；见engineering-moe-fs-2026-10-12.zh.md。合成运行不填入真实数据PSNR主表。
+
+
+2026-10-15：新分支 research/spab-linear-gate6，LG6-SiLU/LG6-ReLU 设计及独立实现完成。本机CPU/CUDA合成、入口累积/缓存/断点恢复检查通过；没有真实PSNR结果。见 research/linear_gate/README.zh.md 与 engineering-2026-10-15.json。A1-G4保持停止，复用基线指向 results/FEAT-MOEFS-G4-LR2E4-20K-01；本轮实验结束后提醒讨论方案2图像旁路。
