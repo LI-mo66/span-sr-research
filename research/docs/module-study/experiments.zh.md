@@ -19,3 +19,6 @@
 
 
 2026-10-15：按用户批准实施A+B候选LG6-SiLU-GB（A为已完成LG6-SiLU，B为2sigmoid空间门控RGB旁路）。新分支research/lg6-silu-gated-bypass，额外1372参数、总部署516116。CPU/CUDA20步、初始A恒等、分阶段梯度启动、真实入口断点恢复和合成备份绘图通过。没有真实A+B PSNR。方案2已进入设计与实施，不再作为遗忘提醒；后续以A+B>A筛选，详见research/gated_bypass/README.zh.md。
+
+
+2026-10-16：LG6-SiLU-GB完成50k，最佳48k验证30.234560232，比A最佳49k +0.044812323dB；统一验证选权重的六集PSNR/SSIM均正增益，逐集PSNR峰值均正。相对B0验证累计+0.074668985dB。保留为当前单seed筛选最优候选，不证明门控独立贡献或两个创新点。详见results/FEAT-LG6-GB-50K-01。
