@@ -43,3 +43,6 @@ Run: runs/FEAT-LG6-GB-50K-01-LG6-SiLU-GB-s10
 Selected: epoch00048_u48000.pt, user reports file exists; latest.pt is50k.
 Curve: curves/seed-10/LG6-SiLU-GB-overview.png
 Full per-image metrics, raw step history, manifests and weights remain in work. Original pasted excerpt does not include full termination status, so record completed50k evaluations and backup path without inventing release-command success status.
+
+
+2026-10-16后续CPU诊断补齐来源：manifest报告实际commit d89bc07b807f5e0b3abbbfbba3d1ff65d436552a，所选48k权重SHA256 e593776dbbae40da1a2af8ae998edff2ec553fc4486288308a1c6b11b8c7c547。全部100验证LR哈希在服务器匹配。门控弱空间变化、旁路幅值接近输入，详见cpu-diagnostic-notes.md；不得据此将动态门控独立贡献视为已证明。

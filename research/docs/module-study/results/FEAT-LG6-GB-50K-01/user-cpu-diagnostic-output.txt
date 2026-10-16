@@ -1,0 +1,567 @@
+(base) ➜ FEAT-LG6-SILU-50K-01-LG6-SiLU-s10 bash <<'SH'
+set -euo pipefail
+
+PROJECT=/home/featurize/work/span-x4-research/code/span-lg6-gated-bypass
+RECORDS=/home/featurize/work/span-x4-research/records
+BACKUP="$RECORDS/FEAT-LG6-GB-50K-01-1792082028817331043"
+TOOLS="$RECORDS/diagnostic_scripts"
+SCRIPT="$TOOLS/gb-diagnose-cpu-b5f2ebc.py"
+
+test -d "$PROJECT"
+test -f "$BACKUP/BACKUP_COMPLETE"
+
+# 只获取诊断脚本，不切换训练源码版本
+git -C "$PROJECT" fetch origin research/lg6-silu-gated-bypass
+mkdir -p "$TOOLS"
+
+git -C "$PROJECT" show \
+  b5f2ebcec23e26c370a4364cb0ff2e4b9af0bc09:research/gated_bypass/diagnose_cpu.py \
+  > "$SCRIPT.tmp"
+
+test -s "$SCRIPT.tmp"
+mv "$SCRIPT.tmp" "$SCRIPT"
+
+python3 -u "$SCRIPT" \
+    --backup "$BACKUP" \
+    --lr-root /home/featurize/datasets/DIV2K/DIV2K_valid_LR_bicubic/X4
+SH
+remote: Enumerating objects: 26, done.
+remote: Counting objects: 100% (26/26), done.
+remote: Compressing objects: 100% (8/8), done.
+remote: Total 18 (delta 12), reused 16 (delta 10), pack-reused 0 (from 0)
+Unpacking objects: 100% (18/18), 18.94 KiB | 262.00 KiB/s, done.
+From https://github.com/LI-mo66/span-sr-research
+ * branch            research/lg6-silu-gated-bypass -> FETCH_HEAD
+   d89bc07..b5f2ebc  research/lg6-silu-gated-bypass -> origin/research/lg6-silu-gated-bypass
+CHECKPOINT PARAMETERS
+{
+  "checkpoint": "/home/featurize/work/span-x4-research/records/FEAT-LG6-GB-50K-01-1792082028817331043/runs/FEAT-LG6-GB-50K-01-LG6-SiLU-GB-s10/epoch00048_u48000.pt",
+  "checkpoint_sha256": "e593776dbbae40da1a2af8ae998edff2ec553fc4486288308a1c6b11b8c7c547",
+  "selected_update": 48000,
+  "source_commit": "d89bc07b807f5e0b3abbbfbba3d1ff65d436552a",
+  "device": "cpu",
+  "output": "/home/featurize/work/span-x4-research/records/GB-CPU-DIAG-20261016T013245Z-68377",
+  "parameters": {
+    "image_gate.weight": {
+      "shape": [
+        1,
+        3,
+        3,
+        3
+      ],
+      "l2": 0.08894786238670349,
+      "absmax": 0.04088686406612396,
+      "mean": 0.0007825940847396851
+    },
+    "image_gate.bias": {
+      "shape": [
+        1
+      ],
+      "l2": 0.11686506122350693,
+      "absmax": 0.11686506122350693,
+      "mean": 0.11686506122350693
+    },
+    "image_residual.weight": {
+      "shape": [
+        48,
+        3,
+        3,
+        3
+      ],
+      "l2": 1.3891172409057617,
+      "absmax": 0.08497968316078186,
+      "mean": 0.03300879895687103
+    },
+    "image_residual.bias": {
+      "shape": [
+        48
+      ],
+      "l2": 0.16954348981380463,
+      "absmax": 0.04768887534737587,
+      "mean": 0.018803425133228302
+    }
+  },
+  "images": [],
+  "gate_bias_only_value": 1.0583661794662476,
+  "gate_rgb_kernel_l2": [
+    0.05389183759689331,
+    0.05015195906162262,
+    0.049921657890081406
+  ],
+  "gate_kernel": [
+    [
+      [
+        [
+          -0.014195379801094532,
+          0.004911985248327255,
+          -0.015801940113306046
+        ],
+        [
+          0.011447572149336338,
+          0.04088686406612396,
+          0.009264755062758923
+        ],
+        [
+          -0.016955509781837463,
+          0.0057274517603218555,
+          -0.014835132285952568
+        ]
+      ],
+      [
+        [
+          -0.01501832902431488,
+          0.005710682366043329,
+          -0.015626156702637672
+        ],
+        [
+          0.009213600307703018,
+          0.03625648096203804,
+          0.00865667313337326
+        ],
+        [
+          -0.017601123079657555,
+          0.005414306186139584,
+          -0.014121088199317455
+        ]
+      ],
+      [
+        [
+          -0.014757624827325344,
+          0.0055939387530088425,
+          -0.01360259111970663
+        ],
+        [
+          0.008186457678675652,
+          0.03754124790430069,
+          0.009646033868193626
+        ],
+        [
+          -0.016934335231781006,
+          0.0053029838018119335,
+          -0.013181784190237522
+        ]
+      ]
+    ]
+  ]
+}
+CPU bypass audit 20/100
+CPU bypass audit 40/100
+CPU bypass audit 60/100
+CPU bypass audit 80/100
+CPU bypass audit 100/100
+DIAGNOSTIC COMPLETE
+{
+  "checkpoint": "/home/featurize/work/span-x4-research/records/FEAT-LG6-GB-50K-01-1792082028817331043/runs/FEAT-LG6-GB-50K-01-LG6-SiLU-GB-s10/epoch00048_u48000.pt",
+  "checkpoint_sha256": "e593776dbbae40da1a2af8ae998edff2ec553fc4486288308a1c6b11b8c7c547",
+  "selected_update": 48000,
+  "source_commit": "d89bc07b807f5e0b3abbbfbba3d1ff65d436552a",
+  "device": "cpu",
+  "output": "/home/featurize/work/span-x4-research/records/GB-CPU-DIAG-20261016T013245Z-68377",
+  "parameters": {
+    "image_gate.weight": {
+      "shape": [
+        1,
+        3,
+        3,
+        3
+      ],
+      "l2": 0.08894786238670349,
+      "absmax": 0.04088686406612396,
+      "mean": 0.0007825940847396851
+    },
+    "image_gate.bias": {
+      "shape": [
+        1
+      ],
+      "l2": 0.11686506122350693,
+      "absmax": 0.11686506122350693,
+      "mean": 0.11686506122350693
+    },
+    "image_residual.weight": {
+      "shape": [
+        48,
+        3,
+        3,
+        3
+      ],
+      "l2": 1.3891172409057617,
+      "absmax": 0.08497968316078186,
+      "mean": 0.03300879895687103
+    },
+    "image_residual.bias": {
+      "shape": [
+        48
+      ],
+      "l2": 0.16954348981380463,
+      "absmax": 0.04768887534737587,
+      "mean": 0.018803425133228302
+    }
+  },
+  "gate_bias_only_value": 1.0583661794662476,
+  "gate_rgb_kernel_l2": [
+    0.05389183759689331,
+    0.05015195906162262,
+    0.049921657890081406
+  ],
+  "gate_kernel": [
+    [
+      [
+        [
+          -0.014195379801094532,
+          0.004911985248327255,
+          -0.015801940113306046
+        ],
+        [
+          0.011447572149336338,
+          0.04088686406612396,
+          0.009264755062758923
+        ],
+        [
+          -0.016955509781837463,
+          0.0057274517603218555,
+          -0.014835132285952568
+        ]
+      ],
+      [
+        [
+          -0.01501832902431488,
+          0.005710682366043329,
+          -0.015626156702637672
+        ],
+        [
+          0.009213600307703018,
+          0.03625648096203804,
+          0.00865667313337326
+        ],
+        [
+          -0.017601123079657555,
+          0.005414306186139584,
+          -0.014121088199317455
+        ]
+      ],
+      [
+        [
+          -0.014757624827325344,
+          0.0055939387530088425,
+          -0.01360259111970663
+        ],
+        [
+          0.008186457678675652,
+          0.03754124790430069,
+          0.009646033868193626
+        ],
+        [
+          -0.016934335231781006,
+          0.0053029838018119335,
+          -0.013181784190237522
+        ]
+      ]
+    ]
+  ],
+  "per_image_statistics": {
+    "gate_mean": {
+      "mean": 1.0627953553199767,
+      "std": 0.0014999951434602787,
+      "min": 1.0588899850845337,
+      "max": 1.066763162612915
+    },
+    "gate_spatial_std": {
+      "mean": 0.0050469715986400845,
+      "std": 0.001484998129647237,
+      "min": 0.002169086365029216,
+      "max": 0.009394107386469841
+    },
+    "gate_fraction_below_0_1": {
+      "mean": 0.0,
+      "std": 0.0,
+      "min": 0.0,
+      "max": 0.0
+    },
+    "gate_fraction_above_1_9": {
+      "mean": 0.0,
+      "std": 0.0,
+      "min": 0.0,
+      "max": 0.0
+    },
+    "gate_delta_vs_same_mean_constant_rms": {
+      "mean": 0.005046977258753031,
+      "std": 0.001484999225428495,
+      "min": 0.002169088227674365,
+      "max": 0.009394107386469841
+    },
+    "correction_rms": {
+      "mean": 0.467991276755929,
+      "std": 0.13310844518804715,
+      "min": 0.09669246524572372,
+      "max": 0.8008009195327759
+    },
+    "correction_mean_abs": {
+      "mean": 0.4204069174081087,
+      "std": 0.13464660997070543,
+      "min": 0.07112006098031998,
+      "max": 0.7737869024276733
+    },
+    "correction_absmax": {
+      "mean": 0.9647009539604187,
+      "std": 0.06128067198283425,
+      "min": 0.7749620079994202,
+      "max": 1.0160104036331177
+    },
+    "correction_rms_8bit_equivalent": {
+      "mean": 119.3377755727619,
+      "std": 33.94265352295202,
+      "min": 24.65657863765955,
+      "max": 204.20423448085785
+    },
+    "correction_rms_over_input_rms": {
+      "mean": 0.961660050449255,
+      "std": 0.021750131364601015,
+      "min": 0.8831541894110312,
+      "max": 1.026482722054958
+    },
+    "correction_change_if_gate_one_rms": {
+      "mean": 0.028903662487864495,
+      "std": 0.008581361396370042,
+      "min": 0.0055603450164198875,
+      "max": 0.0509650893509388
+    },
+    "correction_change_if_gate_image_mean_rms": {
+      "mean": 0.002362603062938433,
+      "std": 0.0007904566745751336,
+      "min": 0.00041782858897931874,
+      "max": 0.005368507467210293
+    }
+  },
+  "pooled_statistics": {
+    "gate_mean": 1.0628112374873517,
+    "gate_std": 0.005457965980613061,
+    "gate_quantiles_01_05_50_95_99_sampled": [
+      1.0482608342170716,
+      1.0545637965202332,
+      1.0625990629196167,
+      1.0711246371269225,
+      1.0784437131881714
+    ],
+    "residual_rms": 0.45736564004295843,
+    "correction_rms": 0.4874905862190271,
+    "correction_rms_over_input_rms": 0.9636156835686587
+  },
+  "status": "COMPLETE",
+  "image_count": 100,
+  "note": "Real LR hashes verified; no full backbone inference or PSNR. Statistics exclude 1 LR pixel borders; 8bit-equivalent is pre-clamp correction scale, not image error. Ratios use input RGB, not main-branch output. Pooled statistics are spatial-site weighted; per-image summaries give each image equal weight. Intervention magnitudes do not prove PSNR benefit or independent retraining effects.",
+  "largest_spatial_variation_images": [
+    {
+      "image": "0820x4.png",
+      "height": 339,
+      "width": 510,
+      "gate_mean": 1.0638455152511597,
+      "gate_spatial_std": 0.009394107386469841,
+      "gate_min": 1.011941909790039,
+      "gate_max": 1.1141330003738403,
+      "gate_fraction_below_0_1": 0.0,
+      "gate_fraction_above_1_9": 0.0,
+      "gate_delta_vs_same_mean_constant_rms": 0.009394107386469841,
+      "input_rms": 0.6073892712593079,
+      "residual_rms": 0.5488086342811584,
+      "correction_rms": 0.5859742760658264,
+      "correction_mean_abs": 0.5172753930091858,
+      "correction_absmax": 1.0158913135528564,
+      "correction_rms_8bit_equivalent": 149.42344039678574,
+      "correction_rms_over_input_rms": 0.9647425527469699,
+      "correction_change_if_gate_one_rms": 0.037471622228622437,
+      "correction_change_if_gate_image_mean_rms": 0.005368507467210293
+    },
+    {
+      "image": "0821x4.png",
+      "height": 339,
+      "width": 510,
+      "gate_mean": 1.062017798423767,
+      "gate_spatial_std": 0.009148710407316685,
+      "gate_min": 1.0196926593780518,
+      "gate_max": 1.0998647212982178,
+      "gate_fraction_below_0_1": 0.0,
+      "gate_fraction_above_1_9": 0.0,
+      "gate_delta_vs_same_mean_constant_rms": 0.009148712269961834,
+      "input_rms": 0.45430871844291687,
+      "residual_rms": 0.39690303802490234,
+      "correction_rms": 0.42341357469558716,
+      "correction_mean_abs": 0.35604310035705566,
+      "correction_absmax": 0.8939725756645203,
+      "correction_rms_8bit_equivalent": 107.97046154737473,
+      "correction_rms_over_input_rms": 0.9319952655691515,
+      "correction_change_if_gate_one_rms": 0.02663738839328289,
+      "correction_change_if_gate_image_mean_rms": 0.0032791781704872847
+    },
+    {
+      "image": "0849x4.png",
+      "height": 339,
+      "width": 510,
+      "gate_mean": 1.06247878074646,
+      "gate_spatial_std": 0.009000628255307674,
+      "gate_min": 1.0196096897125244,
+      "gate_max": 1.115154504776001,
+      "gate_fraction_below_0_1": 0.0,
+      "gate_fraction_above_1_9": 0.0,
+      "gate_delta_vs_same_mean_constant_rms": 0.009000632911920547,
+      "input_rms": 0.4858306050300598,
+      "residual_rms": 0.42834916710853577,
+      "correction_rms": 0.4574057459831238,
+      "correction_mean_abs": 0.3876250088214874,
+      "correction_absmax": 1.0003087520599365,
+      "correction_rms_8bit_equivalent": 116.63846522569656,
+      "correction_rms_over_input_rms": 0.9414922428668788,
+      "correction_change_if_gate_one_rms": 0.029357286170125008,
+      "correction_change_if_gate_image_mean_rms": 0.00489141745492816
+    },
+    {
+      "image": "0846x4.png",
+      "height": 342,
+      "width": 510,
+      "gate_mean": 1.0639463663101196,
+      "gate_spatial_std": 0.008163772523403168,
+      "gate_min": 1.011829137802124,
+      "gate_max": 1.1114187240600586,
+      "gate_fraction_below_0_1": 0.0,
+      "gate_fraction_above_1_9": 0.0,
+      "gate_delta_vs_same_mean_constant_rms": 0.008163772523403168,
+      "input_rms": 0.6473954916000366,
+      "residual_rms": 0.5882043838500977,
+      "correction_rms": 0.6281864047050476,
+      "correction_mean_abs": 0.5268367528915405,
+      "correction_absmax": 1.0158666372299194,
+      "correction_rms_8bit_equivalent": 160.18753319978714,
+      "correction_rms_over_input_rms": 0.9703286674927041,
+      "correction_change_if_gate_one_rms": 0.04013962298631668,
+      "correction_change_if_gate_image_mean_rms": 0.0043640234507620335
+    },
+    {
+      "image": "0828x4.png",
+      "height": 339,
+      "width": 510,
+      "gate_mean": 1.0603289604187012,
+      "gate_spatial_std": 0.008075247518718243,
+      "gate_min": 1.0268595218658447,
+      "gate_max": 1.1050262451171875,
+      "gate_fraction_below_0_1": 0.0,
+      "gate_fraction_above_1_9": 0.0,
+      "gate_delta_vs_same_mean_constant_rms": 0.008075247518718243,
+      "input_rms": 0.26248955726623535,
+      "residual_rms": 0.2218254655599594,
+      "correction_rms": 0.23608630895614624,
+      "correction_mean_abs": 0.20109307765960693,
+      "correction_absmax": 0.7950318455696106,
+      "correction_rms_8bit_equivalent": 60.20200878381729,
+      "correction_rms_over_input_rms": 0.8994121953457025,
+      "correction_change_if_gate_one_rms": 0.014451081864535809,
+      "correction_change_if_gate_image_mean_rms": 0.002561815083026886
+    }
+  ],
+  "largest_correction_images": [
+    {
+      "image": "0896x4.png",
+      "height": 339,
+      "width": 510,
+      "gate_mean": 1.0664923191070557,
+      "gate_spatial_std": 0.004488678649067879,
+      "gate_min": 1.0201655626296997,
+      "gate_max": 1.1025044918060303,
+      "gate_fraction_below_0_1": 0.0,
+      "gate_fraction_above_1_9": 0.0,
+      "gate_delta_vs_same_mean_constant_rms": 0.004488692153245211,
+      "input_rms": 0.8227494359016418,
+      "residual_rms": 0.7498610019683838,
+      "correction_rms": 0.8008009195327759,
+      "correction_mean_abs": 0.7569712996482849,
+      "correction_absmax": 1.0051714181900024,
+      "correction_rms_8bit_equivalent": 204.20423448085785,
+      "correction_rms_over_input_rms": 0.973322963941248,
+      "correction_change_if_gate_one_rms": 0.0509650893509388,
+      "correction_change_if_gate_image_mean_rms": 0.0019751947838813066
+    },
+    {
+      "image": "0868x4.png",
+      "height": 339,
+      "width": 510,
+      "gate_mean": 1.066763162612915,
+      "gate_spatial_std": 0.003796851960942149,
+      "gate_min": 1.0215935707092285,
+      "gate_max": 1.0947667360305786,
+      "gate_fraction_below_0_1": 0.0,
+      "gate_fraction_above_1_9": 0.0,
+      "gate_delta_vs_same_mean_constant_rms": 0.0037968542892485857,
+      "input_rms": 0.8187366724014282,
+      "residual_rms": 0.7458335757255554,
+      "correction_rms": 0.7961980104446411,
+      "correction_mean_abs": 0.7737869024276733,
+      "correction_absmax": 0.8960669636726379,
+      "correction_rms_8bit_equivalent": 203.03049266338348,
+      "correction_rms_over_input_rms": 0.9724714151490501,
+      "correction_change_if_gate_one_rms": 0.050385523587465286,
+      "correction_change_if_gate_image_mean_rms": 0.0016087008407339454
+    },
+    {
+      "image": "0844x4.png",
+      "height": 510,
+      "width": 339,
+      "gate_mean": 1.0661885738372803,
+      "gate_spatial_std": 0.003001290373504162,
+      "gate_min": 1.0333689451217651,
+      "gate_max": 1.0873688459396362,
+      "gate_fraction_below_0_1": 0.0,
+      "gate_fraction_above_1_9": 0.0,
+      "gate_delta_vs_same_mean_constant_rms": 0.0030012906063348055,
+      "input_rms": 0.790608286857605,
+      "residual_rms": 0.718027651309967,
+      "correction_rms": 0.7663888931274414,
+      "correction_mean_abs": 0.725622832775116,
+      "correction_absmax": 0.9776173233985901,
+      "correction_rms_8bit_equivalent": 195.42916774749756,
+      "correction_rms_over_input_rms": 0.9693661271545391,
+      "correction_change_if_gate_one_rms": 0.04837489500641823,
+      "correction_change_if_gate_image_mean_rms": 0.0014497879892587662
+    },
+    {
+      "image": "0833x4.png",
+      "height": 387,
+      "width": 510,
+      "gate_mean": 1.065692663192749,
+      "gate_spatial_std": 0.005148501601070166,
+      "gate_min": 1.0145394802093506,
+      "gate_max": 1.1044673919677734,
+      "gate_fraction_below_0_1": 0.0,
+      "gate_fraction_above_1_9": 0.0,
+      "gate_delta_vs_same_mean_constant_rms": 0.005148510914295912,
+      "input_rms": 0.7324157953262329,
+      "residual_rms": 0.6673914790153503,
+      "correction_rms": 0.7121089696884155,
+      "correction_mean_abs": 0.6791315078735352,
+      "correction_absmax": 1.0112974643707275,
+      "correction_rms_8bit_equivalent": 181.58778727054596,
+      "correction_rms_over_input_rms": 0.9722741839165657,
+      "correction_change_if_gate_one_rms": 0.044774025678634644,
+      "correction_change_if_gate_image_mean_rms": 0.0024809848982840776
+    },
+    {
+      "image": "0894x4.png",
+      "height": 510,
+      "width": 339,
+      "gate_mean": 1.0655088424682617,
+      "gate_spatial_std": 0.004011815879493952,
+      "gate_min": 1.028100609779358,
+      "gate_max": 1.0931940078735352,
+      "gate_fraction_below_0_1": 0.0,
+      "gate_fraction_above_1_9": 0.0,
+      "gate_delta_vs_same_mean_constant_rms": 0.004011819139122963,
+      "input_rms": 0.7164580821990967,
+      "residual_rms": 0.6511257886886597,
+      "correction_rms": 0.6945868134498596,
+      "correction_mean_abs": 0.6644281148910522,
+      "correction_absmax": 1.0158666372299194,
+      "correction_rms_8bit_equivalent": 177.1196374297142,
+      "correction_rms_over_input_rms": 0.9694730657764298,
+      "correction_change_if_gate_one_rms": 0.04351649060845375,
+      "correction_change_if_gate_image_mean_rms": 0.0024067764170467854
+    }
+  ]
+}
+(base) ➜ FEAT-LG6-SILU-50K-01-LG6-SiLU-s10 
