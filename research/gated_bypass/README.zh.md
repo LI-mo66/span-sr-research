@@ -57,3 +57,11 @@ python3 research/gated_bypass/entry.py --config logs/gated_bypass/FEAT-LG6-GB-50
 输出每步loss_steps.jsonl、每1000更新epochs.jsonl/逐图指标/编号权重、latest.pt、验证最佳best_validation.pt。backup备份完整训练产物和日志，SHA256清单/BACKUP_COMPLETE，curves/seed-10/LG6-SiLU-GB-overview.png包含loss/验证PSNR/验证SSIM三联图；comparison-50000.json的A为旧SiLU而非B0。原始数据与缓存不备份。
 
 工程verify检查A初始化恒等、共有参数/RNG、奇数/矩形batch1/2、已知RGB相位修正与空间广播、首步R和后续G启动、有限梯度及20步更新、严格序列化续一步相同、部署一致和参数计数。integration检查真实入口累积、缓存、scheduler/RNG恢复与评测频率一致；engineering模式仅用于隔离合成fixture。本机检查不能等同于服务器已验证，也不能代替真实数据PSNR。
+
+## CPU旁路诊断（2026-10-16）
+
+diagnose_cpu.py只读取最佳验证权重，不运行主干、不训练、不释放实例。仅需100张原DIV2K验证LR×4 PNG（逐张匹配原manifest哈希），不需要HR或训练数据。输出门控参数、逐图空间变化、同RGB均值常色图响应差异、饱和比例，以及修正量RGB[0,1]/8bit等价RMS、相对输入幅值、替换门控为1或逐图均值对修正张量的影响；这些不是PSNR或独立重训消融。
+
+排除1个LR像素边界，避免padding制造内容响应假象；均值/方差注明逐图等权与全空间加权，分位数为确定性采样近似。修正相对输入RGB，不冒称相对主干输出。没有真实LR图时只输出权重信息和NEEDS_REAL_LR_IMAGES，不用随机图代替证据。新报告保存在work，不改原权重/备份。
+
+CPU合成已验证：恒定G=1、已知0.01修正RMS、输入相关空间响应、缺图保护；没有真实诊断结论。
