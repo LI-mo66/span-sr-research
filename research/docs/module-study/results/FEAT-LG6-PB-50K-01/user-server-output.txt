@@ -1,0 +1,985 @@
+(base) ➜ ~ >....                                                                                                                                                                                        
+            print(f"{name}: ΔPSNR={pm['psnr']-am['psnr']:+.9f}, "
+                  f"ΔSSIM={pm['ssim']-am['ssim']:+.9f}")
+
+        print("\n=== 无门控PB 减 有门控GB：统一验证选权重 ===")
+        deltas = candidate.get("selected_metrics_delta_vs_gated", {})
+        for name, metric in deltas.items():
+            print(f"{name}: ΔPSNR={metric['psnr']:+.9f}, "
+                  f"ΔSSIM={metric['ssim']:+.9f}")
+
+        print("\n=== 无门控PB 减 有门控GB：各数据集峰值 ===")
+        for name, delta in candidate.get(
+                "peak_psnr_delta_vs_gated", {}).items():
+            print(f"{name}: ΔPSNR={delta:+.9f}")
+else:
+    print("没有完整50000次比较报告，可能训练未完成。")
+
+print("\n=== 逐步loss和学习率 ===")
+steps = read_rows(run / "loss_steps.jsonl")
+if steps:
+    finite = [r for r in steps if math.isfinite(r["train_l1"])]
+    print("记录数:", len(steps))
+    print("最后更新:", steps[-1]["update"])
+    print("最后学习率:", steps[-1].get("lr"))
+    print("非有限loss数量:", len(steps) - len(finite))
+
+    print("1000次之后最高loss的10条：")
+    late = [r for r in finite if r["update"] >= 1000]
+    for row in sorted(late, key=lambda r: r["train_l1"],
+                      reverse=True)[:10]:
+        print(json.dumps(row))
+
+    print("最后10条：")
+    for row in steps[-10:]:
+        print(json.dumps(row))
+else:
+    print("没有逐步loss记录。")
+
+print("\n=== 曲线位置 ===")
+curves = sorted((backup / "curves").rglob("*.png"))
+for path in curves:
+    print(path)
+if not curves:
+    print("没有找到PNG曲线。")
+
+print("\n=== 备份日志最后40行 ===")
+logs = sorted(
+    (backup / "logs").rglob("nohup.log"),
+    key=lambda p: p.stat().st_mtime
+)
+if logs:
+    print(logs[-1])
+    print("\n".join(
+        logs[-1].read_text(errors="replace").splitlines()[-40:]
+    ))
+else:
+    print("没有找到nohup.log。")
+PY
+=== 任务退出状态 ===
+FEAT-LG6-PB-50K-01-job-20261016T014529Z-68919-status.json
+{
+  "exit_code": 0,
+  "error": null,
+  "auto_release": true,
+  "variants": [
+    "LG6-SiLU-PB"
+  ],
+  "backup_exit_code": 0,
+  "backup": "/home/featurize/work/span-x4-research/records/FEAT-LG6-PB-50K-01-1792129615766337782",
+  "release_requested": true
+}
+
+=== 备份位置 ===
+/home/featurize/work/span-x4-research/records/FEAT-LG6-PB-50K-01-1792129615766337782
+运行目录: /home/featurize/work/span-x4-research/records/FEAT-LG6-PB-50K-01-1792129615766337782/runs/FEAT-LG6-PB-50K-01-LG6-SiLU-PB-s10
+训练退出码: 0
+绘图错误: None
+备份清单文件数: 363
+
+=== 配置与原环境 ===
+commit: dd942d4287f2635f9cfe354418bc2ea9a095d3b2
+fingerprint: 9c3edc30825035744ea06e1251afb3ff37e4fe81d0d0a05d86dcd14fe9f4adc4
+Python: 3.11.8 (main, Feb 26 2024, 21:39:34) [GCC 11.2.0]
+environment: {"torch": "2.2.2+cu121", "cuda": "12.1", "device": "NVIDIA GeForce RTX 4090", "deterministic": true, "cudnn_allow_tf32": true, "matmul_allow_tf32": false}
+config: {
+  "model": {
+    "num_in_ch": 3,
+    "num_out_ch": 3,
+    "feature_channels": 52,
+    "upscale": 4,
+    "img_range": 255.0
+  },
+  "seed": 10,
+  "total_updates": 1000000,
+  "screen_epochs": 20,
+  "record_updates": 1000,
+  "deployed_baseline_parameters": 498208,
+  "max_extra_deployed_parameters": 49820,
+  "hr_patch": 256,
+  "effective_batch": 64,
+  "micro_batch": 16,
+  "lr": 0.0002,
+  "adam_betas": [
+    0.9,
+    0.999
+  ],
+  "adam_eps": 1e-08,
+  "milestones": [
+    200000,
+    400000,
+    600000,
+    800000
+  ],
+  "gamma": 0.5,
+  "crop_border": 4,
+  "test_y_channel": true,
+  "self_ensemble": false,
+  "selection_dataset": "DIV2K_valid",
+  "protocol_status": "SPAN52_stage1_research_protocol_pending_remote_baseline_training",
+  "official_unresolved": [
+    "Adam betas/epsilon unspecified in paper",
+    "number and reset semantics of repeated loaded-weight training stages",
+    "complete training provenance of released weights, including teacher/EMA"
+  ],
+  "paths_file": "/home/featurize/work/span-x4-research/code/span-lg6-plain-bypass/logs/plain_bypass/FEAT-LG6-PB-50K-01/paths.json",
+  "moe_fs": false,
+  "experiment_version": "LG6-SiLU-PlainImageBypass-v1",
+  "training_protocol": "multistep-lr2e4-v1",
+  "image_backend": "npy_mmap",
+  "local_gate": {
+    "activation": "silu",
+    "initial_weight": "zero",
+    "initial_bias": 0.1,
+    "blocks": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6
+    ]
+  },
+  "image_bypass": {
+    "residual_kernel": 3,
+    "gate": "none",
+    "initial_weight": "zero",
+    "initial_bias": 0.0
+  }
+}
+相对原B0新增部署参数: 17880
+
+=== 每次评测 ===
+
+update=1000 mean_L1=0.146319233
+  DIV2K_valid: PSNR=27.425640021, SSIM=0.698769651
+  Set5: PSNR=27.475061393, SSIM=0.703303823
+  Set14: PSNR=25.582164285, SSIM=0.640938654
+  B100: PSNR=25.811536790, SSIM=0.635294155
+  Urban100: PSNR=23.093185642, SSIM=0.609032560
+  Manga109: PSNR=23.984048461, SSIM=0.631678511
+
+update=2000 mean_L1=0.041276043
+  DIV2K_valid: PSNR=27.753619456, SSIM=0.719045344
+  Set5: PSNR=28.262663551, SSIM=0.748377779
+  Set14: PSNR=26.157388658, SSIM=0.676873478
+  B100: PSNR=26.038565883, SSIM=0.652434350
+  Urban100: PSNR=23.365595408, SSIM=0.632364657
+  Manga109: PSNR=24.820913691, SSIM=0.689375399
+
+update=3000 mean_L1=0.036452425
+  DIV2K_valid: PSNR=28.345392215, SSIM=0.776238122
+  Set5: PSNR=28.964948239, SSIM=0.809740111
+  Set14: PSNR=26.517568184, SSIM=0.714408970
+  B100: PSNR=26.292382793, SSIM=0.684603660
+  Urban100: PSNR=23.578506977, SSIM=0.671092228
+  Manga109: PSNR=25.448083184, SSIM=0.768168620
+
+update=4000 mean_L1=0.033745690
+  DIV2K_valid: PSNR=29.055109157, SSIM=0.797858966
+  Set5: PSNR=29.960920788, SSIM=0.839112605
+  Set14: PSNR=27.203849071, SSIM=0.739438466
+  B100: PSNR=26.721470461, SSIM=0.702955851
+  Urban100: PSNR=24.133935047, SSIM=0.703350435
+  Manga109: PSNR=26.745039978, SSIM=0.818945056
+
+update=5000 mean_L1=0.031575287
+  DIV2K_valid: PSNR=29.233367843, SSIM=0.797252860
+  Set5: PSNR=30.413981664, SSIM=0.848755984
+  Set14: PSNR=27.526538153, SSIM=0.747245718
+  B100: PSNR=26.891644721, SSIM=0.706578084
+  Urban100: PSNR=24.474029860, SSIM=0.715400122
+  Manga109: PSNR=27.438458835, SSIM=0.833521414
+
+update=6000 mean_L1=0.030262179
+  DIV2K_valid: PSNR=29.474178569, SSIM=0.810243084
+  Set5: PSNR=30.758641397, SSIM=0.862713543
+  Set14: PSNR=27.737679170, SSIM=0.756039189
+  B100: PSNR=27.013507310, SSIM=0.714539131
+  Urban100: PSNR=24.704148781, SSIM=0.730137048
+  Manga109: PSNR=28.033161897, SSIM=0.855071984
+
+update=7000 mean_L1=0.029732649
+  DIV2K_valid: PSNR=29.417838341, SSIM=0.816077697
+  Set5: PSNR=30.772121186, SSIM=0.870385231
+  Set14: PSNR=27.785611997, SSIM=0.761786687
+  B100: PSNR=27.042166072, SSIM=0.719372810
+  Urban100: PSNR=24.827064882, SSIM=0.739768397
+  Manga109: PSNR=28.296524516, SSIM=0.866978844
+
+update=8000 mean_L1=0.029189898
+  DIV2K_valid: PSNR=29.574877409, SSIM=0.820090415
+  Set5: PSNR=30.998911038, SSIM=0.875636158
+  Set14: PSNR=27.911390728, SSIM=0.765236534
+  B100: PSNR=27.115915987, SSIM=0.722054458
+  Urban100: PSNR=24.936847532, SSIM=0.745167457
+  Manga109: PSNR=28.521232021, SSIM=0.873820026
+
+update=9000 mean_L1=0.028865516
+  DIV2K_valid: PSNR=29.785225477, SSIM=0.820994033
+  Set5: PSNR=31.255360955, SSIM=0.877835736
+  Set14: PSNR=28.018911029, SSIM=0.765855100
+  B100: PSNR=27.189573625, SSIM=0.721949975
+  Urban100: PSNR=25.037889180, SSIM=0.746894470
+  Manga109: PSNR=28.750847366, SSIM=0.876664059
+
+update=10000 mean_L1=0.028537767
+  DIV2K_valid: PSNR=29.829203938, SSIM=0.822771509
+  Set5: PSNR=31.298689266, SSIM=0.880333263
+  Set14: PSNR=28.047899806, SSIM=0.768271990
+  B100: PSNR=27.221120428, SSIM=0.723749332
+  Urban100: PSNR=25.105122969, SSIM=0.750590862
+  Manga109: PSNR=28.960241826, SSIM=0.881707033
+
+update=11000 mean_L1=0.028443349
+  DIV2K_valid: PSNR=29.869999091, SSIM=0.823014110
+  Set5: PSNR=31.382991144, SSIM=0.880403521
+  Set14: PSNR=28.106294593, SSIM=0.768449654
+  B100: PSNR=27.234043270, SSIM=0.724068310
+  Urban100: PSNR=25.174555395, SSIM=0.752307433
+  Manga109: PSNR=29.041866197, SSIM=0.882005076
+
+update=12000 mean_L1=0.028071087
+  DIV2K_valid: PSNR=29.931100053, SSIM=0.824861758
+  Set5: PSNR=31.405646081, SSIM=0.882443270
+  Set14: PSNR=28.137682278, SSIM=0.770096130
+  B100: PSNR=27.267795086, SSIM=0.725158788
+  Urban100: PSNR=25.206606806, SSIM=0.753872783
+  Manga109: PSNR=29.092369663, SSIM=0.885202028
+
+update=13000 mean_L1=0.028026610
+  DIV2K_valid: PSNR=29.916606352, SSIM=0.824576840
+  Set5: PSNR=31.432813922, SSIM=0.882033956
+  Set14: PSNR=28.155125208, SSIM=0.769744803
+  B100: PSNR=27.280799339, SSIM=0.725456653
+  Urban100: PSNR=25.244242344, SSIM=0.754916601
+  Manga109: PSNR=29.100870572, SSIM=0.883646926
+
+update=14000 mean_L1=0.028028930
+  DIV2K_valid: PSNR=29.961496190, SSIM=0.825553723
+  Set5: PSNR=31.484273767, SSIM=0.883538804
+  Set14: PSNR=28.179131993, SSIM=0.770637072
+  B100: PSNR=27.293394019, SSIM=0.725739437
+  Urban100: PSNR=25.271559009, SSIM=0.756319015
+  Manga109: PSNR=29.190090219, SSIM=0.886706835
+
+update=15000 mean_L1=0.027862692
+  DIV2K_valid: PSNR=29.964173968, SSIM=0.825921930
+  Set5: PSNR=31.559638908, SSIM=0.884675237
+  Set14: PSNR=28.182199208, SSIM=0.770943332
+  B100: PSNR=27.281183232, SSIM=0.725893885
+  Urban100: PSNR=25.278691151, SSIM=0.757200238
+  Manga109: PSNR=29.259876901, SSIM=0.888450901
+
+update=16000 mean_L1=0.027708214
+  DIV2K_valid: PSNR=30.009852232, SSIM=0.826805224
+  Set5: PSNR=31.566008085, SSIM=0.885213024
+  Set14: PSNR=28.238277618, SSIM=0.772117117
+  B100: PSNR=27.329816880, SSIM=0.727080193
+  Urban100: PSNR=25.342113106, SSIM=0.758837849
+  Manga109: PSNR=29.353163297, SSIM=0.889860830
+
+update=17000 mean_L1=0.027634873
+  DIV2K_valid: PSNR=29.983592031, SSIM=0.825414374
+  Set5: PSNR=31.574484781, SSIM=0.883419313
+  Set14: PSNR=28.233015452, SSIM=0.770622252
+  B100: PSNR=27.322232454, SSIM=0.726644158
+  Urban100: PSNR=25.376485573, SSIM=0.759806222
+  Manga109: PSNR=29.429749724, SSIM=0.886528735
+
+update=18000 mean_L1=0.027603918
+  DIV2K_valid: PSNR=29.991307197, SSIM=0.826545952
+  Set5: PSNR=31.508634882, SSIM=0.883885923
+  Set14: PSNR=28.228669195, SSIM=0.771850255
+  B100: PSNR=27.322644372, SSIM=0.726767225
+  Urban100: PSNR=25.369957014, SSIM=0.759351823
+  Manga109: PSNR=29.363165071, SSIM=0.889581094
+
+update=19000 mean_L1=0.027346889
+  DIV2K_valid: PSNR=30.021675409, SSIM=0.828001018
+  Set5: PSNR=31.578113424, SSIM=0.886092005
+  Set14: PSNR=28.256438379, SSIM=0.773621343
+  B100: PSNR=27.343168294, SSIM=0.728274227
+  Urban100: PSNR=25.403718844, SSIM=0.761951317
+  Manga109: PSNR=29.464606957, SSIM=0.892330585
+
+update=20000 mean_L1=0.027561875
+  DIV2K_valid: PSNR=30.059907275, SSIM=0.828800133
+  Set5: PSNR=31.692229252, SSIM=0.887413857
+  Set14: PSNR=28.261701841, SSIM=0.773917557
+  B100: PSNR=27.340296251, SSIM=0.728502971
+  Urban100: PSNR=25.426269068, SSIM=0.762981222
+  Manga109: PSNR=29.520321507, SSIM=0.893255861
+
+update=21000 mean_L1=0.027365038
+  DIV2K_valid: PSNR=30.036248531, SSIM=0.827478008
+  Set5: PSNR=31.625055990, SSIM=0.884913152
+  Set14: PSNR=28.257466322, SSIM=0.772341510
+  B100: PSNR=27.351988550, SSIM=0.727725152
+  Urban100: PSNR=25.441154938, SSIM=0.762068408
+  Manga109: PSNR=29.433827702, SSIM=0.890068090
+
+update=22000 mean_L1=0.027264516
+  DIV2K_valid: PSNR=30.090449034, SSIM=0.829150434
+  Set5: PSNR=31.655577976, SSIM=0.887219619
+  Set14: PSNR=28.295470937, SSIM=0.774535013
+  B100: PSNR=27.362377407, SSIM=0.729013748
+  Urban100: PSNR=25.454089403, SSIM=0.763973354
+  Manga109: PSNR=29.558873912, SSIM=0.893958030
+
+update=23000 mean_L1=0.027227041
+  DIV2K_valid: PSNR=30.083998394, SSIM=0.828605873
+  Set5: PSNR=31.706485878, SSIM=0.887143156
+  Set14: PSNR=28.315501947, SSIM=0.774134055
+  B100: PSNR=27.380219887, SSIM=0.728653163
+  Urban100: PSNR=25.491673566, SSIM=0.764323912
+  Manga109: PSNR=29.561941087, SSIM=0.893084033
+
+update=24000 mean_L1=0.027225434
+  DIV2K_valid: PSNR=30.108697112, SSIM=0.829216179
+  Set5: PSNR=31.731275284, SSIM=0.887773201
+  Set14: PSNR=28.325249227, SSIM=0.774331566
+  B100: PSNR=27.371818614, SSIM=0.728702496
+  Urban100: PSNR=25.481074171, SSIM=0.764440218
+  Manga109: PSNR=29.628538703, SSIM=0.894816396
+
+update=25000 mean_L1=0.027093085
+  DIV2K_valid: PSNR=30.100848943, SSIM=0.828752198
+  Set5: PSNR=31.691070393, SSIM=0.887167655
+  Set14: PSNR=28.330770086, SSIM=0.774311837
+  B100: PSNR=27.380199853, SSIM=0.728470829
+  Urban100: PSNR=25.475857973, SSIM=0.763630355
+  Manga109: PSNR=29.583959586, SSIM=0.894078341
+
+update=26000 mean_L1=0.026975123
+  DIV2K_valid: PSNR=30.115833053, SSIM=0.829843676
+  Set5: PSNR=31.703508329, SSIM=0.887997160
+  Set14: PSNR=28.352296946, SSIM=0.775631605
+  B100: PSNR=27.392226734, SSIM=0.729676262
+  Urban100: PSNR=25.509320832, SSIM=0.765714889
+  Manga109: PSNR=29.648987664, SSIM=0.895583644
+
+update=27000 mean_L1=0.027179831
+  DIV2K_valid: PSNR=30.126267907, SSIM=0.830555382
+  Set5: PSNR=31.711405934, SSIM=0.888609191
+  Set14: PSNR=28.353582912, SSIM=0.776189038
+  B100: PSNR=27.393228894, SSIM=0.730580567
+  Urban100: PSNR=25.534215035, SSIM=0.767235934
+  Manga109: PSNR=29.644154514, SSIM=0.896202275
+
+update=28000 mean_L1=0.027096011
+  DIV2K_valid: PSNR=30.126332292, SSIM=0.830290358
+  Set5: PSNR=31.755431843, SSIM=0.888489991
+  Set14: PSNR=28.355178718, SSIM=0.775809292
+  B100: PSNR=27.403550843, SSIM=0.730273278
+  Urban100: PSNR=25.531163338, SSIM=0.766963856
+  Manga109: PSNR=29.655446884, SSIM=0.895887296
+
+update=29000 mean_L1=0.026953585
+  DIV2K_valid: PSNR=30.134708475, SSIM=0.830548519
+  Set5: PSNR=31.693892242, SSIM=0.888417051
+  Set14: PSNR=28.361440381, SSIM=0.775949082
+  B100: PSNR=27.404003883, SSIM=0.730314469
+  Urban100: PSNR=25.537576703, SSIM=0.767570217
+  Manga109: PSNR=29.691346377, SSIM=0.896335091
+
+update=30000 mean_L1=0.027437808
+  DIV2K_valid: PSNR=30.135208573, SSIM=0.831041277
+  Set5: PSNR=31.727888810, SSIM=0.889086270
+  Set14: PSNR=28.341827206, SSIM=0.776245411
+  B100: PSNR=27.407773831, SSIM=0.731077115
+  Urban100: PSNR=25.559904478, SSIM=0.768817615
+  Manga109: PSNR=29.700603062, SSIM=0.897109040
+
+update=31000 mean_L1=0.026889373
+  DIV2K_valid: PSNR=30.144704444, SSIM=0.830946656
+  Set5: PSNR=31.696316883, SSIM=0.888776467
+  Set14: PSNR=28.359019940, SSIM=0.776214716
+  B100: PSNR=27.411428061, SSIM=0.730705246
+  Urban100: PSNR=25.570110726, SSIM=0.768138249
+  Manga109: PSNR=29.721605759, SSIM=0.897262150
+
+update=32000 mean_L1=0.026808635
+  DIV2K_valid: PSNR=30.124218398, SSIM=0.829607856
+  Set5: PSNR=31.676694572, SSIM=0.887964237
+  Set14: PSNR=28.337452330, SSIM=0.774755143
+  B100: PSNR=27.404181553, SSIM=0.729444472
+  Urban100: PSNR=25.539819097, SSIM=0.766100351
+  Manga109: PSNR=29.617024127, SSIM=0.895142529
+
+update=33000 mean_L1=0.026951292
+  DIV2K_valid: PSNR=30.137619396, SSIM=0.830356120
+  Set5: PSNR=31.707811371, SSIM=0.888622334
+  Set14: PSNR=28.374519885, SSIM=0.775987884
+  B100: PSNR=27.416160911, SSIM=0.730186189
+  Urban100: PSNR=25.584234433, SSIM=0.768155869
+  Manga109: PSNR=29.704486348, SSIM=0.896636130
+
+update=34000 mean_L1=0.026913411
+  DIV2K_valid: PSNR=30.166838900, SSIM=0.831073582
+  Set5: PSNR=31.774874872, SSIM=0.889347012
+  Set14: PSNR=28.389000397, SSIM=0.776765198
+  B100: PSNR=27.430609845, SSIM=0.731027364
+  Urban100: PSNR=25.608590551, SSIM=0.769518791
+  Manga109: PSNR=29.740038567, SSIM=0.897326360
+
+update=35000 mean_L1=0.027209467
+  DIV2K_valid: PSNR=30.173414208, SSIM=0.830818082
+  Set5: PSNR=31.754972282, SSIM=0.889111790
+  Set14: PSNR=28.380977472, SSIM=0.775826431
+  B100: PSNR=27.426745888, SSIM=0.730365890
+  Urban100: PSNR=25.598680017, SSIM=0.768925050
+  Manga109: PSNR=29.782552954, SSIM=0.897416656
+
+update=36000 mean_L1=0.026782775
+  DIV2K_valid: PSNR=30.168241751, SSIM=0.831047915
+  Set5: PSNR=31.781576320, SSIM=0.889708016
+  Set14: PSNR=28.387411352, SSIM=0.776607455
+  B100: PSNR=27.418754418, SSIM=0.730863830
+  Urban100: PSNR=25.602036740, SSIM=0.769454548
+  Manga109: PSNR=29.795188978, SSIM=0.897788162
+
+update=37000 mean_L1=0.026664816
+  DIV2K_valid: PSNR=30.180408853, SSIM=0.831329833
+  Set5: PSNR=31.793926428, SSIM=0.889685888
+  Set14: PSNR=28.385957331, SSIM=0.776536470
+  B100: PSNR=27.420348197, SSIM=0.730951820
+  Urban100: PSNR=25.612232899, SSIM=0.769588506
+  Manga109: PSNR=29.810760609, SSIM=0.898054798
+
+update=38000 mean_L1=0.026928122
+  DIV2K_valid: PSNR=30.181231697, SSIM=0.831546911
+  Set5: PSNR=31.780604484, SSIM=0.889789958
+  Set14: PSNR=28.385839471, SSIM=0.776547424
+  B100: PSNR=27.427690747, SSIM=0.731155517
+  Urban100: PSNR=25.634014925, SSIM=0.770437779
+  Manga109: PSNR=29.849083265, SSIM=0.898447805
+
+update=39000 mean_L1=0.027318741
+  DIV2K_valid: PSNR=30.184578889, SSIM=0.831686936
+  Set5: PSNR=31.817621652, SSIM=0.890327533
+  Set14: PSNR=28.400795160, SSIM=0.777167809
+  B100: PSNR=27.446147714, SSIM=0.731715316
+  Urban100: PSNR=25.628601345, SSIM=0.770075165
+  Manga109: PSNR=29.781556782, SSIM=0.898581372
+
+update=40000 mean_L1=0.026749510
+  DIV2K_valid: PSNR=30.191047936, SSIM=0.831533884
+  Set5: PSNR=31.856715743, SSIM=0.890422122
+  Set14: PSNR=28.412771581, SSIM=0.777026709
+  B100: PSNR=27.441835870, SSIM=0.731259528
+  Urban100: PSNR=25.637748608, SSIM=0.770047049
+  Manga109: PSNR=29.852877129, SSIM=0.898824413
+
+update=41000 mean_L1=0.026666661
+  DIV2K_valid: PSNR=30.183550450, SSIM=0.831361832
+  Set5: PSNR=31.762260494, SSIM=0.889341776
+  Set14: PSNR=28.411512165, SSIM=0.776682572
+  B100: PSNR=27.435729834, SSIM=0.730900183
+  Urban100: PSNR=25.632674766, SSIM=0.770108911
+  Manga109: PSNR=29.811166140, SSIM=0.898414189
+
+update=42000 mean_L1=0.026753890
+  DIV2K_valid: PSNR=30.200341023, SSIM=0.831841807
+  Set5: PSNR=31.734021549, SSIM=0.889739854
+  Set14: PSNR=28.395994278, SSIM=0.777064284
+  B100: PSNR=27.441837902, SSIM=0.731284088
+  Urban100: PSNR=25.652619742, SSIM=0.770913938
+  Manga109: PSNR=29.778328259, SSIM=0.898325501
+
+update=43000 mean_L1=0.026799265
+  DIV2K_valid: PSNR=30.195738290, SSIM=0.832482817
+  Set5: PSNR=31.840329478, SSIM=0.890807911
+  Set14: PSNR=28.408438646, SSIM=0.778087500
+  B100: PSNR=27.447661500, SSIM=0.732428880
+  Urban100: PSNR=25.671845139, SSIM=0.772221973
+  Manga109: PSNR=29.894079299, SSIM=0.900445034
+
+update=44000 mean_L1=0.026812440
+  DIV2K_valid: PSNR=30.205011092, SSIM=0.832085991
+  Set5: PSNR=31.809254425, SSIM=0.890327973
+  Set14: PSNR=28.418785719, SSIM=0.777557965
+  B100: PSNR=27.461447340, SSIM=0.731666745
+  Urban100: PSNR=25.688535437, SSIM=0.772145591
+  Manga109: PSNR=29.878523324, SSIM=0.899883846
+
+update=45000 mean_L1=0.026691450
+  DIV2K_valid: PSNR=30.200595643, SSIM=0.831878539
+  Set5: PSNR=31.829802818, SSIM=0.890137605
+  Set14: PSNR=28.409775130, SSIM=0.777491140
+  B100: PSNR=27.439190382, SSIM=0.731234725
+  Urban100: PSNR=25.663111285, SSIM=0.770817015
+  Manga109: PSNR=29.878771393, SSIM=0.899325173
+
+update=46000 mean_L1=0.026586294
+  DIV2K_valid: PSNR=30.200351327, SSIM=0.832075895
+  Set5: PSNR=31.796671443, SSIM=0.890375057
+  Set14: PSNR=28.415612636, SSIM=0.777541147
+  B100: PSNR=27.449150312, SSIM=0.731550696
+  Urban100: PSNR=25.671354067, SSIM=0.771340075
+  Manga109: PSNR=29.914356708, SSIM=0.900125087
+
+update=47000 mean_L1=0.026686008
+  DIV2K_valid: PSNR=30.195433261, SSIM=0.831814481
+  Set5: PSNR=31.807649099, SSIM=0.889504075
+  Set14: PSNR=28.403674004, SSIM=0.776683334
+  B100: PSNR=27.454181134, SSIM=0.731663355
+  Urban100: PSNR=25.688584615, SSIM=0.771736539
+  Manga109: PSNR=29.873179042, SSIM=0.897456449
+
+update=48000 mean_L1=0.026545382
+  DIV2K_valid: PSNR=30.223241852, SSIM=0.832735139
+  Set5: PSNR=31.894617418, SSIM=0.891462442
+  Set14: PSNR=28.421564989, SSIM=0.777994007
+  B100: PSNR=27.459167592, SSIM=0.732448001
+  Urban100: PSNR=25.713448858, SSIM=0.772968167
+  Manga109: PSNR=29.936173016, SSIM=0.900728414
+
+update=49000 mean_L1=0.026708701
+  DIV2K_valid: PSNR=30.202910566, SSIM=0.832396437
+  Set5: PSNR=31.858466203, SSIM=0.890917278
+  Set14: PSNR=28.413040485, SSIM=0.777578353
+  B100: PSNR=27.453196729, SSIM=0.732022169
+  Urban100: PSNR=25.691132742, SSIM=0.772122918
+  Manga109: PSNR=29.912765389, SSIM=0.900301072
+
+update=50000 mean_L1=0.027207352
+  DIV2K_valid: PSNR=30.212114683, SSIM=0.832215404
+  Set5: PSNR=31.832744498, SSIM=0.890490002
+  Set14: PSNR=28.409189378, SSIM=0.777670876
+  B100: PSNR=27.455978567, SSIM=0.732015241
+  Urban100: PSNR=25.655498456, SSIM=0.771590772
+  Manga109: PSNR=29.874495434, SSIM=0.899567273
+
+最后完成评测更新: 50000
+是否完成50000次: True
+
+=== 验证集最高PSNR对应的统一权重 ===
+更新: 48000
+权重: /home/featurize/work/span-x4-research/records/FEAT-LG6-PB-50K-01-1792129615766337782/runs/FEAT-LG6-PB-50K-01-LG6-SiLU-PB-s10/epoch00048_u48000.pt
+文件存在: True
+{
+  "DIV2K_valid": {
+    "psnr": 30.223241852413434,
+    "ssim": 0.8327351388132707
+  },
+  "Set5": {
+    "psnr": 31.894617418148318,
+    "ssim": 0.8914624417755108
+  },
+  "Set14": {
+    "psnr": 28.42156498853664,
+    "ssim": 0.7779940065912602
+  },
+  "B100": {
+    "psnr": 27.45916759191831,
+    "ssim": 0.7324480007641742
+  },
+  "Urban100": {
+    "psnr": 25.71344885845662,
+    "ssim": 0.7729681673317779
+  },
+  "Manga109": {
+    "psnr": 29.936173015547702,
+    "ssim": 0.9007284138813948
+  }
+}
+
+=== 各数据集最高PSNR及对应权重 ===
+DIV2K_valid epoch00048_u48000.pt {"psnr": 30.223241852413434, "ssim": 0.8327351388132707}
+Set5 epoch00048_u48000.pt {"psnr": 31.894617418148318, "ssim": 0.8914624417755108}
+Set14 epoch00048_u48000.pt {"psnr": 28.42156498853664, "ssim": 0.7779940065912602}
+B100 epoch00044_u44000.pt {"psnr": 27.46144733980939, "ssim": 0.7316667445325037}
+Urban100 epoch00048_u48000.pt {"psnr": 25.71344885845662, "ssim": 0.7729681673317779}
+Manga109 epoch00048_u48000.pt {"psnr": 29.936173015547702, "ssim": 0.9007284138813948}
+
+=== 完整比较报告 ===
+{
+  "A": {
+    "selected_update": 49000,
+    "checkpoint": "epoch00049_u49000.pt",
+    "metrics": {
+      "DIV2K_valid": {
+        "psnr": 30.189747908588664,
+        "ssim": 0.8323726081665493
+      },
+      "Set5": {
+        "psnr": 31.854651377500666,
+        "ssim": 0.8907952291261338
+      },
+      "Set14": {
+        "psnr": 28.403203320261948,
+        "ssim": 0.7777543868171567
+      },
+      "B100": {
+        "psnr": 27.447363287427738,
+        "ssim": 0.7321378382953359
+      },
+      "Urban100": {
+        "psnr": 25.668409764250622,
+        "ssim": 0.7716448892827837
+      },
+      "Manga109": {
+        "psnr": 29.86850090980631,
+        "ssim": 0.899911555036035
+      }
+    },
+    "per_dataset_psnr_best": {
+      "DIV2K_valid": {
+        "update": 49000,
+        "checkpoint": "epoch00049_u49000.pt",
+        "metrics": {
+          "psnr": 30.189747908588664,
+          "ssim": 0.8323726081665493
+        }
+      },
+      "Set5": {
+        "update": 49000,
+        "checkpoint": "epoch00049_u49000.pt",
+        "metrics": {
+          "psnr": 31.854651377500666,
+          "ssim": 0.8907952291261338
+        }
+      },
+      "Set14": {
+        "update": 46000,
+        "checkpoint": "epoch00046_u46000.pt",
+        "metrics": {
+          "psnr": 28.414985281543498,
+          "ssim": 0.7772969136876992
+        }
+      },
+      "B100": {
+        "update": 44000,
+        "checkpoint": "epoch00044_u44000.pt",
+        "metrics": {
+          "psnr": 27.45083702698369,
+          "ssim": 0.7313814368787496
+        }
+      },
+      "Urban100": {
+        "update": 49000,
+        "checkpoint": "epoch00049_u49000.pt",
+        "metrics": {
+          "psnr": 25.668409764250622,
+          "ssim": 0.7716448892827837
+        }
+      },
+      "Manga109": {
+        "update": 49000,
+        "checkpoint": "epoch00049_u49000.pt",
+        "metrics": {
+          "psnr": 29.86850090980631,
+          "ssim": 0.899911555036035
+        }
+      }
+    },
+    "checkpoint_sha256": "f39b80ac085df08700330c56193fd4018f546195032b1b8d2f52f61328e56cb8",
+    "source": "/home/featurize/work/span-x4-research/records/FEAT-LG6-SILU-50K-01-1792052706657616355/runs/FEAT-LG6-SILU-50K-01-LG6-SiLU-s10"
+  },
+  "candidates": {
+    "LG6-SiLU-PB": {
+      "selected_update": 48000,
+      "checkpoint": "epoch00048_u48000.pt",
+      "metrics": {
+        "DIV2K_valid": {
+          "psnr": 30.223241852413434,
+          "ssim": 0.8327351388132707
+        },
+        "Set5": {
+          "psnr": 31.894617418148318,
+          "ssim": 0.8914624417755108
+        },
+        "Set14": {
+          "psnr": 28.42156498853664,
+          "ssim": 0.7779940065912602
+        },
+        "B100": {
+          "psnr": 27.45916759191831,
+          "ssim": 0.7324480007641742
+        },
+        "Urban100": {
+          "psnr": 25.71344885845662,
+          "ssim": 0.7729681673317779
+        },
+        "Manga109": {
+          "psnr": 29.936173015547702,
+          "ssim": 0.9007284138813948
+        }
+      },
+      "per_dataset_psnr_best": {
+        "DIV2K_valid": {
+          "update": 48000,
+          "checkpoint": "epoch00048_u48000.pt",
+          "metrics": {
+            "psnr": 30.223241852413434,
+            "ssim": 0.8327351388132707
+          }
+        },
+        "Set5": {
+          "update": 48000,
+          "checkpoint": "epoch00048_u48000.pt",
+          "metrics": {
+            "psnr": 31.894617418148318,
+            "ssim": 0.8914624417755108
+          }
+        },
+        "Set14": {
+          "update": 48000,
+          "checkpoint": "epoch00048_u48000.pt",
+          "metrics": {
+            "psnr": 28.42156498853664,
+            "ssim": 0.7779940065912602
+          }
+        },
+        "B100": {
+          "update": 44000,
+          "checkpoint": "epoch00044_u44000.pt",
+          "metrics": {
+            "psnr": 27.46144733980939,
+            "ssim": 0.7316667445325037
+          }
+        },
+        "Urban100": {
+          "update": 48000,
+          "checkpoint": "epoch00048_u48000.pt",
+          "metrics": {
+            "psnr": 25.71344885845662,
+            "ssim": 0.7729681673317779
+          }
+        },
+        "Manga109": {
+          "update": 48000,
+          "checkpoint": "epoch00048_u48000.pt",
+          "metrics": {
+            "psnr": 29.936173015547702,
+            "ssim": 0.9007284138813948
+          }
+        }
+      },
+      "validation_delta_vs_A": {
+        "psnr": 0.033493943824769445,
+        "ssim": 0.0003625306467213152
+      },
+      "archived_gated_reference": {
+        "selected_update": 48000,
+        "checkpoint": "epoch00048_u48000.pt",
+        "metrics": {
+          "DIV2K_valid": {
+            "psnr": 30.234560231691272,
+            "ssim": 0.8327628425881543
+          },
+          "Set5": {
+            "psnr": 31.90634258853251,
+            "ssim": 0.8912054623562801
+          },
+          "Set14": {
+            "psnr": 28.424236508177465,
+            "ssim": 0.7778495729629317
+          },
+          "B100": {
+            "psnr": 27.45045356163255,
+            "ssim": 0.7321859811612965
+          },
+          "Urban100": {
+            "psnr": 25.68569966010135,
+            "ssim": 0.7719554355156952
+          },
+          "Manga109": {
+            "psnr": 29.939266777910618,
+            "ssim": 0.9005490969755933
+          }
+        },
+        "per_dataset_psnr_best": {
+          "DIV2K_valid": {
+            "update": 48000,
+            "checkpoint": "epoch00048_u48000.pt",
+            "metrics": {
+              "psnr": 30.234560231691272,
+              "ssim": 0.8327628425881543
+            }
+          },
+          "Set5": {
+            "update": 49000,
+            "checkpoint": "epoch00049_u49000.pt",
+            "metrics": {
+              "psnr": 31.912555636645642,
+              "ssim": 0.8910433249593733
+            }
+          },
+          "Set14": {
+            "update": 48000,
+            "checkpoint": "epoch00048_u48000.pt",
+            "metrics": {
+              "psnr": 28.424236508177465,
+              "ssim": 0.7778495729629317
+            }
+          },
+          "B100": {
+            "update": 44000,
+            "checkpoint": "epoch00044_u44000.pt",
+            "metrics": {
+              "psnr": 27.454617949316948,
+              "ssim": 0.7315259292635878
+            }
+          },
+          "Urban100": {
+            "update": 49000,
+            "checkpoint": "epoch00049_u49000.pt",
+            "metrics": {
+              "psnr": 25.68695634449013,
+              "ssim": 0.7719352112818403
+            }
+          },
+          "Manga109": {
+            "update": 48000,
+            "checkpoint": "epoch00048_u48000.pt",
+            "metrics": {
+              "psnr": 29.939266777910618,
+              "ssim": 0.9005490969755933
+            }
+          }
+        },
+        "validation_delta_vs_A": {
+          "psnr": 0.044812323102608076,
+          "ssim": 0.00039023442160490696
+        }
+      },
+      "selected_metrics_delta_vs_gated": {
+        "DIV2K_valid": {
+          "psnr": -0.01131837927783863,
+          "ssim": -2.770377488359177e-05
+        },
+        "Set5": {
+          "psnr": -0.011725170384192296,
+          "ssim": 0.00025697941923075174
+        },
+        "Set14": {
+          "psnr": -0.002671519640824016,
+          "ssim": 0.0001444336283284997
+        },
+        "B100": {
+          "psnr": 0.008714030285759122,
+          "ssim": 0.0002620196028776389
+        },
+        "Urban100": {
+          "psnr": 0.02774919835527001,
+          "ssim": 0.0010127318160826349
+        },
+        "Manga109": {
+          "psnr": -0.0030937623629156974,
+          "ssim": 0.0001793169058015298
+        }
+      },
+      "peak_psnr_delta_vs_gated": {
+        "DIV2K_valid": -0.01131837927783863,
+        "Set5": -0.017938218497324243,
+        "Set14": -0.002671519640824016,
+        "B100": 0.006829390492441689,
+        "Urban100": 0.026492513966488218,
+        "Manga109": -0.0030937623629156974
+      }
+    }
+  },
+  "checkpoint_rule": "Highest DIV2K validation PSNR; earliest tie; no temporal averaging"
+}
+
+=== 无门控旁路PB 减 A ===
+PB更新: 48000 A更新: 49000
+DIV2K_valid: ΔPSNR=+0.033493944, ΔSSIM=+0.000362531
+Set5: ΔPSNR=+0.039966041, ΔSSIM=+0.000667213
+Set14: ΔPSNR=+0.018361668, ΔSSIM=+0.000239620
+B100: ΔPSNR=+0.011804304, ΔSSIM=+0.000310162
+Urban100: ΔPSNR=+0.045039094, ΔSSIM=+0.001323278
+Manga109: ΔPSNR=+0.067672106, ΔSSIM=+0.000816859
+
+=== 无门控PB 减 有门控GB：统一验证选权重 ===
+DIV2K_valid: ΔPSNR=-0.011318379, ΔSSIM=-0.000027704
+Set5: ΔPSNR=-0.011725170, ΔSSIM=+0.000256979
+Set14: ΔPSNR=-0.002671520, ΔSSIM=+0.000144434
+B100: ΔPSNR=+0.008714030, ΔSSIM=+0.000262020
+Urban100: ΔPSNR=+0.027749198, ΔSSIM=+0.001012732
+Manga109: ΔPSNR=-0.003093762, ΔSSIM=+0.000179317
+
+=== 无门控PB 减 有门控GB：各数据集峰值 ===
+DIV2K_valid: ΔPSNR=-0.011318379
+Set5: ΔPSNR=-0.017938218
+Set14: ΔPSNR=-0.002671520
+B100: ΔPSNR=+0.006829390
+Urban100: ΔPSNR=+0.026492514
+Manga109: ΔPSNR=-0.003093762
+
+=== 逐步loss和学习率 ===
+记录数: 50000
+最后更新: 50000
+最后学习率: 0.0002
+非有限loss数量: 0
+1000次之后最高loss的10条：
+{"update": 38398, "train_l1": 0.07085819356143475, "lr": 0.0002}
+{"update": 29274, "train_l1": 0.06855851411819458, "lr": 0.0002}
+{"update": 29280, "train_l1": 0.06642910838127136, "lr": 0.0002}
+{"update": 29284, "train_l1": 0.06144114024937153, "lr": 0.0002}
+{"update": 29285, "train_l1": 0.059306913055479527, "lr": 0.0002}
+{"update": 38390, "train_l1": 0.05868022330105305, "lr": 0.0002}
+{"update": 38381, "train_l1": 0.057768190279603004, "lr": 0.0002}
+{"update": 29275, "train_l1": 0.0576115008443594, "lr": 0.0002}
+{"update": 38385, "train_l1": 0.05696900933980942, "lr": 0.0002}
+{"update": 49851, "train_l1": 0.056245206855237484, "lr": 0.0002}
+最后10条：
+{"update": 49991, "train_l1": 0.024127472657710314, "lr": 0.0002}
+{"update": 49992, "train_l1": 0.023192691616714, "lr": 0.0002}
+{"update": 49993, "train_l1": 0.026654555927962065, "lr": 0.0002}
+{"update": 49994, "train_l1": 0.0273611624725163, "lr": 0.0002}
+{"update": 49995, "train_l1": 0.022488583344966173, "lr": 0.0002}
+{"update": 49996, "train_l1": 0.02887100027874112, "lr": 0.0002}
+{"update": 49997, "train_l1": 0.024067243095487356, "lr": 0.0002}
+{"update": 49998, "train_l1": 0.026383773423731327, "lr": 0.0002}
+{"update": 49999, "train_l1": 0.02576221153140068, "lr": 0.0002}
+{"update": 50000, "train_l1": 0.029842902906239033, "lr": 0.0002}
+
+=== 曲线位置 ===
+/home/featurize/work/span-x4-research/records/FEAT-LG6-PB-50K-01-1792129615766337782/curves/seed-10/LG6-SiLU-PB-overview.png
+
+=== 备份日志最后40行 ===
+/home/featurize/work/span-x4-research/records/FEAT-LG6-PB-50K-01-1792129615766337782/logs/job-20261016T014529Z-68919/nohup.log
+        "psnr": 0.044812323102608076,
+        "ssim": 0.00039023442160490696
+      }
+    },
+    "selected_metrics_delta_vs_gated": {
+      "DIV2K_valid": {
+        "psnr": -0.01131837927783863,
+        "ssim": -2.770377488359177e-05
+      },
+      "Set5": {
+        "psnr": -0.011725170384192296,
+        "ssim": 0.00025697941923075174
+      },
+      "Set14": {
+        "psnr": -0.002671519640824016,
+        "ssim": 0.0001444336283284997
+      },
+      "B100": {
+        "psnr": 0.008714030285759122,
+        "ssim": 0.0002620196028776389
+      },
+      "Urban100": {
+        "psnr": 0.02774919835527001,
+        "ssim": 0.0010127318160826349
+      },
+      "Manga109": {
+        "psnr": -0.0030937623629156974,
+        "ssim": 0.0001793169058015298
+      }
+    },
+    "peak_psnr_delta_vs_gated": {
+      "DIV2K_valid": -0.01131837927783863,
+      "Set5": -0.017938218497324243,
+      "Set14": -0.002671519640824016,
+      "B100": 0.006829390492441689,
+      "Urban100": 0.026492513966488218,
+      "Manga109": -0.0030937623629156974
+    }
+  }
+}
+(base) ➜ ~ 

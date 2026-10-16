@@ -25,3 +25,6 @@
 
 
 2026-10-16：用户批准LG6-SiLU-PB独立训练对照（只去掉RGB旁路空间门控28参数）；新分支research/lg6-silu-plain-bypass，部署516088。CPU/CUDA工程与真实入口断点恢复通过，固定权重时与GB设G=1严格一致。将新训练50k与已归档A/GB比较，不重训旧组；没有PB真实PSNR。详见research/plain_bypass/README.zh.md。
+
+
+2026-10-16：PB无门控对照完成50k，最佳48k验证30.223241852，相对A+0.033493944，低于GB0.011318379dB；PB对A六集PSNR/SSIM正增益，PB/GB互有胜负，公共五集所选权重SSIM均PB更高。保留GB为原验证规则主结果，保留PB为有效简化对照，不宣称门控普遍涨分。详见results/FEAT-LG6-PB-50K-01。
