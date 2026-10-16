@@ -1,0 +1,35 @@
+{
+  "date": "2026-10-16",
+  "implementation_commit": "c4dcc7b",
+  "scope": "Synthetic only, no real PSNR or long-run stability evidence",
+  "environment": {
+    "python": "3.10.20 | packaged by Anaconda, Inc. | (main, Mar 11 2026, 17:42:35) [MSC v.1942 64 bit (AMD64)]",
+    "torch": "2.9.1+cu128",
+    "cuda": "12.8",
+    "gpu": "NVIDIA GeForce RTX 4060 Laptop GPU"
+  },
+  "checks": {
+    "cpu20steps": "PASS",
+    "cuda20steps": "PASS",
+    "A_initial_identity_and_RNG": "PASS",
+    "fixed_weights_gated_G1_exact_equivalence": "PASS",
+    "no_image_gate_parameters": "PASS",
+    "signed_RGB_phase_oracle": "PASS",
+    "optimizer_gradients_updates": "PASS",
+    "strict_reload_resumed_next_step": "PASS",
+    "deployment_agreement": "PASS",
+    "deployed_parameters": 516088,
+    "entry_integration": "PASS",
+    "fixture": "ENGINEERING-PB-4deddc722c",
+    "entry_checks": [
+      "gradient accumulation",
+      "npy cache",
+      "optimizer/scheduler/RNG resume vs continuous equality",
+      "interrupted JSON recovery",
+      "evaluation cadence invariance",
+      "50000 cap accepted"
+    ]
+  },
+  "unchanged_source_audit": "basicsr, research/moe_fs/trainer.py, research/linear_gate/lg_model.py, research/gated_bypass/gb_model.py, research/image_io.py and research/parallel_loader.py unchanged vs d89bc07",
+  "limits": "Run server CUDA verification; no new training or shutdown performed locally"
+}
