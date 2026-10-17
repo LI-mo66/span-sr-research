@@ -1,0 +1,31 @@
+{
+  "checkpoint": "runs/ENGINEERING-CATA-f00afb61e9/epoch00002_u2.pt",
+  "update": 2,
+  "image": "tmp/cata-engineering-8d34b974/DIV2K_valid/LR/a.png",
+  "tab": {
+    "attention_delta_ratio": 0.00026784808142110705,
+    "ffn_delta_ratio": 0.0015893919626250863,
+    "total_delta_ratio": 0.001618332345969975,
+    "center_norm": 3.9990806579589844,
+    "occupied_centers": 15
+  },
+  "variants": {
+    "full": {
+      "output_change_ratio": 0.0,
+      "psnr": 9.82268391498391,
+      "ssim": 0.0055510866210069865
+    },
+    "group_disabled": {
+      "output_change_ratio": 0.00030934467213228345,
+      "psnr": 9.822670745323101,
+      "ssim": 0.0055544298523822686
+    },
+    "center_disabled": {
+      "output_change_ratio": 3.994470171164721e-05,
+      "psnr": 9.8227092944007,
+      "ssim": 0.005544382349424113
+    }
+  },
+  "eval_buffers_unchanged": true,
+  "scope": "same-checkpoint dependence only; not independently trained ablations or proof of PSNR gain"
+}

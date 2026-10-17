@@ -31,6 +31,12 @@ def main():
     torch.manual_seed(cfg['seed'])
     model = build_model(arch,cfg).to(args.device).eval()
     state = torch.load(args.checkpoint,map_location=args.device,weights_only=False)
+    manifest_path = Path(args.checkpoint).resolve().parent / 'manifest.json'
+    manifest = json.loads(manifest_path.read_text(encoding='utf8'))
+    if cfg != manifest['config']:
+        raise ValueError('Diagnostic config differs from checkpoint manifest; use its exact saved config')
+    if state.get('fingerprint') != manifest['fingerprint']:
+        raise ValueError('Checkpoint fingerprint differs from its sibling manifest')
     model.load_state_dict(state['model'],strict=True)
     if not model.content_tab.initted.item():
         raise ValueError('Checkpoint centers have not been initialized by training')
