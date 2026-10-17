@@ -37,7 +37,7 @@ def main():
             paths['validation'][name] = pair
     path_file = fixture / 'paths.json'
     path_file.write_text(json.dumps(paths))
-    cfg = json.loads((HERE / 'configs/C1-mid-lr2e4.json').read_text())
+    cfg = json.loads((HERE / 'configs/C1-tail-lr2e4.json').read_text())
     cfg.update(engineering_only=True, paths_file=str(path_file), effective_batch=2,
                micro_batch=1, hr_patch=32, total_updates=2, record_updates=1,
                screen_epochs=1, image_backend='npy_mmap')

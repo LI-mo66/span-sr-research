@@ -22,7 +22,7 @@ def main():
     args = parser.parse_args()
     torch.set_num_threads(2)
     arch,_ = runtime.components()
-    cfg = json.loads((HERE / 'configs/C1-mid-lr2e4.json').read_text())
+    cfg = json.loads((HERE / 'configs/C1-tail-lr2e4.json').read_text())
     torch.manual_seed(cfg['seed'])
     b0 = build_model(arch,dict(cfg,cata_tab=False)).cuda()
     torch.manual_seed(cfg['seed'])

@@ -1,0 +1,115 @@
+{
+  "status": "PASS",
+  "device": "cuda",
+  "torch": "2.9.1+cu128",
+  "shapes": [
+    [
+      1,
+      3,
+      1,
+      1
+    ],
+    [
+      2,
+      3,
+      3,
+      5
+    ],
+    [
+      1,
+      3,
+      3,
+      43
+    ],
+    [
+      2,
+      3,
+      13,
+      17
+    ],
+    [
+      1,
+      3,
+      64,
+      64
+    ],
+    [
+      1,
+      3,
+      65,
+      71
+    ]
+  ],
+  "extra_parameters": 32812,
+  "deployed_parameters": 531020,
+  "adapter_first_gradient_max": {
+    "norm.weight": 5.0919193306242505e-09,
+    "norm.bias": 7.759112463645579e-09,
+    "mlp.norm.weight": 8.798367368001436e-09,
+    "mlp.norm.bias": 1.0384881399261303e-08,
+    "mlp.fn.fc1.weight": 1.0736719957549212e-07,
+    "mlp.fn.fc1.bias": 5.261003721557245e-08,
+    "mlp.fn.dwconv.depthwise_conv.0.weight": 3.6358120958368545e-09,
+    "mlp.fn.dwconv.depthwise_conv.0.bias": 4.266885156312128e-08,
+    "mlp.fn.fc2.weight": 2.3504597379542247e-07,
+    "mlp.fn.fc2.bias": 8.569890610488073e-07,
+    "irca_attn.to_k.weight": 1.8493023085097704e-11,
+    "irca_attn.to_v.weight": 9.55907175637094e-09,
+    "iasa_attn.to_q.weight": 6.388411466495825e-10,
+    "iasa_attn.to_k.weight": 5.336673325473384e-10,
+    "iasa_attn.to_v.weight": 4.199704761731482e-08,
+    "iasa_attn.proj.weight": 3.342903909242523e-08,
+    "conv1x1.weight": 1.1129862365066856e-08
+  },
+  "adapter_parameters_updated": {
+    "norm.weight": true,
+    "norm.bias": true,
+    "mlp.norm.weight": true,
+    "mlp.norm.bias": true,
+    "mlp.fn.fc1.weight": true,
+    "mlp.fn.fc1.bias": true,
+    "mlp.fn.dwconv.depthwise_conv.0.weight": true,
+    "mlp.fn.dwconv.depthwise_conv.0.bias": true,
+    "mlp.fn.fc2.weight": true,
+    "mlp.fn.fc2.bias": true,
+    "irca_attn.to_k.weight": true,
+    "irca_attn.to_v.weight": true,
+    "iasa_attn.to_q.weight": true,
+    "iasa_attn.to_k.weight": true,
+    "iasa_attn.to_v.weight": true,
+    "iasa_attn.proj.weight": true,
+    "conv1x1.weight": true
+  },
+  "group_attention_output_gradient_min": 4.498053041146477e-09,
+  "center_attention_output_gradient_min": 4.498053041146477e-09,
+  "synthetic_l1": [
+    6.479012966156006,
+    5.972342014312744,
+    5.557777404785156,
+    5.186660289764404
+  ],
+  "diagnostic_example": {
+    "attention_delta_ratio": 0.001963807502761483,
+    "ffn_delta_ratio": 0.008882066234946251,
+    "total_delta_ratio": 0.009116197004914284,
+    "center_norm": 3.9743223190307617,
+    "occupied_centers": 14
+  },
+  "full_network_batch_difference_max": 0.019199728965759277,
+  "baseline_batch_difference_max": 0.019217371940612793,
+  "adapter_batch_fp32_rounding_max": 4.0531158447265625e-06,
+  "checks": [
+    "baseline weights/RNG",
+    "original SPAN routes with Identity",
+    "shape/tiny/odd/non-square",
+    "eval buffers frozen and batch independence",
+    "both attention paths reach final RGB L1",
+    "all new parameter tensors update",
+    "center buffers update in train",
+    "optimizer coverage",
+    "serialized optimizer replay exact",
+    "strict reload",
+    "prefused agreement"
+  ],
+  "evidence": "engineering/mechanism only; no real PSNR measured"
+}

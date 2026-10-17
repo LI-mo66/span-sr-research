@@ -1,4 +1,4 @@
-# ContentTAB-v1工程审查记录
+# ContentTAB工程审查记录（mid原型与tail首选）
 
 2026-10-17，本机RTX4060 Laptop、PyTorch2.9.1+cu128。基点88e7298，只新增research/cata_tab；不改共同训练/指标代码，不启动真实数据实验。
 
@@ -12,16 +12,29 @@
 
 ## 完整SPAN的学习和状态
 
-engineering-cpu.json/engineering-cuda.json：
+工程原始mid检查保留在engineering-mid-cpu.json/engineering-mid-cuda.json；当前首选tail重新检查写入engineering-cpu.json/engineering-cuda.json，position字段区分：
 
 - 所有原主干参数与同seed B0一致，后续CPU/CUDA RNG保持一致。临时用Identity旁路TAB后，原SPAN输出严格一致，证明四路融合/残差未漏接或重复。
 - 1×1、3×5、3×43、13×17、64×64、65×71，batch1/2、train/eval输出形状正确、有限，不原地修改输入。
 - 最终RGB L1反向同时到达组内和中心注意力输出；所有新增参数张量首步有非零有限梯度、四步后真实更新，optimizer无重复遗漏；合成loss下降只属于工程证据。
 - 训练时中心更新，eval严格冻结；将相同特征输入TAB的图片隔离性以FP64验证，避免FP32算子批次形状差异干扰。FP32模块batch与逐图最大差约4.1e-6。
 - 完整网络GPU batch与逐图输出最大差约0.01920，原B0对照约0.01922；CPU双方约3e-5。不能把完整网络宣称为跨batch逐bit一致，也不把这种共同存在的差异归因于中心串图。主评测保持B0的batch1。
-- 序列化第二步模型与optimizer，再恢复两步，完整state_dict与连续四步逐元素一致。严格重载、Conv3XC预合并输出对照通过。实际trainer的缓存/采样/评测与RNG恢复仍需integration.py检查。
+- 序列化第二步模型与optimizer，再恢复两步，完整state_dict与连续四步逐元素一致。严格重载、Conv3XC预合并输出对照通过。mid实际trainer合成集成检查ENGINEERING-CATA-0e7ce28410在677aeb4通过，含缓存/累积/RNG恢复/评测间隔等价；tail另行重测，不混用两种位置的证据。
 
-17个新增参数张量均有真实更新，但IRCA的K投影首步梯度约1.8e-11，小于FFN部分，不能把非零梯度当作充分利用证据。诊断API读取真实SPAB3特征，记录attention/FFN修正范数和中心占用；不自动加大学习率或gate。
+17个新增参数张量均有真实更新。mid原型IRCA的K投影首步梯度约1.8e-11，小于FFN部分，不能把非零梯度当作充分利用证据；这也是追加位置审查的原因之一。诊断API读取真实插入点特征，记录attention/FFN修正范数和中心占用；不自动加大学习率或gate。tail重测的详细梯度见当前JSON。
+
+## 位置选择与信息衰减
+
+工程mid合成checkpoint关闭两条注意力路径时，最终输出相对变化约1e-7，不能把反向非零视为充分利用。进一步以相同随机起点、相同输入/target比较mid与tail，LR64×64、batch2、seed10/20/30结果记录在position-audit.json：
+
+|位置|关闭组内路径的输出相对变化|关闭中心路径的输出相对变化|IRCA K梯度范数|
+|---|---:|---:|---:|
+|mid|约3.1e-7|约2.4e-7|约7.1e-11—1.3e-10|
+|tail|约6.2e-4—6.4e-4|约1.1e-4—1.2e-4|约2.9e-6—5.8e-6|
+
+所以首选改为conv_cat后/upsampler前，让融合后的多层特征直接进入TAB并写入重建，减少后续三块SPAB对新修正的衰减。没有放大gate或额外加LR来人为制造大输出。13×17的较小对照也保留在position-audit-small.json。以上是随机起点信号传递对照，不是三个seed的训练收益，也不能保证tail性能优于mid。
+
+诊断入口diagnose.py已在mid合成checkpoint上检查：eval buffers不改变，分别关闭两路后能读取最终输出变化；量化PSNR未变化亦如实保留，不包装成涨点。
 
 ## 参数与部署成本
 
@@ -29,7 +42,7 @@ engineering-cpu.json/engineering-cuda.json：
 
 首次顺序基准的小图baseline比候选更慢，存在时钟/顺序偏差疑点，保留engineering-resources-initial.json但不据此声明加模块反而更快。重测使用每个输入尺寸2秒交错预热、每轮轮转测试顺序、20次同步计时，5个模型始终共同驻留。
 
-LR180×320、FP32、预合并完整SPAN的探索性结果：
+以下是mid原型的LR180×320、FP32、预合并完整SPAN探索性结果，保留在engineering-resources-mid.json；tail必须重测，不能直接当作tail部署速度：
 
 |路径|中位延迟|peak额外allocated（相对当时常驻）|
 |---|---:|---:|

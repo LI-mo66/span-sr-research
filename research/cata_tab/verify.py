@@ -23,11 +23,12 @@ def main():
     parser = argparse.ArgumentParser()
     parser.add_argument('--device', choices=('cpu', 'cuda'), default='cpu')
     parser.add_argument('--output')
+    parser.add_argument('--config',default=str(HERE / 'configs/C1-tail-lr2e4.json'))
     args = parser.parse_args()
     torch.set_num_threads(2)
     torch.use_deterministic_algorithms(True)
     arch, _ = runtime.components()
-    cfg = json.loads((HERE / 'configs/C1-mid-lr2e4.json').read_text())
+    cfg = json.loads(Path(args.config).read_text())
     torch.manual_seed(cfg['seed'])
     baseline = build_model(arch, dict(cfg, cata_tab=False)).to(args.device)
     cpu_rng, cuda_rng = torch.get_rng_state().clone(), torch.cuda.get_rng_state_all()
@@ -155,6 +156,7 @@ def main():
     assert model.extra_parameters == 32812
     assert sum(p.numel() for p in deployed.parameters()) == 531020
     report = dict(status='PASS',device=args.device,torch=torch.__version__,
+                  position=model.content_position,
                   shapes=[list(s) for s in shapes],extra_parameters=32812,
                   deployed_parameters=531020,adapter_first_gradient_max=gradients,
                   adapter_parameters_updated=updated,

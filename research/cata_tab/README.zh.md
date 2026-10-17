@@ -1,12 +1,14 @@
-# SPAN52-ContentTAB v1：工程原型
+# SPAN52-ContentTAB-tail v1：工程原型
 
 独立分支research/cata-tab，基于88e7298（共同训练源自d280dc5）。只新增research/cata_tab；未改原SPAN、EASA、MoE-FS或共同trainer/数据/指标。没有启动真实训练，工程PASS不能保证PSNR提高或全局最优。
 
 ## 接入和信息路径
 
-`SPAB1→SPAB2→SPAB3→ContentTAB→SPAB4→SPAB5→SPAB6→原四路融合→原上采样`。
+首选：`原六个SPAB→原四路融合/conv_cat→ContentTAB→原上采样`。
 
-ContentTAB保留原TAB的CATA分组、IASA相邻子组交互、IRCA中心交互、融合投影和ConvFFN。内部已经有两次残差，直接`b3=content_tab(b3)`，不再外加b3或额外0.01gate。不叠EASA或其它候选。
+中间接入保留为明确标注的对照配置。原型检查发现其注意力修正传到最终输出很弱；LR64×64、seed10/20/30、相同随机初始权重的配对检查支持融合后位置有更强的输出依赖与梯度，见position-audit.json。它不是三个seed训练精度实验，也不能证明该位置PSNR最优。
+
+ContentTAB保留原TAB的CATA分组、IASA相邻子组交互、IRCA中心交互、融合投影和ConvFFN。内部已经有两次残差，直接`fused=content_tab(fused)`，不再外加fused或额外0.01gate。不叠EASA或其它候选。
 
 参数：dim52、QK52、heads4（每头13）、MLP104、中心16、子组128、中心迭代5、EMA0.999。新增32812参数，部署498208→531020。中心832个浮点元素和bool初始化标志是buffer，不计入可学习参数。
 
@@ -23,9 +25,9 @@ ContentTAB保留原TAB的CATA分组、IASA相邻子组交互、IRCA中心交互�
 |中心注意力|共享Q读取16个中心；训练聚合microbatch，eval使用冻结中心|
 |空间恢复|每图独立唯一索引，逆置换gather回原位置；不是任意reshape|
 |FFN|原空间5×5 depthwise、GELU、线性投影及自身残差|
-|残差输出|传给SPAB4；原浅层/早层/深层/T6四路融合顺序不变|
+|残差输出|传给原上采样卷积/PixelShuffle；原浅层/早层/深层/T6四路融合顺序不变|
 
-中心每个训练forward更新，microbatch16/effective64意味着每次optimizer更新4次中心更新。中心EMA不是权重EMA，不可更改microbatch而宣称同条件。buffers必须严格保存恢复。eval不更新已训练中心；初始未训练eval允许按原码从当前输入计算临时中心，不当作有效预训练推理。
+中心每个训练forward更新，microbatch16/effective64意味着每次optimizer更新4次中心更新。中心EMA不是权重EMA，不可更改microbatch而宣称同条件。buffers必须严格保存恢复。eval不更新已训练中心；初始未训练eval允许按原码从当前输入计算临时中心，不当作有效预训练推理。位置必须在config中显式写mid或tail，拒绝旧的无位置配置，避免换源码后静默改变checkpoint含义。
 
 保留官方反射重复Token的注意力边界语义，没有宣称重复位置被mask。修复了N小于中心数，以及N刚超过子组长度时原码补齐不足的问题：按需重复反射尾部。已测N=1/7/16/127/128/129/130/191/192/255/256/257。不同中心类别可能落在同一个固定子组，不宣传为严格同类屏蔽注意力。
 
@@ -52,7 +54,7 @@ python research/cata_tab/resources.py --output results/cata-resource.json
 
 ## 单候选入口与B0复用
 
-没有自动训练队列，也不会自动启动ATD/MambaIRv2。configs/C1-mid-lr2e4.json为候选模板，正式复用B0前必须用prepare_reuse.py审查实际manifest/环境/有序数据哈希并冻结C1-config.json。它只构造C1，不训练或加载B0权重。
+没有自动训练队列，也不会自动启动ATD/MambaIRv2。configs/C1-tail-lr2e4.json为首选候选模板，C1-mid-lr2e4.json为位置对照。正式复用B0前必须用prepare_reuse.py审查实际manifest/环境/有序数据哈希并冻结C1-config.json。它只构造tail-C1，不训练或加载B0权重。
 
 协议保持seed10、microbatch16/effective64、RGB L1、HR256、LR2e-4及1M更新调度、50k停止上限、每1k评测、Y/crop4/uint8/整图/无自集成。CATA中心是候选的新增状态，不能修改共同训练/评测。主比较选各自50k内DIV2K_valid最佳权重，所有测试共用该权重，另列固定50k末点。目标服务器工程检查和资源准入完成前，不建议直接投入50k训练。
 

@@ -2,6 +2,7 @@
   "status": "PASS",
   "device": "cuda",
   "torch": "2.9.1+cu128",
+  "position": "tail",
   "shapes": [
     [
       1,
@@ -43,23 +44,23 @@
   "extra_parameters": 32812,
   "deployed_parameters": 531020,
   "adapter_first_gradient_max": {
-    "norm.weight": 5.0919193306242505e-09,
-    "norm.bias": 7.759112463645579e-09,
-    "mlp.norm.weight": 8.798367368001436e-09,
-    "mlp.norm.bias": 1.0384881399261303e-08,
-    "mlp.fn.fc1.weight": 1.0736719957549212e-07,
-    "mlp.fn.fc1.bias": 5.261003721557245e-08,
-    "mlp.fn.dwconv.depthwise_conv.0.weight": 3.6358120958368545e-09,
-    "mlp.fn.dwconv.depthwise_conv.0.bias": 4.266885156312128e-08,
-    "mlp.fn.fc2.weight": 2.3504597379542247e-07,
-    "mlp.fn.fc2.bias": 8.569890610488073e-07,
-    "irca_attn.to_k.weight": 1.8493023085097704e-11,
-    "irca_attn.to_v.weight": 9.55907175637094e-09,
-    "iasa_attn.to_q.weight": 6.388411466495825e-10,
-    "iasa_attn.to_k.weight": 5.336673325473384e-10,
-    "iasa_attn.to_v.weight": 4.199704761731482e-08,
-    "iasa_attn.proj.weight": 3.342903909242523e-08,
-    "conv1x1.weight": 1.1129862365066856e-08
+    "norm.weight": 4.166409053141251e-05,
+    "norm.bias": 7.46667938074097e-05,
+    "mlp.norm.weight": 0.0002303083019796759,
+    "mlp.norm.bias": 0.00011661028838716447,
+    "mlp.fn.fc1.weight": 0.001588319893926382,
+    "mlp.fn.fc1.bias": 0.0005249961977824569,
+    "mlp.fn.dwconv.depthwise_conv.0.weight": 8.709745452506468e-05,
+    "mlp.fn.dwconv.depthwise_conv.0.bias": 0.0005905802827328444,
+    "mlp.fn.fc2.weight": 0.0025291582569479942,
+    "mlp.fn.fc2.bias": 0.007377214264124632,
+    "irca_attn.to_k.weight": 5.098244173495914e-07,
+    "irca_attn.to_v.weight": 8.981099381344393e-05,
+    "iasa_attn.to_q.weight": 3.5657823900692165e-05,
+    "iasa_attn.to_k.weight": 1.9762157535296865e-05,
+    "iasa_attn.to_v.weight": 0.0005037092487327754,
+    "iasa_attn.proj.weight": 0.0005669679376296699,
+    "conv1x1.weight": 0.0001526154374005273
   },
   "adapter_parameters_updated": {
     "norm.weight": true,
@@ -80,24 +81,24 @@
     "iasa_attn.proj.weight": true,
     "conv1x1.weight": true
   },
-  "group_attention_output_gradient_min": 4.498053041146477e-09,
-  "center_attention_output_gradient_min": 4.498053041146477e-09,
+  "group_attention_output_gradient_min": 1.094673734769458e-05,
+  "center_attention_output_gradient_min": 1.094673734769458e-05,
   "synthetic_l1": [
-    6.479012966156006,
-    5.972342014312744,
-    5.557777404785156,
-    5.186660289764404
+    6.478758811950684,
+    5.971397399902344,
+    5.5561628341674805,
+    5.184395790100098
   ],
   "diagnostic_example": {
-    "attention_delta_ratio": 0.001963807502761483,
-    "ffn_delta_ratio": 0.008882066234946251,
-    "total_delta_ratio": 0.009116197004914284,
-    "center_norm": 3.9743223190307617,
-    "occupied_centers": 14
+    "attention_delta_ratio": 0.0002673368726391345,
+    "ffn_delta_ratio": 0.001745330635458231,
+    "total_delta_ratio": 0.0017578444676473737,
+    "center_norm": 3.983839750289917,
+    "occupied_centers": 8
   },
-  "full_network_batch_difference_max": 0.019199728965759277,
+  "full_network_batch_difference_max": 0.018413305282592773,
   "baseline_batch_difference_max": 0.019217371940612793,
-  "adapter_batch_fp32_rounding_max": 4.0531158447265625e-06,
+  "adapter_batch_fp32_rounding_max": 7.62939453125e-06,
   "checks": [
     "baseline weights/RNG",
     "original SPAN routes with Identity",

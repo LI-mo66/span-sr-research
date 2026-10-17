@@ -1,4 +1,4 @@
-"""Single content TAB at SPAB3; all original SPAN routes remain intact."""
+"""Single content TAB; original SPAN routes remain intact."""
 import torch
 
 from tab import ContentTAB
@@ -16,12 +16,16 @@ def build_model(arch, cfg):
     if not enabled:
         return arch.SPAN(**cfg['model'])
     settings = cfg.get('cata_settings', {})
-    if set(settings) - {'chunk_groups'}:
+    if set(settings) - {'chunk_groups', 'position'}:
         raise ValueError('Structural settings are fixed for ContentTAB-v1')
+    position = settings.get('position')
+    if position not in ('mid', 'tail'):
+        raise ValueError('Content TAB position must be mid or tail')
 
     class ContentSPAN(arch.SPAN):
         def __init__(self):
             super().__init__(**cfg['model'])
+            self.content_position = position
             with torch.random.fork_rng(devices=list(range(torch.cuda.device_count()))):
                 torch.manual_seed(cfg['seed'] + 30001)
                 self.content_tab = ContentTAB(chunk_groups=settings.get('chunk_groups', 128))
@@ -36,12 +40,15 @@ def build_model(arch, cfg):
             b1, _, _ = self.block_1(feature)
             b2, _, _ = self.block_2(b1)
             b3, _, _ = self.block_3(b2)
-            b3 = self.content_tab(b3)  # TAB already includes its own two residuals
+            if self.content_position == 'mid':
+                b3 = self.content_tab(b3)  # TAB includes its own residuals
             b4, _, _ = self.block_4(b3)
             b5, _, _ = self.block_5(b4)
             b6, b6_first, _ = self.block_6(b5)
             b6 = self.conv_2(b6)
             fused = self.conv_cat(torch.cat([feature, b6, b1, b6_first], 1))
+            if self.content_position == 'tail':
+                fused = self.content_tab(fused)
             return self.upsampler(fused)
 
     return ContentSPAN()

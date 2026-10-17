@@ -113,8 +113,8 @@ def main():
     path_file.write_text(json.dumps(paths, indent=2), encoding='utf8')
     candidate = dict(cfg)
     candidate.pop('moe_fs', None)
-    candidate.update(cata_tab=True, experiment_version='ContentTAB-v1',
-                     cata_settings=dict(chunk_groups=128),
+    candidate.update(cata_tab=True, experiment_version='ContentTAB-tail-v1',
+                     cata_settings=dict(chunk_groups=128, position='tail'),
                      paths_file=str(path_file))
     (out / 'C1-config.json').write_text(json.dumps(candidate, indent=2), encoding='utf8')
     audit = dict(status='PASS', baseline_run=str(baseline), baseline_source=BASE_SOURCE,

@@ -1,0 +1,209 @@
+{
+  "scope": "paired random-start signal transmission only; no PSNR or learned-use claim",
+  "results": [
+    {
+      "seed": 10,
+      "position": "mid",
+      "output_change_ratio": {
+        "group": 9.41986309044296e-06,
+        "center": 4.8334159146179445e-06
+      },
+      "parameter_gradient_norms": {
+        "norm.weight": 5.003571335038259e-09,
+        "norm.bias": 2.1642772907171093e-08,
+        "mlp.norm.weight": 1.2559868700634524e-08,
+        "mlp.norm.bias": 2.55433665330429e-08,
+        "mlp.fn.fc1.weight": 8.788564400674659e-07,
+        "mlp.fn.fc1.bias": 1.6974509264855442e-07,
+        "mlp.fn.dwconv.depthwise_conv.0.weight": 2.3209363320120246e-08,
+        "mlp.fn.dwconv.depthwise_conv.0.bias": 1.6796067825453065e-07,
+        "mlp.fn.fc2.weight": 1.6208161923714215e-06,
+        "mlp.fn.fc2.bias": 2.0296904494898627e-06,
+        "irca_attn.to_k.weight": 1.000250507421363e-10,
+        "irca_attn.to_v.weight": 5.4484321054815155e-08,
+        "iasa_attn.to_q.weight": 3.441878559939937e-09,
+        "iasa_attn.to_k.weight": 2.811884947107046e-09,
+        "iasa_attn.to_v.weight": 2.0834382041812205e-07,
+        "iasa_attn.proj.weight": 2.4674051246620365e-07,
+        "conv1x1.weight": 5.6819160931809165e-08
+      },
+      "tab": {
+        "attention_delta_ratio": 0.0017320174956694245,
+        "ffn_delta_ratio": 0.014956424944102764,
+        "total_delta_ratio": 0.014888026751577854,
+        "center_norm": 4.0,
+        "occupied_centers": 16
+      }
+    },
+    {
+      "seed": 10,
+      "position": "tail",
+      "output_change_ratio": {
+        "group": 0.00031762951402924955,
+        "center": 0.00010693992953747511
+      },
+      "parameter_gradient_norms": {
+        "norm.weight": 5.478451930684969e-05,
+        "norm.bias": 0.0002228416269645095,
+        "mlp.norm.weight": 0.00043741698027588427,
+        "mlp.norm.bias": 0.0002990099019370973,
+        "mlp.fn.fc1.weight": 0.024902725592255592,
+        "mlp.fn.fc1.bias": 0.0023731430992484093,
+        "mlp.fn.dwconv.depthwise_conv.0.weight": 0.0004487377591431141,
+        "mlp.fn.dwconv.depthwise_conv.0.bias": 0.0022972237784415483,
+        "mlp.fn.fc2.weight": 0.03025555983185768,
+        "mlp.fn.fc2.bias": 0.0233627837151289,
+        "irca_attn.to_k.weight": 4.7601665755792055e-06,
+        "irca_attn.to_v.weight": 0.0005421212408691645,
+        "iasa_attn.to_q.weight": 0.00020489397866185755,
+        "iasa_attn.to_k.weight": 0.0001845101360231638,
+        "iasa_attn.to_v.weight": 0.0033667869865894318,
+        "iasa_attn.proj.weight": 0.0034981216304004192,
+        "conv1x1.weight": 0.0008490594336763024
+      },
+      "tab": {
+        "attention_delta_ratio": 0.00020938566012773663,
+        "ffn_delta_ratio": 0.0014121754793450236,
+        "total_delta_ratio": 0.0014204718172550201,
+        "center_norm": 3.999999761581421,
+        "occupied_centers": 16
+      }
+    },
+    {
+      "seed": 20,
+      "position": "mid",
+      "output_change_ratio": {
+        "group": 2.676383473954047e-06,
+        "center": 7.408274541376159e-06
+      },
+      "parameter_gradient_norms": {
+        "norm.weight": 5.558050464316011e-09,
+        "norm.bias": 2.4729240877263692e-08,
+        "mlp.norm.weight": 1.8321307138080556e-08,
+        "mlp.norm.bias": 3.764874634271109e-08,
+        "mlp.fn.fc1.weight": 1.0662354270607466e-06,
+        "mlp.fn.fc1.bias": 2.8717937539113336e-07,
+        "mlp.fn.dwconv.depthwise_conv.0.weight": 3.169066786767871e-08,
+        "mlp.fn.dwconv.depthwise_conv.0.bias": 2.9452110084093874e-07,
+        "mlp.fn.fc2.weight": 2.080802460113773e-06,
+        "mlp.fn.fc2.bias": 2.8034914976160508e-06,
+        "irca_attn.to_k.weight": 8.299017029145261e-11,
+        "irca_attn.to_v.weight": 7.586227468436846e-08,
+        "iasa_attn.to_q.weight": 3.3323077630598164e-09,
+        "iasa_attn.to_k.weight": 2.9097662057608886e-09,
+        "iasa_attn.to_v.weight": 3.144992604120489e-07,
+        "iasa_attn.proj.weight": 3.607356404700113e-07,
+        "conv1x1.weight": 8.660308736807565e-08
+      },
+      "tab": {
+        "attention_delta_ratio": 0.0017727372469380498,
+        "ffn_delta_ratio": 0.015004620887339115,
+        "total_delta_ratio": 0.015030989423394203,
+        "center_norm": 4.0,
+        "occupied_centers": 16
+      }
+    },
+    {
+      "seed": 20,
+      "position": "tail",
+      "output_change_ratio": {
+        "group": 0.000275956786936149,
+        "center": 0.00011390510917408392
+      },
+      "parameter_gradient_norms": {
+        "norm.weight": 7.937878399388865e-05,
+        "norm.bias": 0.0003333539643790573,
+        "mlp.norm.weight": 0.0004998418153263628,
+        "mlp.norm.bias": 0.00037417671410366893,
+        "mlp.fn.fc1.weight": 0.024898972362279892,
+        "mlp.fn.fc1.bias": 0.002447493141517043,
+        "mlp.fn.dwconv.depthwise_conv.0.weight": 0.00041899073403328657,
+        "mlp.fn.dwconv.depthwise_conv.0.bias": 0.002412558998912573,
+        "mlp.fn.fc2.weight": 0.02934015356004238,
+        "mlp.fn.fc2.bias": 0.02430436573922634,
+        "irca_attn.to_k.weight": 5.067488018539734e-06,
+        "irca_attn.to_v.weight": 0.00061713409377262,
+        "iasa_attn.to_q.weight": 0.0002038124221144244,
+        "iasa_attn.to_k.weight": 0.00021305597329046577,
+        "iasa_attn.to_v.weight": 0.0037129970733076334,
+        "iasa_attn.proj.weight": 0.0036165236961096525,
+        "conv1x1.weight": 0.0007635409128852189
+      },
+      "tab": {
+        "attention_delta_ratio": 0.0001670969504630193,
+        "ffn_delta_ratio": 0.0012788238236680627,
+        "total_delta_ratio": 0.0012974420096725225,
+        "center_norm": 3.999999761581421,
+        "occupied_centers": 16
+      }
+    },
+    {
+      "seed": 30,
+      "position": "mid",
+      "output_change_ratio": {
+        "group": 5.415479336079443e-06,
+        "center": 5.05032130604377e-06
+      },
+      "parameter_gradient_norms": {
+        "norm.weight": 4.110586981909137e-09,
+        "norm.bias": 2.28689476244881e-08,
+        "mlp.norm.weight": 1.721981846003473e-08,
+        "mlp.norm.bias": 2.1649068315809927e-08,
+        "mlp.fn.fc1.weight": 9.84595772024477e-07,
+        "mlp.fn.fc1.bias": 1.7280316910728288e-07,
+        "mlp.fn.dwconv.depthwise_conv.0.weight": 2.91046688971619e-08,
+        "mlp.fn.dwconv.depthwise_conv.0.bias": 1.7453886869134294e-07,
+        "mlp.fn.fc2.weight": 1.3215899343776982e-06,
+        "mlp.fn.fc2.bias": 1.5381757521026884e-06,
+        "irca_attn.to_k.weight": 7.591512835025682e-11,
+        "irca_attn.to_v.weight": 5.838995065232666e-08,
+        "iasa_attn.to_q.weight": 2.544606525489712e-09,
+        "iasa_attn.to_k.weight": 2.286580702559604e-09,
+        "iasa_attn.to_v.weight": 2.4292035050166305e-07,
+        "iasa_attn.proj.weight": 2.517603263640922e-07,
+        "conv1x1.weight": 6.969992227823241e-08
+      },
+      "tab": {
+        "attention_delta_ratio": 0.0020956755615770817,
+        "ffn_delta_ratio": 0.013687695376574993,
+        "total_delta_ratio": 0.013784430921077728,
+        "center_norm": 4.0,
+        "occupied_centers": 16
+      }
+    },
+    {
+      "seed": 30,
+      "position": "tail",
+      "output_change_ratio": {
+        "group": 0.0003184129891451448,
+        "center": 0.00011095601803390309
+      },
+      "parameter_gradient_norms": {
+        "norm.weight": 7.990638550836593e-05,
+        "norm.bias": 0.0002727785031311214,
+        "mlp.norm.weight": 0.00042262632632628083,
+        "mlp.norm.bias": 0.00030901271384209394,
+        "mlp.fn.fc1.weight": 0.021613935008645058,
+        "mlp.fn.fc1.bias": 0.0022217934019863605,
+        "mlp.fn.dwconv.depthwise_conv.0.weight": 0.0004388064262457192,
+        "mlp.fn.dwconv.depthwise_conv.0.bias": 0.0019942098297178745,
+        "mlp.fn.fc2.weight": 0.02730068936944008,
+        "mlp.fn.fc2.bias": 0.01983259618282318,
+        "irca_attn.to_k.weight": 3.139552063657902e-06,
+        "irca_attn.to_v.weight": 0.0005429870798252523,
+        "iasa_attn.to_q.weight": 0.00019057869212701917,
+        "iasa_attn.to_k.weight": 0.00016639135719742626,
+        "iasa_attn.to_v.weight": 0.0034859594888985157,
+        "iasa_attn.proj.weight": 0.0033358207438141108,
+        "conv1x1.weight": 0.0007955564651638269
+      },
+      "tab": {
+        "attention_delta_ratio": 0.0002102385915350169,
+        "ffn_delta_ratio": 0.0013684205478057265,
+        "total_delta_ratio": 0.0013739416608586907,
+        "center_norm": 4.0,
+        "occupied_centers": 16
+      }
+    }
+  ]
+}

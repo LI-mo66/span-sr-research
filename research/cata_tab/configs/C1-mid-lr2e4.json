@@ -43,6 +43,7 @@
   "training_protocol": "multistep-lr2e4-v1",
   "cata_tab": true,
   "cata_settings": {
+    "position": "mid",
     "chunk_groups": 128
   }
 }

@@ -17,8 +17,10 @@ from model import build_model
 def validate_config(cfg):
     if cfg.get('cata_tab') is not True or cfg.get('moe_fs') or cfg.get('easa') or cfg.get('variants'):
         raise ValueError('This entry permits only the ContentTAB candidate')
-    if set(cfg.get('cata_settings', {})) - {'chunk_groups'}:
+    if set(cfg.get('cata_settings', {})) - {'chunk_groups', 'position'}:
         raise ValueError('ContentTAB-v1 structural settings are fixed')
+    if cfg.get('cata_settings', {}).get('position') not in ('mid', 'tail'):
+        raise ValueError('Invalid Content TAB position')
     chunk = cfg.get('cata_settings', {}).get('chunk_groups', 128)
     if type(chunk) is not int or chunk < 1:
         raise ValueError('chunk_groups must be a positive integer')
