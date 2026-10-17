@@ -1,0 +1,47 @@
+{
+  "date": "2026-10-17",
+  "status": "PASS",
+  "environment": {
+    "python": "E:/anaconda/envs/dl/python.exe",
+    "torch": "2.9.1+cu128",
+    "timm": "1.0.19",
+    "device": "NVIDIA GeForce RTX 4060 Laptop GPU"
+  },
+  "teacher": {
+    "name": "SwinIR-M-DF2K-classical-x4",
+    "source_commit": "6545850fbf8df298df73d81f3e8cba638787c8bd",
+    "checkpoint_sha256": "4e78e33f22c1aa8a773db0cf4a7381bae97c2362c717f155439ebc690cbd9215",
+    "parameters": 11900199
+  },
+  "checks": {
+    "real_official_checkpoint_strict_load": true,
+    "teacher_frozen_and_state_unchanged": true,
+    "teacher_rng_isolation": true,
+    "odd_rectangular_and_batch2": true,
+    "chunk_equivalence_full_fp32": true,
+    "kd_gradient_and_student_update": true,
+    "exact_serialized_continuation": true,
+    "deployed_student_parameters": 498208,
+    "deploy_output_equivalence": true,
+    "real_entry_accumulation_cache_resume": true,
+    "real_entry_run_id": "ENGINEERING-KD-f006ce7de5",
+    "continuous_vs_resumed_weights_and_step_logs_equal": true,
+    "interrupted_json_history_repaired": true,
+    "b0_reuse_equal_basename_multiset": true,
+    "altered_dataset_rejected": true,
+    "locked_seed_lr_batch_rejected": true,
+    "tied_checkpoint_earliest_selection": true,
+    "backup_sha_and_png_svg": true,
+    "bash_syntax": true,
+    "committed_vendor_hash": true,
+    "existing_architecture_trainer_sampler_metrics_untouched": true
+  },
+  "limitations": [
+    "Synthetic inputs only; no real-data PSNR result",
+    "Local torch/GPU differs from server: server launcher repeats CUDA verification",
+    "Linux flock/nohup lifecycle not executed on local Windows",
+    "TF32 teacher chunk comparisons are batch-shape dependent; mathematical equivalence checked with full FP32",
+    "Logged FP32 total compared to recomputed FP64 scalar with standard rounding tolerance"
+  ],
+  "production_shape_check": "PASS on local CUDA: teacher chunk1 and student micro16, LR64/HR256, finite backward; server repeats"
+}
