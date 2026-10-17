@@ -1,0 +1,124 @@
+{
+  "torch": "2.9.1+cu128",
+  "gpu": "NVIDIA GeForce RTX 4060 Laptop GPU",
+  "precision": "FP32",
+  "warmup": "2 seconds interleaved per input size",
+  "repeats": 20,
+  "measurement_order": "rotate across all models every repeat",
+  "all_five_models_resident": true,
+  "results": [
+    {
+      "name": "B0",
+      "lr_hw": [
+        64,
+        64
+      ],
+      "deployed_parameters": 498208,
+      "median_ms": 10.756850002508145,
+      "peak_extra_allocated_bytes": 17089024,
+      "peak_reserved_bytes": 104857600
+    },
+    {
+      "name": "C1_chunked4D",
+      "lr_hw": [
+        64,
+        64
+      ],
+      "deployed_parameters": 531020,
+      "median_ms": 20.03465000052529,
+      "peak_extra_allocated_bytes": 47312384,
+      "peak_reserved_bytes": 104857600
+    },
+    {
+      "name": "C1_official5D",
+      "lr_hw": [
+        64,
+        64
+      ],
+      "deployed_parameters": 531020,
+      "median_ms": 20.17245000024559,
+      "peak_extra_allocated_bytes": 49311232,
+      "peak_reserved_bytes": 104857600
+    },
+    {
+      "name": "C1_chunk128",
+      "lr_hw": [
+        64,
+        64
+      ],
+      "deployed_parameters": 531020,
+      "median_ms": 19.559650001610862,
+      "peak_extra_allocated_bytes": 47312384,
+      "peak_reserved_bytes": 104857600
+    },
+    {
+      "name": "C1_chunk512",
+      "lr_hw": [
+        64,
+        64
+      ],
+      "deployed_parameters": 531020,
+      "median_ms": 19.54355000088981,
+      "peak_extra_allocated_bytes": 47312384,
+      "peak_reserved_bytes": 104857600
+    },
+    {
+      "name": "B0",
+      "lr_hw": [
+        180,
+        320
+      ],
+      "deployed_parameters": 498208,
+      "median_ms": 12.448049999875366,
+      "peak_extra_allocated_bytes": 249520640,
+      "peak_reserved_bytes": 901775360
+    },
+    {
+      "name": "C1_chunked4D",
+      "lr_hw": [
+        180,
+        320
+      ],
+      "deployed_parameters": 531020,
+      "median_ms": 54.30999999953201,
+      "peak_extra_allocated_bytes": 199514112,
+      "peak_reserved_bytes": 901775360
+    },
+    {
+      "name": "C1_official5D",
+      "lr_hw": [
+        180,
+        320
+      ],
+      "deployed_parameters": 531020,
+      "median_ms": 29.830350000338512,
+      "peak_extra_allocated_bytes": 702383616,
+      "peak_reserved_bytes": 901775360
+    },
+    {
+      "name": "C1_chunk128",
+      "lr_hw": [
+        180,
+        320
+      ],
+      "deployed_parameters": 531020,
+      "median_ms": 30.73855000002368,
+      "peak_extra_allocated_bytes": 296204800,
+      "peak_reserved_bytes": 901775360
+    },
+    {
+      "name": "C1_chunk512",
+      "lr_hw": [
+        180,
+        320
+      ],
+      "deployed_parameters": 531020,
+      "median_ms": 30.43295000134094,
+      "peak_extra_allocated_bytes": 673070592,
+      "peak_reserved_bytes": 901775360
+    }
+  ],
+  "cudnn_allow_tf32": true,
+  "matmul_allow_tf32": false,
+  "evidence": "random weights, full prefused SPAN, not PSNR/4090 results"
+}

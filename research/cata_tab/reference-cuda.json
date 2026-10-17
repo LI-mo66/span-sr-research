@@ -1,0 +1,82 @@
+{
+  "device": "cuda",
+  "torch": "2.9.1+cu128",
+  "checks": [
+    {
+      "hw": [
+        13,
+        17
+      ],
+      "training": true,
+      "status": "PASS",
+      "output_max_error": 1.0728836059570312e-06
+    },
+    {
+      "hw": [
+        13,
+        17
+      ],
+      "training": false,
+      "status": "PASS",
+      "output_max_error": 1.0728836059570312e-06
+    },
+    {
+      "hw": [
+        16,
+        16
+      ],
+      "training": true,
+      "status": "PASS",
+      "output_max_error": 2.384185791015625e-07
+    },
+    {
+      "hw": [
+        16,
+        16
+      ],
+      "training": false,
+      "status": "PASS",
+      "output_max_error": 2.384185791015625e-07
+    },
+    {
+      "hw": [
+        64,
+        64
+      ],
+      "training": true,
+      "status": "PASS",
+      "output_max_error": 2.384185791015625e-07
+    },
+    {
+      "hw": [
+        64,
+        64
+      ],
+      "training": false,
+      "status": "PASS",
+      "output_max_error": 2.384185791015625e-07
+    }
+  ],
+  "status": "PASS",
+  "edge_tokens": [
+    1,
+    7,
+    16,
+    127,
+    128,
+    129,
+    130,
+    191,
+    192,
+    255,
+    256,
+    257
+  ],
+  "remote_value_derivative": 0.25,
+  "content_grouping_far_pair": [
+    0,
+    7
+  ],
+  "parameters": 32812,
+  "scope": "mechanism/implementation evidence only, not PSNR"
+}

@@ -1,0 +1,79 @@
+{
+  "torch": "2.9.1+cu128",
+  "gpu": "NVIDIA GeForce RTX 4060 Laptop GPU",
+  "precision": "FP32",
+  "warmup": 5,
+  "repeats": 20,
+  "all_three_models_resident": true,
+  "results": [
+    {
+      "name": "B0",
+      "lr_hw": [
+        64,
+        64
+      ],
+      "deployed_parameters": 498208,
+      "median_ms": 10.037449999799719,
+      "peak_extra_allocated_bytes": 17089024,
+      "peak_reserved_bytes": 104857600
+    },
+    {
+      "name": "C1_chunked4D",
+      "lr_hw": [
+        64,
+        64
+      ],
+      "deployed_parameters": 531020,
+      "median_ms": 6.855600000562845,
+      "peak_extra_allocated_bytes": 47312384,
+      "peak_reserved_bytes": 104857600
+    },
+    {
+      "name": "C1_official5D",
+      "lr_hw": [
+        64,
+        64
+      ],
+      "deployed_parameters": 531020,
+      "median_ms": 6.5940000022237655,
+      "peak_extra_allocated_bytes": 49311232,
+      "peak_reserved_bytes": 104857600
+    },
+    {
+      "name": "B0",
+      "lr_hw": [
+        180,
+        320
+      ],
+      "deployed_parameters": 498208,
+      "median_ms": 12.00539999990724,
+      "peak_extra_allocated_bytes": 249520640,
+      "peak_reserved_bytes": 341835776
+    },
+    {
+      "name": "C1_chunked4D",
+      "lr_hw": [
+        180,
+        320
+      ],
+      "deployed_parameters": 531020,
+      "median_ms": 50.5049000003055,
+      "peak_extra_allocated_bytes": 199514112,
+      "peak_reserved_bytes": 367001600
+    },
+    {
+      "name": "C1_official5D",
+      "lr_hw": [
+        180,
+        320
+      ],
+      "deployed_parameters": 531020,
+      "median_ms": 31.416099998750724,
+      "peak_extra_allocated_bytes": 702383616,
+      "peak_reserved_bytes": 901775360
+    }
+  ],
+  "cudnn_allow_tf32": true,
+  "matmul_allow_tf32": false,
+  "evidence": "random weights, full prefused SPAN, not PSNR/4090 results"
+}
