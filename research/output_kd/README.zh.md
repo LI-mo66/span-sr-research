@@ -39,3 +39,7 @@ trainer.py 为 research/moe_fs/trainer.py 独立副本，仅加入配置校验�
 ## 已完成的工程检查
 
 本机PyTorch2.9.1+cu128／RTX4060Laptop／timm1.0.19：官方权重严格加载、冻结与RNG隔离、奇数矩形batch、完整FP32下教师分批一致、蒸馏梯度和学生更新、序列化精确继续、498208参数部署及输出一致、正式micro16/HR256有限反向均通过。真实entry合成集成run `ENGINEERING-KD-f006ce7de5` 验证连续两步与保存恢复后第二步权重/逐步loss一致、评测频率不扰动学习、损坏日志恢复。B0哈希复用、同名多源图片、错误配置拒绝、同分最早选择、PNG/SVG及备份SHA验证通过；bash语法检查通过。详见engineering-2026-10-17.json。未在本机执行Linux flock/nohup生命周期，未运行真实数据训练。
+
+### 服务器预检查兼容性修正
+
+服务器PyTorch2.2.2的weights-only反序列化器不支持MultiStepLR状态中的collections.Counter，首次启动因此在verify内存快照检查阶段退出，尚未开始真实训练。verify改用weights_only=False读取本进程刚创建的BytesIO完整训练状态；官方外部教师文件仍使用weights_only=True和SHA256校验。正式trainer/server/integration的本地训练状态原本已显式weights_only=False，不需要修改。该修正不改变模型、损失、优化器、数据或评测协议；服务器修正后检查结果待用户回传。

@@ -73,7 +73,11 @@ def main():
     assert all(torch.equal(v, teacher.state_dict()[k]) for k, v in teacher_state.items())
     stream = io.BytesIO()
     torch.save(dict(model=student.state_dict(), optimizer=opt.state_dict(), scheduler=sched.state_dict()), stream)
-    stream.seek(0); state = torch.load(stream, weights_only=True)
+    # This BytesIO was created immediately above in this process, not supplied
+    # externally. Full training state includes MultiStepLR's collections.Counter,
+    # which torch 2.2.2's weights-only unpickler cannot deserialize. Match the
+    # existing trusted local training-checkpoint loader, not the teacher loader.
+    stream.seek(0); state = torch.load(stream, weights_only=False)
     clone = arch.SPAN(**cfg['model']).to(args.device)
     clone.load_state_dict(state['model'], strict=True)
     opt2 = torch.optim.Adam((p for p in clone.parameters() if p.requires_grad), lr=2e-4)

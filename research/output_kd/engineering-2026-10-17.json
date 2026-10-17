@@ -43,5 +43,12 @@
     "TF32 teacher chunk comparisons are batch-shape dependent; mathematical equivalence checked with full FP32",
     "Logged FP32 total compared to recomputed FP64 scalar with standard rounding tolerance"
   ],
-  "production_shape_check": "PASS on local CUDA: teacher chunk1 and student micro16, LR64/HR256, finite backward; server repeats"
+  "production_shape_check": "PASS on local CUDA: teacher chunk1 and student micro16, LR64/HR256, finite backward; server repeats",
+  "server_preflight_compatibility_fix": {
+    "reported_torch": "2.2.2+cu121",
+    "failure": "verify.py weights_only=True rejected MultiStepLR collections.Counter before training started",
+    "fix": "Use weights_only=False solely for the self-created in-memory full training snapshot; official teacher retains weights_only=True",
+    "training_and_baseline_protocol_changed": false,
+    "server_recheck": "pending user rerun"
+  }
 }
