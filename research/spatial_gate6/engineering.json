@@ -1,0 +1,55 @@
+{
+  "date": "2026-10-17",
+  "code_commit": "5b609c3",
+  "environment": {
+    "python": "E:/anaconda/envs/dl/python.exe",
+    "torch": "2.9.1+cu128",
+    "gpu": "NVIDIA GeForce RTX 4060 Laptop GPU"
+  },
+  "cpu": {
+    "status": "PASS",
+    "updates": 20,
+    "first_loss": 5.941995143890381,
+    "last_loss": 1.6258257627487183
+  },
+  "cuda": {
+    "status": "PASS",
+    "updates": 20,
+    "first_loss": 5.9575910568237305,
+    "last_loss": 1.6573914289474487
+  },
+  "integration": {
+    "status": "PASS",
+    "run": "ENGINEERING-SG6-44863cbbcd",
+    "updates": 2,
+    "checks": [
+      "real entry accumulation/cache/evaluation",
+      "resume vs continuous exact model tensors",
+      "scheduler equality",
+      "per-step loss equality",
+      "interrupted JSON recovery",
+      "50000 stop-cap accepted"
+    ]
+  },
+  "backup": {
+    "status": "PASS",
+    "fixture": "tmp/sg6-backup-52tsw7tx",
+    "checks": [
+      "validation-best checkpoint selection",
+      "PNG/SVG curve generation",
+      "copied file SHA256",
+      "BACKUP_COMPLETE"
+    ]
+  },
+  "bash_syntax": "PASS bash -n",
+  "unchanged": [
+    "basicsr",
+    "research/gated_bypass",
+    "research/linear_gate",
+    "research/moe_fs"
+  ],
+  "deployed_parameters": 535772,
+  "extra_over_GB": 19656,
+  "shutdown_enabled": false,
+  "scope": "Synthetic engineering only; server launcher separately verifies CUDA on original RTX4090 environment; no real-data PSNR or long-run stability evidence."
+}
