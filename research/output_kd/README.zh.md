@@ -35,3 +35,7 @@ trainer.py 为 research/moe_fs/trainer.py 独立副本，仅加入配置校验�
 `bash research/output_kd/launch.sh` 自动下载并校验教师、CUDA工程检查（含正式micro16/HR256形状）、校验B0并只排新候选。可通过前三个参数指定group/data/B0备份，TEACHER_DIR/BACKUP_ROOT/PYTHON_BIN指定持久路径和Python。默认代码work、data=/home/featurize/datasets、备份work，不使用高速盘永久保存教师。
 
 本地验证命令：`python research/output_kd/verify.py --device cuda --teacher-checkpoint <官方权重>`；真实入口合成集成检查：`python research/output_kd/integration.py --teacher-checkpoint <官方权重>`。合成检查绝非PSNR证据，本机torch与服务器不同，启动时仍强制服务器CUDA验证。
+
+## 已完成的工程检查
+
+本机PyTorch2.9.1+cu128／RTX4060Laptop／timm1.0.19：官方权重严格加载、冻结与RNG隔离、奇数矩形batch、完整FP32下教师分批一致、蒸馏梯度和学生更新、序列化精确继续、498208参数部署及输出一致、正式micro16/HR256有限反向均通过。真实entry合成集成run `ENGINEERING-KD-f006ce7de5` 验证连续两步与保存恢复后第二步权重/逐步loss一致、评测频率不扰动学习、损坏日志恢复。B0哈希复用、同名多源图片、错误配置拒绝、同分最早选择、PNG/SVG及备份SHA验证通过；bash语法检查通过。详见engineering-2026-10-17.json。未在本机执行Linux flock/nohup生命周期，未运行真实数据训练。
