@@ -56,6 +56,10 @@
 
 本机Flash不可用。4D布局让目标环境能够尝试支持的后端，但不强制cast/AMP，不保证目标torch2.2.2支持Flash或相同确定性能力。未给完整全算子FLOPs。推理分块限制临时score工作区，训练反向可能保留各块，训练显存仍需目标GPU实测。
 
+tail版本同条件重测（engineering-resources.json）：B0约12.27ms，官方TAB约30.58ms，128分块约30.83ms；后两者peak额外allocated分别763545088与358543872 bytes。位置迁移没有消除注意力的实际延迟代价。
+
+tail首次集成ENGINEERING-CATA-c6fd4dd0f8被共同trainer的dirty检查拒绝，原因是资源基准刚写回跟踪的JSON报告尚未提交；没有开始训练。失败fixture保留在tmp/cata-engineering-10bb2a65。冻结报告后必须顺序重跑集成，不修改/绕过生产源码保护。
+
 ## 判定与后续
 
 结构/梯度准入已通过，本机速度代价仍大；没有真实PSNR证据，不能承诺必涨。下一步应完成共享trainer集成及真实checkpoint诊断入口检查，再在目标服务器核验后端/显存与B0协议；资源可接受后才考虑单组短筛。不同位置和融合不自动扩展。
