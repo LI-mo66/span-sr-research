@@ -28,3 +28,6 @@
 
 
 2026-10-16：PB无门控对照完成50k，最佳48k验证30.223241852，相对A+0.033493944，低于GB0.011318379dB；PB对A六集PSNR/SSIM正增益，PB/GB互有胜负，公共五集所选权重SSIM均PB更高。保留GB为原验证规则主结果，保留PB为有效简化对照，不宣称门控普遍涨分。详见results/FEAT-LG6-PB-50K-01。
+
+
+2026-10-17：用户批准LG6-SiLU-MS非线性多尺度旁路，新分支research/lg6-silu-multiscale-bypass；部署517380，比GB多1264。CPU/CUDA工程、分阶段梯度启动、真实入口断点恢复、备份绘图与Bash语法检查通过；没有真实PSNR。主要比较GB，补充PB。用户最新要求：只nohup，不自动关机；新队列没有释放功能。详见research/multiscale_bypass/README.zh.md。

@@ -1,0 +1,45 @@
+{
+  "date": "2026-10-17",
+  "implementation_commit": "b89fcd1",
+  "scope": "Synthetic engineering only; no real-data PSNR or long-run stability claim",
+  "environment": {
+    "python": "3.10.20 | packaged by Anaconda, Inc. | (main, Mar 11 2026, 17:42:35) [MSC v.1942 64 bit (AMD64)]",
+    "torch": "2.9.1+cu128",
+    "cuda_runtime": "12.8",
+    "gpu": "NVIDIA GeForce RTX 4060 Laptop GPU"
+  },
+  "checks": {
+    "cpu20steps": "PASS",
+    "cuda20steps": "PASS",
+    "shared_A_initial_weights_and_rng": "PASS",
+    "initial_exact_A_identity_train_eval": "PASS",
+    "rectangular_odd_batch1_2": "PASS",
+    "RGB_phase_oracle": "PASS",
+    "projection_first_step_and_stem_DW3_DW5_gate_later_learning": "PASS",
+    "optimizer_coverage_finite_gradients_updates": "PASS",
+    "strict_reload_next_step_equality": "PASS",
+    "deployment_agreement": "PASS",
+    "deployed_parameters": 517380,
+    "extra_vs_GB": 1264,
+    "extra_vs_B0": 19172,
+    "entry_integration": "PASS",
+    "entry_fixture": "ENGINEERING-MS-112cf40fbe",
+    "entry_checks": [
+      "microbatch accumulation",
+      "npy cache",
+      "optimizer/scheduler/RNG resume vs continuous equality",
+      "JSON recovery",
+      "evaluation cadence invariance",
+      "50000 stop-cap acceptance"
+    ],
+    "backup_peak_selection_SHA256_overview": "PASS",
+    "bash_syntax": "PASS using Git Bash -n outside sandbox after MSYS sandbox named-object failure",
+    "no_shutdown_audit": "server has no featurize invocation or auto-release flag; launcher never invokes shutdown"
+  },
+  "source_audit": "basicsr, public trainer, original A and GB, image_io and parallel_loader unchanged vs d89bc07",
+  "limits": [
+    "Server Linux queue not run locally",
+    "Execute server CUDA verification on torch2.2.2 before real training",
+    "No latency/memory benchmark yet"
+  ]
+}
