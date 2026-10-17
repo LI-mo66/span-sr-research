@@ -22,6 +22,9 @@ def sha256(path):
 
 
 def architecture():
+    import timm
+    if timm.__version__ != '1.0.19':
+        raise ValueError('Teacher requires pinned timm==1.0.19')
     path = HERE / 'vendor/network_swinir.py'
     if sha256(path) != SOURCE_SHA256:
         raise ValueError('Pinned teacher source hash mismatch')

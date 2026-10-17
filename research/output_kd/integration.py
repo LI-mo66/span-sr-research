@@ -85,7 +85,10 @@ def main():
     assert manifest['extra_deployed_parameters'] == 0
     assert not any('teacher' in key for key in resumed['model'])
     assert manifest['teacher']['frozen']
-    assert all(abs(row['total_loss']-(row['train_l1']+.1*row['distill_l1'])) < 1e-7 for row in step_rows)
+    import math
+    # The GPU total is rounded in FP32 before logging; Python recomputes in FP64.
+    assert all(math.isclose(row['total_loss'],row['train_l1']+.1*row['distill_l1'],
+                            rel_tol=1e-6,abs_tol=1e-6) for row in step_rows)
     print('PASS synthetic accumulation/cache/checkpoint/resume and evaluation-cadence equality:', run_id)
     print('No real-data accuracy evidence. Fixture artifacts retained under tmp/ and runs/.')
 
