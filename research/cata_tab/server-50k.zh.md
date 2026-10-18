@@ -7,6 +7,7 @@
 在原Featurize服务器执行。独立worktree，不切换原checkout或其它分支。目录或实验组已存在时会拒绝覆盖，请先检查原任务状态，不重复启动。
 
 ```bash
+(
 set -euo pipefail
 cd /home/featurize/work/span-x4-research/code/span-sr-research
 git fetch origin research/cata-tab
@@ -19,7 +20,12 @@ export AUTO_RELEASE=1
 export BACKUP_ROOT=/home/featurize/work/span-x4-research/records
 bash research/cata_tab/launch_reuse.sh FEAT-CATA-TAIL-LR2E4-50K-01 \
   /home/featurize/work/span-x4-research/records/FEAT-MOEFS-G4-LR2E4-20K-01-1791983354063378494/runs/FEAT-MOEFS-G4-LR2E4-20K-01-B0-s10
+)
+launch_rc=$?
+printf '启动流程退出码：%s\n' "$launch_rc"
 ```
+
+括号将严格错误处理限制在子shell内，避免失败时退出交互终端。如果此前已经在当前交互shell执行过set -euo pipefail，先运行`set +e; set +u; set +o pipefail`恢复，再执行命令。已有worktree时不要重复执行首次创建命令，应先检查日志、进程与run状态，判断首次启动停在哪一步。
 
 启动器在前台审计配置、版本、有序数据哈希，冻结C1-config.json；用一次性候选检查microbatch16×4反向及最大评测LR图整图推理，再运行目标CUDA工程检查与共同数据预检。一次性权重丢弃，正式训练重新seed10从零开始。此过程可能较慢；出现PID和nohup.log路径后，才表示nohup训练已启动，可以断开终端。启动前检查GPU无其它占用，本流程不停止其它任务，也不安装或升级环境。
 
