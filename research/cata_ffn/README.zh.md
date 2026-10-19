@@ -16,4 +16,6 @@
 
 本地检查：verify.py核保留FFN初值/原SPAN权重/后续RNG、Identity回归、奇数/小尺寸、真实梯度更新、优化器覆盖、严格重载和恢复、预合并；check_reuse.py核停止cap不压缩调度、路径顺序、最佳选择及备份损坏拒绝；integration.py走实际trainer合成两步及恢复。结果属于工程证据，不属于真实精度提升。
 
+CPU/CUDA检查均PASS，详见engineering-cpu.json/engineering-cuda.json；四项复用/备份检查及Bash语法检查通过。实际trainer集成ENGINEERING-FFN-debca611bb在cac1ab6通过：合成缓存/累积/两步训练/损坏日志恢复、连续与断点模型状态及loss记录、不同评测间隔一致性均通过。本地第一次检查输出到尚未创建的tmp目录导致写报告失败，核心断言已执行；已修复输出父目录创建并完整重测通过。目标4090环境、真实数据和PSNR仍以服务器为准。
+
 ATD、MambaIRv2仍未测试；本轮仅该对照，不自动扩展实验。
