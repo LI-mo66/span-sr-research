@@ -1,0 +1,26 @@
+{
+  "status": "PASS",
+  "device": "cuda",
+  "extra_parameters": 21813,
+  "deployed_parameters": 520021,
+  "adapter_initialization_exact": true,
+  "baseline_initialization_and_rng_exact": true,
+  "all_adapter_tensors_updated": true,
+  "resume_exact": true,
+  "synthetic_loss": [
+    6.4771223068237305,
+    5.970617771148682,
+    5.553841590881348,
+    5.181990623474121
+  ],
+  "branch_output_gradient_min": {
+    "tdca": 0.00013360958837438375,
+    "acmsa": 0.00013360958837438375
+  },
+  "branch_bypass_output_change_ratio": {
+    "tdca": 0.0038304978515952826,
+    "acmsa": 0.0006050232332199812
+  },
+  "no_center_buffers": true,
+  "evidence": "Engineering only; no real PSNR evidence"
+}

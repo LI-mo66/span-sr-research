@@ -1,0 +1,166 @@
+{
+  "source": "User-provided server text, 2026-10-19; raw server files not independently fetched",
+  "training_commit": "97b8173d067bacca4f7f9281839891af0aeca56f",
+  "checkpoint": "epoch00048_u48000.pt",
+  "budget": 50000,
+  "seed": 10,
+  "metrics": {
+    "DIV2K_valid": {
+      "B0_psnr": 30.15989124662389,
+      "FullTAB_psnr": 30.140102880729405,
+      "ConvFFN": {
+        "psnr": 30.138430831094084,
+        "ssim": 0.830328934642757
+      },
+      "delta_vs_B0": -0.021460415529805488,
+      "delta_vs_FullTAB": -0.0016720496353208603
+    },
+    "Set5": {
+      "B0_psnr": 31.820548063043777,
+      "FullTAB_psnr": 31.79069258330024,
+      "ConvFFN": {
+        "psnr": 31.804581307019653,
+        "ssim": 0.8892091250588203
+      },
+      "delta_vs_B0": -0.015966756024123896,
+      "delta_vs_FullTAB": 0.013888723719414742
+    },
+    "Set14": {
+      "B0_psnr": 28.36729279739073,
+      "FullTAB_psnr": 28.341683864956767,
+      "ConvFFN": {
+        "psnr": 28.343031761259653,
+        "ssim": 0.7754215527585887
+      },
+      "delta_vs_B0": -0.024261036131075997,
+      "delta_vs_FullTAB": 0.001347896302885232
+    },
+    "B100": {
+      "B0_psnr": 27.419095382547262,
+      "FullTAB_psnr": 27.406790314819485,
+      "ConvFFN": {
+        "psnr": 27.405232764348124,
+        "ssim": 0.7300744063070365
+      },
+      "delta_vs_B0": -0.0138626181991377,
+      "delta_vs_FullTAB": -0.001557550471360969
+    },
+    "Urban100": {
+      "B0_psnr": 25.57220348909937,
+      "FullTAB_psnr": 25.55524277216214,
+      "ConvFFN": {
+        "psnr": 25.544827202851298,
+        "ssim": 0.7670560384457109
+      },
+      "delta_vs_B0": -0.02737628624807087,
+      "delta_vs_FullTAB": -0.010415569310840311
+    },
+    "Manga109": {
+      "B0_psnr": 29.772182272606813,
+      "FullTAB_psnr": 29.714834022854006,
+      "ConvFFN": {
+        "psnr": 29.719799671544788,
+        "ssim": 0.896321003801972
+      },
+      "delta_vs_B0": -0.05238260106202475,
+      "delta_vs_FullTAB": 0.004965648690781421
+    }
+  },
+  "selected_record": {
+    "epoch": 48,
+    "update": 48000,
+    "updates_in_epoch": 1000,
+    "samples_in_epoch": 64000,
+    "train_l1_mean": 0.027092102536931634,
+    "train_l1_last": 0.025607623625546694,
+    "metrics": {
+      "DIV2K_valid": {
+        "psnr": 30.138430831094084,
+        "ssim": 0.830328934642757
+      },
+      "Set5": {
+        "psnr": 31.804581307019653,
+        "ssim": 0.8892091250588203
+      },
+      "Set14": {
+        "psnr": 28.343031761259653,
+        "ssim": 0.7754215527585887
+      },
+      "B100": {
+        "psnr": 27.405232764348124,
+        "ssim": 0.7300744063070365
+      },
+      "Urban100": {
+        "psnr": 25.544827202851298,
+        "ssim": 0.7670560384457109
+      },
+      "Manga109": {
+        "psnr": 29.719799671544788,
+        "ssim": 0.896321003801972
+      }
+    },
+    "best": {
+      "DIV2K_valid/psnr": {
+        "value": 30.138430831094084,
+        "epoch": 48,
+        "update": 48000
+      },
+      "DIV2K_valid/ssim": {
+        "value": 0.830464107176112,
+        "epoch": 47,
+        "update": 47000
+      },
+      "Set5/psnr": {
+        "value": 31.804581307019653,
+        "epoch": 48,
+        "update": 48000
+      },
+      "Set5/ssim": {
+        "value": 0.8894889693416832,
+        "epoch": 43,
+        "update": 43000
+      },
+      "Set14/psnr": {
+        "value": 28.343031761259653,
+        "epoch": 48,
+        "update": 48000
+      },
+      "Set14/ssim": {
+        "value": 0.7763103319722207,
+        "epoch": 43,
+        "update": 43000
+      },
+      "B100/psnr": {
+        "value": 27.41169416418184,
+        "epoch": 44,
+        "update": 44000
+      },
+      "B100/ssim": {
+        "value": 0.7305836091753715,
+        "epoch": 43,
+        "update": 43000
+      },
+      "Urban100/psnr": {
+        "value": 25.544827202851298,
+        "epoch": 48,
+        "update": 48000
+      },
+      "Urban100/ssim": {
+        "value": 0.7673442339995961,
+        "epoch": 43,
+        "update": 43000
+      },
+      "Manga109/psnr": {
+        "value": 29.719799671544788,
+        "epoch": 48,
+        "update": 48000
+      },
+      "Manga109/ssim": {
+        "value": 0.8967849898623228,
+        "epoch": 43,
+        "update": 43000
+      }
+    },
+    "elapsed_seconds": 331.6020761050022
+  }
+}

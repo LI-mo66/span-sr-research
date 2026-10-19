@@ -1,0 +1,42 @@
+{
+  "input": [
+    1,
+    3,
+    180,
+    320
+  ],
+  "device": "NVIDIA GeForce RTX 4060 Laptop GPU",
+  "torch": "2.9.1+cu128",
+  "repeats": 20,
+  "warmup_seconds": 1.0,
+  "precision": "FP32",
+  "prefused": true,
+  "results": {
+    "B0": {
+      "median_ms": 12.508449999586446,
+      "incremental_peak_allocated": 247845376,
+      "process_peak_reserved": 727711744
+    },
+    "ATD_chunked": {
+      "median_ms": 51.50675000004412,
+      "incremental_peak_allocated": 345199616,
+      "process_peak_reserved": 727711744
+    },
+    "ATD_unchunked": {
+      "median_ms": 20.30754999987039,
+      "incremental_peak_allocated": 497427456,
+      "process_peak_reserved": 727711744
+    },
+    "ATD_q16k_g128": {
+      "median_ms": 28.206199999658566,
+      "incremental_peak_allocated": 346301440,
+      "process_peak_reserved": 727711744
+    },
+    "ATD_q64k_g256": {
+      "median_ms": 19.967500000348082,
+      "incremental_peak_allocated": 414221312,
+      "process_peak_reserved": 727711744
+    }
+  },
+  "caveat": "All five models co-resident. Reserved is process-wide; random-weight exploration, not trained deployment or full FLOPs."
+}

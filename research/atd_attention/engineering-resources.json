@@ -1,0 +1,32 @@
+{
+  "input": [
+    1,
+    3,
+    180,
+    320
+  ],
+  "device": "NVIDIA GeForce RTX 4060 Laptop GPU",
+  "torch": "2.9.1+cu128",
+  "repeats": 20,
+  "warmup_seconds": 1.0,
+  "precision": "FP32",
+  "prefused": true,
+  "results": {
+    "B0": {
+      "median_ms": 12.976550000075804,
+      "incremental_peak_allocated": 247845376,
+      "process_peak_reserved": 717225984
+    },
+    "ATD_chunked": {
+      "median_ms": 54.09305000011955,
+      "incremental_peak_allocated": 345199616,
+      "process_peak_reserved": 717225984
+    },
+    "ATD_unchunked": {
+      "median_ms": 20.892450000246754,
+      "incremental_peak_allocated": 497427456,
+      "process_peak_reserved": 717225984
+    }
+  },
+  "caveat": "All three models co-resident. Reserved is process-wide; random-weight exploration, not trained deployment or full FLOPs."
+}

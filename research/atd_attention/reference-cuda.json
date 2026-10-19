@@ -1,0 +1,59 @@
+{
+  "status": "PASS",
+  "device": "cuda",
+  "reference_commit": "c064084c3a33724e850ec03532fc6ddc7d7a0828",
+  "cases": [
+    {
+      "shape": [
+        1,
+        52,
+        1,
+        1
+      ],
+      "output_error": 0.0,
+      "parameter_gradient_error": 0.0
+    },
+    {
+      "shape": [
+        1,
+        52,
+        1,
+        7
+      ],
+      "output_error": 0.0,
+      "parameter_gradient_error": 0.0
+    },
+    {
+      "shape": [
+        2,
+        52,
+        3,
+        43
+      ],
+      "output_error": 2.384185791015625e-07,
+      "parameter_gradient_error": 3.725290298461914e-09
+    },
+    {
+      "shape": [
+        1,
+        52,
+        13,
+        17
+      ],
+      "output_error": 2.384185791015625e-07,
+      "parameter_gradient_error": 3.725290298461914e-09
+    },
+    {
+      "shape": [
+        1,
+        52,
+        64,
+        65
+      ],
+      "output_error": 2.384185791015625e-07,
+      "parameter_gradient_error": 3.725290298461914e-09
+    }
+  ],
+  "batch_isolation_fp64": 0.0,
+  "evidence": "attention extraction/chunk semantics only; no full ATD or PSNR claim"
+}
