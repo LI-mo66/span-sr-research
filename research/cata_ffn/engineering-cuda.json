@@ -1,0 +1,18 @@
+{
+  "status": "PASS",
+  "device": "cuda",
+  "extra_parameters": 13780,
+  "deployed_parameters": 511988,
+  "retained_ffn_initialization_exact": true,
+  "baseline_initialization_and_rng_exact": true,
+  "all_ffn_tensors_updated": true,
+  "resume_exact": true,
+  "synthetic_loss": [
+    6.477322101593018,
+    5.971499919891357,
+    5.555152893066406,
+    5.183560371398926
+  ],
+  "no_attention_or_centers": true,
+  "evidence": "Engineering only; no real PSNR evidence"
+}

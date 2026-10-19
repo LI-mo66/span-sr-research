@@ -1,0 +1,18 @@
+{
+  "status": "PASS",
+  "device": "cpu",
+  "extra_parameters": 13780,
+  "deployed_parameters": 511988,
+  "retained_ffn_initialization_exact": true,
+  "baseline_initialization_and_rng_exact": true,
+  "all_ffn_tensors_updated": true,
+  "resume_exact": true,
+  "synthetic_loss": [
+    6.607125282287598,
+    6.089345455169678,
+    5.660346984863281,
+    5.276089668273926
+  ],
+  "no_attention_or_centers": true,
+  "evidence": "Engineering only; no real PSNR evidence"
+}
