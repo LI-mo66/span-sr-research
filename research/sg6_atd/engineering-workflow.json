@@ -1,0 +1,21 @@
+{
+  "status": "PASS",
+  "tested_source": "10324765309a0716e4f7053ac028876df2bfbf90",
+  "python": "3.10.20",
+  "torch": "2.9.1+cu128",
+  "device": "NVIDIA GeForce RTX 4060 Laptop GPU",
+  "workflow_tests": 4,
+  "bash_syntax": true,
+  "actual_trainer": {
+    "updates": 2,
+    "effective_batch": 2,
+    "micro_batch": 1,
+    "accumulation": true,
+    "npy_cache": true,
+    "partial_log_recovery": true,
+    "strict_resume_equal": true,
+    "evaluation_cadence_equal": true,
+    "fixture_run": "ENGINEERING-SG6-ATD-fe1c754a2c"
+  },
+  "evidence": "Synthetic integration only; no real-data PSNR evidence"
+}

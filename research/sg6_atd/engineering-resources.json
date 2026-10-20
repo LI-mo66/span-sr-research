@@ -1,0 +1,66 @@
+{
+  "input": [
+    1,
+    3,
+    180,
+    320
+  ],
+  "device": "NVIDIA GeForce RTX 4060 Laptop GPU",
+  "torch": "2.9.1+cu128",
+  "repeats": 20,
+  "warmup_seconds": 1.0,
+  "precision": "FP32",
+  "prefused": true,
+  "execution_equivalence": {
+    "status": "PASS",
+    "fp32_full_atol": 1e-05,
+    "fp32_full_rtol": 1e-05,
+    "fp32_adapter_atol": 2e-06,
+    "fp32_adapter_rtol": 1e-05,
+    "fp64_adapter_atol": 1e-10,
+    "fp64_adapter_rtol": 1e-10,
+    "variants": {
+      "ATD_selected": {
+        "backbone_features_exact": true,
+        "fp32_route_mismatches": 0,
+        "fp32_full_max_abs": 0.0,
+        "fp32_full_relative_l2": 0.0,
+        "fp32_adapter_max_abs": 0.0,
+        "old_tolerance_mismatches": 0,
+        "fp64_route_mismatches": 0,
+        "reference_fp32_vs_fp64_route_mismatches": 0,
+        "fp64_adapter_max_abs": 0.0
+      },
+      "ATD_unchunked": {
+        "backbone_features_exact": true,
+        "fp32_route_mismatches": 0,
+        "fp32_full_max_abs": 0.0,
+        "fp32_full_relative_l2": 0.0,
+        "fp32_adapter_max_abs": 0.0,
+        "old_tolerance_mismatches": 0,
+        "fp64_route_mismatches": 0,
+        "reference_fp32_vs_fp64_route_mismatches": 0,
+        "fp64_adapter_max_abs": 0.0
+      }
+    },
+    "scope": "Random-weight execution equivalence; no claim of identical uint8 metrics or trained PSNR"
+  },
+  "results": {
+    "SG6": {
+      "median_ms": 15.492350001295563,
+      "incremental_peak_allocated": 186045952,
+      "process_peak_reserved": 702545920
+    },
+    "ATD_selected": {
+      "median_ms": 22.87254999828292,
+      "incremental_peak_allocated": 556951552,
+      "process_peak_reserved": 702545920
+    },
+    "ATD_unchunked": {
+      "median_ms": 22.678649998852052,
+      "incremental_peak_allocated": 556951552,
+      "process_peak_reserved": 702545920
+    }
+  },
+  "caveat": "All three models co-resident. Reserved is process-wide; random-weight exploration, not trained deployment or full FLOPs."
+}

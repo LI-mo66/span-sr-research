@@ -1,0 +1,46 @@
+{
+  "status": "FAILED",
+  "fp32_full_atol": 1e-05,
+  "fp32_full_rtol": 1e-05,
+  "fp32_adapter_atol": 2e-06,
+  "fp32_adapter_rtol": 1e-05,
+  "fp64_adapter_atol": 1e-10,
+  "fp64_adapter_rtol": 1e-10,
+  "variants": {
+    "ATD_chunked": {
+      "backbone_features_exact": true,
+      "fp32_route_mismatches": 0,
+      "fp32_full_max_abs": 0.0,
+      "fp32_full_relative_l2": 0.0,
+      "fp32_adapter_max_abs": 0.0,
+      "old_tolerance_mismatches": 0,
+      "fp64_route_mismatches": 0,
+      "reference_fp32_vs_fp64_route_mismatches": 0,
+      "fp64_adapter_max_abs": 0.0
+    },
+    "ATD_unchunked": {
+      "backbone_features_exact": true,
+      "fp32_route_mismatches": 0,
+      "fp32_full_max_abs": 0.0,
+      "fp32_full_relative_l2": 0.0,
+      "fp32_adapter_max_abs": 0.0,
+      "old_tolerance_mismatches": 0,
+      "fp64_route_mismatches": 0,
+      "reference_fp32_vs_fp64_route_mismatches": 0,
+      "fp64_adapter_max_abs": 0.0
+    },
+    "ATD_q16k_g128": {
+      "backbone_features_exact": true,
+      "fp32_route_mismatches": 0,
+      "fp32_full_max_abs": 0.00017952919006347656,
+      "fp32_full_relative_l2": 1.734935324293474e-07,
+      "fp32_adapter_max_abs": 3.814697265625e-06,
+      "old_tolerance_mismatches": 285,
+      "fp64_route_mismatches": 0,
+      "reference_fp32_vs_fp64_route_mismatches": 0,
+      "fp64_adapter_max_abs": 0.0
+    }
+  },
+  "failed_variant": "ATD_q16k_g128",
+  "error": "Tensor-likes are not close!\n\nMismatched elements: 242 / 2764800 (0.0%)\nGreatest absolute difference: 0.00017952919006347656 at index (0, 1, 657, 1029) (up to 1e-05 allowed)\nGreatest relative difference: 0.0027642552740871906 at index (0, 0, 666, 1027) (up to 1e-05 allowed)"
+}

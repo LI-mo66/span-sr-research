@@ -1,0 +1,34 @@
+{
+  "status": "PASS",
+  "fp32_full_atol": 1e-05,
+  "fp32_full_rtol": 1e-05,
+  "fp32_adapter_atol": 2e-06,
+  "fp32_adapter_rtol": 1e-05,
+  "fp64_adapter_atol": 1e-10,
+  "fp64_adapter_rtol": 1e-10,
+  "variants": {
+    "ATD_selected": {
+      "backbone_features_exact": true,
+      "fp32_route_mismatches": 0,
+      "fp32_full_max_abs": 0.0,
+      "fp32_full_relative_l2": 0.0,
+      "fp32_adapter_max_abs": 0.0,
+      "old_tolerance_mismatches": 0,
+      "fp64_route_mismatches": 0,
+      "reference_fp32_vs_fp64_route_mismatches": 0,
+      "fp64_adapter_max_abs": 0.0
+    },
+    "ATD_unchunked": {
+      "backbone_features_exact": true,
+      "fp32_route_mismatches": 0,
+      "fp32_full_max_abs": 0.0,
+      "fp32_full_relative_l2": 0.0,
+      "fp32_adapter_max_abs": 0.0,
+      "old_tolerance_mismatches": 0,
+      "fp64_route_mismatches": 0,
+      "reference_fp32_vs_fp64_route_mismatches": 0,
+      "fp64_adapter_max_abs": 0.0
+    }
+  },
+  "scope": "Random-weight execution equivalence; no claim of identical uint8 metrics or trained PSNR"
+}
