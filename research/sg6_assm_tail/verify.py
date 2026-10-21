@@ -95,7 +95,7 @@ def main():
     parser=argparse.ArgumentParser()
     parser.add_argument('--device',choices=('cpu','cuda'),default='cpu')
     parser.add_argument('--output',required=True)
-    parser.add_argument('--backend',choices=('reference','cuda'),default='reference')
+    parser.add_argument('--backend',choices=('reference','cuda','cuda_isolated'),default='reference')
     args=parser.parse_args()
     torch.set_num_threads(2)
     torch.use_deterministic_algorithms(True)
@@ -196,7 +196,7 @@ def main():
                 forward_preserves_rng=True,same_shape_batch_isolation_exact=True,
                 full_batch_shape_change_diagnostic=batch_shape_errors,new_parameters=model.assm_extra_parameters,
                 deployed_parameters=sum(p.numel() for p in deployed.parameters()),synthetic_loss=losses,
-                scope='Small engineering diagnostic only; CUDA extension and PSNR remain unverified')
+                scope='Small engineering diagnostic only; real-data resources and PSNR remain unverified')
     Path(args.output).write_text(json.dumps(report,indent=2)+'\n')
     print(json.dumps(report,indent=2))
 

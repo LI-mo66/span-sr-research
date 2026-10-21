@@ -11,8 +11,8 @@ import torch
 from adapter import ASSMAdapter
 
 
-def probe():
-    report=dict(status='INSPECTING',python=platform.python_version(),torch=torch.__version__,
+def probe(backend='cuda_isolated'):
+    report=dict(status='INSPECTING',backend=backend,python=platform.python_version(),torch=torch.__version__,
                 cuda=torch.version.cuda,cxx11_abi=bool(torch._C._GLIBCXX_USE_CXX11_ABI),packages={})
     for name in ('mamba-ssm','causal-conv1d','einops','triton','ninja','packaging'):
         try:report['packages'][name]=importlib.metadata.version(name)
@@ -34,7 +34,7 @@ def probe():
     torch.backends.cuda.matmul.allow_tf32=False
     torch.manual_seed(10)
     reference=ASSMAdapter('reference').cuda()
-    production=ASSMAdapter('cuda').cuda()
+    production=ASSMAdapter(backend).cuda()
     production.load_state_dict(reference.state_dict(),strict=True)
     x=torch.randn(2,52,3,5,device='cuda',requires_grad=True)
     xr=x.detach().clone().requires_grad_()
@@ -63,8 +63,9 @@ def probe():
 
 def main():
     parser=argparse.ArgumentParser();parser.add_argument('--output',required=True)
+    parser.add_argument('--backend',choices=('cuda','cuda_isolated'),default='cuda_isolated')
     args=parser.parse_args()
-    try:report=probe()
+    try:report=probe(args.backend)
     except Exception as exc:
         import traceback
         report=dict(status='KERNEL_CHECK_FAILED',error=f'{type(exc).__name__}: {exc}',traceback=traceback.format_exc())

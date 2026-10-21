@@ -31,7 +31,7 @@ def build_model(arch,cfg):
         raise ValueError('Only this SG6+ASSM variant is supported')
     if {k:v for k,v in settings.items() if k!='backend'}!=expected:
         raise ValueError('Unknown structure or initialization')
-    if settings['backend'] not in ('cuda','reference'):
+    if settings['backend'] not in ('cuda','cuda_isolated','reference'):
         raise ValueError('Unknown backend')
     if settings['backend']=='reference' and not cfg.get('engineering_only'):
         raise ValueError('Reference scan is diagnostic only')

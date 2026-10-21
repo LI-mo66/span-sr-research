@@ -33,7 +33,7 @@ def gradient_comparison(loss,other,parameters):
 
 def main():
     p=argparse.ArgumentParser();p.add_argument('--device',choices=('cpu','cuda'),default='cpu')
-    p.add_argument('--backend',choices=('reference','cuda'),default='reference')
+    p.add_argument('--backend',choices=('reference','cuda','cuda_isolated'),default='reference')
     p.add_argument('--output',required=True);args=p.parse_args()
     torch.set_num_threads(2);torch.use_deterministic_algorithms(True)
     torch.backends.cudnn.deterministic=True;torch.backends.cudnn.allow_tf32=True

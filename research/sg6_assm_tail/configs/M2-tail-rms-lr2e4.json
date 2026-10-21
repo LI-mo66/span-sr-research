@@ -88,7 +88,7 @@
     "num_tokens": 64,
     "inner_rank": 32,
     "initial_scale": 0.01,
-    "backend": "cuda",
+    "backend": "cuda_isolated",
     "routing": "deterministic-st",
     "prompt_alignment": "sorted-with-values",
     "stable_sort": true,
