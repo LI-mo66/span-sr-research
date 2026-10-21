@@ -21,6 +21,8 @@ nvidia-smi --query-compute-apps=pid,process_name,used_memory --format=csv,nohead
 "$python_bin" research/sgla_context/verify.py --device cuda --output "logs/sgla_context/$group-$mode-engineering.json"
 "$python_bin" research/sgla_context/resources.py --output "logs/sgla_context/$group-$mode-resources.json"
 "$python_bin" research/sgla_context/prepare.py --reference-backup "$reference" --output "$config_dir" --mode "$mode"
+cp "logs/sgla_context/$group-$mode-engineering.json" "$config_dir/engineering.json"
+cp "logs/sgla_context/$group-$mode-resources.json" "$config_dir/resources.json"
 set +e
 "$python_bin" -u research/sgla_context/run.py --config "$config_dir/config.json" --id "$run_id" --screen --screen-updates 50000
 training_exit=$?
@@ -37,5 +39,6 @@ printf '%s\n' "$comparison_exit" > "$config_dir/comparison-exit-code.txt"
 backup_root=${BACKUP_ROOT:-$(dirname "$reference")}
 destination="$backup_root/$run_id-$(date -u +%Y%m%dT%H%M%SZ)"
 "$python_bin" research/sgla_context/backup.py --run "runs/$run_id" --logs "$config_dir" --destination "$destination" --training-exit "$training_exit" --comparison-exit "$comparison_exit"
+printf '%s\n' "$destination" > "$config_dir/backup-path.txt"
 [[ "$training_exit" == 0 && "$comparison_exit" == 0 ]] || { echo 'Run failed; failure archive retained.'; exit 1; }
 echo "Completed and hash-verified backup: $destination. Instance remains running."

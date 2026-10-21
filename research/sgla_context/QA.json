@@ -14,7 +14,10 @@
     "resume vs continuous exact model tensors, scheduler and per-step losses",
     "synthetic comparison: selected weight, tail trend, paired images/bootstrap",
     "synthetic backup copy with every file SHA256 verified",
-    "Python compileall and bash -n"
+    "Python compileall and bash -n",
+    "three-arm aggregate report synthetic fixture",
+    "mocked queue success: release called once after three archives",
+    "mocked second-arm failure: release never called"
   ],
   "integration_run": "ENGINEERING-SGLA-28639881d0",
   "comparison_backup_fixture": "tmp/sgla-comparison-smoke",
@@ -30,5 +33,6 @@
     "server environment/data/archive preflight",
     "target RTX4090 resource measurement",
     "real-data 50K training and PSNR evaluation"
-  ]
+  ],
+  "queue_test_scope": "Commands stubbed; no real release, GPU or training; actual Linux flock not exercised locally"
 }

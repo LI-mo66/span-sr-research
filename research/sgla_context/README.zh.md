@@ -58,3 +58,9 @@ bash research/sgla_context/launch.sh FEAT-SG6-SGLA-QKDW-50K-01 \
 完成自动生成 `logs/sgla_context/<group>-context/comparison-50000.json`：对SG6验证选权重、固定50K、40–50K差值趋势、逐图胜率/中位数/最差回退与图片bootstrap。单seed图片bootstrap不是跨seed证据。不会按各测试集单独best拼表；只赢B0、单次best微小变化、或局部对照同样好均不足以认定机制有效。50K灰区不自动加长。
 
 服务器启动尚未执行，目标设备成本及数据审计仍待运行。launch训练结束（含训练失败）后将run、冻结日志/对照及源码zip复制到独立持久目录，并逐文件验证SHA256；默认归档到SG6参考归档的父目录，可用BACKUP_ROOT指定。BACKUP_COMPLETE只说明复制校验完成，还须检查training_exit_code和comparison_exit_code。不自动关机或释放实例。
+
+## 用户授权的三方案队列与自动关机
+
+后续授权：推送GitHub，nohup后台串行context/original/local三组，每组同协议50K，共150K更新；复用既有SG6，不重训基线。队列脚本 `queue.sh GROUP SG6_ARCHIVE` 在三组成功、逐文件备份验证及总表归档后，检查GPU没有其它计算进程，再执行原平台 `featurize instance release`。训练/备份/预检查失败会停止队列、记录失败并保留实例；其它GPU任务占用则跳过释放。不设新的延迟淘汰线，总部署参数上限1000K。
+
+单组launch仍不自动关机；只有用户授权的queue会执行释放。总表含三组各自DIV2K_valid选定的单权重六集合结果、40–50K趋势，以及context相对original/local的差值，不自动宣布微小best提升有效。
