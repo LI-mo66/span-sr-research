@@ -1,0 +1,33 @@
+{
+  "status": "PASS",
+  "device": "cuda",
+  "scan_backend": "reference",
+  "official_core_adaptation_check": {
+    "output_max_error": 1.043081283569336e-07,
+    "parameter_gradient_max_error": 6.51925802230835e-09,
+    "scope": "official ASSM equations plus explicitly adapted routing/permutation"
+  },
+  "prompt_value_alignment": true,
+  "retained_sg6_state_and_rng_exact": true,
+  "nonzero_rgb_bypass_preserved": true,
+  "all_new_parameter_tensors_updated": 22,
+  "all_six_spatial_branches_started": true,
+  "optimizer_coverage": true,
+  "save_resume_exact": true,
+  "eval_repeat_exact": true,
+  "forward_preserves_rng": true,
+  "same_shape_batch_isolation_exact": true,
+  "full_batch_shape_change_diagnostic": {
+    "SG6": 0.011427879333496094,
+    "SG6_ASSM": 0.013140678405761719
+  },
+  "new_parameters": 12417,
+  "deployed_parameters": 548189,
+  "synthetic_loss": [
+    5.564891338348389,
+    5.1437482833862305,
+    4.735286712646484,
+    4.338180065155029
+  ],
+  "scope": "Small engineering diagnostic only; CUDA extension and PSNR remain unverified"
+}
