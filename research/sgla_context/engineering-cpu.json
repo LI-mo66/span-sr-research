@@ -1,0 +1,106 @@
+{
+  "status": "PASS",
+  "device": "cpu",
+  "torch": "2.9.1+cu128",
+  "reference_equivalence": [
+    {
+      "shape": [
+        1,
+        52,
+        1,
+        1
+      ],
+      "absmax": 0.0
+    },
+    {
+      "shape": [
+        1,
+        52,
+        1,
+        7
+      ],
+      "absmax": 0.0
+    },
+    {
+      "shape": [
+        2,
+        52,
+        13,
+        17
+      ],
+      "absmax": 0.0
+    },
+    {
+      "shape": [
+        1,
+        52,
+        7,
+        31
+      ],
+      "absmax": 0.0
+    }
+  ],
+  "base_initialization_identical": true,
+  "rng_identical": true,
+  "zero_projection_identity_train_eval": true,
+  "gradient_steps": [
+    {
+      "norm.weight": 0.0,
+      "norm.bias": 0.0,
+      "core.qkvo.weight": 0.0,
+      "core.qkvo.bias": 0.0,
+      "core.qk_context.weight": 0.0,
+      "core.qk_context.bias": 0.0,
+      "core.lepe.weight": 0.0,
+      "core.lepe.bias": 0.0,
+      "core.proj.weight": 0.018381617963314056,
+      "core.proj.bias": 0.0015898749697953463
+    },
+    {
+      "norm.weight": 6.6093020905100275e-06,
+      "norm.bias": 7.749015821900684e-06,
+      "core.qkvo.weight": 0.0005147649790160358,
+      "core.qkvo.bias": 1.2141855222580489e-05,
+      "core.qk_context.weight": 3.438089152041357e-06,
+      "core.qk_context.bias": 9.897844392980915e-07,
+      "core.lepe.weight": 6.742405821569264e-05,
+      "core.lepe.bias": 7.515483503084397e-06,
+      "core.proj.weight": 0.018102211877703667,
+      "core.proj.bias": 0.0013820149470120668
+    },
+    {
+      "norm.weight": 1.10548862721771e-05,
+      "norm.bias": 1.3274790035211481e-05,
+      "core.qkvo.weight": 0.0008854883490130305,
+      "core.qkvo.bias": 2.112788388330955e-05,
+      "core.qk_context.weight": 7.115083917597076e-06,
+      "core.qk_context.bias": 2.034236331382999e-06,
+      "core.lepe.weight": 0.00011557352991076186,
+      "core.lepe.bias": 1.2566080840770155e-05,
+      "core.proj.weight": 0.018500488251447678,
+      "core.proj.bias": 0.0012399766128510237
+    },
+    {
+      "norm.weight": 1.3714256056118757e-05,
+      "norm.bias": 1.5934780094539747e-05,
+      "core.qkvo.weight": 0.0011017934884876013,
+      "core.qkvo.bias": 2.650764145073481e-05,
+      "core.qk_context.weight": 9.580577170709148e-06,
+      "core.qk_context.bias": 3.009595729963621e-06,
+      "core.lepe.weight": 0.00014431534509640187,
+      "core.lepe.bias": 1.5552313925581984e-05,
+      "core.proj.weight": 0.018567129969596863,
+      "core.proj.bias": 0.0011084858560934663
+    }
+  ],
+  "all_adapter_parameters_updated": true,
+  "strict_reload": true,
+  "deployment_fp64_absmax": 0.0,
+  "remote_derivative": 0.0026265230374791955,
+  "deployed_parameters": {
+    "off": 535772,
+    "original": 551008,
+    "context": 552048,
+    "local": 552172
+  }
+}

@@ -1,0 +1,117 @@
+{
+  "torch": "2.9.1+cu128",
+  "gpu": "NVIDIA GeForce RTX 4060 Laptop GPU",
+  "precision": "FP32 TF32 off",
+  "batch": 1,
+  "scope": "random tensors; no PSNR; MACs omit norm/activation/rope/softmax/elementwise",
+  "sizes": {
+    "64x64": {
+      "off": {
+        "parameters": 535772,
+        "peak_allocated_increment": 12779520,
+        "peak_reserved": 85983232,
+        "round_median_ms": [
+          8.303536415100098,
+          8.112128257751465,
+          7.516671895980835
+        ],
+        "conv_MACs": 2185818112,
+        "attention_matmul_MACs": 0,
+        "median_ms": 8.112128257751465
+      },
+      "original": {
+        "parameters": 551008,
+        "peak_allocated_increment": 20491264,
+        "peak_reserved": 85983232,
+        "round_median_ms": [
+          11.997151851654053,
+          12.388832092285156,
+          12.356639862060547
+        ],
+        "conv_MACs": 2246520832,
+        "attention_matmul_MACs": 22577152,
+        "median_ms": 12.356639862060547
+      },
+      "context": {
+        "parameters": 552048,
+        "peak_allocated_increment": 22195200,
+        "peak_reserved": 85983232,
+        "round_median_ms": [
+          12.426239967346191,
+          12.887135982513428,
+          11.91531229019165
+        ],
+        "conv_MACs": 2250354688,
+        "attention_matmul_MACs": 22577152,
+        "median_ms": 12.426239967346191
+      },
+      "local": {
+        "parameters": 552172,
+        "peak_allocated_increment": 12779520,
+        "peak_reserved": 85983232,
+        "round_median_ms": [
+          9.698319911956787,
+          9.482751846313477,
+          8.813519954681396
+        ],
+        "conv_MACs": 2251337728,
+        "attention_matmul_MACs": 0,
+        "median_ms": 9.482751846313477
+      }
+    },
+    "180x320": {
+      "off": {
+        "parameters": 535772,
+        "peak_allocated_increment": 186390528,
+        "peak_reserved": 427819008,
+        "round_median_ms": [
+          20.70268726348877,
+          20.015616416931152,
+          20.509183883666992
+        ],
+        "conv_MACs": 30738067200,
+        "attention_matmul_MACs": 0,
+        "median_ms": 20.509183883666992
+      },
+      "original": {
+        "parameters": 551008,
+        "peak_allocated_increment": 299506688,
+        "peak_reserved": 427819008,
+        "round_median_ms": [
+          27.554304122924805,
+          27.02998447418213,
+          26.92812728881836
+        ],
+        "conv_MACs": 31591699200,
+        "attention_matmul_MACs": 317491200,
+        "median_ms": 27.02998447418213
+      },
+      "context": {
+        "parameters": 552048,
+        "peak_allocated_increment": 323468288,
+        "peak_reserved": 427819008,
+        "round_median_ms": [
+          27.08889675140381,
+          27.251200675964355,
+          28.160927772521973
+        ],
+        "conv_MACs": 31645612800,
+        "attention_matmul_MACs": 317491200,
+        "median_ms": 27.251200675964355
+      },
+      "local": {
+        "parameters": 552172,
+        "peak_allocated_increment": 186390528,
+        "peak_reserved": 427819008,
+        "round_median_ms": [
+          23.283199310302734,
+          23.6759033203125,
+          23.220736503601074
+        ],
+        "conv_MACs": 31659436800,
+        "attention_matmul_MACs": 0,
+        "median_ms": 23.283199310302734
+      }
+    }
+  }
+}
