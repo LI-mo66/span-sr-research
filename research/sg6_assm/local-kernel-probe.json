@@ -1,0 +1,18 @@
+{
+  "status": "NEEDS_COMPATIBLE_KERNEL",
+  "python": "3.10.20",
+  "torch": "2.9.1+cu128",
+  "cuda": "12.8",
+  "cxx11_abi": true,
+  "packages": {
+    "mamba-ssm": null,
+    "causal-conv1d": null,
+    "einops": "0.8.2",
+    "triton": null,
+    "ninja": null,
+    "packaging": "25.0"
+  },
+  "device": "NVIDIA GeForce RTX 4060 Laptop GPU",
+  "import_error": "ModuleNotFoundError: No module named 'mamba_ssm'",
+  "scope": "No installation attempted; this is not a model accuracy failure"
+}
