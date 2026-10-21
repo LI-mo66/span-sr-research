@@ -20,14 +20,14 @@ class FusionWithASSM(nn.Module):
         return self.adapter(self.fusion(x))
 
 
-def build_model(arch,cfg):
+def validate_variant(cfg):
     validate_sg6(cfg)
     expected=dict(position='post_conv_cat',channels=52,d_state=8,expand=1.0,
                   num_tokens=64,inner_rank=32,initial_scale=.01,routing='deterministic-st',
                   prompt_alignment='sorted-with-values',stable_sort=True,
                   prompt_init='variance-preserving-rank-token',writeback='per-pixel-detached-rms')
     settings=cfg['assm_settings']
-    if cfg.get('assm') is not True or cfg.get('experiment_version')!='SG6-ASSM-tail-RMS-v2':
+    if cfg.get('assm') is not True or cfg.get('experiment_version')!='SG6-ASSM-tail-RMS-NCHW-v3':
         raise ValueError('Only this SG6+ASSM variant is supported')
     if {k:v for k,v in settings.items() if k!='backend'}!=expected:
         raise ValueError('Unknown structure or initialization')
@@ -35,6 +35,11 @@ def build_model(arch,cfg):
         raise ValueError('Unknown backend')
     if settings['backend']=='reference' and not cfg.get('engineering_only'):
         raise ValueError('Reference scan is diagnostic only')
+
+
+def build_model(arch,cfg):
+    validate_variant(cfg)
+    settings=cfg['assm_settings']
     model=build_sg6(arch,cfg)
     with torch.random.fork_rng(devices=list(range(torch.cuda.device_count()))):
         torch.manual_seed(cfg['seed']+60001)

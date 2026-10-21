@@ -39,6 +39,15 @@ def check_reference(device):
     def align(module,inputs):
         value,prompt=inputs
         return value,gather_tokens(prompt,indices[0])
+    stages = {'actual': {}, 'official': {}}
+    handles = []
+    def capture(side, name):
+        def hook(module, inputs, output):
+            stages[side][name] = output.detach().clone()
+        return hook
+    for side, core in (('actual', actual.core), ('official', official)):
+        for name in ('route', 'in_proj', 'CPE', 'selectiveScan', 'out_norm', 'out_proj'):
+            handles.append(getattr(core,name).register_forward_hook(capture(side,name)))
     handle=official.selectiveScan.register_forward_pre_hook(align)
     try:
         with patch.object(reference.F,'gumbel_softmax',lambda v,**kw:policy(v)), \
@@ -47,7 +56,13 @@ def check_reference(device):
             expected=official(xr,(3,5),token)
     finally:
         handle.remove()
-    observed=actual.core(x,(3,5))
+    try:
+        observed=actual.core(x,(3,5))
+    finally:
+        for hook in handles: hook.remove()
+    stage_errors = {name: float((stages['actual'][name]-stages['official'][name]).abs().max())
+                    for name in stages['actual']}
+    print('REFERENCE_STAGE_MAX_ERRORS:', json.dumps(stage_errors), flush=True)
     torch.testing.assert_close(observed,expected,atol=2e-6,rtol=1e-5)
     target=torch.randn_like(expected)
     ((observed-target)**2).mean().backward()
@@ -61,7 +76,7 @@ def check_reference(device):
         assert p.grad is not None and q.grad is not None,name
         torch.testing.assert_close(p.grad,q.grad,atol=2e-7,rtol=2e-3)
         max_gradient=max(max_gradient,float((p.grad-q.grad).abs().max()))
-    return dict(output_max_error=float((observed-expected).abs().max().detach()),
+    return dict(stage_max_errors=stage_errors,output_max_error=float((observed-expected).abs().max().detach()),
                 parameter_gradient_max_error=max_gradient,
                 scope='official ASSM equations plus explicitly adapted routing/permutation')
 
@@ -72,7 +87,7 @@ def check_alignment(device):
     chosen=policy(core.route(tokens))
     index=chosen.detach().argmax(-1).argsort(dim=-1,stable=True)
     prompt=chosen @ (core.embeddingB.weight @ core.embeddingA.weight)
-    v=core.in_proj(tokens.transpose(1,2).reshape(2,52,3,5))
+    v=core.in_proj(tokens.transpose(1,2).reshape(2,52,3,5).contiguous())
     v=v*core.CPE(v).sigmoid()
     expected_value=gather_tokens(v.flatten(2).transpose(1,2),index)
     expected_prompt=gather_tokens(prompt,index)

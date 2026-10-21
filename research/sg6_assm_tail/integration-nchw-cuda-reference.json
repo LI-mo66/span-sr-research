@@ -1,0 +1,13 @@
+{
+  "status": "PASS",
+  "resumed_run": "ENGINEERING-SG6-ASSM-08b8ac1bff",
+  "direct_run": "ENGINEERING-SG6-ASSM-08b8ac1bff-continuous",
+  "updates": 2,
+  "save_resume_exact": true,
+  "step_history_equal": true,
+  "cumulative_extra_parameters": 49981,
+  "backend": "reference",
+  "torch": "2.9.1+cu128",
+  "device": "NVIDIA GeForce RTX 4060 Laptop GPU",
+  "scope": "Local CUDA reference backend, synthetic data; server-native integration is still gated before 50K"
+}

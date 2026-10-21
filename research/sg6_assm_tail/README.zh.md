@@ -91,3 +91,9 @@
 原生小检查通过后，还需真实数据、micro16/最大整图显存和公共训练器集成，才能启动50K。
 
 来源为MambaIRv2 CVPR2025，固定官方提交/许可证和明确适配差异在 `vendor/NOTICE.md`。
+
+
+## Current guarded 50K workflow (v3)
+
+See `shortscreen.zh.md` for NCHW layout correction, updated evidence and the registered protocol.
+`screen_worker.sh GROUP SG6_ARCHIVE` runs all remaining native/server checks and starts a scratch 50K candidate only after every check passes. It uses the existing isolated kernel environment and the fixed SG6 archive as a read-only comparator. Successful runs are backed up with SHA256 verification before optional Featurize release.

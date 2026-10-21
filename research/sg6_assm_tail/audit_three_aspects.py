@@ -89,7 +89,7 @@ def main():
             assert torch.isfinite(delta).all() and ratio<.05
             contrasts.append(dict(input_gain=gain,correction_over_F_rms=ratio))
     report=dict(status='SMALL_DIAGNOSTICS_PASS',device=args.device,backend=args.backend,
-                scope='8 updates on synthetic bicubic target only; real-image distributions/native kernel/PSNR pending',
+                scope='8 synthetic bicubic updates only; diagnostics do not establish PSNR or real-image stability',
                 guards=dict(max_residual_ratio=.05,min_route_relative_update=1e-5,
                             meaning='Local engineering screens, not universal stability or PSNR thresholds'),
                 normalization_layers=norms,updates=rows,feature_contrast_probe=contrasts)

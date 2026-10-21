@@ -40,7 +40,7 @@
   ],
   "paths_file": "research/configs/paths.local.json",
   "moe_fs": false,
-  "experiment_version": "SG6-ASSM-tail-RMS-v2",
+  "experiment_version": "SG6-ASSM-tail-RMS-NCHW-v3",
   "training_protocol": "multistep-lr2e4-v1",
   "image_backend": "npy_mmap",
   "local_gate": {

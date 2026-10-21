@@ -85,7 +85,8 @@ class ASSMCore(nn.Module):
         selected = policy(self.route(tokens))
         prompt = selected @ (self.embeddingB.weight @ self.embeddingA.weight)
         indices = selected.detach().argmax(-1).argsort(dim=-1, stable=True)
-        image = self.in_proj(tokens.transpose(1, 2).reshape(b, c, h, w))
+        # Match the official NCHW convolution input, including physical layout.
+        image = self.in_proj(tokens.transpose(1, 2).reshape(b, c, h, w).contiguous())
         image = image * torch.sigmoid(self.CPE(image))
         values = image.flatten(2).transpose(1, 2)
         # Both values and their pixel-specific readout prompts use ONE ordering.
