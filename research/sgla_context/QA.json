@@ -1,0 +1,34 @@
+{
+  "status": "PASS_ENGINEERING_ONLY",
+  "base_commit": "e731483d4ce4e325f3d64dbbc80add342b46f7f1",
+  "tested_implementation_commit": "b09866b",
+  "environment": "RTX4060 Laptop, torch2.9.1+cu128; not server RTX4090",
+  "checks": [
+    "CPU and CUDA reference output/input/common-parameter-gradient FP64 equivalence",
+    "SG6 original tensor and CPU/CUDA RNG preservation",
+    "zero-output-projection exact identity in train/eval",
+    "odd rectangular and one-pixel dimensions",
+    "finite full-network loss/gradients; actual updates of all adapter parameters",
+    "strict checkpoint reload and FP64 deployment equivalence",
+    "real trainer synthetic accumulation/cache/evaluation/best-checkpoint path",
+    "resume vs continuous exact model tensors, scheduler and per-step losses",
+    "synthetic comparison: selected weight, tail trend, paired images/bootstrap",
+    "synthetic backup copy with every file SHA256 verified",
+    "Python compileall and bash -n"
+  ],
+  "integration_run": "ENGINEERING-SGLA-28639881d0",
+  "comparison_backup_fixture": "tmp/sgla-comparison-smoke",
+  "budget": {
+    "user_max_total_deployed_parameters": 1000000,
+    "actual_deployed_parameters": 552048,
+    "extra_over_SG6": 16276,
+    "trainable_reparameterized_parameters": 2210976,
+    "stored_parameters_including_eval_conv_cache": 2675804,
+    "interpretation": "1000K uses the established deployment-fused counting convention"
+  },
+  "not_completed": [
+    "server environment/data/archive preflight",
+    "target RTX4090 resource measurement",
+    "real-data 50K training and PSNR evaluation"
+  ]
+}

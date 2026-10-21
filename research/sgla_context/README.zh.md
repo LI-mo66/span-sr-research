@@ -40,6 +40,13 @@ local：LN→PW52→124→GELU→DW5→GELU→PW124→52，末PW同样零初始�
 
 在一个**本实验独立Git checkout**中，源码提交且干净之后：
 
+若使用本轮交付的自包含Git bundle，将文件上传到服务器后先创建独立目录（不覆盖旧实验）：
+
+```bash
+git clone -b research/sg6-sgla-context /实际上传路径/SG6-SGLA-QKDW-v1.bundle span-sg6-sgla-qkdw
+cd span-sg6-sgla-qkdw
+```
+
 ```bash
 export PYTHON_BIN=/environment/miniconda3/bin/python3
 bash research/sgla_context/launch.sh FEAT-SG6-SGLA-QKDW-50K-01 \
