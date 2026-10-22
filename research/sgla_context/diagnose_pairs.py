@@ -14,6 +14,7 @@ from pathlib import Path
 import sys
 import subprocess
 import time
+import traceback
 from datetime import datetime, timezone
 import cv2
 import numpy as np
@@ -33,6 +34,27 @@ def sha(path):
 
 def read(path): return json.loads(path.read_text(encoding='utf8'))
 def write(path,value): path.write_text(json.dumps(value,indent=2,ensure_ascii=False,allow_nan=False),encoding='utf8')
+
+def archive_file_hash(metadata,key):
+    """Normalize old SG6 list manifests and new SGLA mapping manifests strictly."""
+    if not isinstance(metadata,dict): raise ValueError('Backup metadata must be an object')
+    files=metadata.get('files')
+    if isinstance(files,dict):
+        entries=files.items()
+    elif isinstance(files,list):
+        if any(not isinstance(row,dict) or 'path' not in row or 'sha256' not in row for row in files):
+            raise ValueError('Malformed legacy backup file record')
+        entries=((row['path'],row['sha256']) for row in files)
+    else:
+        raise ValueError('Unsupported backup files format')
+    normalized={}
+    for path,value in entries:
+        if not isinstance(path,str) or not isinstance(value,str) or len(value)!=64 or any(c not in '0123456789abcdefABCDEF' for c in value):
+            raise ValueError('Invalid backup path/hash')
+        path=path.replace('\\','/')
+        if path in normalized: raise ValueError('Duplicate backup file record: '+path)
+        normalized[path]=value.lower()
+    return normalized.get(key.replace('\\','/'))
 
 def selected(folder):
     rows=[json.loads(line) for line in (folder/'epochs.jsonl').read_text().splitlines() if line.strip()]
@@ -155,9 +177,10 @@ def main():
             weight_hash=sha(weight)
             metadata=read(archive/'backup-manifest.json')
             key=str(weight.relative_to(archive)).replace('\\','/')
-            recorded=metadata.get('files',{}).get(key)
+            recorded=archive_file_hash(metadata,key)
             if mode=='SG6':
                 if weight_hash!=REFERENCE_SHA: raise ValueError('SG6 weight hash differs')
+                if recorded!=weight_hash: raise ValueError('SG6 backup manifest hash absent/mismatched')
             elif recorded!=weight_hash:
                 raise ValueError('Archived candidate weight hash absent/mismatched: '+mode)
             model=build_model(arch,cfg).cpu().eval()
@@ -238,6 +261,6 @@ def main():
         print(json.dumps(dict(status=report['status'],summary=summary,numerical_warnings=report['warnings']),indent=2),flush=True)
         print('REPORT:',report_path,flush=True)
     except Exception as e:
-        report.update(status='FAILED',error=repr(e)); write(report_path,report); raise
+        report.update(status='FAILED',error=repr(e),traceback=traceback.format_exc()); write(report_path,report); raise
 
 if __name__=='__main__': main()

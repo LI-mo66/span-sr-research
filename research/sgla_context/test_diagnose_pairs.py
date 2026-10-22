@@ -43,7 +43,10 @@ def main():
         sr=np.rint(y[0].clamp(0,1).numpy().transpose(1,2,0)[:,:,::-1]*255).astype(np.uint8)
         score=metrics.calculate_psnr(sr,hr,crop_border=4,test_y_channel=True)
         diag.write(run/'DIV2K_valid_epoch00048_u48000.json',[dict(image=Path(r['hr']).name,psnr=score) for r in data])
-        diag.write(archive/'backup-manifest.json',dict(training_exit_code=0,comparison_exit_code=0,files={str(weight.relative_to(archive)).replace('\\','/'):checkpoint_sha}))
+        key=str(weight.relative_to(archive)).replace('\\','/')
+        # SG6's historical server.py used [{path,sha256,bytes}], not a mapping.
+        files=[dict(path=key,sha256=checkpoint_sha,bytes=weight.stat().st_size)] if mode=='SG6' else {key:checkpoint_sha}
+        diag.write(archive/'backup-manifest.json',dict(training_exit_code=0,comparison_exit_code=0,files=files))
         (archive/'BACKUP_COMPLETE').write_text('synthetic fixture only')
     # Fixture-only substitution in this test process; no CLI bypass in production.
     diag.REFERENCE_SHA=ref_sha
@@ -59,6 +62,14 @@ def main():
     assert r['all']['harm_sse']==400 and r['all']['gain_sse']==0
     assert r['high_gradient']['pixels']==0
     assert diag.heat(np.array([[1.,-1.]]),1).tolist()==[[[0,0,255],[255,0,0]]]
+    h='a'*64
+    assert diag.archive_file_hash({'files':[dict(path='runs/a.pt',sha256=h,bytes=12)]},'runs/a.pt')==h
+    assert diag.archive_file_hash({'files':{'runs/a.pt':h}},'runs/a.pt')==h
+    assert diag.archive_file_hash({'files':{'runs/a.pt':h}},'missing.pt') is None
+    for invalid in ({'files':None},{'files':[dict(path='a',sha256=h),dict(path='a',sha256=h)]},{'files':{'a':'bad'}}):
+        try: diag.archive_file_hash(invalid,'a')
+        except ValueError: pass
+        else: raise AssertionError('Invalid manifest was accepted')
     print('PASS full CPU archive/hash/strict-load/four-model/fixed12/metrics/maps pipeline:',fixture)
 
 if __name__=='__main__': main()
