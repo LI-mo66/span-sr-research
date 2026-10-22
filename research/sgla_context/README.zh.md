@@ -64,3 +64,13 @@ bash research/sgla_context/launch.sh FEAT-SG6-SGLA-QKDW-50K-01 \
 后续授权：推送GitHub，nohup后台串行context/original/local三组，每组同协议50K，共150K更新；复用既有SG6，不重训基线。队列脚本 `queue.sh GROUP SG6_ARCHIVE` 在三组成功、逐文件备份验证及总表归档后，检查GPU没有其它计算进程，再执行原平台 `featurize instance release`。训练/备份/预检查失败会停止队列、记录失败并保留实例；其它GPU任务占用则跳过释放。不设新的延迟淘汰线，总部署参数上限1000K。
 
 单组launch仍不自动关机；只有用户授权的queue会执行释放。总表含三组各自DIV2K_valid选定的单权重六集合结果、40–50K趋势，以及context相对original/local的差值，不自动宣布微小best提升有效。
+
+## 训练结束后的CPU配对误差诊断
+
+50K结果与停止决策见RESULTS-50K.zh.md。diagnose_pairs.py只读取持久records下四个真实归档的验证所选权重，检查源实现未改变、strict加载、checkpoint和固定图像SHA。按排序验证图索引np.linspace(0,99,12,dtype=int)固定12图，与前次SG6体检的均匀选择一致；不是最差图/测试集择优。
+
+强制CUDA_VISIBLE_DEVICES为空、CPU两线程，整图FP32部署融合推理。输出原协议量化Y/crop4的CPU指标、与归档GPU逐图PSNR差异（绝对偏差>0.0002dB标记）、三种HR梯度区域的gain/harm SSE与像素占比、共享色标误差差图、同一图固定64网格内损益最大patch。红色表示新增误差、蓝色表示减少误差。示例patch是事后描述，不是独立证据。区域低/中/高梯度不是语义类别；平坦图空分组明确记录0像素。
+
+输出目录必须不存在，过程持续写入report.json；失败保留原因。结束再次验证权重hash。不会启动训练、写权重、升级依赖、访问GPU或自动关机。
+
+`test_diagnose_pairs.py` 已在完全合成的四份归档上通过完整读取/hash/strict加载/12图前向/数值核对/差图流程；该测试临时替换参考hash只在测试进程内，生产CLI没有跳过真实SG6hash的开关。合成通过不是实际12图诊断结论，真实服务器尚待运行。
