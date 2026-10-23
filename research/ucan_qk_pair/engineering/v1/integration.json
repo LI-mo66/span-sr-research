@@ -1,0 +1,22 @@
+{
+  "status": "PASS",
+  "scope": "four synthetic updates; not real-data performance",
+  "source_commit": "ea7970e1e626f0cc689b0034175111e12eac04e7",
+  "run_id": "ENGINEERING-UCAN-IND-85f78450df",
+  "continuous_id": "ENGINEERING-UCAN-IND-85f78450df-continuous",
+  "exact_model_optimizer_scheduler_rng_resume": true,
+  "exact_losses_with_different_evaluation_cadence": true,
+  "partial_log_recovery": true,
+  "best_validation_checkpoint": true,
+  "accumulation": 2,
+  "micro_batch": 1,
+  "npy_mmap": true,
+  "environment": {
+    "torch": "2.9.1+cu128",
+    "cuda": "12.8",
+    "device": "NVIDIA GeForce RTX 4060 Laptop GPU",
+    "deterministic": true,
+    "cudnn_allow_tf32": true,
+    "matmul_allow_tf32": false
+  }
+}

@@ -1,0 +1,540 @@
+{
+  "status": "PASS",
+  "device": "cuda",
+  "torch": "2.9.1+cu128",
+  "scope": "synthetic engineering only; no PSNR or real-data claims",
+  "tf32": false,
+  "deterministic": true,
+  "reference": [
+    {
+      "reuse": false,
+      "shape": [
+        2,
+        1,
+        1
+      ],
+      "forward_absmax": 0.0
+    },
+    {
+      "reuse": false,
+      "shape": [
+        2,
+        1,
+        7
+      ],
+      "forward_absmax": 0.0
+    },
+    {
+      "reuse": false,
+      "shape": [
+        2,
+        13,
+        17
+      ],
+      "forward_absmax": 0.0
+    },
+    {
+      "reuse": false,
+      "shape": [
+        2,
+        17,
+        13
+      ],
+      "forward_absmax": 0.0
+    },
+    {
+      "reuse": true,
+      "shape": [
+        2,
+        1,
+        1
+      ],
+      "forward_absmax": 0.0
+    },
+    {
+      "reuse": true,
+      "shape": [
+        2,
+        1,
+        7
+      ],
+      "forward_absmax": 0.0
+    },
+    {
+      "reuse": true,
+      "shape": [
+        2,
+        13,
+        17
+      ],
+      "forward_absmax": 0.0
+    },
+    {
+      "reuse": true,
+      "shape": [
+        2,
+        17,
+        13
+      ],
+      "forward_absmax": 0.0
+    }
+  ],
+  "interfaces": {
+    "shapes": [
+      [
+        1,
+        52,
+        1,
+        1
+      ],
+      [
+        2,
+        52,
+        1,
+        7
+      ],
+      [
+        2,
+        52,
+        13,
+        17
+      ],
+      [
+        1,
+        52,
+        63,
+        65
+      ],
+      [
+        1,
+        52,
+        65,
+        63
+      ]
+    ],
+    "invalid_state_rejected": true,
+    "batch_independent": true,
+    "no_cache": true,
+    "signed_zero_sum_stress_finite": true
+  },
+  "models": {
+    "counts": {
+      "off": {
+        "trainable": 2194700,
+        "serialized_parameters": 2659528,
+        "deployed": 535772
+      },
+      "independent": {
+        "trainable": 2213056,
+        "serialized_parameters": 2677884,
+        "deployed": 554128
+      },
+      "reuse": {
+        "trainable": 2210300,
+        "serialized_parameters": 2675128,
+        "deployed": 551372
+      }
+    },
+    "base_initialization_identical": true,
+    "rng_identical": true,
+    "identity_with_nonzero_base_branches": true,
+    "common_arm_tensors_identical": true,
+    "receiver_loss_reaches_producer_qk": true,
+    "arms": {
+      "independent": {
+        "steps": [
+          {
+            "step": 1,
+            "loss": 5.80302095413208,
+            "gradient_l1": {
+              "context_2.norm.weight": 0.0,
+              "context_2.norm.bias": 0.0,
+              "context_2.core.temperature": 0.0,
+              "context_2.core.q.weight": 0.0,
+              "context_2.core.q.bias": 0.0,
+              "context_2.core.k.weight": 0.0,
+              "context_2.core.k.bias": 0.0,
+              "context_2.core.v.weight": 0.0,
+              "context_2.core.v.bias": 0.0,
+              "context_2.core.ln_q.layer.weight": 0.0,
+              "context_2.core.ln_q.layer.bias": 0.0,
+              "context_2.core.ln_k.layer.weight": 0.0,
+              "context_2.core.ln_k.layer.bias": 0.0,
+              "context_2.core.lepe.weight": 0.0,
+              "context_2.core.lepe.bias": 0.0,
+              "context_2.core.proj.weight": 0.0001776520803105086,
+              "context_2.core.proj.bias": 1.4694334822706878e-05,
+              "context_2.core.pos_emb.sin_coef": 0.0,
+              "context_2.core.pos_emb.cos_coef": 0.0,
+              "context_4.norm.weight": 0.0,
+              "context_4.norm.bias": 0.0,
+              "context_4.core.temperature": 0.0,
+              "context_4.core.q.weight": 0.0,
+              "context_4.core.q.bias": 0.0,
+              "context_4.core.k.weight": 0.0,
+              "context_4.core.k.bias": 0.0,
+              "context_4.core.v.weight": 0.0,
+              "context_4.core.v.bias": 0.0,
+              "context_4.core.ln_q.layer.weight": 0.0,
+              "context_4.core.ln_q.layer.bias": 0.0,
+              "context_4.core.ln_k.layer.weight": 0.0,
+              "context_4.core.ln_k.layer.bias": 0.0,
+              "context_4.core.lepe.weight": 0.0,
+              "context_4.core.lepe.bias": 0.0,
+              "context_4.core.proj.weight": 0.04042910039424896,
+              "context_4.core.proj.bias": 0.0014865149278193712,
+              "context_4.core.pos_emb.sin_coef": 0.0,
+              "context_4.core.pos_emb.cos_coef": 0.0
+            }
+          },
+          {
+            "step": 2,
+            "loss": 5.366913795471191,
+            "gradient_l1": {
+              "context_2.norm.weight": 4.366213701700872e-08,
+              "context_2.norm.bias": 4.6195843594887265e-08,
+              "context_2.core.temperature": 4.507028528166757e-09,
+              "context_2.core.q.weight": 6.412327593352529e-07,
+              "context_2.core.q.bias": 1.3988127989250643e-08,
+              "context_2.core.k.weight": 9.228361363966542e-07,
+              "context_2.core.k.bias": 1.419330075691505e-08,
+              "context_2.core.v.weight": 1.48109234032745e-06,
+              "context_2.core.v.bias": 4.4231374118908207e-08,
+              "context_2.core.ln_q.layer.weight": 2.0113107268571184e-07,
+              "context_2.core.ln_q.layer.bias": 1.1300471669528633e-08,
+              "context_2.core.ln_k.layer.weight": 1.6613358866379713e-07,
+              "context_2.core.ln_k.layer.bias": 1.0086681712095924e-08,
+              "context_2.core.lepe.weight": 9.396252664828353e-08,
+              "context_2.core.lepe.bias": 3.806155035590564e-08,
+              "context_2.core.proj.weight": 0.00020636044791899621,
+              "context_2.core.proj.bias": 1.7763983123586513e-05,
+              "context_2.core.pos_emb.sin_coef": 1.0597848643101315e-07,
+              "context_2.core.pos_emb.cos_coef": 7.68413315199723e-08,
+              "context_4.norm.weight": 1.0650216609064955e-05,
+              "context_4.norm.bias": 1.3582920473709237e-05,
+              "context_4.core.temperature": 2.4683959054527804e-07,
+              "context_4.core.q.weight": 0.0001795029966160655,
+              "context_4.core.q.bias": 4.179089955869131e-06,
+              "context_4.core.k.weight": 0.00018204236403107643,
+              "context_4.core.k.bias": 4.396661097416654e-06,
+              "context_4.core.v.weight": 0.00055131153203547,
+              "context_4.core.v.bias": 1.4599913811252918e-05,
+              "context_4.core.ln_q.layer.weight": 4.305546099203639e-05,
+              "context_4.core.ln_q.layer.bias": 4.207058736938052e-06,
+              "context_4.core.ln_k.layer.weight": 4.425884617376141e-05,
+              "context_4.core.ln_k.layer.bias": 4.005668415629771e-06,
+              "context_4.core.lepe.weight": 2.3873490135883912e-05,
+              "context_4.core.lepe.bias": 5.838768629473634e-06,
+              "context_4.core.proj.weight": 0.03720327466726303,
+              "context_4.core.proj.bias": 0.0012946655042469501,
+              "context_4.core.pos_emb.sin_coef": 0.010396882891654968,
+              "context_4.core.pos_emb.cos_coef": 6.219257193151861e-05
+            }
+          },
+          {
+            "step": 3,
+            "loss": 4.940382480621338,
+            "gradient_l1": {
+              "context_2.norm.weight": 6.422091303193156e-08,
+              "context_2.norm.bias": 8.616932234417618e-08,
+              "context_2.core.temperature": 7.191892859026439e-09,
+              "context_2.core.q.weight": 9.828738711803453e-07,
+              "context_2.core.q.bias": 2.6873381742120728e-08,
+              "context_2.core.k.weight": 1.205645276058931e-06,
+              "context_2.core.k.bias": 2.1421783458208665e-08,
+              "context_2.core.v.weight": 2.4854441562638385e-06,
+              "context_2.core.v.bias": 9.053997018781956e-08,
+              "context_2.core.ln_q.layer.weight": 3.0737948009118554e-07,
+              "context_2.core.ln_q.layer.bias": 2.2049198022955352e-08,
+              "context_2.core.ln_k.layer.weight": 2.6062306801577506e-07,
+              "context_2.core.ln_k.layer.bias": 1.713449293561098e-08,
+              "context_2.core.lepe.weight": 1.7367101179388555e-07,
+              "context_2.core.lepe.bias": 7.38283745249646e-08,
+              "context_2.core.proj.weight": 0.0003127355012111366,
+              "context_2.core.proj.bias": 3.266294515924528e-05,
+              "context_2.core.pos_emb.sin_coef": 2.8540344487737457e-07,
+              "context_2.core.pos_emb.cos_coef": 2.134094643224671e-07,
+              "context_4.norm.weight": 2.950736234197393e-05,
+              "context_4.norm.bias": 3.7419129512272775e-05,
+              "context_4.core.temperature": 3.307135898467095e-07,
+              "context_4.core.q.weight": 0.0006497730500996113,
+              "context_4.core.q.bias": 1.6863086784724146e-05,
+              "context_4.core.k.weight": 0.0006797644309699535,
+              "context_4.core.k.bias": 1.83682786882855e-05,
+              "context_4.core.v.weight": 0.0013304415624588728,
+              "context_4.core.v.bias": 3.783885404118337e-05,
+              "context_4.core.ln_q.layer.weight": 0.0001522043312434107,
+              "context_4.core.ln_q.layer.bias": 1.6672052879584953e-05,
+              "context_4.core.ln_k.layer.weight": 0.00017295239376835525,
+              "context_4.core.ln_k.layer.bias": 1.8560569515102543e-05,
+              "context_4.core.lepe.weight": 4.211736813886091e-05,
+              "context_4.core.lepe.bias": 1.0010741789301392e-05,
+              "context_4.core.proj.weight": 0.05012841895222664,
+              "context_4.core.proj.bias": 0.0012022017035633326,
+              "context_4.core.pos_emb.sin_coef": 0.052750784903764725,
+              "context_4.core.pos_emb.cos_coef": 0.00011581010767258704
+            }
+          },
+          {
+            "step": 4,
+            "loss": 4.5320024490356445,
+            "gradient_l1": {
+              "context_2.norm.weight": 2.178865088353632e-07,
+              "context_2.norm.bias": 4.2270957578693924e-07,
+              "context_2.core.temperature": 1.032894125785333e-08,
+              "context_2.core.q.weight": 3.348369773448212e-06,
+              "context_2.core.q.bias": 1.1949535405619827e-07,
+              "context_2.core.k.weight": 3.435137386986753e-06,
+              "context_2.core.k.bias": 7.393062873006784e-08,
+              "context_2.core.v.weight": 9.236260666511953e-06,
+              "context_2.core.v.bias": 5.303651846588764e-07,
+              "context_2.core.ln_q.layer.weight": 1.0180851859331597e-06,
+              "context_2.core.ln_q.layer.bias": 1.1266288879596686e-07,
+              "context_2.core.ln_k.layer.weight": 9.773922329259221e-07,
+              "context_2.core.ln_k.layer.bias": 7.380474897900058e-08,
+              "context_2.core.lepe.weight": 7.532947847721516e-07,
+              "context_2.core.lepe.bias": 4.668415840569651e-07,
+              "context_2.core.proj.weight": 0.0021204259246587753,
+              "context_2.core.proj.bias": 0.0002656268479768187,
+              "context_2.core.pos_emb.sin_coef": 1.8492428353056312e-06,
+              "context_2.core.pos_emb.cos_coef": 8.172203820322466e-07,
+              "context_4.norm.weight": 0.00026015579351224005,
+              "context_4.norm.bias": 0.0003826753527391702,
+              "context_4.core.temperature": 3.7800521113240393e-07,
+              "context_4.core.q.weight": 0.004995887633413076,
+              "context_4.core.q.bias": 0.0001420767803210765,
+              "context_4.core.k.weight": 0.004835079424083233,
+              "context_4.core.k.bias": 0.00014975327940192074,
+              "context_4.core.v.weight": 0.004146575927734375,
+              "context_4.core.v.bias": 0.00013397261500358582,
+              "context_4.core.ln_q.layer.weight": 0.0012210779823362827,
+              "context_4.core.ln_q.layer.bias": 0.00014163990272209048,
+              "context_4.core.ln_k.layer.weight": 0.001232300652191043,
+              "context_4.core.ln_k.layer.bias": 0.00014973466750234365,
+              "context_4.core.lepe.weight": 5.172450983081944e-05,
+              "context_4.core.lepe.bias": 1.254303970199544e-05,
+              "context_4.core.proj.weight": 0.11784854531288147,
+              "context_4.core.proj.bias": 0.0010999399237334728,
+              "context_4.core.pos_emb.sin_coef": 0.48368749022483826,
+              "context_4.core.pos_emb.cos_coef": 0.00020389736164361238
+            }
+          }
+        ],
+        "all_new_parameters_changed": true,
+        "exact_resume": true,
+        "strict_reload": true,
+        "fused_fp64_absmax": 0.0,
+        "layer_norm_count": 2,
+        "train_eval_fp64_absmax": 3.241851231905457e-14,
+        "train_eval_fp32_absmax": 1.1920928955078125e-05,
+        "fourier_denominators": {
+          "context_2.sin_coef": {
+            "min_abs_sum": 0.0570097491145134,
+            "floored_columns": 0
+          },
+          "context_2.cos_coef": {
+            "min_abs_sum": 0.09802018105983734,
+            "floored_columns": 0
+          },
+          "context_4.sin_coef": {
+            "min_abs_sum": 0.00146445631980896,
+            "floored_columns": 0
+          },
+          "context_4.cos_coef": {
+            "min_abs_sum": 0.029240667819976807,
+            "floored_columns": 0
+          }
+        }
+      },
+      "reuse": {
+        "steps": [
+          {
+            "step": 1,
+            "loss": 5.80302095413208,
+            "gradient_l1": {
+              "context_2.norm.weight": 0.0,
+              "context_2.norm.bias": 0.0,
+              "context_2.core.temperature": 0.0,
+              "context_2.core.q.weight": 0.0,
+              "context_2.core.q.bias": 0.0,
+              "context_2.core.k.weight": 0.0,
+              "context_2.core.k.bias": 0.0,
+              "context_2.core.v.weight": 0.0,
+              "context_2.core.v.bias": 0.0,
+              "context_2.core.ln_q.layer.weight": 0.0,
+              "context_2.core.ln_q.layer.bias": 0.0,
+              "context_2.core.ln_k.layer.weight": 0.0,
+              "context_2.core.ln_k.layer.bias": 0.0,
+              "context_2.core.lepe.weight": 0.0,
+              "context_2.core.lepe.bias": 0.0,
+              "context_2.core.proj.weight": 0.0001776520803105086,
+              "context_2.core.proj.bias": 1.4694334822706878e-05,
+              "context_2.core.pos_emb.sin_coef": 0.0,
+              "context_2.core.pos_emb.cos_coef": 0.0,
+              "context_4.norm.weight": 0.0,
+              "context_4.norm.bias": 0.0,
+              "context_4.core.temperature": 0.0,
+              "context_4.core.v.weight": 0.0,
+              "context_4.core.v.bias": 0.0,
+              "context_4.core.ln_q.layer.weight": 0.0,
+              "context_4.core.ln_q.layer.bias": 0.0,
+              "context_4.core.ln_k.layer.weight": 0.0,
+              "context_4.core.ln_k.layer.bias": 0.0,
+              "context_4.core.lepe.weight": 0.0,
+              "context_4.core.lepe.bias": 0.0,
+              "context_4.core.proj.weight": 0.06219961494207382,
+              "context_4.core.proj.bias": 0.0014865149278193712,
+              "context_4.core.pos_emb.sin_coef": 0.0,
+              "context_4.core.pos_emb.cos_coef": 0.0
+            }
+          },
+          {
+            "step": 2,
+            "loss": 5.366912841796875,
+            "gradient_l1": {
+              "context_2.norm.weight": 1.2235341273481026e-05,
+              "context_2.norm.bias": 1.2525886631920002e-05,
+              "context_2.core.temperature": 4.354659299821151e-09,
+              "context_2.core.q.weight": 0.0002813447790686041,
+              "context_2.core.q.bias": 5.974709438305581e-06,
+              "context_2.core.k.weight": 0.00023892338504083455,
+              "context_2.core.k.bias": 7.866635314712767e-06,
+              "context_2.core.v.weight": 1.457784037484089e-06,
+              "context_2.core.v.bias": 4.5204401999399124e-08,
+              "context_2.core.ln_q.layer.weight": 1.9495689684845274e-07,
+              "context_2.core.ln_q.layer.bias": 1.0969919195247257e-08,
+              "context_2.core.ln_k.layer.weight": 1.6204171515710186e-07,
+              "context_2.core.ln_k.layer.bias": 9.76400293950519e-09,
+              "context_2.core.lepe.weight": 9.458942429318995e-08,
+              "context_2.core.lepe.bias": 3.712654716991892e-08,
+              "context_2.core.proj.weight": 0.00020041030074935406,
+              "context_2.core.proj.bias": 1.7675658455118537e-05,
+              "context_2.core.pos_emb.sin_coef": 9.853559390649025e-08,
+              "context_2.core.pos_emb.cos_coef": 7.267796320320485e-08,
+              "context_4.norm.weight": 1.1657875802484341e-05,
+              "context_4.norm.bias": 1.4616765838582069e-05,
+              "context_4.core.temperature": 2.2713396674589603e-07,
+              "context_4.core.v.weight": 0.0005882218247279525,
+              "context_4.core.v.bias": 1.5341116522904485e-05,
+              "context_4.core.ln_q.layer.weight": 9.50286048464477e-05,
+              "context_4.core.ln_q.layer.bias": 5.853260518051684e-06,
+              "context_4.core.ln_k.layer.weight": 6.374911754392087e-05,
+              "context_4.core.ln_k.layer.bias": 7.3956662163254805e-06,
+              "context_4.core.lepe.weight": 2.2473966964753345e-05,
+              "context_4.core.lepe.bias": 5.2735404096893035e-06,
+              "context_4.core.proj.weight": 0.04159001260995865,
+              "context_4.core.proj.bias": 0.0012947000795975327,
+              "context_4.core.pos_emb.sin_coef": 0.01524815708398819,
+              "context_4.core.pos_emb.cos_coef": 6.930537347216159e-05
+            }
+          },
+          {
+            "step": 3,
+            "loss": 4.940385341644287,
+            "gradient_l1": {
+              "context_2.norm.weight": 2.2291018467512913e-05,
+              "context_2.norm.bias": 2.5357541744597256e-05,
+              "context_2.core.temperature": 6.873608349167171e-09,
+              "context_2.core.q.weight": 0.000531100551597774,
+              "context_2.core.q.bias": 1.4200955774867907e-05,
+              "context_2.core.k.weight": 0.0005039738025516272,
+              "context_2.core.k.bias": 1.4429985640163068e-05,
+              "context_2.core.v.weight": 2.489751523171435e-06,
+              "context_2.core.v.bias": 9.64051309892966e-08,
+              "context_2.core.ln_q.layer.weight": 3.0423865382545046e-07,
+              "context_2.core.ln_q.layer.bias": 2.3552644279334345e-08,
+              "context_2.core.ln_k.layer.weight": 2.660793541053863e-07,
+              "context_2.core.ln_k.layer.bias": 1.826925810632929e-08,
+              "context_2.core.lepe.weight": 1.767919854955835e-07,
+              "context_2.core.lepe.bias": 7.740412399925845e-08,
+              "context_2.core.proj.weight": 0.00022334832465276122,
+              "context_2.core.proj.bias": 2.276894883834757e-05,
+              "context_2.core.pos_emb.sin_coef": 2.6190673452219926e-07,
+              "context_2.core.pos_emb.cos_coef": 2.1983720444040955e-07,
+              "context_4.norm.weight": 2.2434816855820827e-05,
+              "context_4.norm.bias": 2.8591322916327044e-05,
+              "context_4.core.temperature": 3.5269783893454587e-07,
+              "context_4.core.v.weight": 0.0010877072345465422,
+              "context_4.core.v.bias": 2.995258546434343e-05,
+              "context_4.core.ln_q.layer.weight": 0.00019633254851214588,
+              "context_4.core.ln_q.layer.bias": 1.3983556527819019e-05,
+              "context_4.core.ln_k.layer.weight": 0.00015543711197096854,
+              "context_4.core.ln_k.layer.bias": 1.4218081560102291e-05,
+              "context_4.core.lepe.weight": 4.000890112365596e-05,
+              "context_4.core.lepe.bias": 8.996305041364394e-06,
+              "context_4.core.proj.weight": 0.045407894998788834,
+              "context_4.core.proj.bias": 0.00120274699293077,
+              "context_4.core.pos_emb.sin_coef": 0.049471572041511536,
+              "context_4.core.pos_emb.cos_coef": 0.00013795743871014565
+            }
+          },
+          {
+            "step": 4,
+            "loss": 4.532015800476074,
+            "gradient_l1": {
+              "context_2.norm.weight": 0.00011103239376097918,
+              "context_2.norm.bias": 0.00017443799879401922,
+              "context_2.core.temperature": 7.239688848414971e-09,
+              "context_2.core.q.weight": 0.002680818550288677,
+              "context_2.core.q.bias": 9.20034508453682e-05,
+              "context_2.core.k.weight": 0.002814964856952429,
+              "context_2.core.k.bias": 9.599835175322369e-05,
+              "context_2.core.v.weight": 5.105125637783203e-06,
+              "context_2.core.v.bias": 2.3362755996458873e-07,
+              "context_2.core.ln_q.layer.weight": 6.329114512482192e-07,
+              "context_2.core.ln_q.layer.bias": 6.361992888059831e-08,
+              "context_2.core.ln_k.layer.weight": 5.606744934993912e-07,
+              "context_2.core.ln_k.layer.bias": 4.3541835026417175e-08,
+              "context_2.core.lepe.weight": 3.4384925129415933e-07,
+              "context_2.core.lepe.bias": 1.8063437323689868e-07,
+              "context_2.core.proj.weight": 0.00038657852564938366,
+              "context_2.core.proj.bias": 4.864651054958813e-05,
+              "context_2.core.pos_emb.sin_coef": 6.307848252617987e-07,
+              "context_2.core.pos_emb.cos_coef": 4.7395838009833824e-07,
+              "context_4.norm.weight": 6.553086859639734e-05,
+              "context_4.norm.bias": 9.068370854947716e-05,
+              "context_4.core.temperature": 3.3876636962304474e-07,
+              "context_4.core.v.weight": 0.00310555100440979,
+              "context_4.core.v.bias": 9.531238174531609e-05,
+              "context_4.core.ln_q.layer.weight": 0.0009055306436493993,
+              "context_4.core.ln_q.layer.bias": 9.20619786484167e-05,
+              "context_4.core.ln_k.layer.weight": 0.0007410467369481921,
+              "context_4.core.ln_k.layer.bias": 9.602641512174159e-05,
+              "context_4.core.lepe.weight": 5.011285247746855e-05,
+              "context_4.core.lepe.bias": 1.1092915883637033e-05,
+              "context_4.core.proj.weight": 0.09993202984333038,
+              "context_4.core.proj.bias": 0.00110270653385669,
+              "context_4.core.pos_emb.sin_coef": 0.3916274905204773,
+              "context_4.core.pos_emb.cos_coef": 0.0002852463803719729
+            }
+          }
+        ],
+        "all_new_parameters_changed": true,
+        "exact_resume": true,
+        "strict_reload": true,
+        "fused_fp64_absmax": 0.0,
+        "layer_norm_count": 2,
+        "train_eval_fp64_absmax": 2.842170943040401e-14,
+        "train_eval_fp32_absmax": 1.33514404296875e-05,
+        "fourier_denominators": {
+          "context_2.sin_coef": {
+            "min_abs_sum": 0.05737188830971718,
+            "floored_columns": 0
+          },
+          "context_2.cos_coef": {
+            "min_abs_sum": 0.09773789346218109,
+            "floored_columns": 0
+          },
+          "context_4.sin_coef": {
+            "min_abs_sum": 0.0012463629245758057,
+            "floored_columns": 0
+          },
+          "context_4.cos_coef": {
+            "min_abs_sum": 0.029543057084083557,
+            "floored_columns": 0
+          }
+        }
+      }
+    }
+  }
+}

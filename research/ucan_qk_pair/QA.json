@@ -1,0 +1,55 @@
+{
+  "status": "PASS_SYNTHETIC_ENGINEERING_ONLY",
+  "candidate": "SG6-UCAN-QKPair-v2",
+  "base_commit": "e731483d4ce4e325f3d64dbbc80add342b46f7f1",
+  "implementation_commit": "5914b0147b6000ca31edeea0ef89d98634577906",
+  "original_sg6_clean_at_fixed_commit": true,
+  "only_new_candidate_directory_changed": true,
+  "source_manifest": {
+    "repository": "https://github.com/hokiyoshi/UCAN",
+    "commit": "b812c0adb8ce70d442973db5c87bab7d1e8c3333",
+    "license": "Apache-2.0",
+    "files": {
+      "ucan_arch.py": "d1673486ad78b9a80e46741d94e4267c45e2e763be93b3a25fc5466ec5b1ad3a",
+      "LICENSE": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4"
+    }
+  },
+  "source_files": {
+    "attention.py": "79fd8f6c317da50e8e372fb3cbfb7b21edcf5216017e1f9d3713b3500e620b50",
+    "diagnose.py": "38c55d46bdea7e688fec0ba0c9d4793e1db1489d205da0fa8f73cb5714460272",
+    "integration.py": "21dfe87efe05e3a3b709d37911ad19118ec0c1cf828966fcf0e24ab63990242f",
+    "pair_model.py": "26327e635faf8ce1abf4ee1cd4c1cb14d176f5230edb65aefa1f9b549a150026",
+    "resources.py": "7d85957fe19c945f016ebc5854e44fbaad3025016c2357e8ca5a0bb866199eb8",
+    "run.py": "dfda092f235cc0b6c71a76f3d0008d64e73b8964d7770ad40307e4922620c287",
+    "training_probe.py": "4f5788f688edb9189c2fc306204d23a4de40cbef633c8e6938641e23e9310029",
+    "verify.py": "2d80b466eb35b143f4f821438bcdd053cb88b593a39473145c5eb47e841f3d0b",
+    "configs\\SG6-UCAN-independent.json": "ef21594660cbe6307bf8d98d4e9f284753445830840da32d3b5a7111edb34693",
+    "configs\\SG6-UCAN-off.json": "d56e669c0d6a086e856bb10dbb0adfc62d1645ff58697de5217111aafd4183fe",
+    "configs\\SG6-UCAN-reuse.json": "9834d257df602ccb7821bbdcd9813eee7b84ac43dafa616e8e6928d3fb8cfbec",
+    "vendor\\manifest.json": "6ce40e0923a44bd1653389d103437895efefd3b42c5bb9fe09bd8c3e86880fd2",
+    "vendor\\ucan_arch.py": "d1673486ad78b9a80e46741d94e4267c45e2e763be93b3a25fc5466ec5b1ad3a"
+  },
+  "checks": [
+    "source-signed core forward/backward equivalence",
+    "v2 abs-sum formula and cancellation stress",
+    "RMS writeback formula",
+    "positive odd/rectangular sizes; batch1/2; invalid state rejection",
+    "unchanged SG6 keys/weights/RNG and nonzero branch semantics",
+    "two branch-only LNs; no BN/GN",
+    "new parameter optimizer coverage, startup and updates",
+    "receiver loss reaches producer Q/K",
+    "strict reload and exact model/Adam/scheduler/RNG resume",
+    "unchanged shared trainer synthetic entry, accumulation, cache and log recovery",
+    "original micro16 HR256 effective64 synthetic resource probe"
+  ],
+  "performance_claim": false,
+  "real_data_training_started": false,
+  "remote_push": false,
+  "limitations": [
+    "No real-data PSNR or long-run stability evidence",
+    "No multi-seed evidence",
+    "Server environment/data/protocol fingerprint not audited",
+    "Laptop timings are indicative and vary with desktop load; reuse has no demonstrated speed advantage",
+    "v2 deliberately changes Fourier normalization and branch writeback from the original UCAN equations"
+  ]
+}

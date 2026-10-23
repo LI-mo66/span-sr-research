@@ -1,0 +1,284 @@
+{
+  "scope": "synthetic checkpoint and random RGB inputs; descriptive, not PSNR evidence",
+  "run": "E:\\SPANimagebase\\span-sg6-ucan\\runs\\ENGINEERING-UCAN-IND-85f78450df",
+  "updates": 4,
+  "torch": "2.9.1+cu128",
+  "sizes": {
+    "13x17": {
+      "context_2": {
+        "fourier": {
+          "sin_coef": {
+            "min_abs_sum": 0.057026807218790054,
+            "floored_columns": 0
+          },
+          "cos_coef": {
+            "min_abs_sum": 0.09673667699098587,
+            "floored_columns": 0
+          }
+        },
+        "before_norm": {
+          "mean": 0.024830803071863024,
+          "rms": 1.305795763966817,
+          "absmax": 9.197563171386719,
+          "finite": true
+        },
+        "after_norm": {
+          "mean": -1.7942342322591315e-06,
+          "rms": 1.0000173129345578,
+          "absmax": 5.24862813949585,
+          "finite": true
+        },
+        "spatial_denominator_min": 0.0172924492508173,
+        "spatial_inverse_max": 57.82870864868164,
+        "input": {
+          "mean": 0.024830803071863024,
+          "rms": 1.305795763966817,
+          "absmax": 9.197563171386719,
+          "finite": true
+        },
+        "correction": {
+          "mean": 0.0003008309738346892,
+          "rms": 0.0031303177548735093,
+          "absmax": 0.008230507373809814,
+          "finite": true
+        },
+        "output": {
+          "mean": 0.02513163404571259,
+          "rms": 1.3059649984081096,
+          "absmax": 9.199529647827148,
+          "finite": true
+        },
+        "correction_to_input_rms": 0.002397249126742501
+      },
+      "context_4": {
+        "fourier": {
+          "sin_coef": {
+            "min_abs_sum": 0.0015617460012435913,
+            "floored_columns": 0
+          },
+          "cos_coef": {
+            "min_abs_sum": 0.029763415455818176,
+            "floored_columns": 0
+          }
+        },
+        "before_norm": {
+          "mean": 0.0011934710847733726,
+          "rms": 0.016403499641233697,
+          "absmax": 0.10984184592962265,
+          "finite": true
+        },
+        "after_norm": {
+          "mean": 1.770134141040286e-05,
+          "rms": 0.9758423453474901,
+          "absmax": 4.14700984954834,
+          "finite": true
+        },
+        "spatial_denominator_min": 0.01364142820239067,
+        "spatial_inverse_max": 73.30610656738281,
+        "input": {
+          "mean": 0.0011934710847733726,
+          "rms": 0.016403499641233697,
+          "absmax": 0.10984184592962265,
+          "finite": true
+        },
+        "correction": {
+          "mean": 0.004884950082212921,
+          "rms": 0.8553335559156421,
+          "absmax": 5.101912975311279,
+          "finite": true
+        },
+        "output": {
+          "mean": 0.006078421445377244,
+          "rms": 0.8565939101309662,
+          "absmax": 5.117237567901611,
+          "finite": true
+        },
+        "correction_to_input_rms": 52.14335810180278
+      }
+    },
+    "64x64": {
+      "context_2": {
+        "fourier": {
+          "sin_coef": {
+            "min_abs_sum": 0.057026807218790054,
+            "floored_columns": 0
+          },
+          "cos_coef": {
+            "min_abs_sum": 0.09673667699098587,
+            "floored_columns": 0
+          }
+        },
+        "before_norm": {
+          "mean": 0.04649439869063457,
+          "rms": 1.52169675686266,
+          "absmax": 15.767260551452637,
+          "finite": true
+        },
+        "after_norm": {
+          "mean": -2.1276056528187674e-06,
+          "rms": 1.0000197737670278,
+          "absmax": 5.515242576599121,
+          "finite": true
+        },
+        "spatial_denominator_min": 0.015726832672953606,
+        "spatial_inverse_max": 63.585594177246094,
+        "input": {
+          "mean": 0.04649439869063457,
+          "rms": 1.52169675686266,
+          "absmax": 15.767260551452637,
+          "finite": true
+        },
+        "correction": {
+          "mean": 0.0002732123828015695,
+          "rms": 0.002783019938502926,
+          "absmax": 0.008166015148162842,
+          "finite": true
+        },
+        "output": {
+          "mean": 0.046767611073438554,
+          "rms": 1.5218657318006703,
+          "absmax": 15.767816543579102,
+          "finite": true
+        },
+        "correction_to_input_rms": 0.0018288926002844243
+      },
+      "context_4": {
+        "fourier": {
+          "sin_coef": {
+            "min_abs_sum": 0.0015617460012435913,
+            "floored_columns": 0
+          },
+          "cos_coef": {
+            "min_abs_sum": 0.029763415455818176,
+            "floored_columns": 0
+          }
+        },
+        "before_norm": {
+          "mean": 0.0014142706301618947,
+          "rms": 0.018425065826003676,
+          "absmax": 0.18624617159366608,
+          "finite": true
+        },
+        "after_norm": {
+          "mean": 1.6579902191229315e-05,
+          "rms": 0.978585912261289,
+          "absmax": 4.388313293457031,
+          "finite": true
+        },
+        "spatial_denominator_min": 0.013399522751569748,
+        "spatial_inverse_max": 74.62952423095703,
+        "input": {
+          "mean": 0.0014142706301618947,
+          "rms": 0.018425065826003676,
+          "absmax": 0.18624617159366608,
+          "finite": true
+        },
+        "correction": {
+          "mean": 0.0006386280386964863,
+          "rms": 0.14476364607997164,
+          "absmax": 1.3691456317901611,
+          "finite": true
+        },
+        "output": {
+          "mean": 0.00205289866494746,
+          "rms": 0.14636730338252404,
+          "absmax": 1.3670241832733154,
+          "finite": true
+        },
+        "correction_to_input_rms": 7.856886235687892
+      }
+    },
+    "63x65": {
+      "context_2": {
+        "fourier": {
+          "sin_coef": {
+            "min_abs_sum": 0.057026807218790054,
+            "floored_columns": 0
+          },
+          "cos_coef": {
+            "min_abs_sum": 0.09673667699098587,
+            "floored_columns": 0
+          }
+        },
+        "before_norm": {
+          "mean": 0.04690226519240234,
+          "rms": 1.5164566454063824,
+          "absmax": 18.082223892211914,
+          "finite": true
+        },
+        "after_norm": {
+          "mean": -2.0963895835075586e-06,
+          "rms": 1.00001999871953,
+          "absmax": 5.55698299407959,
+          "finite": true
+        },
+        "spatial_denominator_min": 0.01651388220489025,
+        "spatial_inverse_max": 60.555110931396484,
+        "input": {
+          "mean": 0.04690226519240234,
+          "rms": 1.5164566454063824,
+          "absmax": 18.082223892211914,
+          "finite": true
+        },
+        "correction": {
+          "mean": 0.0002749619207205069,
+          "rms": 0.002783654251322474,
+          "absmax": 0.00807991623878479,
+          "finite": true
+        },
+        "output": {
+          "mean": 0.04717722711311422,
+          "rms": 1.5166244912203368,
+          "absmax": 18.082210540771484,
+          "finite": true
+        },
+        "correction_to_input_rms": 0.0018356306194144483
+      },
+      "context_4": {
+        "fourier": {
+          "sin_coef": {
+            "min_abs_sum": 0.0015617460012435913,
+            "floored_columns": 0
+          },
+          "cos_coef": {
+            "min_abs_sum": 0.029763415455818176,
+            "floored_columns": 0
+          }
+        },
+        "before_norm": {
+          "mean": 0.0014157667887988272,
+          "rms": 0.018382958049078305,
+          "absmax": 0.21698196232318878,
+          "finite": true
+        },
+        "after_norm": {
+          "mean": 1.6534557407293524e-05,
+          "rms": 0.9785916341657982,
+          "absmax": 4.294040203094482,
+          "finite": true
+        },
+        "spatial_denominator_min": 0.013703427277505398,
+        "spatial_inverse_max": 72.97444152832031,
+        "input": {
+          "mean": 0.0014157667887988272,
+          "rms": 0.018382958049078305,
+          "absmax": 0.21698196232318878,
+          "finite": true
+        },
+        "correction": {
+          "mean": 0.0006015506911247858,
+          "rms": 0.15010095573388574,
+          "absmax": 1.2032403945922852,
+          "finite": true
+        },
+        "output": {
+          "mean": 0.002017317463891077,
+          "rms": 0.15162832395457088,
+          "absmax": 1.2175102233886719,
+          "finite": true
+        },
+        "correction_to_input_rms": 8.165223210168376
+      }
+    }
+  }
+}

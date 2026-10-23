@@ -1,0 +1,7 @@
+{
+  "status": "REJECTED_FOR_SCALE_MISMATCH",
+  "implementation_commit": "ea7970e",
+  "reason": "context4 correction/input RMS 7.86--52.14 after four synthetic updates; finite-output tests were insufficient",
+  "scope": "synthetic evidence; no real-data performance",
+  "action": "v2 uses abs-sum Fourier normalization and detached per-image RMS writeback"
+}

@@ -1,0 +1,56 @@
+{
+  "scope": "random images; two effective64 updates, micro16, HR256; no accuracy evidence",
+  "torch": "2.9.1+cu128",
+  "gpu": "NVIDIA GeForce RTX 4060 Laptop GPU",
+  "precision": "FP32 TF32 off",
+  "arms": {
+    "off": [
+      {
+        "step": 1,
+        "synthetic_loss": 6.138261318206787,
+        "seconds": 2.2646121999996467,
+        "peak_allocated_bytes": 2449560576,
+        "peak_reserved_bytes": 2564816896
+      },
+      {
+        "step": 2,
+        "synthetic_loss": 5.6788249015808105,
+        "seconds": 1.4588564000005135,
+        "peak_allocated_bytes": 2467238912,
+        "peak_reserved_bytes": 2564816896
+      }
+    ],
+    "independent": [
+      {
+        "step": 1,
+        "synthetic_loss": 6.138261318206787,
+        "seconds": 3.2927357999997184,
+        "peak_allocated_bytes": 2891247616,
+        "peak_reserved_bytes": 3040870400
+      },
+      {
+        "step": 2,
+        "synthetic_loss": 5.678824424743652,
+        "seconds": 1.6621165999995355,
+        "peak_allocated_bytes": 2909095936,
+        "peak_reserved_bytes": 3047161856
+      }
+    ],
+    "reuse": [
+      {
+        "step": 1,
+        "synthetic_loss": 6.138261318206787,
+        "seconds": 1.74308739999924,
+        "peak_allocated_bytes": 2877591552,
+        "peak_reserved_bytes": 3007315968
+      },
+      {
+        "step": 2,
+        "synthetic_loss": 5.678824424743652,
+        "seconds": 1.6562243999997008,
+        "peak_allocated_bytes": 2895415296,
+        "peak_reserved_bytes": 3013607424
+      }
+    ]
+  }
+}
