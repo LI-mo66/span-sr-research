@@ -1,10 +1,11 @@
 """Linux one-arm 50K controller, read-only baseline audit, persistent backup.
 
-No shutdown, instance-release, package installation, or automatic resume.
+The finish.sh wrapper implements user-authorized release after this exits.
 """
 import argparse
 from datetime import datetime, timezone
 import json
+import os
 from pathlib import Path
 import shutil
 import subprocess
@@ -48,7 +49,8 @@ def main():
     if (job/'status.json').exists() or run.exists() or (job/'frozen').exists():
         raise FileExistsError('Existing experiment preserved; no automatic restart')
     status=dict(id=a.id,stage='preflight',training_exit_code=None,comparison_exit_code=None,
-                plotting_exit_code=None,backup_exit_code=None,auto_release=False,success=False)
+                plotting_exit_code=None,backup_exit_code=None,
+                auto_release=os.environ.get('UCAN_AUTO_RELEASE')=='1',success=False)
     status_path=job/'status.json'
     a.backup_root.mkdir(parents=True,exist_ok=True)
     import fcntl
@@ -129,7 +131,7 @@ def main():
         write(destination/'FINAL_STATUS.json',status)
     write(a.backup_root/(a.id+'-'+stamp+'-status.json'),status)
     print(json.dumps(status,indent=2),flush=True)
-    print('Instance retained. Check training/comparison/backup exit codes, not only BACKUP_COMPLETE.',flush=True)
+    print('Controller finished. The wrapper releases only after verified success; failures retain the instance.',flush=True)
     fcntl.flock(lock,fcntl.LOCK_UN)
     lock.close()
     raise SystemExit(status['exit_code'])

@@ -58,5 +58,10 @@ launch.sh只提交一个nohup后台控制器，立即返回PID/log/status路径�
 training_exit_code=0、comparison_exit_code=0、plotting_exit_code=0、backup_exit_code=0。
 null或-1表示相应步骤没有执行。失败现场保留，不自动续训、不静默重启。
 
-不自动关机或释放实例，不启动共享版、SG6重训或长训。不含SSH远程执行代码。
+用户于2026-10-23明确要求自动关机：launch.sh使用nohup启动finish.sh，
+只有训练、比较、绘图、备份全部成功且持久备份再次通过哈希校验，才调用
+`featurize instance release`释放实例。控制器及CUDA子进程退出后重新获取共享GPU锁，
+若GPU有其它计算进程则保留实例。任一步失败不释放。release-status.txt保存在
+持久备份内，记录释放请求/命令结果；请求不等于已确认平台关机。
+不启动共享版、SG6重训或长训。不含SSH远程执行代码。
 共享版只保留工程机制验证接口，若后续获准训练，另从固定基座建立独立分支/目录。

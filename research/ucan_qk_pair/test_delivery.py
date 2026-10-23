@@ -15,6 +15,12 @@ def save(path,value):
 
 
 def main():
+    from release_guard import successful
+    good=dict(success=True,training_exit_code=0,comparison_exit_code=0,plotting_exit_code=0,backup_exit_code=0,exit_code=0)
+    assert successful(good)
+    for key in good:
+        assert not successful(dict(good,**{key:False if key=='success' else 1}))
+    assert not successful(dict(good,training_exit_code=None))
     root=HERE.parents[1]
     (root/'tmp').mkdir(exist_ok=True)
     with tempfile.TemporaryDirectory(dir=root/'tmp',prefix='ucan-delivery-test-') as temp:
