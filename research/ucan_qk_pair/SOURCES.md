@@ -64,6 +64,12 @@ against explicit formulas separately. They do not establish whole-v2 equivalence
 to UCAN or learned performance. v1 source, failures, and diagnostics are retained
 in Git and engineering artifacts rather than overwritten as a successful model.
 
+Dependency repair after the first server preflight: the original selected
+classes only call rearrange with `b l c -> b c l`. The reference scope now maps
+that exact expression to Tensor.transpose(1,2), rejecting any other pattern.
+The vendor file stays unchanged. No model equation, parameter, initializer,
+optimizer or protocol changes; einops is no longer a server dependency.
+
 ## Evidence boundaries
 
 - Source fact: implementation above, licensed code, equations and interfaces.

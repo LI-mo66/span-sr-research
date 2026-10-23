@@ -1,0 +1,156 @@
+{
+  "status": "PASS",
+  "einops_import_blocked": true,
+  "imports": true,
+  "scope": "dependency regression and unchanged reference equations; no real training",
+  "source_reference": {
+    "cpu": [
+      {
+        "reuse": false,
+        "shape": [
+          2,
+          1,
+          1
+        ],
+        "forward_absmax": 0.0
+      },
+      {
+        "reuse": false,
+        "shape": [
+          2,
+          1,
+          7
+        ],
+        "forward_absmax": 0.0
+      },
+      {
+        "reuse": false,
+        "shape": [
+          2,
+          13,
+          17
+        ],
+        "forward_absmax": 0.0
+      },
+      {
+        "reuse": false,
+        "shape": [
+          2,
+          17,
+          13
+        ],
+        "forward_absmax": 0.0
+      },
+      {
+        "reuse": true,
+        "shape": [
+          2,
+          1,
+          1
+        ],
+        "forward_absmax": 0.0
+      },
+      {
+        "reuse": true,
+        "shape": [
+          2,
+          1,
+          7
+        ],
+        "forward_absmax": 0.0
+      },
+      {
+        "reuse": true,
+        "shape": [
+          2,
+          13,
+          17
+        ],
+        "forward_absmax": 0.0
+      },
+      {
+        "reuse": true,
+        "shape": [
+          2,
+          17,
+          13
+        ],
+        "forward_absmax": 0.0
+      }
+    ],
+    "cuda": [
+      {
+        "reuse": false,
+        "shape": [
+          2,
+          1,
+          1
+        ],
+        "forward_absmax": 0.0
+      },
+      {
+        "reuse": false,
+        "shape": [
+          2,
+          1,
+          7
+        ],
+        "forward_absmax": 0.0
+      },
+      {
+        "reuse": false,
+        "shape": [
+          2,
+          13,
+          17
+        ],
+        "forward_absmax": 0.0
+      },
+      {
+        "reuse": false,
+        "shape": [
+          2,
+          17,
+          13
+        ],
+        "forward_absmax": 0.0
+      },
+      {
+        "reuse": true,
+        "shape": [
+          2,
+          1,
+          1
+        ],
+        "forward_absmax": 0.0
+      },
+      {
+        "reuse": true,
+        "shape": [
+          2,
+          1,
+          7
+        ],
+        "forward_absmax": 0.0
+      },
+      {
+        "reuse": true,
+        "shape": [
+          2,
+          13,
+          17
+        ],
+        "forward_absmax": 0.0
+      },
+      {
+        "reuse": true,
+        "shape": [
+          2,
+          17,
+          13
+        ],
+        "forward_absmax": 0.0
+      }
+    ]
+  }
+}

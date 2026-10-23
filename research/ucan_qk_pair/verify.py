@@ -13,7 +13,6 @@ import traceback
 os.environ.setdefault('CUBLAS_WORKSPACE_CONFIG', ':4096:8')
 import torch
 from torch import nn
-from einops import rearrange
 
 from run import HERE, existing, validate_config
 from attention import ContextAdapter, DualInteraction, FourierEmbedding, QKState
@@ -34,6 +33,14 @@ def rejects(function):
     raise AssertionError('Invalid interface/config was accepted')
 
 
+def reference_transpose(tensor, pattern):
+    # The AST-extracted SDFL/DFRL classes use only this pure permutation.
+    # Resolve it explicitly without importing the rest of UCAN or einops.
+    if pattern != 'b l c -> b c l' or tensor.ndim != 3:
+        raise ValueError('Unexpected layout expression in the locked reference')
+    return tensor.transpose(1, 2)
+
+
 def source_scope():
     manifest = json.loads((HERE / 'vendor/manifest.json').read_text())
     for filename, sha in manifest['files'].items():
@@ -42,7 +49,7 @@ def source_scope():
     names = {'HedgehogFeatureMap', 'RotaryEmbedding', 'FourierEmbedding', 'SDFL', 'DFRL'}
     nodes = [n for n in tree.body if isinstance(n, ast.ClassDef) and n.name in names]
     assert {n.name for n in nodes} == names
-    scope = dict(torch=torch, nn=nn, F=torch.nn.functional, math=math, rearrange=rearrange)
+    scope = dict(torch=torch, nn=nn, F=torch.nn.functional, math=math, rearrange=reference_transpose)
     exec(compile(ast.Module(body=nodes, type_ignores=[]), 'locked-UCAN-reference', 'exec'), scope)
     return scope
 

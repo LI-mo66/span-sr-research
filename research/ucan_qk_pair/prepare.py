@@ -81,7 +81,7 @@ def main():
     torch.backends.cudnn.allow_tf32=True; torch.backends.cuda.matmul.allow_tf32=False
     env=dict(torch=torch.__version__,cuda=torch.version.cuda,device=torch.cuda.get_device_name(),deterministic=True,cudnn_allow_tf32=True,matmul_allow_tf32=False)
     if env!=manifest['environment']: raise ValueError('Reference CUDA environment differs')
-    import numpy,cv2,scipy,einops,matplotlib
+    import numpy,cv2,scipy,matplotlib
     if platform.python_version()!='3.11.8' or (numpy.__version__,cv2.__version__,scipy.__version__)!=('1.26.4','4.10.0','1.13.1'):
         raise ValueError('Reference Python/metric/image dependency mismatch')
     paths=relocate_paths(paths_from_manifest(manifest['data']),a.data_root)
@@ -105,7 +105,7 @@ def main():
     pathfile=a.output/'paths.json'; pathfile.write_text(json.dumps(paths,indent=2))
     config['paths_file']=str(pathfile.resolve()); validate_config(config)
     (a.output/'config.json').write_text(json.dumps(config,indent=2))
-    audit=dict(status='PASS',fixed_base=BASE,candidate_source=git('rev-parse','HEAD'),candidate_config=config,reference_selected=best,reference_final=rows[-1],reference_run=str(folder),reference_weight_sha256=WEIGHT_SHA,environment=env,dependencies=dict(python=platform.python_version(),numpy=numpy.__version__,opencv=cv2.__version__,scipy=scipy.__version__,einops=einops.__version__,matplotlib=matplotlib.__version__),scope='scratch seed10; no reference weights loaded')
+    audit=dict(status='PASS',fixed_base=BASE,candidate_source=git('rev-parse','HEAD'),candidate_config=config,reference_selected=best,reference_final=rows[-1],reference_run=str(folder),reference_weight_sha256=WEIGHT_SHA,environment=env,dependencies=dict(python=platform.python_version(),numpy=numpy.__version__,opencv=cv2.__version__,scipy=scipy.__version__,matplotlib=matplotlib.__version__),scope='scratch seed10; no reference weights loaded')
     (a.output/'audit.json').write_text(json.dumps(audit,indent=2))
     print('PASS frozen',a.mode,'against SG6; no training started')
 
