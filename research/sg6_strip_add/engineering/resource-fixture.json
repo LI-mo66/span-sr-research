@@ -1,0 +1,1 @@
+{"status": "PASS", "group": "E:\\SPANimagebase\\span-sg6-strip-add\\tmp\\resource-fixture-affd1b26", "scope": "LOCAL SYNTHETIC IMAGE FIXTURE ONLY, 4060, not real-data or target cost evidence", "strict_frozen_coverage": {"original_keys": 244, "mapped_original_keys": 244, "new_keys": 4, "missing": [], "unexpected": []}}

@@ -1,0 +1,38 @@
+{
+  "source_zip_sha256": "e00119a5e6ff38144a37e03c1582874344c6689859187179bad8058fce37df00",
+  "commit": "b249a7a0f86a353aea44acd1f1cf1372e4e9c38c",
+  "files": {
+    "manifest.json": {
+      "sha256": "3d5b146d092bafe3adfe922ca45816fc54360cac16076fd691ed33959ec515d8",
+      "bytes": 1436411
+    },
+    "epochs.jsonl": {
+      "sha256": "b5eea628fabc58e6a32e5d8c5d36989894e4bcce75440b7a2b4be94af14e4975",
+      "bytes": 77189
+    },
+    "DIV2K_valid_epoch00048_u48000.json": {
+      "sha256": "6cc840f6d8a670d47100aefdbc4ad90ef922d28c28b169015307ec01ebba2fa7",
+      "bytes": 9646
+    },
+    "Set5_epoch00048_u48000.json": {
+      "sha256": "8a818cd7e1cfe9a23dfe3b37c0d4f1bfc8ceb2daf254f01d5788824be38884ef",
+      "bytes": 490
+    },
+    "Set14_epoch00048_u48000.json": {
+      "sha256": "2d6538fed539be6425dcc143528a860f606c8e079841e0612f2e30d6612978c1",
+      "bytes": 1376
+    },
+    "B100_epoch00048_u48000.json": {
+      "sha256": "c7c419fabb387dc34142b3efcfdebfbc3476948ac339219c8b1a43839ae33119",
+      "bytes": 9804
+    },
+    "Urban100_epoch00048_u48000.json": {
+      "sha256": "e0b335658b9cf51dfb33b2aef4806315ca50ae05c8af2b9fd2e7ed9234d75557",
+      "bytes": 9846
+    },
+    "Manga109_epoch00048_u48000.json": {
+      "sha256": "d3a8bf81c91533125096719ea60a362b98e7dc747e920bec1de07084573d8a84",
+      "bytes": 11601
+    }
+  }
+}

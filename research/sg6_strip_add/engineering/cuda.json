@@ -1,0 +1,493 @@
+{
+  "status": "PASS",
+  "kernel": 31,
+  "device": "cuda",
+  "torch": "2.9.1+cu128",
+  "gpu": "NVIDIA GeForce RTX 4060 Laptop GPU",
+  "synthetic_only": true,
+  "parameters_deployed": 536604,
+  "parameters_new": 832,
+  "parameters_trainable": 2195532,
+  "checks": [
+    "shared initialization and RNG exact",
+    "initial SG6 mapping exact",
+    "all 52 local channels unchanged",
+    "full local DW3 preserved exactly; initial depth mapping exact",
+    "independent additive offset oracle with bias and boundaries",
+    "tiny odd rectangular batch train/eval",
+    "no normalization added",
+    "optimizer no duplicate/missing",
+    "project step1 / vertical step2 / horizontal step3 staged startup",
+    "actual Adam updates measured",
+    "strict model/optimizer resume",
+    "observational hooks and Adam subclass preserve exact next update",
+    "FP64 train/eval equivalence",
+    "FP32 deployment export agreement"
+  ],
+  "normalization_layers": [],
+  "strict_frozen_coverage": {
+    "original_keys": 244,
+    "mapped_original_keys": 244,
+    "new_keys": 4,
+    "missing": [],
+    "unexpected": []
+  },
+  "fp64_max_abs": 2.3092638912203256e-14,
+  "post8step_feature_statistics": {
+    "F": {
+      "rms": 0.515791134265254,
+      "mean": 0.02952238917350769,
+      "absmax": 4.843733787536621
+    },
+    "local": {
+      "rms": 0.10095813240214664,
+      "mean": 0.10047335177659988,
+      "absmax": 0.15899035334587097
+    },
+    "depth": {
+      "rms": 0.32243026563779165,
+      "mean": 0.07002568244934082,
+      "absmax": 2.3929691314697266
+    },
+    "spatial": {
+      "rms": 0.005740735404569324,
+      "mean": -0.00016427245282102376,
+      "absmax": 0.015224558301270008
+    }
+  },
+  "updates": [
+    {
+      "step": 1,
+      "loss": 5.887855052947998,
+      "parameters": {
+        "block_3.spatial_gate.depth.local.weight": {
+          "parameter_rms": 0.18621062239528588,
+          "gradient_rms": 0.0,
+          "actual_update_rms": 0.0,
+          "relative_update": 0.0
+        },
+        "block_3.spatial_gate.depth.local.bias": {
+          "parameter_rms": 0.18168523028549044,
+          "gradient_rms": 0.0,
+          "actual_update_rms": 0.0,
+          "relative_update": 0.0
+        },
+        "block_3.spatial_gate.depth.horizontal.weight": {
+          "parameter_rms": 0.13520337566466462,
+          "gradient_rms": 0.0,
+          "actual_update_rms": 0.0,
+          "relative_update": 0.0
+        },
+        "block_3.spatial_gate.depth.horizontal.bias": {
+          "parameter_rms": 0.0,
+          "gradient_rms": 0.0,
+          "actual_update_rms": 0.0,
+          "relative_update": 0.0
+        },
+        "block_3.spatial_gate.depth.vertical.weight": {
+          "parameter_rms": 0.0,
+          "gradient_rms": 0.0,
+          "actual_update_rms": 0.0,
+          "relative_update": 0.0
+        },
+        "block_3.spatial_gate.depth.vertical.bias": {
+          "parameter_rms": 0.0,
+          "gradient_rms": 0.0,
+          "actual_update_rms": 0.0,
+          "relative_update": 0.0
+        },
+        "block_3.spatial_gate.project.weight": {
+          "parameter_rms": 0.0,
+          "gradient_rms": 2.3128779173851763e-07,
+          "actual_update_rms": 0.00016625768613764773,
+          "relative_update": 1.6625768613764773e+26
+        },
+        "block_3.spatial_gate.project.bias": {
+          "parameter_rms": 0.0,
+          "gradient_rms": 2.0871768855818007e-06,
+          "actual_update_rms": 0.00019631780087534615,
+          "relative_update": 1.9631780087534612e+26
+        }
+      }
+    },
+    {
+      "step": 2,
+      "loss": 5.447208881378174,
+      "parameters": {
+        "block_3.spatial_gate.depth.local.weight": {
+          "parameter_rms": 0.18621062239528588,
+          "gradient_rms": 7.404116942038168e-10,
+          "actual_update_rms": 7.106790902835527e-06,
+          "relative_update": 3.816533563670342e-05
+        },
+        "block_3.spatial_gate.depth.local.bias": {
+          "parameter_rms": 0.18168523028549044,
+          "gradient_rms": 7.171922177515297e-09,
+          "actual_update_rms": 4.8939534828230985e-05,
+          "relative_update": 0.0002693644098165273
+        },
+        "block_3.spatial_gate.depth.horizontal.weight": {
+          "parameter_rms": 0.13520337566466462,
+          "gradient_rms": 0.0,
+          "actual_update_rms": 0.0,
+          "relative_update": 0.0
+        },
+        "block_3.spatial_gate.depth.horizontal.bias": {
+          "parameter_rms": 0.0,
+          "gradient_rms": 0.0,
+          "actual_update_rms": 0.0,
+          "relative_update": 0.0
+        },
+        "block_3.spatial_gate.depth.vertical.weight": {
+          "parameter_rms": 0.0,
+          "gradient_rms": 3.5774796400040627e-10,
+          "actual_update_rms": 3.4316790276688485e-06,
+          "relative_update": 3.431679027668848e+24
+        },
+        "block_3.spatial_gate.depth.vertical.bias": {
+          "parameter_rms": 0.0,
+          "gradient_rms": 7.465662477414292e-09,
+          "actual_update_rms": 5.0253051760826475e-05,
+          "relative_update": 5.025305176082647e+25
+        },
+        "block_3.spatial_gate.project.weight": {
+          "parameter_rms": 0.00016625768613764773,
+          "gradient_rms": 2.1610107681442665e-07,
+          "actual_update_rms": 0.00015614999672219156,
+          "relative_update": 0.9392046788917305
+        },
+        "block_3.spatial_gate.project.bias": {
+          "parameter_rms": 0.00019631780087534615,
+          "gradient_rms": 1.964003164708183e-06,
+          "actual_update_rms": 0.00018304478793470524,
+          "relative_update": 0.9323901710315676
+        }
+      }
+    },
+    {
+      "step": 3,
+      "loss": 5.0174078941345215,
+      "parameters": {
+        "block_3.spatial_gate.depth.local.weight": {
+          "parameter_rms": 0.18621167313415518,
+          "gradient_rms": 1.2620815539131612e-09,
+          "actual_update_rms": 1.2328475310783917e-05,
+          "relative_update": 6.620678018344175e-05
+        },
+        "block_3.spatial_gate.depth.local.bias": {
+          "parameter_rms": 0.1817270235103729,
+          "gradient_rms": 1.2290329673798672e-08,
+          "actual_update_rms": 7.392773959202488e-05,
+          "relative_update": 0.00040680652862729093
+        },
+        "block_3.spatial_gate.depth.horizontal.weight": {
+          "parameter_rms": 0.13520337566466462,
+          "gradient_rms": 1.1712676995716414e-13,
+          "actual_update_rms": 9.255282426384508e-10,
+          "relative_update": 6.845452179640641e-09
+        },
+        "block_3.spatial_gate.depth.horizontal.bias": {
+          "parameter_rms": 0.0,
+          "gradient_rms": 9.597901203690465e-13,
+          "actual_update_rms": 7.082209830325492e-09,
+          "relative_update": 7.082209830325492e+21
+        },
+        "block_3.spatial_gate.depth.vertical.weight": {
+          "parameter_rms": 3.4316790276688485e-06,
+          "gradient_rms": 5.910225081382359e-10,
+          "actual_update_rms": 5.8444791671247095e-06,
+          "relative_update": 1.7030960996066362
+        },
+        "block_3.spatial_gate.depth.vertical.bias": {
+          "parameter_rms": 5.0253051760826475e-05,
+          "gradient_rms": 1.2852783218387632e-08,
+          "actual_update_rms": 7.581958819281321e-05,
+          "relative_update": 1.5087558971277542
+        },
+        "block_3.spatial_gate.project.weight": {
+          "parameter_rms": 0.00032116112012130557,
+          "gradient_rms": 2.844763098946547e-07,
+          "actual_update_rms": 0.00013631530216292153,
+          "relative_update": 0.4244452196188441
+        },
+        "block_3.spatial_gate.project.bias": {
+          "parameter_rms": 0.000377273913674854,
+          "gradient_rms": 2.6036464195328213e-06,
+          "actual_update_rms": 0.00015821038321995446,
+          "relative_update": 0.4193515042662211
+        }
+      }
+    },
+    {
+      "step": 4,
+      "loss": 4.606700420379639,
+      "parameters": {
+        "block_3.spatial_gate.depth.local.weight": {
+          "parameter_rms": 0.18621347577701994,
+          "gradient_rms": 1.9818368620905765e-09,
+          "actual_update_rms": 1.7619515997278785e-05,
+          "relative_update": 9.461998345585447e-05
+        },
+        "block_3.spatial_gate.depth.local.bias": {
+          "parameter_rms": 0.18178978088403627,
+          "gradient_rms": 1.8403296575658653e-08,
+          "actual_update_rms": 9.229332309524836e-05,
+          "relative_update": 0.0005076925812134747
+        },
+        "block_3.spatial_gate.depth.horizontal.weight": {
+          "parameter_rms": 0.13520337565965887,
+          "gradient_rms": 4.4426700183527686e-13,
+          "actual_update_rms": 3.398685932680426e-09,
+          "relative_update": 2.513758192869222e-08
+        },
+        "block_3.spatial_gate.depth.horizontal.bias": {
+          "parameter_rms": 7.082209830325492e-09,
+          "gradient_rms": 3.814172300880736e-12,
+          "actual_update_rms": 2.7190005708968683e-08,
+          "relative_update": 3.839197984863865
+        },
+        "block_3.spatial_gate.depth.vertical.weight": {
+          "parameter_rms": 9.274633080842606e-06,
+          "gradient_rms": 8.577079926461342e-10,
+          "actual_update_rms": 8.06226897391452e-06,
+          "relative_update": 0.8692817175234342
+        },
+        "block_3.spatial_gate.depth.vertical.bias": {
+          "parameter_rms": 0.00012605117062512283,
+          "gradient_rms": 1.934690277903369e-08,
+          "actual_update_rms": 9.465858470382648e-05,
+          "relative_update": 0.75095363441996
+        },
+        "block_3.spatial_gate.project.weight": {
+          "parameter_rms": 0.00045008479504708883,
+          "gradient_rms": 4.2231471059582803e-07,
+          "actual_update_rms": 0.0001277525568346854,
+          "relative_update": 0.2838410855921486
+        },
+        "block_3.spatial_gate.project.bias": {
+          "parameter_rms": 0.0005273035215958807,
+          "gradient_rms": 3.875120034525122e-06,
+          "actual_update_rms": 0.00014387959233514333,
+          "relative_update": 0.2728591531110824
+        }
+      }
+    },
+    {
+      "step": 5,
+      "loss": 4.250051498413086,
+      "parameters": {
+        "block_3.spatial_gate.depth.local.weight": {
+          "parameter_rms": 0.18621604423912613,
+          "gradient_rms": 4.013154824701972e-09,
+          "actual_update_rms": 2.6074075048833008e-05,
+          "relative_update": 0.00014002056136124571
+        },
+        "block_3.spatial_gate.depth.local.bias": {
+          "parameter_rms": 0.18186754997216312,
+          "gradient_rms": 3.1582162222605384e-08,
+          "actual_update_rms": 0.00010948833690309934,
+          "relative_update": 0.0006020223889300635
+        },
+        "block_3.spatial_gate.depth.horizontal.weight": {
+          "parameter_rms": 0.1352033760581163,
+          "gradient_rms": 1.358390316704254e-12,
+          "actual_update_rms": 9.483293142054326e-09,
+          "relative_update": 7.014094927613341e-08
+        },
+        "block_3.spatial_gate.depth.horizontal.bias": {
+          "parameter_rms": 3.4271844366990406e-08,
+          "gradient_rms": 1.2013695855444479e-11,
+          "actual_update_rms": 7.910337048674003e-08,
+          "relative_update": 2.3081153625607023
+        },
+        "block_3.spatial_gate.depth.vertical.weight": {
+          "parameter_rms": 1.7322127100309103e-05,
+          "gradient_rms": 1.4711950946309162e-09,
+          "actual_update_rms": 1.1153109285591347e-05,
+          "relative_update": 0.6438648799310753
+        },
+        "block_3.spatial_gate.depth.vertical.bias": {
+          "parameter_rms": 0.0002206316559139607,
+          "gradient_rms": 3.343219571758556e-08,
+          "actual_update_rms": 0.00011203359132575381,
+          "relative_update": 0.5077856614077326
+        },
+        "block_3.spatial_gate.project.weight": {
+          "parameter_rms": 0.0005516364877511996,
+          "gradient_rms": 6.093788689054843e-07,
+          "actual_update_rms": 0.00013354245204659956,
+          "relative_update": 0.24208415326368007
+        },
+        "block_3.spatial_gate.project.bias": {
+          "parameter_rms": 0.0006414671020615164,
+          "gradient_rms": 5.521237536672591e-06,
+          "actual_update_rms": 0.00014573115513507502,
+          "relative_update": 0.22718414501185047
+        }
+      }
+    },
+    {
+      "step": 6,
+      "loss": 3.9852006435394287,
+      "parameters": {
+        "block_3.spatial_gate.depth.local.weight": {
+          "parameter_rms": 0.18621975076298306,
+          "gradient_rms": 6.289093033050125e-09,
+          "actual_update_rms": 3.545263748414751e-05,
+          "relative_update": 0.00019038065156295347
+        },
+        "block_3.spatial_gate.depth.local.bias": {
+          "parameter_rms": 0.18195879471153226,
+          "gradient_rms": 3.7633236899105865e-08,
+          "actual_update_rms": 0.0001226310330115259,
+          "relative_update": 0.0006739494686472209
+        },
+        "block_3.spatial_gate.depth.horizontal.weight": {
+          "parameter_rms": 0.13520337734767485,
+          "gradient_rms": 2.7090796843410524e-12,
+          "actual_update_rms": 1.8718521237853277e-08,
+          "relative_update": 1.3844714240916253e-07
+        },
+        "block_3.spatial_gate.depth.horizontal.bias": {
+          "parameter_rms": 1.1336888851618483e-07,
+          "gradient_rms": 2.314374237421017e-11,
+          "actual_update_rms": 1.6053066047206515e-07,
+          "relative_update": 1.4160027726579272
+        },
+        "block_3.spatial_gate.depth.vertical.weight": {
+          "parameter_rms": 2.8363578110417542e-05,
+          "gradient_rms": 2.071872488899798e-09,
+          "actual_update_rms": 1.4569443333917985e-05,
+          "relative_update": 0.5136673263577712
+        },
+        "block_3.spatial_gate.depth.vertical.bias": {
+          "parameter_rms": 0.0003325061724657424,
+          "gradient_rms": 4.0228483330740776e-08,
+          "actual_update_rms": 0.00012507174434288682,
+          "relative_update": 0.37614863933322246
+        },
+        "block_3.spatial_gate.project.weight": {
+          "parameter_rms": 0.0006464241656696823,
+          "gradient_rms": 8.442153130721103e-07,
+          "actual_update_rms": 0.000137623401742831,
+          "relative_update": 0.21289953106913315
+        },
+        "block_3.spatial_gate.project.bias": {
+          "parameter_rms": 0.0007437511096770246,
+          "gradient_rms": 7.245049035541377e-06,
+          "actual_update_rms": 0.0001494409568388686,
+          "relative_update": 0.20092871781228483
+        }
+      }
+    },
+    {
+      "step": 7,
+      "loss": 3.730541706085205,
+      "parameters": {
+        "block_3.spatial_gate.depth.local.weight": {
+          "parameter_rms": 0.18622455051899686,
+          "gradient_rms": 5.368290124776484e-09,
+          "actual_update_rms": 3.855925408524418e-05,
+          "relative_update": 0.00020705784483185385
+        },
+        "block_3.spatial_gate.depth.local.bias": {
+          "parameter_rms": 0.1820600068087966,
+          "gradient_rms": 2.649215046023452e-08,
+          "actual_update_rms": 0.00012663293914564895,
+          "relative_update": 0.00069555604970751
+        },
+        "block_3.spatial_gate.depth.horizontal.weight": {
+          "parameter_rms": 0.13520338000600646,
+          "gradient_rms": 3.249977342810699e-12,
+          "actual_update_rms": 2.729394239492788e-08,
+          "relative_update": 2.018732253122321e-07
+        },
+        "block_3.spatial_gate.depth.horizontal.bias": {
+          "parameter_rms": 2.7381791572918817e-07,
+          "gradient_rms": 2.327982035098067e-11,
+          "actual_update_rms": 2.1811954970814122e-07,
+          "relative_update": 0.7965861150001089
+        },
+        "block_3.spatial_gate.depth.vertical.weight": {
+          "parameter_rms": 4.257292204868751e-05,
+          "gradient_rms": 1.9013643667866647e-09,
+          "actual_update_rms": 1.6518584075560666e-05,
+          "relative_update": 0.38800681937381654
+        },
+        "block_3.spatial_gate.depth.vertical.bias": {
+          "parameter_rms": 0.0004573942920898896,
+          "gradient_rms": 2.906209361592548e-08,
+          "actual_update_rms": 0.0001278874902479868,
+          "relative_update": 0.27960010096246163
+        },
+        "block_3.spatial_gate.project.weight": {
+          "parameter_rms": 0.0007427891224867731,
+          "gradient_rms": 1.1116897195448126e-06,
+          "actual_update_rms": 0.00013452955981487364,
+          "relative_update": 0.1811140682357922
+        },
+        "block_3.spatial_gate.project.bias": {
+          "parameter_rms": 0.0008470833513182825,
+          "gradient_rms": 8.684357461480914e-06,
+          "actual_update_rms": 0.00014663066299750463,
+          "relative_update": 0.17310063144235935
+        }
+      }
+    },
+    {
+      "step": 8,
+      "loss": 3.4584054946899414,
+      "parameters": {
+        "block_3.spatial_gate.depth.local.weight": {
+          "parameter_rms": 0.1862303436081732,
+          "gradient_rms": 8.7994969063385e-09,
+          "actual_update_rms": 4.0682850729563064e-05,
+          "relative_update": 0.00021845446848962153
+        },
+        "block_3.spatial_gate.depth.local.bias": {
+          "parameter_rms": 0.18216378701806596,
+          "gradient_rms": 2.109480220551923e-08,
+          "actual_update_rms": 0.0001237854407493205,
+          "relative_update": 0.0006795282573755682
+        },
+        "block_3.spatial_gate.depth.horizontal.weight": {
+          "parameter_rms": 0.13520338412116661,
+          "gradient_rms": 4.037188960576887e-12,
+          "actual_update_rms": 3.547067344272748e-08,
+          "relative_update": 2.6235048533207834e-07
+        },
+        "block_3.spatial_gate.depth.horizontal.bias": {
+          "parameter_rms": 4.916066603644569e-07,
+          "gradient_rms": 2.0701979049773834e-11,
+          "actual_update_rms": 2.4979717510003443e-07,
+          "relative_update": 0.5081240659246665
+        },
+        "block_3.spatial_gate.depth.vertical.weight": {
+          "parameter_rms": 5.8615763580480496e-05,
+          "gradient_rms": 2.2779645843821866e-09,
+          "actual_update_rms": 1.7965974872566226e-05,
+          "relative_update": 0.3065041513602159
+        },
+        "block_3.spatial_gate.depth.vertical.bias": {
+          "parameter_rms": 0.0005848892432309924,
+          "gradient_rms": 2.6692175730187245e-08,
+          "actual_update_rms": 0.00012452594545645524,
+          "relative_update": 0.21290517289830846
+        },
+        "block_3.spatial_gate.project.weight": {
+          "parameter_rms": 0.0008368268271941812,
+          "gradient_rms": 1.5102548451758093e-06,
+          "actual_update_rms": 0.0001272049612481302,
+          "relative_update": 0.15200870372982553
+        },
+        "block_3.spatial_gate.project.bias": {
+          "parameter_rms": 0.0009498787990462194,
+          "gradient_rms": 1.0350663731748108e-05,
+          "actual_update_rms": 0.00013738088492255046,
+          "relative_update": 0.14462990969005274
+        }
+      }
+    }
+  ],
+  "limitations": "Synthetic engineering only. Initial local mapping is exact due zero additive output; no learned feature-distribution or real-data PSNR guarantee."
+}

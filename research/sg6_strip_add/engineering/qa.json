@@ -1,0 +1,29 @@
+{
+  "local_code_commit": "d4d00348a8720dcac51e9a10e1208c394597dd18",
+  "integration": {
+    "31": {
+      "status": "PASS",
+      "resumed": "ENGINEERING-STRIPADD-c19ba626cd-K31",
+      "continuous": "ENGINEERING-STRIPADD-c19ba626cd-K31-direct",
+      "updates": 4
+    }
+  },
+  "reporting": "PASS: selected checkpoint, paired order, weight exclusion, return hashes",
+  "bash_syntax": "PASS launch.sh and create_env.sh",
+  "resource_fixture": {
+    "status": "PASS",
+    "group": "E:\\SPANimagebase\\span-sg6-strip-add\\tmp\\resource-fixture-affd1b26",
+    "scope": "LOCAL SYNTHETIC IMAGE FIXTURE ONLY, 4060, not real-data or target cost evidence",
+    "strict_frozen_coverage": {
+      "original_keys": 244,
+      "mapped_original_keys": 244,
+      "new_keys": 4,
+      "missing": [],
+      "unexpected": []
+    }
+  },
+  "target_server_checks": "PENDING: original 4090 environment and real dataset timing; automatically rerun before formal training",
+  "real_psnr": "NOT TESTED",
+  "formal_training_started": false,
+  "automatic_shutdown": false
+}
