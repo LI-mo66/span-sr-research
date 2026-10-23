@@ -14,6 +14,12 @@ Linux控制器已在用户服务器执行启动审计；尚未通过完整预检
 回归测试主动禁止einops导入后验证入口和CPU/CUDA源码前反向。
 第二次尝试使用新目录和ID `FEAT-SG6-UCAN-IND-V2-50K-02`，保留01，不升级环境。
 
+尝试02通过数据/环境审计、源码对照和接口检查，但工程恢复测试的weights-only
+加载器不支持MultiStepLR中的collections.Counter。修复仅对本测试刚生成的
+内存BytesIO采用与原trainer一致的weights_only=False，不读取外部权重；保持
+严格state_dict、Adam、scheduler和续步逐张量相等检查。尝试03保留01/02现场，
+模型及训练配置均不变；此前两次都未进入真实50K训练。
+
 ## 用户执行流程
 
 在新的源码目录、独立高速runtime下，用当前GitHub提交启动：

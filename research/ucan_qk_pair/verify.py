@@ -261,7 +261,11 @@ def check_models(device):
         stream.seek(0)
         # Match the real trainer: Adam step counters stay on CPU; load_state_dict
         # moves moment tensors to their parameter devices.
-        saved = torch.load(stream,map_location='cpu',weights_only=True)
+        # This BytesIO was created immediately above by this test, never read
+        # from an external checkpoint. It contains optimizer/scheduler state,
+        # including MultiStepLR's collections.Counter (unsupported by the
+        # PyTorch 2.2 weights-only unpickler). Match trainer resume semantics.
+        saved = torch.load(stream,map_location='cpu',weights_only=False)
         restored = build_model(arch,config(mode)).to(device).train()
         restored.load_state_dict(saved['model'],strict=True)
         opt2 = torch.optim.Adam((p for p in restored.parameters() if p.requires_grad),lr=cfg['lr'])
