@@ -1,0 +1,60 @@
+{
+  "local_engineering": {
+    "status": "PASS",
+    "device": "cuda",
+    "arm": {
+      "arm": "p46",
+      "positions": [
+        4,
+        6
+      ],
+      "context": "independent-v2",
+      "lksa_position": null,
+      "lksa_kernel": 35,
+      "lksa_ratio": 4,
+      "lksa_adapter": "detached-image-rms-input-output-zero-projection",
+      "fusion": "post-insertion-block1-tap; original-block6-first-tap",
+      "budget_class": "screen"
+    },
+    "deployed_parameters": 554128,
+    "source_LKSA_output_input_parameter_gradient_equivalence": true,
+    "zero_adapter_identity": true,
+    "original_forward_hook_oracle": true,
+    "backbone_and_RNG_preserved": true,
+    "odd_rectangular_batch_shapes": true,
+    "fp64_train_eval_and_deploy": true,
+    "exact_Adam_scheduler_continuation": true,
+    "scope": "synthetic engineering only; no real-data gain claim"
+  },
+  "shared_trainer_synthetic_integration": {
+    "status": "PASS",
+    "scope": "four synthetic updates; not real-data performance",
+    "source_commit": "32ea364088a3231b41d2eb578764ecdd53fff298",
+    "run_id": "ENGINEERING-UCAN-IND-ce0144937b",
+    "continuous_id": "ENGINEERING-UCAN-IND-ce0144937b-continuous",
+    "exact_model_optimizer_scheduler_rng_resume": true,
+    "exact_losses_with_different_evaluation_cadence": true,
+    "partial_log_recovery": true,
+    "best_validation_checkpoint": true,
+    "accumulation": 2,
+    "micro_batch": 1,
+    "npy_mmap": true,
+    "environment": {
+      "torch": "2.9.1+cu128",
+      "cuda": "12.8",
+      "device": "NVIDIA GeForce RTX 4060 Laptop GPU",
+      "deterministic": true,
+      "cudnn_allow_tf32": true,
+      "matmul_allow_tf32": false
+    }
+  },
+  "queue_control_mock_cases": [
+    "success",
+    "preflight_failure",
+    "training_failure",
+    "archive_guard_failure",
+    "GPU_busy",
+    "auto_release_disabled"
+  ],
+  "scope": "Local CUDA engineering on NVIDIA GeForce RTX 4060 Laptop GPU torch 2.9.1+cu128; actual archived 4090 Torch2.2.2 environment must pass all six preflights before real training. Mocked queue cases do not test Linux flock or live platform release."
+}
