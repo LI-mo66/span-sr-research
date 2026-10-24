@@ -31,7 +31,10 @@ MODES={'full':{},'off_2':{2:'off'},'off_4':{4:'off'},'off_both':{2:'off',4:'off'
        'spatial_off_2':{2:'spatial'},'spatial_off_4':{4:'spatial'},
        'channel_off_2':{2:'channel'},'channel_off_4':{4:'channel'},
        'spatial_off_both':{2:'spatial',4:'spatial'},
-       'channel_off_both':{2:'channel',4:'channel'}}
+       'channel_off_both':{2:'channel',4:'channel'},
+       'global_off_2':{2:'global'},'global_off_4':{4:'global'},
+       'lepe_off_2':{2:'lepe'},'lepe_off_4':{4:'lepe'},
+       'global_off_both':{2:'global',4:'global'},'lepe_off_both':{2:'lepe',4:'lepe'}}
 
 
 def sha(path):
@@ -89,6 +92,12 @@ def intervene(model,settings):
             if mode=='off':
                 def disable(module,args,output):return args[0],output[1]
                 handles.append(adapter.register_forward_hook(disable))
+            elif mode in ('global','lepe'):
+                # Zero both rotated Q/K -> global spatial result is exactly
+                # zero, leaving the current-V LePE and channel path intact.
+                module=adapter.core.pos_emb if mode=='global' else adapter.core.lepe
+                def zero(module,args,output):return torch.zeros_like(output)
+                handles.append(module.register_forward_hook(zero))
             else:
                 def mask(module,args,mode=mode):
                     value=args[0].clone()

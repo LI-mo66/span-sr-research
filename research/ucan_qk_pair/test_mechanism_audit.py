@@ -45,6 +45,12 @@ def main():
     expected=u+expected_delta.transpose(1,2).reshape_as(u)*scale
     with intervene(m,{2:'spatial'}):actual=a(u)[0]
     torch.testing.assert_close(actual,expected,atol=0,rtol=0)
+    lepe=a.core.lepe(v.transpose(1,2).reshape(b,26,h,w)).flatten(2).transpose(1,2)
+    expected_delta=a.core.proj(torch.cat((lepe,channel),-1))
+    expected=u+expected_delta.transpose(1,2).reshape_as(u)*scale
+    with intervene(m,{2:'global'}):actual=a(u)[0]
+    torch.testing.assert_close(actual,expected,atol=1e-12,rtol=1e-12)
+    assert torch.equal(m(x),full)
     arch,_=existing.fs_runtime.components()
     cfg=json.loads((HERE/'configs/SG6-UCAN-independent.json').read_text())
     real=build_model(arch,cfg).eval()
