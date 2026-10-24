@@ -1,0 +1,9 @@
+{
+  "repository": "https://github.com/hokiyoshi/UCAN",
+  "commit": "b812c0adb8ce70d442973db5c87bab7d1e8c3333",
+  "license": "Apache-2.0",
+  "files": {
+    "ucan_arch.py": "d1673486ad78b9a80e46741d94e4267c45e2e763be93b3a25fc5466ec5b1ad3a",
+    "LICENSE": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4"
+  }
+}
