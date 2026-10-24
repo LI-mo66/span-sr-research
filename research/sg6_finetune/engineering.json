@@ -1,0 +1,33 @@
+{
+  "date": "2026-10-24",
+  "base_commit": "e731483d4ce4e325f3d64dbbc80add342b46f7f1",
+  "local_environment": {
+    "torch": "2.9.1+cu128",
+    "device": "RTX 4060 Laptop GPU"
+  },
+  "CPU": "PASS",
+  "CUDA": "PASS",
+  "checks": [
+    "both L1 and standard MSE finite",
+    "identical initial sample stream",
+    "EMA initialized at source and exact first update",
+    "cosine endpoint",
+    "model optimizer scheduler EMA RNG exact resume",
+    "ordinary parameter checkpoint average arithmetic",
+    "Conv3XC derived weights rebuilt",
+    "535772 deployment parameters and zero observed fusion error on fixture"
+  ],
+  "integration": {
+    "status": "PASS",
+    "fixture": "tmp/ft-integration-eqajvccr",
+    "checks": [
+      "real branch runner both arms",
+      "intentional interruption and malformed partial step log recovery",
+      "raw EMA averaged tensors exact vs continuous",
+      "selected metrics and source hash equality",
+      "two PNG/SVG figures",
+      "SHA verified persistent backup"
+    ]
+  },
+  "scope": "Engineering fixtures only, not real SG6 accuracy. Launcher repeats CUDA checks in server environment. No long training or large patch implemented."
+}
