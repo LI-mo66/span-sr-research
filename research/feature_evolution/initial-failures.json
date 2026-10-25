@@ -1,0 +1,9 @@
+{
+  "evidence": "Retained engineering failures, before diagnostic controls",
+  "failures": [
+    {"check": "CUDA train/eval agreement", "shape": [1,3,1,1], "absmax": 0.0009474754333496094, "rtol": 0.0002, "atol": 0.00002, "action": "Keep threshold; explicitly test TF32-disabled diagnostic process"},
+    {"check": "CUDA resumed optimizer update bitwise equality", "action": "Enable deterministic algorithms in verifier to match archived trainer policy"},
+    {"check": "Synthetic trainer integration", "reason": "Initial source archive had no Git metadata", "action": "Restore isolated Git checkout from pinned objects; keep trainer clean-tree guard"}
+  ],
+  "limitations": "These are engineering failures, not PSNR outcomes. No production precision policy changed."
+}

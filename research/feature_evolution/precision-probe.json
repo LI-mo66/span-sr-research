@@ -1,0 +1,139 @@
+{
+  "evidence": "synthetic numerical diagnostic only",
+  "device": "NVIDIA GeForce RTX 4060 Laptop GPU",
+  "torch": "2.9.1+cu128",
+  "records": [
+    {
+      "cudnn_tf32": true,
+      "sign": 0,
+      "shape": [
+        1,
+        3,
+        1,
+        1
+      ],
+      "train_eval_absmax": 5.555152893066406e-05
+    },
+    {
+      "cudnn_tf32": true,
+      "sign": 0,
+      "shape": [
+        1,
+        3,
+        13,
+        17
+      ],
+      "train_eval_absmax": 0.002716541290283203
+    },
+    {
+      "cudnn_tf32": true,
+      "sign": 1,
+      "shape": [
+        1,
+        3,
+        1,
+        1
+      ],
+      "train_eval_absmax": 5.555152893066406e-05
+    },
+    {
+      "cudnn_tf32": true,
+      "sign": 1,
+      "shape": [
+        1,
+        3,
+        13,
+        17
+      ],
+      "train_eval_absmax": 0.002716541290283203
+    },
+    {
+      "cudnn_tf32": true,
+      "sign": -1,
+      "shape": [
+        1,
+        3,
+        1,
+        1
+      ],
+      "train_eval_absmax": 5.555152893066406e-05
+    },
+    {
+      "cudnn_tf32": true,
+      "sign": -1,
+      "shape": [
+        1,
+        3,
+        13,
+        17
+      ],
+      "train_eval_absmax": 0.0027136802673339844
+    },
+    {
+      "cudnn_tf32": false,
+      "sign": 0,
+      "shape": [
+        1,
+        3,
+        1,
+        1
+      ],
+      "train_eval_absmax": 8.940696716308594e-07
+    },
+    {
+      "cudnn_tf32": false,
+      "sign": 0,
+      "shape": [
+        1,
+        3,
+        13,
+        17
+      ],
+      "train_eval_absmax": 1.1920928955078125e-05
+    },
+    {
+      "cudnn_tf32": false,
+      "sign": 1,
+      "shape": [
+        1,
+        3,
+        1,
+        1
+      ],
+      "train_eval_absmax": 1.1920928955078125e-06
+    },
+    {
+      "cudnn_tf32": false,
+      "sign": 1,
+      "shape": [
+        1,
+        3,
+        13,
+        17
+      ],
+      "train_eval_absmax": 1.239776611328125e-05
+    },
+    {
+      "cudnn_tf32": false,
+      "sign": -1,
+      "shape": [
+        1,
+        3,
+        1,
+        1
+      ],
+      "train_eval_absmax": 9.5367431640625e-07
+    },
+    {
+      "cudnn_tf32": false,
+      "sign": -1,
+      "shape": [
+        1,
+        3,
+        13,
+        17
+      ],
+      "train_eval_absmax": 1.239776611328125e-05
+    }
+  ]
+}
