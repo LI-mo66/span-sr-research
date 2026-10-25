@@ -23,8 +23,15 @@ def main():
     import json
     parser = argparse.ArgumentParser(add_help=False)
     parser.add_argument('--config', required=True)
+    parser.add_argument('--id', required=True)
+    parser.add_argument('--resume', action='store_true')
     args, _ = parser.parse_known_args()
     cfg = json.loads(Path(args.config).read_text())
+    if os.environ.get('FE_REFERENCE_AUDIT'):
+        import torch
+        reference_env=json.loads(Path(os.environ['FE_REFERENCE_AUDIT']).read_text())['environment']
+        torch.backends.cudnn.allow_tf32=reference_env['cudnn_allow_tf32']
+        torch.backends.cuda.matmul.allow_tf32=reference_env['matmul_allow_tf32']
     validate_variant(cfg)
     existing.validate_config(cfg)
     if cfg.get('engineering_only'):
@@ -33,7 +40,21 @@ def main():
     elif cfg.get('image_backend') != 'npy_mmap' or cfg['micro_batch'] != 16 or cfg['seed'] != 10:
         raise ValueError('Fixed reference reuse requires seed10, micro16, npy_mmap')
     existing.validate_data(cfg)
-    existing.fs_runtime.trainer.build_model = build_model
+    def factory(arch, config):
+        model=build_model(arch, config)
+        if os.environ.get('FE_OBSERVE') == '1':
+            from observe import Observer
+            initial_update=0
+            if args.resume:
+                import torch
+                saved=torch.load(ROOT/'runs'/args.id/'latest.pt',map_location='cpu',weights_only=False)
+                initial_update=saved['update']
+                del saved
+            # Keep observer outside module state; hooks do not change the optimizer.
+            model._fe_observer=Observer(model, ROOT/'runs'/args.id/'feature-observations.jsonl',
+                                        config['effective_batch']//config['micro_batch'],initial_update)
+        return model
+    existing.fs_runtime.trainer.build_model = factory
     # Extend only CLI stop-cap choices. The 1M scheduler horizon is unchanged.
     original = argparse.ArgumentParser.add_argument
     def add_argument(self, *flags, **kwargs):

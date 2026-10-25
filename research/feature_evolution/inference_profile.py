@@ -1,5 +1,6 @@
 """Small local inference profile; not a server throughput or training benchmark."""
 import gc
+import argparse
 import json
 import statistics
 import time
@@ -34,7 +35,10 @@ for sign in (0,1,-1):
         peak_allocated_bytes=torch.cuda.max_memory_allocated(),
         peak_reserved_bytes=torch.cuda.max_memory_reserved()))
     del model,x,y
-output=ROOT/'research/feature_evolution/profile-cuda.json'
+parser=argparse.ArgumentParser()
+parser.add_argument('--output',type=str,default=str(ROOT/'research/feature_evolution/profile-cuda.json'))
+args=parser.parse_args()
+output=__import__('pathlib').Path(args.output)
 output.write_text(json.dumps(dict(device=torch.cuda.get_device_name(),torch=torch.__version__,
     shape=[1,3,64,64],dtype='float32',tf32=False,warmup=5,repeats=20,records=records,
     limitations='Local untrained fused inference, sequential order. No training memory/throughput or server latency claim. MAC estimate covers only added convolutions: 4056*H*W; no full FLOP coverage.'),indent=2),encoding='utf-8')

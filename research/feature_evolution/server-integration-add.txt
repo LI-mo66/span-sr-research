@@ -1,0 +1,65 @@
+Data audit: train, 1 pairs
+Data audit: DIV2K_valid, 1 pairs
+Data audit: Set5, 1 pairs
+Data audit: Set14, 1 pairs
+Data audit: B100, 1 pairs
+Data audit: Urban100, 1 pairs
+Data audit: Manga109, 1 pairs
+All paired images decoded and x4 shapes checked.
+Checking dataset hashes and train/validation separation...
+Run ENGINEERING-FE-1456330cde; protocol 4f3385cb60dbf4354b191450603c088be058de274d7742d6b554e324e55786da; stop 1 updates; 1 updates per research epoch
+Loader workers=0; log every 100 updates; evaluation every 1
+epoch=1 update=1/1 progress=100.00% L1=5.62628508 lr=0.0002 step_s=0.456 data_wait_s=0.005 elapsed_min=0.0 ETA_train_min=0.0 (evaluation overhead not forecast)
+Evaluation starting at update=1...
+epoch=1 updates_in_epoch=1 total_update=1 mean_train_L1=5.62628508 last_train_L1=5.62628508
+DIV2K_valid: PSNR=9.77948496 SSIM=0.00534175; best={'value': 9.77948496372782, 'epoch': 1, 'update': 1}, {'value': 0.005341747697329915, 'epoch': 1, 'update': 1}
+Set5: PSNR=9.70193842 SSIM=-0.00861761; best={'value': 9.701938422761213, 'epoch': 1, 'update': 1}, {'value': -0.008617612526281987, 'epoch': 1, 'update': 1}
+Set14: PSNR=9.83962927 SSIM=0.01373141; best={'value': 9.839629268898948, 'epoch': 1, 'update': 1}, {'value': 0.01373141236733188, 'epoch': 1, 'update': 1}
+B100: PSNR=9.82384435 SSIM=0.02314872; best={'value': 9.82384434857593, 'epoch': 1, 'update': 1}, {'value': 0.023148717999031527, 'epoch': 1, 'update': 1}
+Urban100: PSNR=9.86143514 SSIM=0.02849296; best={'value': 9.861435143533965, 'epoch': 1, 'update': 1}, {'value': 0.028492958271901497, 'epoch': 1, 'update': 1}
+Manga109: PSNR=9.74222724 SSIM=-0.01716528; best={'value': 9.742227238942583, 'epoch': 1, 'update': 1}, {'value': -0.01716527713176467, 'epoch': 1, 'update': 1}
+Training complete. No stability or paper-value claim follows from a single run.
+Data audit: train, 1 pairs
+Data audit: DIV2K_valid, 1 pairs
+Data audit: Set5, 1 pairs
+Data audit: Set14, 1 pairs
+Data audit: B100, 1 pairs
+Data audit: Urban100, 1 pairs
+Data audit: Manga109, 1 pairs
+All paired images decoded and x4 shapes checked.
+Checking dataset hashes and train/validation separation...
+Run ENGINEERING-FE-1456330cde; protocol 4f3385cb60dbf4354b191450603c088be058de274d7742d6b554e324e55786da; stop 2 updates; 1 updates per research epoch
+Loader workers=0; log every 100 updates; evaluation every 1
+epoch=2 update=2/2 progress=100.00% L1=5.25074005 lr=0.0002 step_s=0.452 data_wait_s=0.006 elapsed_min=0.0 ETA_train_min=0.0 (evaluation overhead not forecast)
+Evaluation starting at update=2...
+epoch=2 updates_in_epoch=1 total_update=2 mean_train_L1=5.25074005 last_train_L1=5.25074005
+DIV2K_valid: PSNR=9.77859614 SSIM=0.00484894; best={'value': 9.77948496372782, 'epoch': 1, 'update': 1}, {'value': 0.005341747697329915, 'epoch': 1, 'update': 1}
+Set5: PSNR=9.71617038 SSIM=-0.00678876; best={'value': 9.716170382559735, 'epoch': 2, 'update': 2}, {'value': -0.006788758573772428, 'epoch': 2, 'update': 2}
+Set14: PSNR=9.82912915 SSIM=0.01713262; best={'value': 9.839629268898948, 'epoch': 1, 'update': 1}, {'value': 0.01713261592045628, 'epoch': 2, 'update': 2}
+B100: PSNR=9.86945076 SSIM=0.02217286; best={'value': 9.869450762060335, 'epoch': 2, 'update': 2}, {'value': 0.023148717999031527, 'epoch': 1, 'update': 1}
+Urban100: PSNR=9.85714758 SSIM=0.02971696; best={'value': 9.861435143533965, 'epoch': 1, 'update': 1}, {'value': 0.029716957902685075, 'epoch': 2, 'update': 2}
+Manga109: PSNR=9.73677054 SSIM=-0.02253215; best={'value': 9.742227238942583, 'epoch': 1, 'update': 1}, {'value': -0.01716527713176467, 'epoch': 1, 'update': 1}
+Training complete. No stability or paper-value claim follows from a single run.
+Data audit: train, 1 pairs
+Data audit: DIV2K_valid, 1 pairs
+Data audit: Set5, 1 pairs
+Data audit: Set14, 1 pairs
+Data audit: B100, 1 pairs
+Data audit: Urban100, 1 pairs
+Data audit: Manga109, 1 pairs
+All paired images decoded and x4 shapes checked.
+Checking dataset hashes and train/validation separation...
+Run ENGINEERING-FE-1456330cde-continuous; protocol 07e81a3a060101b931c27bc6563a7aef1eef69f35d28a2b11333610bb4163de8; stop 2 updates; 2 updates per research epoch
+Loader workers=0; log every 100 updates; evaluation every 2
+epoch=1 update=1/2 progress=50.00% L1=5.62628508 lr=0.0002 step_s=0.479 data_wait_s=0.004 elapsed_min=0.0 ETA_train_min=0.0 (evaluation overhead not forecast)
+Evaluation starting at update=2...
+epoch=1 updates_in_epoch=2 total_update=2 mean_train_L1=5.43851256 last_train_L1=5.25074005
+DIV2K_valid: PSNR=9.77859614 SSIM=0.00484894; best={'value': 9.778596141513187, 'epoch': 1, 'update': 2}, {'value': 0.0048489375765455615, 'epoch': 1, 'update': 2}
+Set5: PSNR=9.71617038 SSIM=-0.00678876; best={'value': 9.716170382559735, 'epoch': 1, 'update': 2}, {'value': -0.006788758573772428, 'epoch': 1, 'update': 2}
+Set14: PSNR=9.82912915 SSIM=0.01713262; best={'value': 9.829129154477563, 'epoch': 1, 'update': 2}, {'value': 0.01713261592045628, 'epoch': 1, 'update': 2}
+B100: PSNR=9.86945076 SSIM=0.02217286; best={'value': 9.869450762060335, 'epoch': 1, 'update': 2}, {'value': 0.022172863953009072, 'epoch': 1, 'update': 2}
+Urban100: PSNR=9.85714758 SSIM=0.02971696; best={'value': 9.8571475798823, 'epoch': 1, 'update': 2}, {'value': 0.029716957902685075, 'epoch': 1, 'update': 2}
+Manga109: PSNR=9.73677054 SSIM=-0.02253215; best={'value': 9.736770541813641, 'epoch': 1, 'update': 2}, {'value': -0.022532154285724252, 'epoch': 1, 'update': 2}
+Training complete. No stability or paper-value claim follows from a single run.
+PASS synthetic accumulation/cache/checkpoint/resume and evaluation-cadence equality: ENGINEERING-FE-1456330cde
+No real-data accuracy evidence. Fixture artifacts retained under tmp/ and runs/.

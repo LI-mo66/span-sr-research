@@ -2,6 +2,8 @@
 日期：2026-10-25（Asia/Shanghai）
 状态：B3加法/差分候选已实现，CPU/CUDA合成工程与真实训练入口合成恢复检查通过；无真实数据训练、无新增PSNR结论。最新证据见 engineering-review.zh.md。
 
+服务器串行50K交付与自动关机说明见 SERVER.zh.md，新增交付检查见 server-delivery-review.zh.md。
+
 ## 1. 固定来源与授权边界
 仓库 LI-mo66/span-sr-research；基座 e731483d4ce4e325f3d64dbbc80add342b46f7f1。
 独立分支 research/sg6-feature-evolution。只研究原SG6，不叠加ADD31、B2Conv、上下文单元或新loss。

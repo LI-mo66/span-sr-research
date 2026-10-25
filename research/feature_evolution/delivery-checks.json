@@ -1,0 +1,11 @@
+{
+  "status": "PASS",
+  "checks": [
+    "Observer leaves three-step model updates and RNG bitwise unchanged",
+    "Backup SHA256 and lightweight ZIP contents/CRC/hash verification",
+    "Mock shutdown rejects missing candidate, failed run, corrupt backup and busy GPU; handles command failure",
+    "Mock noninteractive shutdown permission rejection",
+    "Synthetic comparison validates selected weight, paired images, last3/last10 and equal-capacity comparison"
+  ],
+  "limitation": "Synthetic fixtures and mocked shutdown only; no real training, Linux power-off or target-server permissions tested."
+}
