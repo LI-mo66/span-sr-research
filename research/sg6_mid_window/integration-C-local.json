@@ -1,0 +1,12 @@
+{
+  "status": "PASS",
+  "variant": "C",
+  "torch": "2.9.1+cu128",
+  "device": "NVIDIA GeForce RTX 4060 Laptop GPU",
+  "resumed_run": "ENGINEERING-SG6-MID-C-c340c21833",
+  "direct_run": "ENGINEERING-SG6-MID-C-c340c21833-continuous",
+  "updates": 2,
+  "save_resume_exact": true,
+  "step_history_equal": true,
+  "cumulative_extra_parameters": 42348
+}

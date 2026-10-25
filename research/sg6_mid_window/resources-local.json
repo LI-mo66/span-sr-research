@@ -1,0 +1,38 @@
+{
+  "status": "PASS",
+  "torch": "2.9.1+cu128",
+  "device": "NVIDIA GeForce RTX 4060 Laptop GPU",
+  "precision": "FP32",
+  "shape": [
+    1,
+    3,
+    180,
+    320
+  ],
+  "warmup_each": 3,
+  "repeats_each": 10,
+  "models": {
+    "SG6": {
+      "deployed_parameters": 535772,
+      "median_ms": 17.74055000032604,
+      "min_ms": 15.812499999810825,
+      "incremental_peak_allocated": 186045952,
+      "process_peak_reserved": 480247808
+    },
+    "A": {
+      "deployed_parameters": 540580,
+      "median_ms": 28.125599999839324,
+      "min_ms": 26.20329999990645,
+      "incremental_peak_allocated": 326746112,
+      "process_peak_reserved": 480247808
+    },
+    "C": {
+      "deployed_parameters": 540556,
+      "median_ms": 20.149750000200584,
+      "min_ms": 18.689399999857415,
+      "incremental_peak_allocated": 186045952,
+      "process_peak_reserved": 480247808
+    }
+  },
+  "scope": "Random-weight prefused inference; models co-resident. Reserved memory is process-wide. Not training throughput, trained PSNR, or complete FLOPs coverage."
+}
