@@ -147,9 +147,9 @@
   "shared_trainer_integration": {
     "status": "PASS",
     "scope": "four synthetic updates; not real-data performance",
-    "source_commit": "bed618f4c10566c4c53983f5d0fc5bc058308b79",
-    "run_id": "ENGINEERING-UCAN-IND-1c583fb790",
-    "continuous_id": "ENGINEERING-UCAN-IND-1c583fb790-continuous",
+    "source_commit": "ff6118107390c251ab7888e3463b3d279b87b1ab",
+    "run_id": "ENGINEERING-UCAN-IND-5cce6d92cd",
+    "continuous_id": "ENGINEERING-UCAN-IND-5cce6d92cd-continuous",
     "exact_model_optimizer_scheduler_rng_resume": true,
     "exact_losses_with_different_evaluation_cadence": true,
     "partial_log_recovery": true,
@@ -178,7 +178,7 @@
     "precision": "FP32 cudnnTF32=True matmulTF32=False",
     "peak_allocated_bytes": 3034831872,
     "peak_reserved_bytes": 3309305856,
-    "elapsed_seconds": 1.5044729999999618,
+    "elapsed_seconds": 1.4558273000002373,
     "scope": "synthetic memory/startup check, not real training or effective-batch performance"
   },
   "same_process_reference_profiles": [
@@ -196,5 +196,6 @@
     "release_disabled"
   ],
   "queue_mock_limit": "Real Linux flock and provider release are not invoked by local mocks",
-  "comparison_fixture": "PASS selected/fixed/tail/paired comparisons against prior successful combo"
+  "comparison_fixture": "PASS selected/fixed/tail/paired comparisons against prior successful combo",
+  "final_state_lifetime_recheck": "PASS CUDA engineering, exact trainer integration and all four same-process reference profiles after retaining QK only for reuse"
 }
