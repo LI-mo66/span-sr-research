@@ -1,0 +1,200 @@
+{
+  "scope": "Local engineering, not real-data quality; server repeats all checks in archived Torch2.2.2+cu121/4090 environment before any50K run",
+  "local_torch": "2.9.1+cu128",
+  "hardware": "NVIDIA GeForce RTX 4060 Laptop GPU",
+  "engineering": {
+    "status": "PASS",
+    "device": "cuda",
+    "arm": {
+      "arm": "p26-lksa5",
+      "positions": [
+        2,
+        6
+      ],
+      "context": "v2-currentV-rawQK-independent",
+      "lksa_position": 5,
+      "lksa_kernel": 35,
+      "lksa_ratio": 4,
+      "lksa_adapter": "detached-image-rms-input-output-zero-projection",
+      "fusion": "post-insertion-block1-tap; original-block6-first-tap",
+      "budget_class": "screen",
+      "qk_mode": "independent"
+    },
+    "deployed_parameters": 565087,
+    "source_LKSA_output_input_parameter_gradient_equivalence": true,
+    "zero_adapter_identity": true,
+    "original_forward_hook_oracle": true,
+    "backbone_and_RNG_preserved": true,
+    "odd_rectangular_batch_shapes": true,
+    "fp64_train_eval_and_deploy": true,
+    "exact_Adam_scheduler_continuation": true,
+    "source_attention_equivalence": [
+      {
+        "reuse": false,
+        "shape": [
+          2,
+          1,
+          1
+        ],
+        "forward_absmax": 0.0
+      },
+      {
+        "reuse": false,
+        "shape": [
+          2,
+          1,
+          7
+        ],
+        "forward_absmax": 0.0
+      },
+      {
+        "reuse": false,
+        "shape": [
+          2,
+          13,
+          17
+        ],
+        "forward_absmax": 0.0
+      },
+      {
+        "reuse": false,
+        "shape": [
+          2,
+          17,
+          13
+        ],
+        "forward_absmax": 0.0
+      },
+      {
+        "reuse": true,
+        "shape": [
+          2,
+          1,
+          1
+        ],
+        "forward_absmax": 0.0
+      },
+      {
+        "reuse": true,
+        "shape": [
+          2,
+          1,
+          7
+        ],
+        "forward_absmax": 0.0
+      },
+      {
+        "reuse": true,
+        "shape": [
+          2,
+          13,
+          17
+        ],
+        "forward_absmax": 0.0
+      },
+      {
+        "reuse": true,
+        "shape": [
+          2,
+          17,
+          13
+        ],
+        "forward_absmax": 0.0
+      }
+    ],
+    "state_interfaces": {
+      "shapes": [
+        [
+          1,
+          52,
+          1,
+          1
+        ],
+        [
+          2,
+          52,
+          1,
+          7
+        ],
+        [
+          2,
+          52,
+          13,
+          17
+        ],
+        [
+          1,
+          52,
+          63,
+          65
+        ],
+        [
+          1,
+          52,
+          65,
+          63
+        ]
+      ],
+      "invalid_state_rejected": true,
+      "batch_independent": true,
+      "no_cache": true,
+      "signed_zero_sum_stress_finite": true
+    },
+    "common_initialization_matches_prior_combo": true,
+    "sharing_checks": {},
+    "scope": "synthetic engineering only; no real-data gain claim"
+  },
+  "shared_trainer_integration": {
+    "status": "PASS",
+    "scope": "four synthetic updates; not real-data performance",
+    "source_commit": "c04f952c5b96e8c9474f043c7cde8cad4dd1935a",
+    "run_id": "ENGINEERING-UCAN-IND-d04a0ebff4",
+    "continuous_id": "ENGINEERING-UCAN-IND-d04a0ebff4-continuous",
+    "exact_model_optimizer_scheduler_rng_resume": true,
+    "exact_losses_with_different_evaluation_cadence": true,
+    "partial_log_recovery": true,
+    "best_validation_checkpoint": true,
+    "accumulation": 2,
+    "micro_batch": 1,
+    "npy_mmap": true,
+    "environment": {
+      "torch": "2.9.1+cu128",
+      "cuda": "12.8",
+      "device": "NVIDIA GeForce RTX 4060 Laptop GPU",
+      "deterministic": true,
+      "cudnn_allow_tf32": true,
+      "matmul_allow_tf32": false
+    }
+  },
+  "production_shape_synthetic_memory": {
+    "micro_batch": 16,
+    "lr_hw": [
+      64,
+      64
+    ],
+    "effective_batch": 64,
+    "micro_steps": 2,
+    "optimizer": "Adam",
+    "precision": "FP32 cudnnTF32=True matmulTF32=False",
+    "peak_allocated_bytes": 3034201088,
+    "peak_reserved_bytes": 3307208704,
+    "elapsed_seconds": 1.4125852999995914,
+    "scope": "synthetic memory/startup check, not real training or effective-batch performance"
+  },
+  "same_process_reference_profiles": [
+    "SG6",
+    "P24",
+    "P24_LKSA5",
+    "candidate"
+  ],
+  "queue_mock_cases": [
+    "success",
+    "preflight_fail",
+    "training_fail",
+    "backup_guard_fail",
+    "GPU_busy",
+    "release_disabled"
+  ],
+  "queue_mock_limit": "Real Linux flock and provider release are not invoked by local mocks",
+  "comparison_fixture": "PASS selected/fixed/tail/paired comparisons against prior successful combo"
+}
