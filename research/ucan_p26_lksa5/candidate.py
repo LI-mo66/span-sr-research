@@ -72,9 +72,14 @@ def build_model(arch,cfg):
             for pos in range(1,7):
                 x,first,_=getattr(self,f'block_{pos}')(x)
                 if pos in positions:
-                    reused=state if s['qk_mode']=='reuse' and pos==positions[1] else None
-                    x,new_state=getattr(self,f'context_{pos}')(x,reused)
-                    if pos==positions[0]:state=new_state
+                    if s['qk_mode']=='reuse':
+                        reused=state if pos==positions[1] else None
+                        x,new_state=getattr(self,f'context_{pos}')(x,reused)
+                        if pos==positions[0]:state=new_state
+                    else:
+                        # Match prior independent state lifetime: no retained
+                        # raw-QK variable between adapters during inference.
+                        x,_=getattr(self,f'context_{pos}')(x)
                 if pos==s['lksa_position']:x=getattr(self,f'lksa_{pos}')(x)
                 if pos==1:b1=x
             b6=self.conv_2(x)
