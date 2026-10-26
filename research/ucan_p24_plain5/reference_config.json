@@ -1,0 +1,95 @@
+{
+  "model": {
+    "num_in_ch": 3,
+    "num_out_ch": 3,
+    "feature_channels": 52,
+    "upscale": 4,
+    "img_range": 255.0
+  },
+  "seed": 10,
+  "total_updates": 1000000,
+  "screen_epochs": 20,
+  "record_updates": 1000,
+  "deployed_baseline_parameters": 498208,
+  "max_extra_deployed_parameters": 49820,
+  "hr_patch": 256,
+  "effective_batch": 64,
+  "micro_batch": 16,
+  "lr": 0.0002,
+  "adam_betas": [
+    0.9,
+    0.999
+  ],
+  "adam_eps": 1e-08,
+  "milestones": [
+    200000,
+    400000,
+    600000,
+    800000
+  ],
+  "gamma": 0.5,
+  "crop_border": 4,
+  "test_y_channel": true,
+  "self_ensemble": false,
+  "selection_dataset": "DIV2K_valid",
+  "protocol_status": "SPAN52_stage1_research_protocol_pending_remote_baseline_training",
+  "official_unresolved": [
+    "Adam betas/epsilon unspecified in paper",
+    "number and reset semantics of repeated loaded-weight training stages",
+    "complete training provenance of released weights, including teacher/EMA"
+  ],
+  "paths_file": "research/configs/paths.local.json",
+  "moe_fs": false,
+  "experiment_version": "SG6-UCAN-Sweep-v1-p24-lksa5",
+  "training_protocol": "multistep-lr2e4-v1",
+  "image_backend": "npy_mmap",
+  "local_gate": {
+    "activation": "silu",
+    "initial_weight": "zero",
+    "initial_bias": 0.1,
+    "blocks": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6
+    ]
+  },
+  "image_bypass": {
+    "residual_kernel": 3,
+    "gate_kernel": 3,
+    "gate_channels": 1,
+    "gate_gain": 2.0,
+    "initial_weight": "zero",
+    "initial_bias": 0.0
+  },
+  "spatial_gate": {
+    "blocks": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6
+    ],
+    "kernel": 3,
+    "channels": 52,
+    "activation": "silu",
+    "projection_init": "zero"
+  },
+  "ucan_sweep": {
+    "arm": "p24-lksa5",
+    "positions": [
+      2,
+      4
+    ],
+    "context": "independent-v2",
+    "lksa_position": 5,
+    "lksa_kernel": 35,
+    "lksa_ratio": 4,
+    "lksa_adapter": "detached-image-rms-input-output-zero-projection",
+    "fusion": "post-insertion-block1-tap; original-block6-first-tap",
+    "budget_class": "screen"
+  }
+}
