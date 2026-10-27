@@ -1,0 +1,47 @@
+{
+  "attention.py": {
+    "commit": "d42b73fef5b2ec3e088f340ab033a5c4ac13a190",
+    "path": "research/ucan_p24_lksa5/attention.py",
+    "git_blob_sha": "05543363536c976b5f7a66985b86a2d166596e6f"
+  },
+  "lksa.py": {
+    "commit": "d42b73fef5b2ec3e088f340ab033a5c4ac13a190",
+    "path": "research/ucan_p24_lksa5/lksa.py",
+    "git_blob_sha": "7c4cec36059b090fe365822f7020159d18dc2fa9"
+  },
+  "u_candidate.py": {
+    "commit": "d42b73fef5b2ec3e088f340ab033a5c4ac13a190",
+    "path": "research/ucan_p24_lksa5/candidate.py",
+    "git_blob_sha": "7aa5cf8c6e3f4f86d4bfc458c3aba9130835a6de"
+  },
+  "config.json": {
+    "commit": "d42b73fef5b2ec3e088f340ab033a5c4ac13a190",
+    "path": "research/ucan_p24_lksa5/config.json",
+    "git_blob_sha": "bb29c706661b399912d555b63d69ac4a22fc8701"
+  },
+  "UCAN-LICENSE": {
+    "commit": "d42b73fef5b2ec3e088f340ab033a5c4ac13a190",
+    "path": "research/ucan_p24_lksa5/vendor/LICENSE",
+    "git_blob_sha": "261eeb9e9f8b2b4b0d119366dda99c6fd7d35c64"
+  },
+  "UCAN-source-manifest.json": {
+    "commit": "d42b73fef5b2ec3e088f340ab033a5c4ac13a190",
+    "path": "research/ucan_p24_lksa5/vendor/manifest.json",
+    "git_blob_sha": "8f71718c72e6b9759292c15108acc3f4a009d9a5"
+  },
+  "window_adapter.py": {
+    "commit": "78cc1dda90a5bafcefa6c62225197f6eb95c92e2",
+    "path": "research/sg6_mid_window/adapter.py",
+    "git_blob_sha": "1e3ce3d7ce4071f9cb9f62f9a89d016e93e507fe"
+  },
+  "w_model.py": {
+    "commit": "78cc1dda90a5bafcefa6c62225197f6eb95c92e2",
+    "path": "research/sg6_mid_window/model.py",
+    "git_blob_sha": "b5aa9d8d24aa2dd4143ff70040bd70587c64d063"
+  },
+  "w_config.json": {
+    "commit": "78cc1dda90a5bafcefa6c62225197f6eb95c92e2",
+    "path": "research/sg6_mid_window/configs/A.json",
+    "git_blob_sha": "cc67b8306732ff1c688eed33d74eb8cf9dc7f4f0"
+  }
+}

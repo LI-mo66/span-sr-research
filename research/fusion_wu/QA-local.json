@@ -1,0 +1,70 @@
+{
+  "verify-cpu.json": {
+    "status": "PASS",
+    "device": "cpu",
+    "parameters": 569895,
+    "normalization_LN": 3,
+    "original_W_U_parameter_initialization_exact": true,
+    "backbone_initialization_exact": true,
+    "W_only_forward_exact": true,
+    "U_only_nonzero_forward_exact": true,
+    "exact_save_reload_replay": true,
+    "scope": "Engineering only; no PSNR or optimality claim"
+  },
+  "verify-cuda.json": {
+    "status": "PASS",
+    "device": "cuda",
+    "parameters": 569895,
+    "normalization_LN": 3,
+    "original_W_U_parameter_initialization_exact": true,
+    "backbone_initialization_exact": true,
+    "W_only_forward_exact": true,
+    "U_only_nonzero_forward_exact": true,
+    "exact_save_reload_replay": true,
+    "scope": "Engineering only; no PSNR or optimality claim"
+  },
+  "integration.json": {
+    "status": "PASS",
+    "synthetic_updates": 2,
+    "exact_resumed_weights_optimizer_scheduler_rng": true,
+    "training_entry": "E:\\SPANimagebase\\span-sg6-wu-fusion\\research\\fusion_wu\\run.py",
+    "scope": "Synthetic integration only; no real-data PSNR claim"
+  },
+  "resources.json": {
+    "models": {
+      "SG6": {
+        "deployed_parameters": 535772,
+        "median_ms": 14.895949999981895,
+        "incremental_peak_allocated": 196503040
+      },
+      "W": {
+        "deployed_parameters": 540580,
+        "median_ms": 25.312200000144003,
+        "incremental_peak_allocated": 337602560
+      },
+      "U": {
+        "deployed_parameters": 565087,
+        "median_ms": 26.452600000084203,
+        "incremental_peak_allocated": 233069568
+      },
+      "FUSION": {
+        "deployed_parameters": 569895,
+        "median_ms": 36.15945000001375,
+        "incremental_peak_allocated": 337805312
+      }
+    },
+    "device": "NVIDIA GeForce RTX 4060 Laptop GPU",
+    "torch": "2.9.1+cu128",
+    "input_shape": [
+      1,
+      3,
+      180,
+      320
+    ],
+    "precision": "FP32",
+    "warmup": 3,
+    "repeats": 10,
+    "scope": "Random weights, prefused inference only, sequential models; not training throughput"
+  },
+  "scope": "Local Torch2.9.1 cu128 RTX4060 Laptop engineering only. Server Torch2.2.2 cu121 RTX4090 must rerun all gates before scratch50K."
+}
