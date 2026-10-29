@@ -1,0 +1,101 @@
+{
+  "F1": {
+    "verify-cpu.json": {
+      "status": "PASS",
+      "device": "cpu",
+      "parameters": 569895,
+      "normalization_LN": 3,
+      "original_W_U_parameter_initialization_exact": true,
+      "backbone_initialization_exact": true,
+      "W_only_forward_exact": true,
+      "U_only_nonzero_forward_exact": true,
+      "exact_order_oracle": true,
+      "arm": "F1",
+      "exact_save_reload_replay": true,
+      "scope": "Engineering only; no PSNR or optimality claim",
+      "branch_internal_paths_updated": {
+        "block_2.adapter.core": true,
+        "block_3.adapter.window.core": true,
+        "block_3.adapter.spatial.core": true,
+        "block_4.adapter.core": true
+      }
+    },
+    "verify-cuda.json": {
+      "status": "PASS",
+      "device": "cuda",
+      "parameters": 569895,
+      "normalization_LN": 3,
+      "original_W_U_parameter_initialization_exact": true,
+      "backbone_initialization_exact": true,
+      "W_only_forward_exact": true,
+      "U_only_nonzero_forward_exact": true,
+      "exact_order_oracle": true,
+      "arm": "F1",
+      "exact_save_reload_replay": true,
+      "scope": "Engineering only; no PSNR or optimality claim",
+      "branch_internal_paths_updated": {
+        "block_2.adapter.core": true,
+        "block_3.adapter.window.core": true,
+        "block_3.adapter.spatial.core": true,
+        "block_4.adapter.core": true
+      }
+    },
+    "integration.json": {
+      "status": "PASS",
+      "synthetic_updates": 2,
+      "exact_resumed_weights_optimizer_scheduler_rng": true,
+      "training_entry": "E:\\SPANimagebase\\span-sg6-wu-orders\\research\\fusion_wu\\run.py",
+      "scope": "Synthetic integration only; no real-data PSNR claim"
+    }
+  },
+  "F2": {
+    "verify-cpu.json": {
+      "status": "PASS",
+      "device": "cpu",
+      "parameters": 569895,
+      "normalization_LN": 3,
+      "original_W_U_parameter_initialization_exact": true,
+      "backbone_initialization_exact": true,
+      "W_only_forward_exact": true,
+      "U_only_nonzero_forward_exact": true,
+      "exact_order_oracle": true,
+      "arm": "F2",
+      "exact_save_reload_replay": true,
+      "scope": "Engineering only; no PSNR or optimality claim",
+      "branch_internal_paths_updated": {
+        "block_2.adapter.core": true,
+        "block_3.adapter.window.core": true,
+        "block_3.adapter.spatial.core": true,
+        "block_4.adapter.core": true
+      }
+    },
+    "verify-cuda.json": {
+      "status": "PASS",
+      "device": "cuda",
+      "parameters": 569895,
+      "normalization_LN": 3,
+      "original_W_U_parameter_initialization_exact": true,
+      "backbone_initialization_exact": true,
+      "W_only_forward_exact": true,
+      "U_only_nonzero_forward_exact": true,
+      "exact_order_oracle": true,
+      "arm": "F2",
+      "exact_save_reload_replay": true,
+      "scope": "Engineering only; no PSNR or optimality claim",
+      "branch_internal_paths_updated": {
+        "block_2.adapter.core": true,
+        "block_3.adapter.window.core": true,
+        "block_3.adapter.spatial.core": true,
+        "block_4.adapter.core": true
+      }
+    },
+    "integration.json": {
+      "status": "PASS",
+      "synthetic_updates": 2,
+      "exact_resumed_weights_optimizer_scheduler_rng": true,
+      "training_entry": "E:\\SPANimagebase\\span-sg6-wu-orders\\research\\fusion_wu\\run.py",
+      "scope": "Synthetic integration only; no real-data PSNR claim"
+    }
+  },
+  "scope": "Local Torch2.9.1 cu128 RTX4060 Laptop synthetic engineering only; server native gates and real crop/whole-image checks remain mandatory."
+}
