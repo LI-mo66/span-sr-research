@@ -1,0 +1,15 @@
+{
+  "status": "PASS",
+  "torch": "2.9.1+cu128",
+  "device": "NVIDIA GeForce RTX 4060 Laptop GPU",
+  "transforms_unique_and_inverse_exact": true,
+  "independent_x8_oracle": true,
+  "old_vs_new_training_weights_optimizer_scheduler_rng_losses_exact": true,
+  "staged_vs_continuous_exact": true,
+  "partial_record_recovery": true,
+  "lr_milestone_boundary": true,
+  "both_metric_modes_recorded": true,
+  "scope": "Four synthetic updates; not real-data convergence or stability",
+  "abort_only_guard_unit_tests": "PASS",
+  "server_native_preflight_required": true
+}
