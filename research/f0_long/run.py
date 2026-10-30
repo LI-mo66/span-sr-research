@@ -22,6 +22,9 @@ def main():
     if cfg.get('engineering_only'):
         if os.environ.get('F0_LONG_ENGINEERING')!='1':raise ValueError('Engineering flag missing')
     else:
+        import platform,numpy,cv2,scipy
+        if platform.python_version()!='3.11.8' or (numpy.__version__,cv2.__version__,scipy.__version__)!=('1.26.4','4.10.0','1.13.1'):
+            raise ValueError('Python/image/metric libraries differ from fixed protocol; do not upgrade on resume')
         frozen=json.loads((ROOT/'logs/f0-long/frozen/config.json').read_text())
         if cfg!=frozen:raise ValueError('Configuration differs from immutable frozen protocol')
         if a.id!='FEAT-SG6-F0-X8-S10-1M-01':raise ValueError('Wrong formal run ID')
@@ -29,6 +32,7 @@ def main():
         if cfg['total_updates']!=1000000 or cfg['record_updates']!=1000 or cfg['self_ensemble'] is not True:
             raise ValueError('Long protocol mismatch')
     import torch
+    if torch.get_default_dtype()!=torch.float32:raise ValueError('FP32 default dtype required')
     torch.backends.cudnn.allow_tf32=True;torch.backends.cuda.matmul.allow_tf32=False
     spec=importlib.util.spec_from_file_location('f0_long_trainer',HERE/'trainer.py')
     module=importlib.util.module_from_spec(spec);spec.loader.exec_module(module)
