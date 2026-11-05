@@ -1,0 +1,41 @@
+{
+  "status": "PASS",
+  "torch": "2.9.1+cu128",
+  "device": "RTX4060 Laptop GPU",
+  "tests": [
+    {
+      "scale": 2,
+      "arm": "B0",
+      "exact_resume": true,
+      "metrics": true
+    },
+    {
+      "scale": 2,
+      "arm": "F0",
+      "exact_resume": true,
+      "metrics": true
+    },
+    {
+      "scale": 3,
+      "arm": "B0",
+      "exact_resume": true,
+      "metrics": true
+    },
+    {
+      "scale": 3,
+      "arm": "F0",
+      "exact_resume": true,
+      "metrics": true
+    }
+  ],
+  "additional": [
+    "CPU/CUDA odd and1x1 shapes",
+    "grayscale exact crop oracle",
+    "x8 inverses",
+    "3 real updates",
+    "x4 archived bound mapping exact CPU/CUDA",
+    "bash syntax checked",
+    "Independent rot90/flip x8 averaging oracle, both scales"
+  ],
+  "scope": "4090 torch2.2.2 native checks still required before50K"
+}

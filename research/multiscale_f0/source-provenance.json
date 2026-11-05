@@ -1,0 +1,17 @@
+{
+  "attention.py": {
+    "source_commit": "82296152efc423d34e8c89ad6166ae30bf01e26d",
+    "source_path": "research/fusion_wu/attention.py",
+    "sha256": "79fd8f6c317da50e8e372fb3cbfb7b21edcf5216017e1f9d3713b3500e620b50"
+  },
+  "lksa.py": {
+    "source_commit": "82296152efc423d34e8c89ad6166ae30bf01e26d",
+    "source_path": "research/fusion_wu/lksa.py",
+    "sha256": "1e5f541e0bdda42d28c033b4341935a6e13fa77cd3b332c9813991f0ba503741"
+  },
+  "window_adapter.py": {
+    "source_commit": "82296152efc423d34e8c89ad6166ae30bf01e26d",
+    "source_path": "research/fusion_wu/window_adapter.py",
+    "sha256": "1d5a27f7bfeb6b8e95de1f6c1291637caed3aec2ff80b76cc74063732fc188e9"
+  }
+}
