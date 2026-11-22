@@ -1,0 +1,114 @@
+===== 1. 完成状态 =====
+status.txt COMPLETE_X2_CLIP01_1000K_NO_SHUTDOWN
+ANOMALY.json 未发现
+
+===== 2. 实际配置 =====
+model {'num_in_ch': 3, 'num_out_ch': 3, 'feature_channels': 52, 'upscale': 2, 'img_range': 255.0}
+arm F0
+seed 10
+hr_patch 128
+effective_batch 64
+micro_batch 16
+lr 0.0002
+adam_betas [0.9, 0.999]
+adam_eps 1e-08
+milestones [200000, 400000, 600000, 800000]
+gamma 0.5
+record_updates 1000
+crop_border 2
+test_y_channel True
+self_ensemble True
+selection_dataset DIV2K_valid
+image_backend npy_mmap
+数据清单数量 {'train': 3450, 'DIV2K_valid': 100, 'Set5': 5, 'Set14': 14, 'B100': 100, 'Urban100': 100, 'Manga109': 109}
+源码commit 0748bd60c1eaddda4e0db7f01ba768a0f2a22be3
+协议指纹 1cd930967139a355d9adea5876e71a1bdb8deedd57fd06eb34a632a5cd22b1ae
+环境 {'torch': '2.2.2+cu121', 'cuda': '12.1', 'device': 'NVIDIA GeForce RTX 4090', 'deterministic': True, 'cudnn_allow_tf32': True, 'matmul_allow_tf32': False}
+部署参数参考 481324 新增参数配置 70679
+
+===== 3. 1M完整恢复断点 =====
+{"update": 1000000, "epoch": 1000, "optimizer_lr": [1.25e-05], "scheduler_last_epoch": 1000000, "scheduler_base_lrs": [0.0002], "scheduler_last_lr": [1.25e-05], "milestones": {"200000": 1, "400000": 1, "600000": 1, "800000": 1}, "gamma": 0.5, "model_finite": true, "adam_finite": true, "adam_state_entries": 272, "rng_present": {"python_rng": true, "numpy_rng": true, "torch_rng": true, "cuda_rng": true}, "fingerprint_matches_manifest": true}
+latest.pt SHA256 6a90e22b74412ab69154b797db737771c0bc38d483db75300f25f4fb8cc8ff65
+
+===== 4. 全程评测完整性 =====
+评测记录数 1000
+1K到1M完整按序 True
+缺失或非有限指标组数 0
+全程按普通DIV2K_valid所选步数 982000
+权重路径 /home/featurize/work/span-x4-research/code/span-f0-x2x3-screen-01/runs/F0-X2-CLIP01-U1000K-21/epoch00982_u982000.pt
+权重存在 True
+所选权重内部步数 982000
+所选权重参数有限 True
+所选权重Adam学习率 [1.25e-05]
+所选权重SHA256 3dae5537ca672813dc4e9870f97276d173eda6f15ef8ffaf9aaf1c8406ef3068
+
+===== 5. 同一所选权重的六集合结果 =====
+集合 普通PSNR 普通SSIM x8PSNR x8SSIM x8增量
+DIV2K_valid 36.281380 0.946506 36.356419 0.946921 +0.075039
+Set5 38.169226 0.961027 38.220880 0.961230 +0.051654
+Set14 33.825160 0.919736 33.854650 0.920051 +0.029490
+B100 32.277368 0.900919 32.307235 0.901204 +0.029867
+Urban100 32.556226 0.931723 32.708697 0.932629 +0.152471
+Manga109 39.205670 0.978384 39.356110 0.978684 +0.150439
+
+===== 6. 固定步数和后段均值 =====
+集合 固定50K 固定300K 固定600K 固定800K 固定1M 791–800K均值 981–990K均值 991K–1M均值
+DIV2K_valid 35.862548 36.186213 36.240607 36.270395 36.277622 36.261543 36.275030 36.274677
+DIV2K_valid_x8 35.960981 36.274136 36.315175 36.346423 36.350812 36.337050 36.348066 36.345865
+Set5 37.891034 38.100612 38.161802 38.163781 38.168411 38.163845 38.173171 38.171119
+Set5_x8 37.981635 38.171151 38.202223 38.215157 38.216948 38.215654 38.219149 38.218010
+Set14 33.380792 33.682514 33.763052 33.804619 33.807154 33.781234 33.813266 33.806772
+Set14_x8 33.470546 33.764554 33.803153 33.848385 33.851473 33.843091 33.851858 33.851559
+B100 32.058704 32.228152 32.252965 32.266606 32.274538 32.262769 32.270978 32.269989
+B100_x8 32.103162 32.268752 32.283754 32.297945 32.303883 32.294324 32.300603 32.299808
+Urban100 31.507001 32.321143 32.445034 32.531285 32.558982 32.513769 32.540016 32.548474
+Urban100_x8 31.678194 32.456859 32.592178 32.680234 32.711413 32.668500 32.692872 32.699360
+Manga109 38.336524 39.050600 39.126327 39.198036 39.213560 39.176445 39.199786 39.196826
+Manga109_x8 38.653052 39.238767 39.281270 39.344738 39.362895 39.329801 39.350114 39.345821
+
+===== 7. 600K之后最低5次普通验证PSNR =====
+736000 {'DIV2K_valid': 36.24479, 'B100': 32.25601, 'Urban100': 32.458017, 'Manga109': 39.150277}
+636000 {'DIV2K_valid': 36.249092, 'B100': 32.261039, 'Urban100': 32.521535, 'Manga109': 39.156174}
+650000 {'DIV2K_valid': 36.250438, 'B100': 32.250877, 'Urban100': 32.492792, 'Manga109': 39.183325}
+608000 {'DIV2K_valid': 36.250749, 'B100': 32.256032, 'Urban100': 32.48668, 'Manga109': 39.150203}
+617000 {'DIV2K_valid': 36.251247, 'B100': 32.259295, 'Urban100': 32.494484, 'Manga109': 39.177115}
+
+===== 8. 两阶段裁剪及损失峰值 =====
+to800k
+update 800000
+updates 200000
+lr_for_next_update 1.25e-05
+clip_limit 0.1
+clip_trigger_count 2730
+max_train_l1_value_and_update [0.020606413949280977, 639369]
+max_preclip_gradient_norm_value_and_update [1.731126070022583, 645984]
+selected_update 758000
+裁剪率 1.36%
+to1000k
+update 1000000
+updates 200000
+lr_for_next_update 1.25e-05
+clip_limit 0.1
+clip_trigger_count 1458
+max_train_l1_value_and_update [0.021180796902626753, 900781]
+max_preclip_gradient_norm_value_and_update [0.5198010802268982, 841298]
+selected_update 982000
+裁剪率 0.73%
+
+===== 9. 800K学习率边界与全程损失记录 =====
+{'update': 599999, 'train_l1': 0.014164990279823542, 'lr': 5e-05}
+{'update': 600000, 'train_l1': 0.012193831615149975, 'lr': 2.5e-05}
+{'update': 600001, 'train_l1': 0.01351285562850535, 'lr': 2.5e-05}
+{'update': 799999, 'train_l1': 0.012831872794777155, 'lr': 2.5e-05}
+{'update': 800000, 'train_l1': 0.015531913843005896, 'lr': 1.25e-05}
+{'update': 800001, 'train_l1': 0.011746322037652135, 'lr': 1.25e-05}
+{'update': 1000000, 'train_l1': 0.012752278940752149, 'lr': 1.25e-05}
+记录数 1000000 步号异常 0 非有限损失 0
+日志学习率及记录数 {'0.0002': 199999, '0.0001': 200000, '5e-05': 200000, '2.5e-05': 200000, '1.25e-05': 200001}
+最后训练记录 {'update': 1000000, 'train_l1': 0.012752278940752149, 'lr': 1.25e-05}
+
+===== 10. 所选权重逐图指标文件线索 =====
+['B100_epoch00982_u982000.json', 'B100_x8_epoch00982_u982000.json', 'DIV2K_valid_epoch00982_u982000.json', 'DIV2K_valid_x8_epoch00982_u982000.json', 'Manga109_epoch00982_u982000.json', 'Manga109_x8_epoch00982_u982000.json', 'Set14_epoch00982_u982000.json', 'Set14_x8_epoch00982_u982000.json', 'Set5_epoch00982_u982000.json', 'Set5_x8_epoch00982_u982000.json', 'Urban100_epoch00982_u982000.json', 'Urban100_x8_epoch00982_u982000.json']
+
+CPU只读检查结束
+(base) ➜ ~ 

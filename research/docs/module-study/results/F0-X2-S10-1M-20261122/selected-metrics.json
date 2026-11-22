@@ -1,0 +1,54 @@
+{
+  "source": "user-provided server CPU audit; values rounded to6 decimals",
+  "selection": "plain DIV2K_valid best within1M; same982K weight for all sets",
+  "metrics": [
+    {
+      "dataset": "DIV2K_valid",
+      "update": 982000,
+      "plain_psnr": 36.28138,
+      "plain_ssim": 0.946506,
+      "x8_psnr": 36.356419,
+      "x8_ssim": 0.946921
+    },
+    {
+      "dataset": "Set5",
+      "update": 982000,
+      "plain_psnr": 38.169226,
+      "plain_ssim": 0.961027,
+      "x8_psnr": 38.22088,
+      "x8_ssim": 0.96123
+    },
+    {
+      "dataset": "Set14",
+      "update": 982000,
+      "plain_psnr": 33.82516,
+      "plain_ssim": 0.919736,
+      "x8_psnr": 33.85465,
+      "x8_ssim": 0.920051
+    },
+    {
+      "dataset": "B100",
+      "update": 982000,
+      "plain_psnr": 32.277368,
+      "plain_ssim": 0.900919,
+      "x8_psnr": 32.307235,
+      "x8_ssim": 0.901204
+    },
+    {
+      "dataset": "Urban100",
+      "update": 982000,
+      "plain_psnr": 32.556226,
+      "plain_ssim": 0.931723,
+      "x8_psnr": 32.708697,
+      "x8_ssim": 0.932629
+    },
+    {
+      "dataset": "Manga109",
+      "update": 982000,
+      "plain_psnr": 39.20567,
+      "plain_ssim": 0.978384,
+      "x8_psnr": 39.35611,
+      "x8_ssim": 0.978684
+    }
+  ]
+}
