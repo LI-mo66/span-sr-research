@@ -1,0 +1,46 @@
+{
+  "train": [
+    {
+      "hr": "/home/featurize/datasets/DIV2K/DIV2K_train_HR",
+      "lr": "/home/featurize/datasets/DIV2K/DIV2K_train_LR_bicubic/X2",
+      "lr_suffix": "x2"
+    },
+    {
+      "hr": "/home/featurize/datasets/downloads/Flickr2K/Flickr2K_HR",
+      "lr": "/home/featurize/datasets/downloads/Flickr2K/Flickr2K_LR_bicubic/X2",
+      "lr_suffix": "x2"
+    }
+  ],
+  "validation": {
+    "DIV2K_valid": {
+      "hr": "/home/featurize/datasets/DIV2K/DIV2K_valid_HR",
+      "lr": "/home/featurize/datasets/DIV2K/DIV2K_valid_LR_bicubic/X2",
+      "lr_suffix": "x2"
+    },
+    "Set5": {
+      "hr": "/home/featurize/datasets/benchmark/Set5/HR",
+      "lr": "/home/featurize/datasets/benchmark/Set5/LR_bicubic/X2",
+      "lr_suffix": "x2"
+    },
+    "Set14": {
+      "hr": "/home/featurize/datasets/benchmark/Set14/HR",
+      "lr": "/home/featurize/datasets/benchmark/Set14/LR_bicubic/X2",
+      "lr_suffix": "x2"
+    },
+    "B100": {
+      "hr": "/home/featurize/datasets/benchmark/B100/HR",
+      "lr": "/home/featurize/datasets/benchmark/B100/LR_bicubic/X2",
+      "lr_suffix": "x2"
+    },
+    "Urban100": {
+      "hr": "/home/featurize/datasets/benchmark/Urban100/HR",
+      "lr": "/home/featurize/datasets/benchmark/Urban100/LR_bicubic/X2",
+      "lr_suffix": "x2"
+    },
+    "Manga109": {
+      "hr": "/home/featurize/datasets/benchmark/manga109/HR",
+      "lr": "/home/featurize/datasets/benchmark/manga109/LR_bicubic/X2",
+      "lr_suffix": "x2"
+    }
+  }
+}

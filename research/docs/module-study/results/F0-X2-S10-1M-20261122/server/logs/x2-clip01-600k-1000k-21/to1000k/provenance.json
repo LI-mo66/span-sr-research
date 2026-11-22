@@ -1,0 +1,8 @@
+{
+  "source_checkpoint": "/home/featurize/work/span-x4-research/code/span-f0-x2x3-screen-01/runs/F0-X2-CLIP01-U800K-21/latest.pt",
+  "source_sha256": "d37bb265da4319e32c6cd54e82cc335828a19530cfe7f569ca6260eca41d8e64",
+  "start_update": 800000,
+  "stop_update": 1000000,
+  "lr_used": 1.25e-05,
+  "clip_limit": 0.1
+}

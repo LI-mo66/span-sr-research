@@ -1,0 +1,8 @@
+{
+  "source_checkpoint": "/home/featurize/work/span-x4-research/code/span-f0-x2x3-screen-01/runs/F0-X2-CLIP01-U600K-20/latest.pt",
+  "source_sha256": "4b25d94f4ad44e11146e0b0cd97044234f1b915ba12fcc8fd93794754a602eca",
+  "start_update": 600000,
+  "stop_update": 800000,
+  "lr_used": 2.5e-05,
+  "clip_limit": 0.1
+}

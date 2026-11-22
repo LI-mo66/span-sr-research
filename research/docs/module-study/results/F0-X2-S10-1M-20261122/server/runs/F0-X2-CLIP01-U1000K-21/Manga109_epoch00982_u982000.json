@@ -1,0 +1,547 @@
+[
+  {
+    "image": "ARMS.png",
+    "psnr": 36.608170974440235,
+    "ssim": 0.9538332174467025
+  },
+  {
+    "image": "AisazuNihaIrarenai.png",
+    "psnr": 37.120481819369864,
+    "ssim": 0.9494852391234722
+  },
+  {
+    "image": "AkkeraKanjinchou.png",
+    "psnr": 38.25221963820845,
+    "ssim": 0.9804473509576132
+  },
+  {
+    "image": "Akuhamu.png",
+    "psnr": 44.38544754079085,
+    "ssim": 0.9885854311940483
+  },
+  {
+    "image": "AosugiruHaru.png",
+    "psnr": 46.78414732188081,
+    "ssim": 0.9944328466824739
+  },
+  {
+    "image": "AppareKappore.png",
+    "psnr": 38.420911142872065,
+    "ssim": 0.982107061665872
+  },
+  {
+    "image": "Arisa.png",
+    "psnr": 43.03671063197801,
+    "ssim": 0.9880914337559872
+  },
+  {
+    "image": "BEMADER_P.png",
+    "psnr": 34.835648042180054,
+    "ssim": 0.9728760721809504
+  },
+  {
+    "image": "BakuretsuKungFuGirl.png",
+    "psnr": 39.49575756618401,
+    "ssim": 0.9858382768103858
+  },
+  {
+    "image": "Belmondo.png",
+    "psnr": 38.249413802805414,
+    "ssim": 0.9666580439513281
+  },
+  {
+    "image": "BokuHaSitatakaKun.png",
+    "psnr": 40.01831471090402,
+    "ssim": 0.9900130100475243
+  },
+  {
+    "image": "BurariTessenTorimonocho.png",
+    "psnr": 36.92649252925695,
+    "ssim": 0.9746324927719057
+  },
+  {
+    "image": "ByebyeC-BOY.png",
+    "psnr": 42.419299899389785,
+    "ssim": 0.9921607145888568
+  },
+  {
+    "image": "Count3DeKimeteAgeru.png",
+    "psnr": 39.37345248413229,
+    "ssim": 0.9699143270945194
+  },
+  {
+    "image": "DollGun.png",
+    "psnr": 39.71042412539382,
+    "ssim": 0.9857060181401817
+  },
+  {
+    "image": "Donburakokko.png",
+    "psnr": 37.23007230482681,
+    "ssim": 0.9843888457690634
+  },
+  {
+    "image": "DualJustice.png",
+    "psnr": 40.82962846656609,
+    "ssim": 0.9916952335232198
+  },
+  {
+    "image": "EienNoWith.png",
+    "psnr": 44.082721541963856,
+    "ssim": 0.9947168372864698
+  },
+  {
+    "image": "EvaLady.png",
+    "psnr": 39.60704000235363,
+    "ssim": 0.9776676363388249
+  },
+  {
+    "image": "EverydayOsakanaChan.png",
+    "psnr": 43.06166608725431,
+    "ssim": 0.9953506906082815
+  },
+  {
+    "image": "GOOD_KISS_Ver2.png",
+    "psnr": 40.19482272402526,
+    "ssim": 0.9822219564684636
+  },
+  {
+    "image": "GakuenNoise.png",
+    "psnr": 40.56159967971521,
+    "ssim": 0.9856247744089668
+  },
+  {
+    "image": "GarakutayaManta.png",
+    "psnr": 39.64075594726458,
+    "ssim": 0.983101837308882
+  },
+  {
+    "image": "GinNoChimera.png",
+    "psnr": 45.14887947610407,
+    "ssim": 0.9918008172770496
+  },
+  {
+    "image": "Hamlet.png",
+    "psnr": 38.75858322538584,
+    "ssim": 0.9908766390933107
+  },
+  {
+    "image": "HanzaiKousyouninMinegishiEitarou.png",
+    "psnr": 40.13250281838913,
+    "ssim": 0.9879995521345074
+  },
+  {
+    "image": "HaruichibanNoFukukoro.png",
+    "psnr": 45.809686779239556,
+    "ssim": 0.9935495250123284
+  },
+  {
+    "image": "HarukaRefrain.png",
+    "psnr": 39.06699888655538,
+    "ssim": 0.9820689113810219
+  },
+  {
+    "image": "HealingPlanet.png",
+    "psnr": 42.718513729777435,
+    "ssim": 0.9905895919661517
+  },
+  {
+    "image": "HeiseiJimen.png",
+    "psnr": 40.341345460137504,
+    "ssim": 0.9870568158093831
+  },
+  {
+    "image": "HighschoolKimengumi_vol01.png",
+    "psnr": 38.71209923915601,
+    "ssim": 0.9903603086800618
+  },
+  {
+    "image": "HighschoolKimengumi_vol20.png",
+    "psnr": 38.514044621091955,
+    "ssim": 0.9885320464262075
+  },
+  {
+    "image": "HinagikuKenzan.png",
+    "psnr": 40.68579551853902,
+    "ssim": 0.9795688420387926
+  },
+  {
+    "image": "HisokaReturns.png",
+    "psnr": 34.73691352371495,
+    "ssim": 0.9242283052936241
+  },
+  {
+    "image": "JangiriPonpon.png",
+    "psnr": 34.455843047171626,
+    "ssim": 0.9728282072250536
+  },
+  {
+    "image": "JijiBabaFight.png",
+    "psnr": 40.2676765752883,
+    "ssim": 0.9809272938816879
+  },
+  {
+    "image": "Joouari.png",
+    "psnr": 33.37302899707937,
+    "ssim": 0.9407229361601097
+  },
+  {
+    "image": "Jyovolley.png",
+    "psnr": 43.38096979606344,
+    "ssim": 0.9927991009484747
+  },
+  {
+    "image": "KarappoHighschool.png",
+    "psnr": 44.24329902559934,
+    "ssim": 0.9918103808292666
+  },
+  {
+    "image": "KimiHaBokuNoTaiyouDa.png",
+    "psnr": 36.9536392686677,
+    "ssim": 0.9771115246878427
+  },
+  {
+    "image": "KoukouNoHitotachi.png",
+    "psnr": 38.99554705316078,
+    "ssim": 0.9700474472867888
+  },
+  {
+    "image": "KuroidoGanka.png",
+    "psnr": 41.13577217931536,
+    "ssim": 0.981745514281785
+  },
+  {
+    "image": "KyokugenCyclone.png",
+    "psnr": 29.531054148671902,
+    "ssim": 0.9561850149750497
+  },
+  {
+    "image": "LancelotFullThrottle.png",
+    "psnr": 45.43970735259124,
+    "ssim": 0.9965216575653534
+  },
+  {
+    "image": "LoveHina_vol01.png",
+    "psnr": 30.197491750401383,
+    "ssim": 0.9643384277237478
+  },
+  {
+    "image": "LoveHina_vol14.png",
+    "psnr": 37.3423300200975,
+    "ssim": 0.9823923084197357
+  },
+  {
+    "image": "MAD_STONE.png",
+    "psnr": 42.54020254082423,
+    "ssim": 0.9890530526591327
+  },
+  {
+    "image": "MadouTaiga.png",
+    "psnr": 35.240865955732026,
+    "ssim": 0.9633719374310585
+  },
+  {
+    "image": "MagicStarGakuin.png",
+    "psnr": 38.63770361896958,
+    "ssim": 0.9857911085956574
+  },
+  {
+    "image": "MagicianLoad.png",
+    "psnr": 33.0499084052579,
+    "ssim": 0.9024262921276045
+  },
+  {
+    "image": "MariaSamaNihaNaisyo.png",
+    "psnr": 39.255294839647455,
+    "ssim": 0.9864330069801994
+  },
+  {
+    "image": "MayaNoAkaiKutsu.png",
+    "psnr": 41.723035249564255,
+    "ssim": 0.9878175023284307
+  },
+  {
+    "image": "MemorySeijin.png",
+    "psnr": 42.35685797661507,
+    "ssim": 0.9697457128502082
+  },
+  {
+    "image": "MeteoSanStrikeDesu.png",
+    "psnr": 44.53057785640388,
+    "ssim": 0.9917643934073984
+  },
+  {
+    "image": "MiraiSan.png",
+    "psnr": 29.303391127753443,
+    "ssim": 0.9413113431855925
+  },
+  {
+    "image": "MisutenaideDaisy.png",
+    "psnr": 43.581684883686165,
+    "ssim": 0.9922419693307732
+  },
+  {
+    "image": "MoeruOnisan_vol01.png",
+    "psnr": 40.56477927807754,
+    "ssim": 0.9858288593194168
+  },
+  {
+    "image": "MoeruOnisan_vol19.png",
+    "psnr": 41.45900214295484,
+    "ssim": 0.9893831374921137
+  },
+  {
+    "image": "MomoyamaHaikagura.png",
+    "psnr": 29.65761013162752,
+    "ssim": 0.930545938059537
+  },
+  {
+    "image": "MukoukizuNoChonbo.png",
+    "psnr": 40.996720201267124,
+    "ssim": 0.9907157369924764
+  },
+  {
+    "image": "MutekiBoukenSyakuma.png",
+    "psnr": 41.88762574154811,
+    "ssim": 0.9913381995459825
+  },
+  {
+    "image": "Nekodama.png",
+    "psnr": 40.26180429235492,
+    "ssim": 0.9883838294619782
+  },
+  {
+    "image": "NichijouSoup.png",
+    "psnr": 42.44145514964912,
+    "ssim": 0.9897200226899745
+  },
+  {
+    "image": "Ningyoushi.png",
+    "psnr": 41.299530572985226,
+    "ssim": 0.9804839397775986
+  },
+  {
+    "image": "OL_Lunch.png",
+    "psnr": 35.82898065789154,
+    "ssim": 0.9886679276214358
+  },
+  {
+    "image": "OhWareraRettouSeitokai.png",
+    "psnr": 41.418610384296386,
+    "ssim": 0.9889312935605169
+  },
+  {
+    "image": "PLANET7.png",
+    "psnr": 41.36793281355669,
+    "ssim": 0.9836064058803073
+  },
+  {
+    "image": "ParaisoRoad.png",
+    "psnr": 40.98771600696395,
+    "ssim": 0.987260421435699
+  },
+  {
+    "image": "PikaruGenkiDesu.png",
+    "psnr": 37.534623179647305,
+    "ssim": 0.9853156305521085
+  },
+  {
+    "image": "PlatinumJungle.png",
+    "psnr": 39.61437418259871,
+    "ssim": 0.9862481847304082
+  },
+  {
+    "image": "PrayerHaNemurenai.png",
+    "psnr": 32.04222754652838,
+    "ssim": 0.863858300238695
+  },
+  {
+    "image": "PrismHeart.png",
+    "psnr": 43.25825038043335,
+    "ssim": 0.9910527509492236
+  },
+  {
+    "image": "PsychoStaff.png",
+    "psnr": 42.610490353628954,
+    "ssim": 0.9893029267018998
+  },
+  {
+    "image": "Raphael.png",
+    "psnr": 38.62144247935854,
+    "ssim": 0.9825142089653802
+  },
+  {
+    "image": "ReveryEarth.png",
+    "psnr": 37.32473445454419,
+    "ssim": 0.9772796816945782
+  },
+  {
+    "image": "RinToSiteSippuNoNaka.png",
+    "psnr": 41.32021736600304,
+    "ssim": 0.9810826917408547
+  },
+  {
+    "image": "RisingGirl.png",
+    "psnr": 40.27244240772599,
+    "ssim": 0.9855859449650151
+  },
+  {
+    "image": "Saisoku.png",
+    "psnr": 33.83625956509432,
+    "ssim": 0.9308878183428648
+  },
+  {
+    "image": "SaladDays_vol01.png",
+    "psnr": 40.46166994645806,
+    "ssim": 0.989678574507025
+  },
+  {
+    "image": "SaladDays_vol18.png",
+    "psnr": 40.86717863977853,
+    "ssim": 0.991406848585402
+  },
+  {
+    "image": "SamayoeruSyonenNiJunaiWo.png",
+    "psnr": 38.11592059947924,
+    "ssim": 0.9730934318205077
+  },
+  {
+    "image": "SeisinkiVulnus.png",
+    "psnr": 39.91429693730328,
+    "ssim": 0.9804602901314207
+  },
+  {
+    "image": "ShimatteIkouze_vol01.png",
+    "psnr": 41.10226752870376,
+    "ssim": 0.991364521660216
+  },
+  {
+    "image": "ShimatteIkouze_vol26.png",
+    "psnr": 38.362663089617605,
+    "ssim": 0.9897199277219543
+  },
+  {
+    "image": "SonokiDeABC.png",
+    "psnr": 41.644407136479174,
+    "ssim": 0.9871817609000527
+  },
+  {
+    "image": "SyabondamaKieta.png",
+    "psnr": 35.7697882410196,
+    "ssim": 0.9723230786783956
+  },
+  {
+    "image": "TaiyouNiSmash.png",
+    "psnr": 43.18636178297247,
+    "ssim": 0.9882386672344793
+  },
+  {
+    "image": "TapkunNoTanteisitsu.png",
+    "psnr": 42.719509286752846,
+    "ssim": 0.9897842551874046
+  },
+  {
+    "image": "TasogareTsushin.png",
+    "psnr": 38.94960532167105,
+    "ssim": 0.9826646938685586
+  },
+  {
+    "image": "TennenSenshiG.png",
+    "psnr": 32.880934101355344,
+    "ssim": 0.9549102781722891
+  },
+  {
+    "image": "TensiNoHaneToAkumaNoShippo.png",
+    "psnr": 38.69827839451772,
+    "ssim": 0.9864586618040414
+  },
+  {
+    "image": "TetsuSan.png",
+    "psnr": 38.4053923727874,
+    "ssim": 0.9943265991656731
+  },
+  {
+    "image": "ThatsIzumiko_000.png",
+    "psnr": 27.831959041532084,
+    "ssim": 0.9373977281149737
+  },
+  {
+    "image": "TotteokiNoABC.png",
+    "psnr": 43.501497615373026,
+    "ssim": 0.9914342711806343
+  },
+  {
+    "image": "ToutaMairimasu.png",
+    "psnr": 35.20651635389816,
+    "ssim": 0.9751794651596047
+  },
+  {
+    "image": "TouyouKidan.png",
+    "psnr": 38.46264891830496,
+    "ssim": 0.9765972450245857
+  },
+  {
+    "image": "TsubasaNoKioku.png",
+    "psnr": 38.559234618727956,
+    "ssim": 0.9669159292170988
+  },
+  {
+    "image": "UchiNoNyansDiary_000.png",
+    "psnr": 38.733760006665506,
+    "ssim": 0.9927690817670747
+  },
+  {
+    "image": "UchuKigekiM774.png",
+    "psnr": 33.581651415065615,
+    "ssim": 0.9443664714919495
+  },
+  {
+    "image": "UltraEleven.png",
+    "psnr": 32.83945364823659,
+    "ssim": 0.9759418257641108
+  },
+  {
+    "image": "UnbalanceTokyo.png",
+    "psnr": 35.15727659139048,
+    "ssim": 0.9798273748029065
+  },
+  {
+    "image": "WarewareHaOniDearu.png",
+    "psnr": 36.3619126759093,
+    "ssim": 0.9879465441582526
+  },
+  {
+    "image": "YamatoNoHane.png",
+    "psnr": 45.81698672057818,
+    "ssim": 0.9940055745028895
+  },
+  {
+    "image": "YasasiiAkuma.png",
+    "psnr": 39.09332546541064,
+    "ssim": 0.9799856285380223
+  },
+  {
+    "image": "YouchienBoueigumi.png",
+    "psnr": 41.5553445125222,
+    "ssim": 0.9908046956456174
+  },
+  {
+    "image": "YoumaKourin.png",
+    "psnr": 37.335177248889,
+    "ssim": 0.9748013465850458
+  },
+  {
+    "image": "YukiNoFuruMachi.png",
+    "psnr": 43.793042248549874,
+    "ssim": 0.9824679099551856
+  },
+  {
+    "image": "YumeNoKayoiji.png",
+    "psnr": 39.06662122647193,
+    "ssim": 0.969536338020891
+  },
+  {
+    "image": "YumeiroCooking.png",
+    "psnr": 39.830129006330225,
+    "ssim": 0.9907174661070042
+  }
+]

@@ -1,0 +1,16 @@
+{
+  "original_checkpoint": "/home/featurize/work/span-x4-research/code/span-f0-x2x3-screen-01/runs/F0-X3-CLIP01-U300K-14/epoch00295_u295000.pt",
+  "original_sha256": "b89b03032267db41405124807a53d2ac28aea241e601919049cf917cc558563b",
+  "historical_loss_gaps": [
+    {
+      "first_missing": 127201,
+      "last_missing": 127213,
+      "count": 13
+    }
+  ],
+  "start_update": 295000,
+  "stop_update": 300000,
+  "original_lr": 0.0001,
+  "recovery_lr": 5e-05,
+  "clip_limit": 0.1
+}
