@@ -13,7 +13,28 @@ git clone --single-branch --branch "$branch" \
 cd "$delivery/repo"
 export CUDA_VISIBLE_DEVICES="" OMP_NUM_THREADS=1 MKL_NUM_THREADS=1
 "$python_bin" "$archive/collect_server.py" --project "$project"
-git add -- "$archive/server"
+# The collector has already restricted file types, sizes and source paths.
+# Root ignore rules also match nested runs/, logs/ and *.py, so explicitly stage
+# only the verified archive directory.
+git add -f -- "$archive/server"
+"$python_bin" - "$archive/server" <<'PY'
+import json
+import subprocess
+import sys
+from pathlib import Path
+
+folder = Path(sys.argv[1])
+manifest = json.loads((folder / 'collection-manifest.json').read_text())
+expected = {str(folder / row['path']) for row in manifest['files']}
+expected.update(str(folder / name) for name in (
+    'COMPLETE', 'collection-manifest.json', 'cpu-audit.json'
+))
+tracked = set(subprocess.check_output(
+    ['git', 'ls-files', '-z', '--', str(folder)]
+).decode().rstrip('\0').split('\0'))
+assert expected <= tracked, sorted(expected - tracked)
+print('PASS all collected files staged', len(expected), flush=True)
+PY
 git -c user.name='LI-mo66' -c user.email='LI-mo66@users.noreply.github.com' \
     commit -m 'Archive verified x2 1M server metadata histories and per-image metrics'
 printf '已创建本地提交，开始上传分支 %s\n' "$branch"
