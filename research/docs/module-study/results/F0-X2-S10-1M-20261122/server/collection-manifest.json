@@ -1,0 +1,372 @@
+{
+  "files": [
+    {
+      "path": "runs/F0-X2-CLIP01-U1000K-21/manifest.json",
+      "bytes": 1437048,
+      "sha256": "34f136cf669d3badbd0a8c6f105039c3c8212e363508447bd6d5d5f374fb2061"
+    },
+    {
+      "path": "runs/F0-X2-CLIP01-U1000K-21/epochs.jsonl",
+      "bytes": 2962825,
+      "sha256": "d0fa3ea96beeb9fe9a4bd1313fbd0eb0472993ce713d2744b1fdf3f420d2f5a4"
+    },
+    {
+      "path": "logs/x2-clip01-600k-1000k-21/result.json",
+      "bytes": 2440,
+      "sha256": "1745e36514b8459a7169da863e3dc4d05134fe6661877a41f979cf397c8b5ca1"
+    },
+    {
+      "path": "logs/x2-clip01-600k-1000k-21/to800k/stage-summary.json",
+      "bytes": 3863,
+      "sha256": "db784d9de616b629d4d019f586d7018e0ab555a34e50db5ed57c47c4eefff2b3"
+    },
+    {
+      "path": "logs/x2-clip01-600k-1000k-21/to1000k/stage-summary.json",
+      "bytes": 3871,
+      "sha256": "2c6e80ee4f8ce620e55a8afc5c32430a55112d5826964950e2ea6bec13420d8d"
+    },
+    {
+      "path": "runs/F0-X2-CLIP01-U1000K-21/B100_epoch00982_u982000.json",
+      "bytes": 9797,
+      "sha256": "e92a9bb9f2dd87c290d22fb571d514c583d0e18d78d21eeb47fba972add2d04f"
+    },
+    {
+      "path": "runs/F0-X2-CLIP01-U1000K-21/B100_x8_epoch00982_u982000.json",
+      "bytes": 9806,
+      "sha256": "06f035c77246f65ea09c33232f5cd7d381272415d040e76230ce08ccbe774379"
+    },
+    {
+      "path": "runs/F0-X2-CLIP01-U1000K-21/DIV2K_valid_epoch00982_u982000.json",
+      "bytes": 9608,
+      "sha256": "8bd040a8f1832efa7b19e498b854b391dd1821ac83d5ec38ecb3c2d0f45b69e4"
+    },
+    {
+      "path": "runs/F0-X2-CLIP01-U1000K-21/DIV2K_valid_x8_epoch00982_u982000.json",
+      "bytes": 9619,
+      "sha256": "aed6814d77f670dd7cff696e44cabc226ceea7b7b7a4992b4e9c5d922fd06a51"
+    },
+    {
+      "path": "runs/F0-X2-CLIP01-U1000K-21/Manga109_epoch00982_u982000.json",
+      "bytes": 11576,
+      "sha256": "894b35604a0c19450a517e9c54aae4a8429ca5b0d23c75dbff9dfcbb642db1e2"
+    },
+    {
+      "path": "runs/F0-X2-CLIP01-U1000K-21/Manga109_x8_epoch00982_u982000.json",
+      "bytes": 11568,
+      "sha256": "eb8cf761a492cecaf1a43c2269fc31644f7b7f9b93116a1697dd2beaca0c9cc1"
+    },
+    {
+      "path": "runs/F0-X2-CLIP01-U1000K-21/Set14_epoch00982_u982000.json",
+      "bytes": 1376,
+      "sha256": "e198a00da64091e0daa2dfa374cb7f515fed733071cef221e0adf52aaf567b65"
+    },
+    {
+      "path": "runs/F0-X2-CLIP01-U1000K-21/Set14_x8_epoch00982_u982000.json",
+      "bytes": 1372,
+      "sha256": "f4b0c0747218ba63d17ffbd894aaf5412cd6dfaaa53bd83e5af606eed237fa46"
+    },
+    {
+      "path": "runs/F0-X2-CLIP01-U1000K-21/Set5_epoch00982_u982000.json",
+      "bytes": 488,
+      "sha256": "b2a898830744429f7ff9463ca49d8e4c8dd120533e37c192080a1579fdfa7323"
+    },
+    {
+      "path": "runs/F0-X2-CLIP01-U1000K-21/Set5_x8_epoch00982_u982000.json",
+      "bytes": 490,
+      "sha256": "fd04031dd6b781465c684bace2c9e8fdb4ab17de61224ab868ef13467e506fb7"
+    },
+    {
+      "path": "runs/F0-X2-CLIP01-U1000K-21/Urban100_epoch00982_u982000.json",
+      "bytes": 9836,
+      "sha256": "75a4ed15c772c79611244793113c3ccb991f3969914f8e84353e901e827bd9e3"
+    },
+    {
+      "path": "runs/F0-X2-CLIP01-U1000K-21/Urban100_x8_epoch00982_u982000.json",
+      "bytes": 9826,
+      "sha256": "51354e8dbc1eacc41faaf74b5526ea21ac24c040f43fb48cb6e82599b2f5083b"
+    },
+    {
+      "path": "logs/f0-x2x3-100k-01/continue.py",
+      "bytes": 8422,
+      "sha256": "e792f529bb27609308421dd9835a05943a4363296a545f2e4d7342d16bc4992f"
+    },
+    {
+      "path": "logs/f0-x2x3-100k-01/worker.sh",
+      "bytes": 894,
+      "sha256": "ef704a8d0e972564cd811d0011fe3b764ca3704ac9f16deb5e30e3c4ae9a7933"
+    },
+    {
+      "path": "logs/f0-x2x3-100k-01/status.txt",
+      "bytes": 35,
+      "sha256": "fb714ee01468b3a8a4e6b1fab4a15caaad4685b3ab9f6d5d753c94f0f7a3a98b"
+    },
+    {
+      "path": "logs/f0-x2x3-300k-01/continue.py",
+      "bytes": 8101,
+      "sha256": "63db0f974ae821de8f68b30030196d5dba463c8355dfd92ed8e146836be3fd81"
+    },
+    {
+      "path": "logs/f0-x2x3-300k-01/worker.sh",
+      "bytes": 912,
+      "sha256": "de24559ad2aa288999a550406e88acf692049e4316dcfed71490da9ea75be091"
+    },
+    {
+      "path": "logs/f0-x2x3-300k-01/status.txt",
+      "bytes": 71,
+      "sha256": "45d6fc72bf8e8b7ca2bd644297ac30af39c1c84aa38edd6938424c88cd3c3817"
+    },
+    {
+      "path": "logs/x2-gradient-clip-screen-07/clip01/replay.py",
+      "bytes": 9368,
+      "sha256": "9e972970a0af327f258e0022216c1ba2adc33975bfdb54621b6c62acb6941846"
+    },
+    {
+      "path": "logs/x2-clip01-200k-210k-08/continue.py",
+      "bytes": 9544,
+      "sha256": "370ba0e0589b76554ebf6b34c063798821b924d71e712846bdaf5e31d2a020f5"
+    },
+    {
+      "path": "logs/x2-clip01-200k-210k-08/worker.sh",
+      "bytes": 2598,
+      "sha256": "93afda3375a6e3ef8eb37ed75157c06dea7ff07cbdd8f82f1f3d2d382c8234f2"
+    },
+    {
+      "path": "logs/x2-clip01-200k-210k-08/stage-summary.json",
+      "bytes": 15939,
+      "sha256": "9a7e8effdec314bca2657d78725639f0aea553d2e498c563b18c8a3292414133"
+    },
+    {
+      "path": "logs/x2-clip01-200k-210k-08/status.txt",
+      "bytes": 36,
+      "sha256": "2742ec541ebb5ead7be736328a0fa2e9888f5d5624a5aa30e6aa68db8cdf26e5"
+    },
+    {
+      "path": "logs/f0-x2clip-x3original-to300k-09/manager.py",
+      "bytes": 6694,
+      "sha256": "af0821f4e80ea2187829d6f165325f812d36c1dcc7bc5b9e93af06b26280c8a4"
+    },
+    {
+      "path": "logs/f0-x2clip-x3original-to300k-09/worker.sh",
+      "bytes": 752,
+      "sha256": "9e6a11855c86a20e47f7cce205247b543166be6f05e190369400427a7b07ec1a"
+    },
+    {
+      "path": "logs/f0-x2clip-x3original-to300k-09/status.txt",
+      "bytes": 30,
+      "sha256": "306b9d0995e2c72ef25d614e3e228e957d41593109806590cdf5d591829fe887"
+    },
+    {
+      "path": "logs/x2-clip01-300k-400k-13/continue.py",
+      "bytes": 9491,
+      "sha256": "989859dc2eaec0176ed832ef4bb941977d67c1068fb639cea79c5a57d9e3da69"
+    },
+    {
+      "path": "logs/x2-clip01-300k-400k-13/worker.sh",
+      "bytes": 3600,
+      "sha256": "cfc8dd430643516ef159b3922b64e8152dd5b7353642291d2f532010e7b42097"
+    },
+    {
+      "path": "logs/x2-clip01-300k-400k-13/stage-summary.json",
+      "bytes": 16879,
+      "sha256": "57fb6b931faaf9155079cd0f527933f340795663175d9a11a2bb2d7fb68368f0"
+    },
+    {
+      "path": "logs/x2-clip01-300k-400k-13/status.txt",
+      "bytes": 36,
+      "sha256": "43bd3c305b256f809196ad10b10906f6da39cee0485b0d13d5f828276ab2a536"
+    },
+    {
+      "path": "logs/x2-clip01-400k-500k-19/continue.py",
+      "bytes": 9491,
+      "sha256": "a357f2e10ae004a1d0888298b14fce7623000329c47fd9349cdd97274674f498"
+    },
+    {
+      "path": "logs/x2-clip01-400k-500k-19/worker.sh",
+      "bytes": 6943,
+      "sha256": "42513a3d515e64b9d21b695c0e4b9c092cd956fcf3bc0ad61520dfa6bb8c81e0"
+    },
+    {
+      "path": "logs/x2-clip01-400k-500k-19/provenance.json",
+      "bytes": 306,
+      "sha256": "40aaec9eb49b6cd74f046cec642e67d3544383cfa30c87326a309e2332ab61b9"
+    },
+    {
+      "path": "logs/x2-clip01-400k-500k-19/stage-summary.json",
+      "bytes": 3798,
+      "sha256": "a4687323d39d5422d2f30211a4e1e9c913da61016658c04197949129b5d7ebd4"
+    },
+    {
+      "path": "logs/x2-clip01-400k-500k-19/status.txt",
+      "bytes": 36,
+      "sha256": "440cc4dc7569852ea4eb2e2c6bf88546414e9f0089bdf746e26016875ba154c3"
+    },
+    {
+      "path": "logs/x2-clip01-500k-600k-20/continue.py",
+      "bytes": 9491,
+      "sha256": "a114da989edfad859017f220fae1177baa2229f30580ac494639e01ed91c7791"
+    },
+    {
+      "path": "logs/x2-clip01-500k-600k-20/worker.sh",
+      "bytes": 6801,
+      "sha256": "03c7971cd2faef88e78dc3e66925f06377c91079fb400617c66067358371bfb0"
+    },
+    {
+      "path": "logs/x2-clip01-500k-600k-20/provenance.json",
+      "bytes": 311,
+      "sha256": "b0de28cc14bd6e760a54ab0866481d8f60e3420e5ba37c1c2c418f01eabb6927"
+    },
+    {
+      "path": "logs/x2-clip01-500k-600k-20/stage-summary.json",
+      "bytes": 3827,
+      "sha256": "cd9795a49082c6cf735b63f236a1b92f4b31957775c6de8fda80a95eef1c0c4e"
+    },
+    {
+      "path": "logs/x2-clip01-500k-600k-20/status.txt",
+      "bytes": 36,
+      "sha256": "028349989221689f74eddd201be4260bc82d2e8c16dc1b1241ed230908232a9b"
+    },
+    {
+      "path": "logs/x2-clip01-600k-1000k-21/manager.py",
+      "bytes": 9175,
+      "sha256": "10ed8bce344c96ab97372808238e499ee4235666c75bf501e7fa9b1faa617a54"
+    },
+    {
+      "path": "logs/x2-clip01-600k-1000k-21/worker.sh",
+      "bytes": 910,
+      "sha256": "fe27ce0c4c3deb291ae637abf093539901da6a0755b08891470f1207e0b47c25"
+    },
+    {
+      "path": "logs/x2-clip01-600k-1000k-21/status.txt",
+      "bytes": 37,
+      "sha256": "3bbc6061f839fba972b7291e4e46b9f5df6fef173157f4744ccd4dd3b3f6bc78"
+    },
+    {
+      "path": "logs/x2-clip01-600k-1000k-21/to800k/continue.py",
+      "bytes": 9499,
+      "sha256": "00a93fcaebdbe438fd9672690dd6a6a6e6eea193063d07414981a9276f2dd586"
+    },
+    {
+      "path": "logs/x2-clip01-600k-1000k-21/to800k/provenance.json",
+      "bytes": 313,
+      "sha256": "0f1b0b1e63ba7824fb43c8a7efe2fa3cf77096f7e6c76bcd10704ebbb988ae2e"
+    },
+    {
+      "path": "logs/x2-clip01-600k-1000k-21/to1000k/continue.py",
+      "bytes": 9505,
+      "sha256": "a5660199e487f291bdfdb9da18de8631d19d98bf7c6c95b71b38e247b20bec1f"
+    },
+    {
+      "path": "logs/x2-clip01-600k-1000k-21/to1000k/provenance.json",
+      "bytes": 315,
+      "sha256": "ac6a9cedb4b59f2b59f1ed15b1cb899807170ac8451fc31015bfbebdbb04c0a8"
+    },
+    {
+      "path": "logs/x3-clip01-recovery-295k-300k-17/continue.py",
+      "bytes": 9259,
+      "sha256": "5bcb6e22d94604e14e2d7999199b5843cfbd258ec2e82d128478068d272c5146"
+    },
+    {
+      "path": "logs/x3-clip01-recovery-295k-300k-17/worker.sh",
+      "bytes": 1473,
+      "sha256": "5a579fb365ac0d6f0bc243b5ed7aed4492004bb1245188c843abdb3a79b20651"
+    },
+    {
+      "path": "logs/x3-clip01-recovery-295k-300k-17/prepare.py",
+      "bytes": 5401,
+      "sha256": "57df160c579e9bbb322509505d9d863a3a696d615be46dca48d5b9f01fcad66e"
+    },
+    {
+      "path": "logs/x3-clip01-recovery-295k-300k-17/check.py",
+      "bytes": 2540,
+      "sha256": "a338323281e1c1d84e21bb0d2ec54c75eb6f139fb12f2cf9b00d15cc5595a21c"
+    },
+    {
+      "path": "logs/x3-clip01-recovery-295k-300k-17/provenance.json",
+      "bytes": 480,
+      "sha256": "45c4fa37cbf1d70d98abb5073639f505f707606532922a9ec0ffc46ecce5d418"
+    },
+    {
+      "path": "logs/x3-clip01-recovery-295k-300k-17/stage-summary.json",
+      "bytes": 9545,
+      "sha256": "4db1eb52ebb6c6a6098a5133d23c48937ab0edb21c3f06346e42e0cfc0942cde"
+    },
+    {
+      "path": "logs/x3-clip01-recovery-295k-300k-17/status.txt",
+      "bytes": 38,
+      "sha256": "f00f5790c715ac881d9caf199507e4ddbe0adb52a9f327b7cc42d7480a67d4f3"
+    },
+    {
+      "path": "logs/x3-clip05-test-295k-300k-18/continue.py",
+      "bytes": 9252,
+      "sha256": "a264426240edf1f4f432749cfc57fde2d5ea8c0c7c2773d8026c02e09531e1d6"
+    },
+    {
+      "path": "logs/x3-clip05-test-295k-300k-18/worker.sh",
+      "bytes": 1476,
+      "sha256": "9470b63bd30c91c11180f381c9b186fe3901168a5c994fb15e00d8cce470edd4"
+    },
+    {
+      "path": "logs/x3-clip05-test-295k-300k-18/prepare.py",
+      "bytes": 6199,
+      "sha256": "401ebc99429f38947015670092760b61185a8cf171adebbb8f4759089f841a20"
+    },
+    {
+      "path": "logs/x3-clip05-test-295k-300k-18/check.py",
+      "bytes": 2559,
+      "sha256": "a1dbea373ccdd0e818916460bdb51480dea96bc92af287daca1ec582539ab076"
+    },
+    {
+      "path": "logs/x3-clip05-test-295k-300k-18/provenance.json",
+      "bytes": 481,
+      "sha256": "a0b4e70848c01aebaad4aec45b64633c219fa6613a0438ec5e579a741641a5bc"
+    },
+    {
+      "path": "logs/x3-clip05-test-295k-300k-18/stage-summary.json",
+      "bytes": 9687,
+      "sha256": "3445c0b31f78d9b50ff5d56a671a613977b1dbdd74db9d9a3874601ad1e06647"
+    },
+    {
+      "path": "logs/x3-clip05-test-295k-300k-18/status.txt",
+      "bytes": 41,
+      "sha256": "b8019f4019797b4c5fcec0952247fcf9761307bb353834916b37c5808f8b9bc4"
+    },
+    {
+      "path": "logs/multiscale50k/x2-F0.json",
+      "bytes": 2507,
+      "sha256": "6f63374e5cabcdcc259efa87690ab44fb3b7d04f113a5c6d26a4076357bfc40d"
+    },
+    {
+      "path": "logs/multiscale50k/x2-B0.json",
+      "bytes": 2507,
+      "sha256": "a08440d4f5f0f9f4d78a563c780abd5d05e70c7965168e508c90006e30cea518"
+    },
+    {
+      "path": "logs/multiscale50k/x2-paths.json",
+      "bytes": 1473,
+      "sha256": "c2c91b295e7cb0f6bd60df5f33b9f69076670f0859cd0efb44d89938a7dc3652"
+    },
+    {
+      "path": "logs/multiscale50k/smoke-x2-F0.json",
+      "bytes": 399,
+      "sha256": "d2fe00631c785c822c5a3e0d024b36e089c76fb1fb1977871adf92782ae18335"
+    },
+    {
+      "path": "logs/multiscale50k/comparison-x2.json",
+      "bytes": 3860,
+      "sha256": "aca71edf8fb7064b6c31ab31de220782cf8f704450e8157e856faf5a178a0e9e"
+    },
+    {
+      "path": "logs/multiscale50k/comparison-x3.json",
+      "bytes": 3849,
+      "sha256": "12b9816b280932c87b021d7531b8c7c88c7eb3d288f3ef38778cd96b0ae5105d"
+    }
+  ],
+  "total_bytes": 4732631,
+  "omitted": [
+    "weights",
+    "datasets",
+    "cache",
+    "full per-step loss and clipping logs",
+    "large console logs"
+  ]
+}
