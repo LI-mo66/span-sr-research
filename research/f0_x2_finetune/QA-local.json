@@ -1,0 +1,15 @@
+{
+  "date": "2026-11-22",
+  "torch": "2.9.1+cu128",
+  "device": "NVIDIA GeForce RTX 4060 Laptop GPU",
+  "checks": [
+    "L1 and MSE analytic gradient comparison",
+    "staged objective switches after half budget",
+    "CPU and CUDA exact saved optimizer and RNG2+2 vs4 fixture",
+    "native F0 x2 shape1x1,17x19,63x65 with D4x8",
+    "native random-weight F0 micro16 accum4 gradients and parameter updates for all four arms",
+    "Python compile and Bash syntax",
+    "Fine-tune main entry interrupted after checkpoint2 then resumed to4 exactly matches direct4 using tiny model/data/evaluation fixture"
+  ],
+  "scope": "Synthetic engineering checks. Actual982K weights and real-data smoke checks run on server before training. No fine-tuning accuracy result yet."
+}
