@@ -19,8 +19,7 @@ import trainer
 from image_io import enable_cache
 
 EXPECTED_SHA = '3dae5537ca672813dc4e9870f97276d173eda6f15ef8ffaf9aaf1c8406ef3068'
-ARMS = {'l1_lr125': ('l1', 1.25e-5), 'l1_lr5': ('l1', 5e-6),
-        'mse_lr5': ('mse', 5e-6), 'l1_to_mse_lr5': ('staged', 5e-6)}
+ARMS = {'l1_lr5': ('l1', 5e-6), 'mse_lr5': ('mse', 5e-6)}
 TARGETS = ('Set5', 'Set14', 'B100', 'Urban100', 'Manga109')
 
 
@@ -82,7 +81,7 @@ def preflight(source, group):
             assert trainer.digest(lr) == row['lr_sha256'], lr
             high, low = trainer.aligned(hr, lr)
             if name == 'train':
-                assert min(low.shape[:2]) >= 64
+                assert min(low.shape[:2]) >= 96, (hr, lr, low.shape)
         print('PASS ordered data hashes and geometry', name, len(items), flush=True)
     assert len(data['train']) == 3450
     train_hashes = {row['hr_sha256'] for row in metadata['data']['train']}
@@ -119,7 +118,7 @@ def main():
     torch.backends.cuda.matmul.allow_tf32 = False
     torch.use_deterministic_algorithms(True)
     metadata = json.loads((source / 'manifest.json').read_text())
-    cfg = metadata['config']
+    cfg = dict(metadata['config'], hr_patch=192)
     trainer.SCALE = 2
     checkpoint = source / 'epoch00982_u982000.pt'
     assert trainer.digest(checkpoint) == EXPECTED_SHA
@@ -134,10 +133,10 @@ def main():
     optimizer = torch.optim.Adam(model.parameters(), lr=rate,
         betas=tuple(cfg['adam_betas']), eps=cfg['adam_eps'])
     total, interval = 10000, 1000
-    out = ROOT / 'runs' / ('FT-X2-982K-' + args.arm + '-10K-v1')
+    out = ROOT / 'runs' / ('FT-X2-982K-PC96-' + args.arm + '-10K-v1')
     protocol = dict(arm=args.arm, source_sha256=EXPECTED_SHA, objective=kind,
         lr=rate, adam='fresh for every arm', steps=total, seed=10, clip=0.1,
-        model='unchanged F0 x2 bound8', cfg=cfg,
+        model='unchanged F0 x2 bound8', lr_patch=96, hr_patch=192, cfg=cfg,
         code_sha256=trainer.digest(Path(__file__)), data=metadata['data'])
     protocol['environment'] = dict(torch=torch.__version__, cuda=torch.version.cuda,
         device=torch.cuda.get_device_name(), cudnn_tf32=torch.backends.cudnn.allow_tf32,
@@ -169,7 +168,7 @@ def main():
     else:
         json_write(out / 'protocol.json', protocol)
         # Verify the exact starting weight through the ordinary x8 entry point once.
-        if args.arm == 'l1_lr125':
+        if args.arm == 'l1_lr5':
             print('Verifying starting982K six-set plain+x8 metrics', flush=True)
             before_rng = rng_state()
             observed = trainer.evaluate(model, {k: v for k, v in data.items() if k != 'train'},
@@ -194,7 +193,7 @@ def main():
             optimizer.zero_grad(set_to_none=True)
             values = [0.0, 0.0, 0.0]
             for micro in range(4):
-                samples = [trainer.sample(random.choice(data['train']), 128) for _ in range(16)]
+                samples = [trainer.sample(random.choice(data['train']), 192) for _ in range(16)]
                 low = torch.stack([item[0] for item in samples]).cuda()
                 high = torch.stack([item[1] for item in samples]).cuda()
                 prediction = model(low)

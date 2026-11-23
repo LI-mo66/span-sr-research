@@ -107,9 +107,10 @@ if __name__ == '__main__':
             optimizer = torch.optim.Adam(model.parameters(), lr=rate,
                 betas=tuple(cfg['adam_betas']), eps=cfg['adam_eps'])
             optimizer.zero_grad(set_to_none=True)
+            torch.cuda.reset_peak_memory_stats()
             random.seed(10)
             for _ in range(4):
-                samples = [run.trainer.sample(random.choice(data), 128) for _ in range(16)]
+                samples = [run.trainer.sample(random.choice(data), 192) for _ in range(16)]
                 x = torch.stack([s[0] for s in samples]).cuda()
                 y = torch.stack([s[1] for s in samples]).cuda()
                 loss = run.objective(model(x), y, kind, 1, 10000)[0]
@@ -119,5 +120,6 @@ if __name__ == '__main__':
                        for p in model.parameters() if p.requires_grad)
             torch.nn.utils.clip_grad_norm_(model.parameters(), .1, error_if_nonfinite=True)
             optimizer.step()
+            print('CUDA peak allocated GiB', torch.cuda.max_memory_allocated() / 1024**3, flush=True)
             assert all(torch.isfinite(p).all() for p in model.parameters())
             print('PASS actual982K micro16 accum4', arm, flush=True)

@@ -15,16 +15,33 @@ flock -n 9 || { echo GPU_LOCK_BUSY; exit 75; }
 busy=$(nvidia-smi --query-compute-apps=pid --format=csv,noheader)
 [[ -z "$busy" ]] || { echo "GPU_BUSY: $busy"; exit 75; }
 [[ -z $(git status --porcelain) ]]
+auto_release=${AUTO_RELEASE:-0}
+[[ "$auto_release" == 0 || "$auto_release" == 1 ]]
+if [[ "$auto_release" == 1 ]]; then
+    release_cli=$(command -v featurize)
+    "$release_cli" instance release --help > "$group/release-help.txt"
+fi
 phase=AUDITING_982K_AND_DATA
 echo "$phase" > "$group/status.txt"
 "$python_bin" -u research/f0_x2_finetune/run.py --source-run "$source_run" --group "$group" --preflight
 phase=VERIFYING_ENGINEERING
 echo "$phase" > "$group/status.txt"
 "$python_bin" -u research/f0_x2_finetune/verify.py --source-run "$source_run"
-for arm in l1_lr125 l1_lr5 mse_lr5 l1_to_mse_lr5; do
+for arm in l1_lr5 mse_lr5; do
     phase="TRAINING_$arm"
     echo "$phase" > "$group/status.txt"
     "$python_bin" -u research/f0_x2_finetune/run.py --source-run "$source_run" --group "$group" --arm "$arm"
     "$python_bin" research/f0_x2_finetune/finish.py "$group" > "$group/comparison.log"
 done
-echo COMPLETE_FOUR_FINETUNES_NO_SHUTDOWN > "$group/status.txt"
+phase=VERIFYING_AND_FLUSHING_RESULTS
+echo "$phase" > "$group/status.txt"
+CUDA_VISIBLE_DEVICES="" "$python_bin" research/f0_x2_finetune/finalize.py "$group"
+echo COMPLETE_TWO_PATCH96_FINETUNES > "$group/status.txt"
+if [[ "$auto_release" == 1 ]]; then
+    phase=CHECKING_GPU_BEFORE_RELEASE
+    busy=$(nvidia-smi --query-compute-apps=pid --format=csv,noheader)
+    [[ -z "$busy" ]] || { echo "GPU_BUSY: $busy"; exit 75; }
+    phase=RELEASING_INSTANCE
+    echo "$phase" > "$group/status.txt"
+    "$release_cli" instance release < /dev/null
+fi
