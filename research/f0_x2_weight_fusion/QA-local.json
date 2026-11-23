@@ -1,0 +1,16 @@
+{
+  "date": "2026-11-23",
+  "torch": "2.9.1+cu128",
+  "devices": ["CPU", "RTX4060 Laptop GPU CUDA"],
+  "checks": [
+    "Conv3XC conversion in actual F0 x2: 1x1, 17x19, 63x65 native/deployed outputs",
+    "Deployed parameter count552003 and all Conv3XC wrappers removed",
+    "Interpolation arithmetic and exact0/1 endpoints",
+    "Five-way identical-state mean is identical",
+    "Nonparameter buffer mismatch rejected",
+    "Five interpolation coefficients: native x2 shapes and finite D4x8 outputs",
+    "Source state dictionaries are not changed",
+    "Python compile, Bash syntax"
+  ],
+  "scope": "Synthetic local engineering checks only. Real982K and patch96 source SHA/fingerprints,428 evaluation pairs and three reference score reproductions are mandatory server checks. No fused-model PSNR gain has been established."
+}
