@@ -1,0 +1,30 @@
+[
+  {
+    "lr_hw": [
+      180,
+      320
+    ],
+    "hr_hw": [
+      360,
+      640
+    ],
+    "deployed_parameters": 552003,
+    "training_parameters": 2675759,
+    "core_flops": 65693921280,
+    "profiler_supported_flops": 65961950793
+  },
+  {
+    "lr_hw": [
+      360,
+      640
+    ],
+    "hr_hw": [
+      720,
+      1280
+    ],
+    "deployed_parameters": 552003,
+    "training_parameters": 2675759,
+    "core_flops": 262447677440,
+    "profiler_supported_flops": 263509305673
+  }
+]

@@ -1,0 +1,1500 @@
+{
+  "record_date": "2026-11-24",
+  "evidence_type": "User-pasted server CPU audit transcripts; not a direct download of full server JSON",
+  "precision": "Fusion and patch96 tables reported to8 decimal places; patch64 tables to6. No extra precision inferred.",
+  "patch64": {
+    "l1_lr125": {
+      "fixed_10k": {
+        "DIV2K_valid": {
+          "psnr": 36.276981,
+          "ssim": 0.946472,
+          "reported_delta_psnr": -0.004399,
+          "reported_delta_ssim": -3.4e-05
+        },
+        "DIV2K_valid_x8": {
+          "psnr": 36.346914,
+          "ssim": 0.946858,
+          "reported_delta_psnr": -0.009505,
+          "reported_delta_ssim": -6.3e-05
+        },
+        "Set5": {
+          "psnr": 38.170018,
+          "ssim": 0.961008,
+          "reported_delta_psnr": 0.000792,
+          "reported_delta_ssim": -1.8e-05
+        },
+        "Set5_x8": {
+          "psnr": 38.218983,
+          "ssim": 0.961192,
+          "reported_delta_psnr": -0.001897,
+          "reported_delta_ssim": -3.9e-05
+        },
+        "Set14": {
+          "psnr": 33.813641,
+          "ssim": 0.919468,
+          "reported_delta_psnr": -0.01152,
+          "reported_delta_ssim": -0.000269
+        },
+        "Set14_x8": {
+          "psnr": 33.853815,
+          "ssim": 0.919938,
+          "reported_delta_psnr": -0.000835,
+          "reported_delta_ssim": -0.000113
+        },
+        "B100": {
+          "psnr": 32.269438,
+          "ssim": 0.900752,
+          "reported_delta_psnr": -0.00793,
+          "reported_delta_ssim": -0.000167
+        },
+        "B100_x8": {
+          "psnr": 32.299672,
+          "ssim": 0.901045,
+          "reported_delta_psnr": -0.007563,
+          "reported_delta_ssim": -0.00016
+        },
+        "Urban100": {
+          "psnr": 32.544281,
+          "ssim": 0.931548,
+          "reported_delta_psnr": -0.011945,
+          "reported_delta_ssim": -0.000174
+        },
+        "Urban100_x8": {
+          "psnr": 32.699188,
+          "ssim": 0.932569,
+          "reported_delta_psnr": -0.009509,
+          "reported_delta_ssim": -5.9e-05
+        },
+        "Manga109": {
+          "psnr": 39.188574,
+          "ssim": 0.97838,
+          "reported_delta_psnr": -0.017096,
+          "reported_delta_ssim": -4e-06
+        },
+        "Manga109_x8": {
+          "psnr": 39.335409,
+          "ssim": 0.978659,
+          "reported_delta_psnr": -0.020701,
+          "reported_delta_ssim": -2.5e-05
+        }
+      },
+      "last5": {
+        "DIV2K_valid": {
+          "psnr": 36.274521,
+          "reported_delta_psnr": -0.006859
+        },
+        "DIV2K_valid_x8": {
+          "psnr": 36.345127,
+          "reported_delta_psnr": -0.011292
+        },
+        "Set5": {
+          "psnr": 38.173553,
+          "reported_delta_psnr": 0.004327
+        },
+        "Set5_x8": {
+          "psnr": 38.218746,
+          "reported_delta_psnr": -0.002135
+        },
+        "Set14": {
+          "psnr": 33.810279,
+          "reported_delta_psnr": -0.014881
+        },
+        "Set14_x8": {
+          "psnr": 33.848666,
+          "reported_delta_psnr": -0.005984
+        },
+        "B100": {
+          "psnr": 32.268443,
+          "reported_delta_psnr": -0.008925
+        },
+        "B100_x8": {
+          "psnr": 32.297529,
+          "reported_delta_psnr": -0.009705
+        },
+        "Urban100": {
+          "psnr": 32.542895,
+          "reported_delta_psnr": -0.013331
+        },
+        "Urban100_x8": {
+          "psnr": 32.68999,
+          "reported_delta_psnr": -0.018707
+        },
+        "Manga109": {
+          "psnr": 39.201214,
+          "reported_delta_psnr": -0.004457
+        },
+        "Manga109_x8": {
+          "psnr": 39.347349,
+          "reported_delta_psnr": -0.008761
+        }
+      }
+    },
+    "l1_lr5": {
+      "fixed_10k": {
+        "DIV2K_valid": {
+          "psnr": 36.281727,
+          "ssim": 0.946522,
+          "reported_delta_psnr": 0.000347,
+          "reported_delta_ssim": 1.7e-05
+        },
+        "DIV2K_valid_x8": {
+          "psnr": 36.351736,
+          "ssim": 0.946906,
+          "reported_delta_psnr": -0.004683,
+          "reported_delta_ssim": -1.5e-05
+        },
+        "Set5": {
+          "psnr": 38.17168,
+          "ssim": 0.961036,
+          "reported_delta_psnr": 0.002453,
+          "reported_delta_ssim": 1e-05
+        },
+        "Set5_x8": {
+          "psnr": 38.221037,
+          "ssim": 0.961219,
+          "reported_delta_psnr": 0.000156,
+          "reported_delta_ssim": -1.1e-05
+        },
+        "Set14": {
+          "psnr": 33.811769,
+          "ssim": 0.919512,
+          "reported_delta_psnr": -0.013391,
+          "reported_delta_ssim": -0.000224
+        },
+        "Set14_x8": {
+          "psnr": 33.855194,
+          "ssim": 0.91998,
+          "reported_delta_psnr": 0.000544,
+          "reported_delta_ssim": -7.1e-05
+        },
+        "B100": {
+          "psnr": 32.273021,
+          "ssim": 0.900841,
+          "reported_delta_psnr": -0.004347,
+          "reported_delta_ssim": -7.8e-05
+        },
+        "B100_x8": {
+          "psnr": 32.302438,
+          "ssim": 0.901129,
+          "reported_delta_psnr": -0.004797,
+          "reported_delta_ssim": -7.5e-05
+        },
+        "Urban100": {
+          "psnr": 32.558488,
+          "ssim": 0.931698,
+          "reported_delta_psnr": 0.002262,
+          "reported_delta_ssim": -2.5e-05
+        },
+        "Urban100_x8": {
+          "psnr": 32.710602,
+          "ssim": 0.932675,
+          "reported_delta_psnr": 0.001905,
+          "reported_delta_ssim": 4.6e-05
+        },
+        "Manga109": {
+          "psnr": 39.199336,
+          "ssim": 0.978408,
+          "reported_delta_psnr": -0.006335,
+          "reported_delta_ssim": 2.4e-05
+        },
+        "Manga109_x8": {
+          "psnr": 39.344759,
+          "ssim": 0.978684,
+          "reported_delta_psnr": -0.011351,
+          "reported_delta_ssim": -0.0
+        }
+      },
+      "last5": {
+        "DIV2K_valid": {
+          "psnr": 36.278728,
+          "reported_delta_psnr": -0.002652
+        },
+        "DIV2K_valid_x8": {
+          "psnr": 36.348433,
+          "reported_delta_psnr": -0.007986
+        },
+        "Set5": {
+          "psnr": 38.174291,
+          "reported_delta_psnr": 0.005065
+        },
+        "Set5_x8": {
+          "psnr": 38.220129,
+          "reported_delta_psnr": -0.000752
+        },
+        "Set14": {
+          "psnr": 33.813568,
+          "reported_delta_psnr": -0.011593
+        },
+        "Set14_x8": {
+          "psnr": 33.85178,
+          "reported_delta_psnr": -0.00287
+        },
+        "B100": {
+          "psnr": 32.271403,
+          "reported_delta_psnr": -0.005965
+        },
+        "B100_x8": {
+          "psnr": 32.299667,
+          "reported_delta_psnr": -0.007568
+        },
+        "Urban100": {
+          "psnr": 32.554751,
+          "reported_delta_psnr": -0.001475
+        },
+        "Urban100_x8": {
+          "psnr": 32.70011,
+          "reported_delta_psnr": -0.008588
+        },
+        "Manga109": {
+          "psnr": 39.209607,
+          "reported_delta_psnr": 0.003937
+        },
+        "Manga109_x8": {
+          "psnr": 39.353214,
+          "reported_delta_psnr": -0.002895
+        }
+      }
+    },
+    "mse_lr5": {
+      "fixed_10k": {
+        "DIV2K_valid": {
+          "psnr": 36.285035,
+          "ssim": 0.946545,
+          "reported_delta_psnr": 0.003655,
+          "reported_delta_ssim": 3.9e-05
+        },
+        "DIV2K_valid_x8": {
+          "psnr": 36.357137,
+          "ssim": 0.946953,
+          "reported_delta_psnr": 0.000718,
+          "reported_delta_ssim": 3.2e-05
+        },
+        "Set5": {
+          "psnr": 38.181205,
+          "ssim": 0.961112,
+          "reported_delta_psnr": 0.011979,
+          "reported_delta_ssim": 8.6e-05
+        },
+        "Set5_x8": {
+          "psnr": 38.230016,
+          "ssim": 0.961295,
+          "reported_delta_psnr": 0.009135,
+          "reported_delta_ssim": 6.5e-05
+        },
+        "Set14": {
+          "psnr": 33.820715,
+          "ssim": 0.919578,
+          "reported_delta_psnr": -0.004446,
+          "reported_delta_ssim": -0.000158
+        },
+        "Set14_x8": {
+          "psnr": 33.862954,
+          "ssim": 0.920068,
+          "reported_delta_psnr": 0.008304,
+          "reported_delta_ssim": 1.7e-05
+        },
+        "B100": {
+          "psnr": 32.268337,
+          "ssim": 0.900914,
+          "reported_delta_psnr": -0.009031,
+          "reported_delta_ssim": -6e-06
+        },
+        "B100_x8": {
+          "psnr": 32.298547,
+          "ssim": 0.901216,
+          "reported_delta_psnr": -0.008688,
+          "reported_delta_ssim": 1.1e-05
+        },
+        "Urban100": {
+          "psnr": 32.569353,
+          "ssim": 0.931703,
+          "reported_delta_psnr": 0.013127,
+          "reported_delta_ssim": -2e-05
+        },
+        "Urban100_x8": {
+          "psnr": 32.725311,
+          "ssim": 0.932742,
+          "reported_delta_psnr": 0.016614,
+          "reported_delta_ssim": 0.000113
+        },
+        "Manga109": {
+          "psnr": 39.192104,
+          "ssim": 0.978399,
+          "reported_delta_psnr": -0.013567,
+          "reported_delta_ssim": 1.4e-05
+        },
+        "Manga109_x8": {
+          "psnr": 39.34555,
+          "ssim": 0.978697,
+          "reported_delta_psnr": -0.01056,
+          "reported_delta_ssim": 1.2e-05
+        }
+      },
+      "last5": {
+        "DIV2K_valid": {
+          "psnr": 36.282463,
+          "reported_delta_psnr": 0.001083
+        },
+        "DIV2K_valid_x8": {
+          "psnr": 36.35445,
+          "reported_delta_psnr": -0.001969
+        },
+        "Set5": {
+          "psnr": 38.180379,
+          "reported_delta_psnr": 0.011153
+        },
+        "Set5_x8": {
+          "psnr": 38.22754,
+          "reported_delta_psnr": 0.006659
+        },
+        "Set14": {
+          "psnr": 33.823246,
+          "reported_delta_psnr": -0.001914
+        },
+        "Set14_x8": {
+          "psnr": 33.860141,
+          "reported_delta_psnr": 0.005491
+        },
+        "B100": {
+          "psnr": 32.268328,
+          "reported_delta_psnr": -0.00904
+        },
+        "B100_x8": {
+          "psnr": 32.297156,
+          "reported_delta_psnr": -0.010079
+        },
+        "Urban100": {
+          "psnr": 32.571161,
+          "reported_delta_psnr": 0.014935
+        },
+        "Urban100_x8": {
+          "psnr": 32.72065,
+          "reported_delta_psnr": 0.011953
+        },
+        "Manga109": {
+          "psnr": 39.194918,
+          "reported_delta_psnr": -0.010753
+        },
+        "Manga109_x8": {
+          "psnr": 39.346895,
+          "reported_delta_psnr": -0.009215
+        }
+      }
+    },
+    "l1_to_mse_lr5": {
+      "fixed_10k": {
+        "DIV2K_valid": {
+          "psnr": 36.285194,
+          "ssim": 0.946547,
+          "reported_delta_psnr": 0.003814,
+          "reported_delta_ssim": 4.2e-05
+        },
+        "DIV2K_valid_x8": {
+          "psnr": 36.356718,
+          "ssim": 0.946954,
+          "reported_delta_psnr": 0.000298,
+          "reported_delta_ssim": 3.3e-05
+        },
+        "Set5": {
+          "psnr": 38.180532,
+          "ssim": 0.961106,
+          "reported_delta_psnr": 0.011305,
+          "reported_delta_ssim": 8e-05
+        },
+        "Set5_x8": {
+          "psnr": 38.229724,
+          "ssim": 0.961288,
+          "reported_delta_psnr": 0.008843,
+          "reported_delta_ssim": 5.8e-05
+        },
+        "Set14": {
+          "psnr": 33.813618,
+          "ssim": 0.919535,
+          "reported_delta_psnr": -0.011543,
+          "reported_delta_ssim": -0.000202
+        },
+        "Set14_x8": {
+          "psnr": 33.857577,
+          "ssim": 0.920059,
+          "reported_delta_psnr": 0.002927,
+          "reported_delta_ssim": 8e-06
+        },
+        "B100": {
+          "psnr": 32.268404,
+          "ssim": 0.900897,
+          "reported_delta_psnr": -0.008964,
+          "reported_delta_ssim": -2.3e-05
+        },
+        "B100_x8": {
+          "psnr": 32.298407,
+          "ssim": 0.901197,
+          "reported_delta_psnr": -0.008828,
+          "reported_delta_ssim": -7e-06
+        },
+        "Urban100": {
+          "psnr": 32.562778,
+          "ssim": 0.931644,
+          "reported_delta_psnr": 0.006552,
+          "reported_delta_ssim": -7.9e-05
+        },
+        "Urban100_x8": {
+          "psnr": 32.718531,
+          "ssim": 0.932682,
+          "reported_delta_psnr": 0.009833,
+          "reported_delta_ssim": 5.3e-05
+        },
+        "Manga109": {
+          "psnr": 39.195942,
+          "ssim": 0.978417,
+          "reported_delta_psnr": -0.009728,
+          "reported_delta_ssim": 3.3e-05
+        },
+        "Manga109_x8": {
+          "psnr": 39.347361,
+          "ssim": 0.978708,
+          "reported_delta_psnr": -0.008749,
+          "reported_delta_ssim": 2.4e-05
+        }
+      },
+      "last5": {
+        "DIV2K_valid": {
+          "psnr": 36.282709,
+          "reported_delta_psnr": 0.001329
+        },
+        "DIV2K_valid_x8": {
+          "psnr": 36.353861,
+          "reported_delta_psnr": -0.002559
+        },
+        "Set5": {
+          "psnr": 38.1795,
+          "reported_delta_psnr": 0.010274
+        },
+        "Set5_x8": {
+          "psnr": 38.226047,
+          "reported_delta_psnr": 0.005167
+        },
+        "Set14": {
+          "psnr": 33.815384,
+          "reported_delta_psnr": -0.009777
+        },
+        "Set14_x8": {
+          "psnr": 33.854002,
+          "reported_delta_psnr": -0.000648
+        },
+        "B100": {
+          "psnr": 32.269137,
+          "reported_delta_psnr": -0.008231
+        },
+        "B100_x8": {
+          "psnr": 32.297522,
+          "reported_delta_psnr": -0.009713
+        },
+        "Urban100": {
+          "psnr": 32.562724,
+          "reported_delta_psnr": 0.006498
+        },
+        "Urban100_x8": {
+          "psnr": 32.710671,
+          "reported_delta_psnr": 0.001974
+        },
+        "Manga109": {
+          "psnr": 39.201923,
+          "reported_delta_psnr": -0.003748
+        },
+        "Manga109_x8": {
+          "psnr": 39.350352,
+          "reported_delta_psnr": -0.005758
+        }
+      }
+    }
+  },
+  "patch96": {
+    "l1_lr5": {
+      "fixed_10k_x8": {
+        "DIV2K_valid": {
+          "psnr": 36.35936699,
+          "ssim": 0.94697027,
+          "reported_delta_psnr": 0.00294765,
+          "reported_delta_ssim": 4.913e-05
+        },
+        "Set5": {
+          "psnr": 38.22618772,
+          "ssim": 0.96123882,
+          "reported_delta_psnr": 0.00530725,
+          "reported_delta_ssim": 8.57e-06
+        },
+        "Set14": {
+          "psnr": 33.87417128,
+          "ssim": 0.92015092,
+          "reported_delta_psnr": 0.01952127,
+          "reported_delta_ssim": 9.968e-05
+        },
+        "B100": {
+          "psnr": 32.30661466,
+          "ssim": 0.90122519,
+          "reported_delta_psnr": -0.00062002,
+          "reported_delta_ssim": 2.072e-05
+        },
+        "Urban100": {
+          "psnr": 32.71428382,
+          "ssim": 0.93269227,
+          "reported_delta_psnr": 0.0055867,
+          "reported_delta_ssim": 6.334e-05
+        },
+        "Manga109": {
+          "psnr": 39.37133845,
+          "ssim": 0.97871456,
+          "reported_delta_psnr": 0.0152286,
+          "reported_delta_ssim": 3.019e-05
+        }
+      },
+      "last5_x8_mean": {
+        "DIV2K_valid": {
+          "psnr": 36.36000851,
+          "ssim": 0.94697659,
+          "reported_delta_psnr": 0.00358916,
+          "reported_delta_ssim": 5.546e-05
+        },
+        "Set5": {
+          "psnr": 38.22571299,
+          "ssim": 0.96123574,
+          "reported_delta_psnr": 0.00483252,
+          "reported_delta_ssim": 5.49e-06
+        },
+        "Set14": {
+          "psnr": 33.87089005,
+          "ssim": 0.92010527,
+          "reported_delta_psnr": 0.01624005,
+          "reported_delta_ssim": 5.402e-05
+        },
+        "B100": {
+          "psnr": 32.30865652,
+          "ssim": 0.90124434,
+          "reported_delta_psnr": 0.00142184,
+          "reported_delta_ssim": 3.988e-05
+        },
+        "Urban100": {
+          "psnr": 32.71523327,
+          "ssim": 0.93271298,
+          "reported_delta_psnr": 0.00653615,
+          "reported_delta_ssim": 8.405e-05
+        },
+        "Manga109": {
+          "psnr": 39.36866089,
+          "ssim": 0.97871703,
+          "reported_delta_psnr": 0.01255104,
+          "reported_delta_ssim": 3.266e-05
+        }
+      },
+      "exploratory_selected_step": 4000,
+      "selected_x8": {
+        "DIV2K_valid": {
+          "psnr": 36.36127697,
+          "ssim": 0.94700351,
+          "reported_delta_psnr": 0.00485763
+        },
+        "Set5": {
+          "psnr": 38.22785884,
+          "ssim": 0.9612432,
+          "reported_delta_psnr": 0.00697837
+        },
+        "Set14": {
+          "psnr": 33.86689026,
+          "ssim": 0.92010573,
+          "reported_delta_psnr": 0.01224026
+        },
+        "B100": {
+          "psnr": 32.30866803,
+          "ssim": 0.90126206,
+          "reported_delta_psnr": 0.00143335
+        },
+        "Urban100": {
+          "psnr": 32.72617451,
+          "ssim": 0.93286402,
+          "reported_delta_psnr": 0.01747739
+        },
+        "Manga109": {
+          "psnr": 39.37072016,
+          "ssim": 0.97872839,
+          "reported_delta_psnr": 0.01461031
+        }
+      },
+      "x8_psnr_trajectory_reported_6dp": [
+        {
+          "step": 1000,
+          "psnr": {
+            "Set5": 38.222045,
+            "Set14": 33.858264,
+            "B100": 32.307848,
+            "Urban100": 32.718444,
+            "Manga109": 39.368041
+          },
+          "mean_delta": 0.005414
+        },
+        {
+          "step": 2000,
+          "psnr": {
+            "Set5": 38.227907,
+            "Set14": 33.864746,
+            "B100": 32.311033,
+            "Urban100": 32.725489,
+            "Manga109": 39.368938
+          },
+          "mean_delta": 0.010108
+        },
+        {
+          "step": 3000,
+          "psnr": {
+            "Set5": 38.224003,
+            "Set14": 33.866705,
+            "B100": 32.3131,
+            "Urban100": 32.72512,
+            "Manga109": 39.364763
+          },
+          "mean_delta": 0.009224
+        },
+        {
+          "step": 4000,
+          "psnr": {
+            "Set5": 38.227859,
+            "Set14": 33.86689,
+            "B100": 32.308668,
+            "Urban100": 32.726175,
+            "Manga109": 39.37072
+          },
+          "mean_delta": 0.010548
+        },
+        {
+          "step": 5000,
+          "psnr": {
+            "Set5": 38.225068,
+            "Set14": 33.862497,
+            "B100": 32.305988,
+            "Urban100": 32.700154,
+            "Manga109": 39.369016
+          },
+          "mean_delta": 0.00303
+        },
+        {
+          "step": 6000,
+          "psnr": {
+            "Set5": 38.225467,
+            "Set14": 33.866279,
+            "B100": 32.31167,
+            "Urban100": 32.716212,
+            "Manga109": 39.363513
+          },
+          "mean_delta": 0.007114
+        },
+        {
+          "step": 7000,
+          "psnr": {
+            "Set5": 38.225445,
+            "Set14": 33.872332,
+            "B100": 32.308896,
+            "Urban100": 32.721536,
+            "Manga109": 39.371118
+          },
+          "mean_delta": 0.010351
+        },
+        {
+          "step": 8000,
+          "psnr": {
+            "Set5": 38.226847,
+            "Set14": 33.870091,
+            "B100": 32.30765,
+            "Urban100": 32.703848,
+            "Manga109": 39.371166
+          },
+          "mean_delta": 0.006406
+        },
+        {
+          "step": 9000,
+          "psnr": {
+            "Set5": 38.224618,
+            "Set14": 33.871576,
+            "B100": 32.308452,
+            "Urban100": 32.720286,
+            "Manga109": 39.366169
+          },
+          "mean_delta": 0.008706
+        },
+        {
+          "step": 10000,
+          "psnr": {
+            "Set5": 38.226188,
+            "Set14": 33.874171,
+            "B100": 32.306615,
+            "Urban100": 32.714284,
+            "Manga109": 39.371338
+          },
+          "mean_delta": 0.009005
+        }
+      ]
+    },
+    "mse_lr5": {
+      "fixed_10k_x8": {
+        "DIV2K_valid": {
+          "psnr": 36.36386861,
+          "ssim": 0.94698706,
+          "reported_delta_psnr": 0.00744926,
+          "reported_delta_ssim": 6.593e-05
+        },
+        "Set5": {
+          "psnr": 38.23067645,
+          "ssim": 0.96128798,
+          "reported_delta_psnr": 0.00979598,
+          "reported_delta_ssim": 5.773e-05
+        },
+        "Set14": {
+          "psnr": 33.88525452,
+          "ssim": 0.92022036,
+          "reported_delta_psnr": 0.03060452,
+          "reported_delta_ssim": 0.00016912
+        },
+        "B100": {
+          "psnr": 32.30440196,
+          "ssim": 0.90128227,
+          "reported_delta_psnr": -0.00283272,
+          "reported_delta_ssim": 7.781e-05
+        },
+        "Urban100": {
+          "psnr": 32.73466276,
+          "ssim": 0.93276172,
+          "reported_delta_psnr": 0.02596564,
+          "reported_delta_ssim": 0.00013279
+        },
+        "Manga109": {
+          "psnr": 39.36646379,
+          "ssim": 0.9787154,
+          "reported_delta_psnr": 0.01035394,
+          "reported_delta_ssim": 3.103e-05
+        }
+      },
+      "last5_x8_mean": {
+        "DIV2K_valid": {
+          "psnr": 36.36502165,
+          "ssim": 0.94700226,
+          "reported_delta_psnr": 0.00860231,
+          "reported_delta_ssim": 8.113e-05
+        },
+        "Set5": {
+          "psnr": 38.23272405,
+          "ssim": 0.96129277,
+          "reported_delta_psnr": 0.01184358,
+          "reported_delta_ssim": 6.252e-05
+        },
+        "Set14": {
+          "psnr": 33.88319948,
+          "ssim": 0.92019276,
+          "reported_delta_psnr": 0.02854947,
+          "reported_delta_ssim": 0.00014151
+        },
+        "B100": {
+          "psnr": 32.30716323,
+          "ssim": 0.90131149,
+          "reported_delta_psnr": -7.145e-05,
+          "reported_delta_ssim": 0.00010703
+        },
+        "Urban100": {
+          "psnr": 32.73490152,
+          "ssim": 0.93278283,
+          "reported_delta_psnr": 0.0262044,
+          "reported_delta_ssim": 0.0001539
+        },
+        "Manga109": {
+          "psnr": 39.3637777,
+          "ssim": 0.97871923,
+          "reported_delta_psnr": 0.00766785,
+          "reported_delta_ssim": 3.486e-05
+        }
+      },
+      "exploratory_selected_step": 7000,
+      "selected_x8": {
+        "DIV2K_valid": {
+          "psnr": 36.36625901,
+          "ssim": 0.94700453,
+          "reported_delta_psnr": 0.00983966
+        },
+        "Set5": {
+          "psnr": 38.23350595,
+          "ssim": 0.96129107,
+          "reported_delta_psnr": 0.01262548
+        },
+        "Set14": {
+          "psnr": 33.88552008,
+          "ssim": 0.92019159,
+          "reported_delta_psnr": 0.03087008
+        },
+        "B100": {
+          "psnr": 32.30872927,
+          "ssim": 0.9013221,
+          "reported_delta_psnr": 0.00149459
+        },
+        "Urban100": {
+          "psnr": 32.74305672,
+          "ssim": 0.93285065,
+          "reported_delta_psnr": 0.03435961
+        },
+        "Manga109": {
+          "psnr": 39.36667079,
+          "ssim": 0.97872914,
+          "reported_delta_psnr": 0.01056094
+        }
+      },
+      "x8_psnr_trajectory_reported_6dp": [
+        {
+          "step": 1000,
+          "psnr": {
+            "Set5": 38.226727,
+            "Set14": 33.857314,
+            "B100": 32.306995,
+            "Urban100": 32.72616,
+            "Manga109": 39.352906
+          },
+          "mean_delta": 0.004506
+        },
+        {
+          "step": 2000,
+          "psnr": {
+            "Set5": 38.233424,
+            "Set14": 33.861121,
+            "B100": 32.307984,
+            "Urban100": 32.735816,
+            "Manga109": 39.356876
+          },
+          "mean_delta": 0.00953
+        },
+        {
+          "step": 3000,
+          "psnr": {
+            "Set5": 38.23079,
+            "Set14": 33.872103,
+            "B100": 32.309493,
+            "Urban100": 32.733047,
+            "Manga109": 39.362075
+          },
+          "mean_delta": 0.011987
+        },
+        {
+          "step": 4000,
+          "psnr": {
+            "Set5": 38.23373,
+            "Set14": 33.870034,
+            "B100": 32.305159,
+            "Urban100": 32.73574,
+            "Manga109": 39.373499
+          },
+          "mean_delta": 0.014118
+        },
+        {
+          "step": 5000,
+          "psnr": {
+            "Set5": 38.233409,
+            "Set14": 33.870626,
+            "B100": 32.305971,
+            "Urban100": 32.72318,
+            "Manga109": 39.364066
+          },
+          "mean_delta": 0.009936
+        },
+        {
+          "step": 6000,
+          "psnr": {
+            "Set5": 38.234856,
+            "Set14": 33.877202,
+            "B100": 32.311466,
+            "Urban100": 32.734573,
+            "Manga109": 39.359221
+          },
+          "mean_delta": 0.013949
+        },
+        {
+          "step": 7000,
+          "psnr": {
+            "Set5": 38.233506,
+            "Set14": 33.88552,
+            "B100": 32.308729,
+            "Urban100": 32.743057,
+            "Manga109": 39.366671
+          },
+          "mean_delta": 0.017982
+        },
+        {
+          "step": 8000,
+          "psnr": {
+            "Set5": 38.230352,
+            "Set14": 33.881659,
+            "B100": 32.304569,
+            "Urban100": 32.722185,
+            "Manga109": 39.363024
+          },
+          "mean_delta": 0.010844
+        },
+        {
+          "step": 9000,
+          "psnr": {
+            "Set5": 38.234229,
+            "Set14": 33.886362,
+            "B100": 32.30665,
+            "Urban100": 32.74003,
+            "Manga109": 39.363508
+          },
+          "mean_delta": 0.016641
+        },
+        {
+          "step": 10000,
+          "psnr": {
+            "Set5": 38.230676,
+            "Set14": 33.885255,
+            "B100": 32.304402,
+            "Urban100": 32.734663,
+            "Manga109": 39.366464
+          },
+          "mean_delta": 0.014777
+        }
+      ]
+    }
+  },
+  "weight_fusion": {
+    "original_982k": {
+      "metrics": {
+        "DIV2K_valid_x8": {
+          "psnr": 36.35641934,
+          "ssim": 0.94692113
+        },
+        "Set5_x8": {
+          "psnr": 38.22088047,
+          "ssim": 0.96123025
+        },
+        "Set14_x8": {
+          "psnr": 33.85465001,
+          "ssim": 0.92005125
+        },
+        "B100_x8": {
+          "psnr": 32.30723468,
+          "ssim": 0.90120446
+        },
+        "Urban100_x8": {
+          "psnr": 32.70869712,
+          "ssim": 0.93262893
+        },
+        "Manga109_x8": {
+          "psnr": 39.35610985,
+          "ssim": 0.97868436
+        },
+        "DIV2K_valid": {
+          "psnr": 36.28138006,
+          "ssim": 0.94650567
+        },
+        "Set5": {
+          "psnr": 38.1692264,
+          "ssim": 0.96102658
+        },
+        "Set14": {
+          "psnr": 33.82516026,
+          "ssim": 0.91973635
+        },
+        "B100": {
+          "psnr": 32.27736801,
+          "ssim": 0.90091938
+        },
+        "Urban100": {
+          "psnr": 32.55622609,
+          "ssim": 0.93172282
+        },
+        "Manga109": {
+          "psnr": 39.20567049,
+          "ssim": 0.9783841
+        }
+      },
+      "reported_delta_psnr_vs_982k": {
+        "DIV2K_valid_x8": 0.0,
+        "Set5_x8": 0.0,
+        "Set14_x8": 0.0,
+        "B100_x8": 0.0,
+        "Urban100_x8": 0.0,
+        "Manga109_x8": 0.0
+      },
+      "computed_delta_psnr_vs_982k": {
+        "DIV2K_valid_x8": 0.0,
+        "Set5_x8": 0.0,
+        "Set14_x8": 0.0,
+        "B100_x8": 0.0,
+        "Urban100_x8": 0.0,
+        "Manga109_x8": 0.0,
+        "DIV2K_valid": 0.0,
+        "Set5": 0.0,
+        "Set14": 0.0,
+        "B100": 0.0,
+        "Urban100": 0.0,
+        "Manga109": 0.0
+      },
+      "mean_five_x8_delta": 0.0,
+      "min_five_x8_delta": 0.0,
+      "all_five_x8_improved": false
+    },
+    "l1_4k": {
+      "metrics": {
+        "DIV2K_valid_x8": {
+          "psnr": 36.36127697,
+          "ssim": 0.94700351
+        },
+        "Set5_x8": {
+          "psnr": 38.22785884,
+          "ssim": 0.9612432
+        },
+        "Set14_x8": {
+          "psnr": 33.86689026,
+          "ssim": 0.92010573
+        },
+        "B100_x8": {
+          "psnr": 32.30866803,
+          "ssim": 0.90126206
+        },
+        "Urban100_x8": {
+          "psnr": 32.72617451,
+          "ssim": 0.93286402
+        },
+        "Manga109_x8": {
+          "psnr": 39.37072016,
+          "ssim": 0.97872839
+        },
+        "DIV2K_valid": {
+          "psnr": 36.28618234,
+          "ssim": 0.94659655
+        },
+        "Set5": {
+          "psnr": 38.18137551,
+          "ssim": 0.96105608
+        },
+        "Set14": {
+          "psnr": 33.83357661,
+          "ssim": 0.91974731
+        },
+        "B100": {
+          "psnr": 32.2782315,
+          "ssim": 0.90096522
+        },
+        "Urban100": {
+          "psnr": 32.56897902,
+          "ssim": 0.9318913
+        },
+        "Manga109": {
+          "psnr": 39.2228868,
+          "ssim": 0.97844057
+        }
+      },
+      "reported_delta_psnr_vs_982k": {
+        "DIV2K_valid_x8": 0.00485763,
+        "Set5_x8": 0.00697837,
+        "Set14_x8": 0.01224026,
+        "B100_x8": 0.00143335,
+        "Urban100_x8": 0.01747739,
+        "Manga109_x8": 0.01461031
+      },
+      "computed_delta_psnr_vs_982k": {
+        "DIV2K_valid_x8": 0.0048576299999965045,
+        "Set5_x8": 0.006978370000005896,
+        "Set14_x8": 0.012240249999997843,
+        "B100_x8": 0.0014333499999992227,
+        "Urban100_x8": 0.017477390000003368,
+        "Manga109_x8": 0.014610309999994797,
+        "DIV2K_valid": 0.004802280000006931,
+        "Set5": 0.01214911000000285,
+        "Set14": 0.008416350000004513,
+        "B100": 0.0008634899999933054,
+        "Urban100": 0.012752929999997775,
+        "Manga109": 0.017216309999994905
+      },
+      "mean_five_x8_delta": 0.010547934000000226,
+      "min_five_x8_delta": 0.0014333499999992227,
+      "all_five_x8_improved": true
+    },
+    "mse_7k": {
+      "metrics": {
+        "DIV2K_valid_x8": {
+          "psnr": 36.36625901,
+          "ssim": 0.94700453
+        },
+        "Set5_x8": {
+          "psnr": 38.23350595,
+          "ssim": 0.96129107
+        },
+        "Set14_x8": {
+          "psnr": 33.88552008,
+          "ssim": 0.92019159
+        },
+        "B100_x8": {
+          "psnr": 32.30872927,
+          "ssim": 0.9013221
+        },
+        "Urban100_x8": {
+          "psnr": 32.74305672,
+          "ssim": 0.93285065
+        },
+        "Manga109_x8": {
+          "psnr": 39.36667079,
+          "ssim": 0.97872914
+        },
+        "DIV2K_valid": {
+          "psnr": 36.29051724,
+          "ssim": 0.94659291
+        },
+        "Set5": {
+          "psnr": 38.18830633,
+          "ssim": 0.96110793
+        },
+        "Set14": {
+          "psnr": 33.84512651,
+          "ssim": 0.91978337
+        },
+        "B100": {
+          "psnr": 32.27947452,
+          "ssim": 0.90102047
+        },
+        "Urban100": {
+          "psnr": 32.58482234,
+          "ssim": 0.93178287
+        },
+        "Manga109": {
+          "psnr": 39.21090991,
+          "ssim": 0.97842949
+        }
+      },
+      "reported_delta_psnr_vs_982k": {
+        "DIV2K_valid_x8": 0.00983966,
+        "Set5_x8": 0.01262548,
+        "Set14_x8": 0.03087008,
+        "B100_x8": 0.00149459,
+        "Urban100_x8": 0.03435961,
+        "Manga109_x8": 0.01056094
+      },
+      "computed_delta_psnr_vs_982k": {
+        "DIV2K_valid_x8": 0.00983966999999808,
+        "Set5_x8": 0.012625480000004075,
+        "Set14_x8": 0.03087006999999886,
+        "B100_x8": 0.0014945900000000734,
+        "Urban100_x8": 0.03435960000000193,
+        "Manga109_x8": 0.010560939999997743,
+        "DIV2K_valid": 0.009137180000003298,
+        "Set5": 0.019079930000003742,
+        "Set14": 0.019966250000003072,
+        "B100": 0.002106509999997286,
+        "Urban100": 0.028596249999999657,
+        "Manga109": 0.005239419999995221
+      },
+      "mean_five_x8_delta": 0.017982136000000537,
+      "min_five_x8_delta": 0.0014945900000000734,
+      "all_five_x8_improved": true
+    },
+    "mse_mean_6to10k": {
+      "metrics": {
+        "DIV2K_valid_x8": {
+          "psnr": 36.36615035,
+          "ssim": 0.94701192
+        },
+        "Set5_x8": {
+          "psnr": 38.23393413,
+          "ssim": 0.9613001
+        },
+        "Set14_x8": {
+          "psnr": 33.88431589,
+          "ssim": 0.92020717
+        },
+        "B100_x8": {
+          "psnr": 32.30785854,
+          "ssim": 0.90132689
+        },
+        "Urban100_x8": {
+          "psnr": 32.73758716,
+          "ssim": 0.93280523
+        },
+        "Manga109_x8": {
+          "psnr": 39.36673461,
+          "ssim": 0.978726
+        },
+        "DIV2K_valid": {
+          "psnr": 36.29287632,
+          "ssim": 0.94661082
+        },
+        "Set5": {
+          "psnr": 38.18772119,
+          "ssim": 0.96111398
+        },
+        "Set14": {
+          "psnr": 33.84442179,
+          "ssim": 0.91978604
+        },
+        "B100": {
+          "psnr": 32.27929677,
+          "ssim": 0.90103818
+        },
+        "Urban100": {
+          "psnr": 32.58699096,
+          "ssim": 0.93181659
+        },
+        "Manga109": {
+          "psnr": 39.21569226,
+          "ssim": 0.97843247
+        }
+      },
+      "reported_delta_psnr_vs_982k": {
+        "DIV2K_valid_x8": 0.00973101,
+        "Set5_x8": 0.01305366,
+        "Set14_x8": 0.02966589,
+        "B100_x8": 0.00062387,
+        "Urban100_x8": 0.02889004,
+        "Manga109_x8": 0.01062476
+      },
+      "computed_delta_psnr_vs_982k": {
+        "DIV2K_valid_x8": 0.009731009999995877,
+        "Set5_x8": 0.013053660000004186,
+        "Set14_x8": 0.029665880000003142,
+        "B100_x8": 0.0006238599999974781,
+        "Urban100_x8": 0.028890040000000283,
+        "Manga109_x8": 0.0106247599999989,
+        "DIV2K_valid": 0.011496260000001257,
+        "Set5": 0.018494789999998318,
+        "Set14": 0.019261530000001414,
+        "B100": 0.0019287599999984195,
+        "Urban100": 0.030764869999998723,
+        "Manga109": 0.01002176999999449
+      },
+      "mean_five_x8_delta": 0.016571640000000797,
+      "min_five_x8_delta": 0.0006238599999974781,
+      "all_five_x8_improved": true
+    },
+    "l1_mse_alpha25": {
+      "metrics": {
+        "DIV2K_valid_x8": {
+          "psnr": 36.36451753,
+          "ssim": 0.94701094
+        },
+        "Set5_x8": {
+          "psnr": 38.22981866,
+          "ssim": 0.96125443
+        },
+        "Set14_x8": {
+          "psnr": 33.87365425,
+          "ssim": 0.92013706
+        },
+        "B100_x8": {
+          "psnr": 32.30992732,
+          "ssim": 0.90127985
+        },
+        "Urban100_x8": {
+          "psnr": 32.73403397,
+          "ssim": 0.93287806
+        },
+        "Manga109_x8": {
+          "psnr": 39.37361444,
+          "ssim": 0.97873623
+        },
+        "DIV2K_valid": {
+          "psnr": 36.28997365,
+          "ssim": 0.94660791
+        },
+        "Set5": {
+          "psnr": 38.18398381,
+          "ssim": 0.96107897
+        },
+        "Set14": {
+          "psnr": 33.83931874,
+          "ssim": 0.9197738
+        },
+        "B100": {
+          "psnr": 32.2802945,
+          "ssim": 0.90098613
+        },
+        "Urban100": {
+          "psnr": 32.57772534,
+          "ssim": 0.93189963
+        },
+        "Manga109": {
+          "psnr": 39.22532358,
+          "ssim": 0.9784487
+        }
+      },
+      "reported_delta_psnr_vs_982k": {
+        "DIV2K_valid_x8": 0.00809819,
+        "Set5_x8": 0.00893819,
+        "Set14_x8": 0.01900425,
+        "B100_x8": 0.00269264,
+        "Urban100_x8": 0.02533685,
+        "Manga109_x8": 0.01750459
+      },
+      "computed_delta_psnr_vs_982k": {
+        "DIV2K_valid_x8": 0.00809818999999834,
+        "Set5_x8": 0.008938190000002066,
+        "Set14_x8": 0.019004240000001005,
+        "B100_x8": 0.0026926399999993578,
+        "Urban100_x8": 0.025336850000002187,
+        "Manga109_x8": 0.01750458999999438,
+        "DIV2K_valid": 0.008593590000003815,
+        "Set5": 0.014757410000001414,
+        "Set14": 0.01415848000000608,
+        "B100": 0.0029264899999930094,
+        "Urban100": 0.02149924999999797,
+        "Manga109": 0.019653089999998485
+      },
+      "mean_five_x8_delta": 0.0146953019999998,
+      "min_five_x8_delta": 0.0026926399999993578,
+      "all_five_x8_improved": true
+    },
+    "l1_mse_alpha50": {
+      "metrics": {
+        "DIV2K_valid_x8": {
+          "psnr": 36.36627978,
+          "ssim": 0.94701372
+        },
+        "Set5_x8": {
+          "psnr": 38.23172164,
+          "ssim": 0.96126921
+        },
+        "Set14_x8": {
+          "psnr": 33.87920265,
+          "ssim": 0.92016282
+        },
+        "B100_x8": {
+          "psnr": 32.31032821,
+          "ssim": 0.90129669
+        },
+        "Urban100_x8": {
+          "psnr": 32.73929075,
+          "ssim": 0.9328803
+        },
+        "Manga109_x8": {
+          "psnr": 39.3735823,
+          "ssim": 0.97873845
+        },
+        "DIV2K_valid": {
+          "psnr": 36.29181854,
+          "ssim": 0.94661078
+        },
+        "Set5": {
+          "psnr": 38.18661465,
+          "ssim": 0.96109688
+        },
+        "Set14": {
+          "psnr": 33.84312469,
+          "ssim": 0.91979022
+        },
+        "B100": {
+          "psnr": 32.28099023,
+          "ssim": 0.90100386
+        },
+        "Urban100": {
+          "psnr": 32.58307081,
+          "ssim": 0.93188152
+        },
+        "Manga109": {
+          "psnr": 39.22404472,
+          "ssim": 0.97844936
+        }
+      },
+      "reported_delta_psnr_vs_982k": {
+        "DIV2K_valid_x8": 0.00986044,
+        "Set5_x8": 0.01084117,
+        "Set14_x8": 0.02455264,
+        "B100_x8": 0.00309353,
+        "Urban100_x8": 0.03059363,
+        "Manga109_x8": 0.01747245
+      },
+      "computed_delta_psnr_vs_982k": {
+        "DIV2K_valid_x8": 0.009860439999997084,
+        "Set5_x8": 0.010841170000006173,
+        "Set14_x8": 0.024552640000003123,
+        "B100_x8": 0.00309353000000101,
+        "Urban100_x8": 0.03059363000000559,
+        "Manga109_x8": 0.01747244999999964,
+        "DIV2K_valid": 0.010438480000004802,
+        "Set5": 0.017388250000003325,
+        "Set14": 0.01796443000000636,
+        "B100": 0.0036222199999969007,
+        "Urban100": 0.02684471999999971,
+        "Manga109": 0.01837422999999916
+      },
+      "mean_five_x8_delta": 0.01731068400000311,
+      "min_five_x8_delta": 0.00309353000000101,
+      "all_five_x8_improved": true
+    },
+    "l1_mse_alpha75": {
+      "metrics": {
+        "DIV2K_valid_x8": {
+          "psnr": 36.3667979,
+          "ssim": 0.94701261
+        },
+        "Set5_x8": {
+          "psnr": 38.23275801,
+          "ssim": 0.96128282
+        },
+        "Set14_x8": {
+          "psnr": 33.88309784,
+          "ssim": 0.92018394
+        },
+        "B100_x8": {
+          "psnr": 32.30992411,
+          "ssim": 0.9013151
+        },
+        "Urban100_x8": {
+          "psnr": 32.74222043,
+          "ssim": 0.93287264
+        },
+        "Manga109_x8": {
+          "psnr": 39.37132781,
+          "ssim": 0.97873652
+        },
+        "DIV2K_valid": {
+          "psnr": 36.29195354,
+          "ssim": 0.94660717
+        },
+        "Set5": {
+          "psnr": 38.18884716,
+          "ssim": 0.96110588
+        },
+        "Set14": {
+          "psnr": 33.84490974,
+          "ssim": 0.91979634
+        },
+        "B100": {
+          "psnr": 32.28074642,
+          "ssim": 0.90101901
+        },
+        "Urban100": {
+          "psnr": 32.58541264,
+          "ssim": 0.93184378
+        },
+        "Manga109": {
+          "psnr": 39.21927089,
+          "ssim": 0.97844363
+        }
+      },
+      "reported_delta_psnr_vs_982k": {
+        "DIV2K_valid_x8": 0.01037856,
+        "Set5_x8": 0.01187754,
+        "Set14_x8": 0.02844784,
+        "B100_x8": 0.00268943,
+        "Urban100_x8": 0.03352331,
+        "Manga109_x8": 0.01521796
+      },
+      "computed_delta_psnr_vs_982k": {
+        "DIV2K_valid_x8": 0.010378559999999482,
+        "Set5_x8": 0.011877540000000408,
+        "Set14_x8": 0.02844782999999751,
+        "B100_x8": 0.002689429999996662,
+        "Urban100_x8": 0.033523310000006745,
+        "Manga109_x8": 0.01521795999999398,
+        "DIV2K_valid": 0.01057348000000502,
+        "Set5": 0.019620760000002235,
+        "Set14": 0.01974948000000154,
+        "B100": 0.003378409999996279,
+        "Urban100": 0.02918654999999859,
+        "Manga109": 0.013600399999994295
+      },
+      "mean_five_x8_delta": 0.01835121399999906,
+      "min_five_x8_delta": 0.002689429999996662,
+      "all_five_x8_improved": true
+    }
+  }
+}

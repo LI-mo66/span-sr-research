@@ -1,0 +1,335 @@
+            f'{old["psnr"]:.8f}', f'{new["psnr"]:.8f}',
+            f'{new["psnr"] - old["psnr"]:+.8f}',
+            f'{old["ssim"]:.8f}', f'{new["ssim"]:.8f}',
+            f'{new["ssim"] - old["ssim"]:+.8f}',
+        )
+
+    title(f"9. {arm}：后5次×8均值")
+    print("包含步数：", [r["step"] for r in tail])
+    print("集合 平均PSNR ΔPSNR 平均SSIM ΔSSIM")
+    for name in datasets:
+        label = name + "_x8"
+        psnr = mean(r["metrics"][label]["psnr"] for r in tail)
+        ssim = mean(r["metrics"][label]["ssim"] for r in tail)
+        print(
+            name, f"{psnr:.8f}",
+            f'{psnr - baseline[label]["psnr"]:+.8f}',
+            f"{ssim:.8f}",
+            f'{ssim - baseline[label]["ssim"]:+.8f}',
+        )
+
+    title(f"10. {arm}：每1K的五集合×8趋势")
+    print("步数 Set5 Set14 B100 Urban100 Manga109 五集合平均Δ")
+    for row in history:
+        scores = [row["metrics"][name + "_x8"]["psnr"] for name in targets]
+        delta = mean(
+            row["metrics"][name + "_x8"]["psnr"]
+            - baseline[name + "_x8"]["psnr"]
+            for name in targets
+        )
+        print(row["step"], *(f"{v:.6f}" for v in scores), f"{delta:+.6f}")
+
+    # 仅用于探索比较，所有集合仍共用一个权重。
+    selected = min(
+        history,
+        key=lambda r: (
+            -mean(r["metrics"][name + "_x8"]["psnr"] for name in targets),
+            r["step"],
+        ),
+    )
+    title(f"11. {arm}：五集合×8平均分所选同一权重")
+    print("探索性选择，不是独立测试集上的无偏选型。")
+    print("所选步数：", selected["step"])
+    print("所选权重存在：",
+          (run / f'step{selected["step"]:05d}.pt').is_file())
+    print("集合 PSNR SSIM ΔPSNR")
+    for name in datasets:
+        label = name + "_x8"
+        value = selected["metrics"][label]
+        print(
+            name, f'{value["psnr"]:.8f}', f'{value["ssim"]:.8f}',
+            f'{value["psnr"] - baseline[label]["psnr"]:+.8f}',
+        )
+
+title("只读CPU汇总结束")
+print("未修改文件、未使用GPU、未启动训练、未触发关机。")
+PY
+BASH
+
+========== 1. 完成状态与最终落盘验收 ==========
+项目： /home/featurize/work/span-x4-research/code/span-f0-x2-finetune-patch96-01
+status.txt RELEASING_INSTANCE
+pid.txt 4077
+落盘验收状态： PASS
+验收文件数： 285
+验收断点： {'l1_lr5': '/home/featurize/work/span-x4-research/code/span-f0-x2-finetune-patch96-01/runs/FT-X2-982K-PC96-l1_lr5-10K-v1/latest.pt', 'mse_lr5': '/home/featurize/work/span-x4-research/code/span-f0-x2-finetune-patch96-01/runs/FT-X2-982K-PC96-mse_lr5-10K-v1/latest.pt'}
+
+========== 2. 最近日志 ==========
+EVAL Set14 14/14 plain+x8 elapsed_s=3.2
+EVAL B100 10/100 plain+x8 elapsed_s=2.1
+EVAL B100 20/100 plain+x8 elapsed_s=4.3
+EVAL B100 30/100 plain+x8 elapsed_s=6.4
+EVAL B100 40/100 plain+x8 elapsed_s=8.4
+EVAL B100 50/100 plain+x8 elapsed_s=10.5
+EVAL B100 60/100 plain+x8 elapsed_s=12.6
+EVAL B100 70/100 plain+x8 elapsed_s=14.6
+EVAL B100 80/100 plain+x8 elapsed_s=16.7
+EVAL B100 90/100 plain+x8 elapsed_s=18.7
+EVAL B100 100/100 plain+x8 elapsed_s=20.8
+EVAL Urban100 10/100 plain+x8 elapsed_s=4.9
+EVAL Urban100 20/100 plain+x8 elapsed_s=10.4
+EVAL Urban100 30/100 plain+x8 elapsed_s=15.4
+EVAL Urban100 40/100 plain+x8 elapsed_s=19.9
+EVAL Urban100 50/100 plain+x8 elapsed_s=24.2
+EVAL Urban100 60/100 plain+x8 elapsed_s=28.7
+EVAL Urban100 70/100 plain+x8 elapsed_s=33.9
+EVAL Urban100 80/100 plain+x8 elapsed_s=38.6
+EVAL Urban100 90/100 plain+x8 elapsed_s=44.7
+EVAL Urban100 100/100 plain+x8 elapsed_s=50.0
+EVAL Manga109 10/109 plain+x8 elapsed_s=6.7
+EVAL Manga109 20/109 plain+x8 elapsed_s=13.4
+EVAL Manga109 30/109 plain+x8 elapsed_s=20.1
+EVAL Manga109 40/109 plain+x8 elapsed_s=26.8
+EVAL Manga109 50/109 plain+x8 elapsed_s=33.5
+EVAL Manga109 60/109 plain+x8 elapsed_s=40.2
+EVAL Manga109 70/109 plain+x8 elapsed_s=46.8
+EVAL Manga109 80/109 plain+x8 elapsed_s=53.4
+EVAL Manga109 90/109 plain+x8 elapsed_s=68.4
+EVAL Manga109 100/109 plain+x8 elapsed_s=75.1
+EVAL Manga109 109/109 plain+x8 elapsed_s=81.1
+EVALUATED mse_lr5 10000 {'DIV2K_valid': {'psnr': 36.29069536405781, 'ssim': 0.9465797956688097}, 'DIV2K_valid_x8': {'psnr': 36.363868605314586, 'ssim': 0.946987062134316}, 'Set5': {'psnr': 38.18694480303351, 'ssim': 0.9610995651542387}, 'Set5_x8': {'psnr': 38.23067644854929, 'ssim': 0.9612879788609184}, 'Set14': {'psnr': 33.84866656948821, 'ssim': 0.9198192903362313}, 'Set14_x8': {'psnr': 33.88525452150333, 'ssim': 0.9202203646742392}, 'B100': {'psnr': 32.27498399232668, 'ssim': 0.9009889754192778}, 'B100_x8': {'psnr': 32.304401959825526, 'ssim': 0.9012822737026687}, 'Urban100': {'psnr': 32.58526482374034, 'ssim': 0.9318004951692503}, 'Urban100_x8': {'psnr': 32.73466276047057, 'ssim': 0.9327617204319076}, 'Manga109': {'psnr': 39.21604036204874, 'ssim': 0.9784206408043967}, 'Manga109_x8': {'psnr': 39.366463787894226, 'ssim': 0.9787153962280856}}
+COMPLETE mse_lr5
+PASS both10K runs, all checkpoints and text files flushed and hashed
+
+========== 3. 数据与起点复现检查 ==========
+{
+  "status": "PASS",
+  "source_sha256": "3dae5537ca672813dc4e9870f97276d173eda6f15ef8ffaf9aaf1c8406ef3068",
+  "counts": {
+    "train": 3450,
+    "DIV2K_valid": 100,
+    "Set5": 5,
+    "Set14": 14,
+    "B100": 100,
+    "Urban100": 100,
+    "Manga109": 109
+  },
+  "training": "DF2K only",
+  "test_selection": "exploratory five-set reporting"
+}
+
+原982K同一权重的×8指标：
+集合 PSNR SSIM
+DIV2K_valid 36.35641934 0.94692113
+Set5 38.22088047 0.96123025
+Set14 33.85465001 0.92005125
+B100 32.30723468 0.90120446
+Urban100 32.70869712 0.93262893
+Manga109 39.35610985 0.97868436
+
+========== 4. 已生成的两组比较文件 ==========
+比较口径： Mean x8 PSNR delta over five sets, using last5 evaluations
+l1_lr5 五集合×8后5次平均增量： 0.008316319306099728 五集合×8是否全部上涨： True
+mse_lr5 五集合×8后5次平均增量： 0.014838770769981125 五集合×8是否全部上涨： False
+
+========== 5. l1_lr5：协议、完成与断点 ==========
+运行目录： /home/featurize/work/span-x4-research/code/span-f0-x2-finetune-patch96-01/runs/FT-X2-982K-PC96-l1_lr5-10K-v1
+{
+  "arm": "l1_lr5",
+  "source_sha256": "3dae5537ca672813dc4e9870f97276d173eda6f15ef8ffaf9aaf1c8406ef3068",
+  "objective": "l1",
+  "lr": 5e-06,
+  "adam": "fresh for every arm",
+  "steps": 10000,
+  "seed": 10,
+  "clip": 0.1,
+  "model": "unchanged F0 x2 bound8",
+  "lr_patch": 96,
+  "hr_patch": 192,
+  "environment": {
+    "torch": "2.2.2+cu121",
+    "cuda": "12.1",
+    "device": "NVIDIA GeForce RTX 4090",
+    "cudnn_tf32": true,
+    "matmul_tf32": false
+  }
+}
+COMPLETE.json {
+  "step": 10000,
+  "arm": "l1_lr5",
+  "fingerprint": "d8d9171625da89e9cabe1609d287d88ddb73fb16249f49ff865b68eaff73a7c0"
+}
+ANOMALY.json 未发现
+latest保存步数： 10000
+Adam学习率： [5e-06]
+模型和Adam状态全部有限： True
+随机状态字段： ['cuda', 'numpy', 'python', 'torch']
+latest大小MiB： 27.4
+latest SHA256： 56c63ff194495a7c7e229a3e736528526d99a22e9737aa22ca9375b87d5c75f1
+
+========== 6. l1_lr5：每步损失与裁剪 ==========
+解析错误： []
+记录数： 10000
+步数从1连续至10K： True
+缺失或非有限记录数： 0
+首条： {'step': 1, 'objective': 0.0139586441218853, 'rgb_l1': 0.0139586441218853, 'rgb_mse': 0.0007257370089064352, 'gradient_norm_before_clip': 0.04195727780461311, 'clip_applied': False, 'lr': 5e-06}
+末条： {'step': 10000, 'objective': 0.014306799741461873, 'rgb_l1': 0.014306799741461873, 'rgb_mse': 0.0007523473905166611, 'gradient_norm_before_clip': 0.02060946822166443, 'clip_applied': False, 'lr': 5e-06}
+实际学习率： [5e-06]
+裁剪次数和比例： 18 0.18%
+最大 rgb_l1 0.020546139916405082 对应步数 7527
+最大 rgb_mse 0.0016330735961673781 对应步数 7527
+最大 gradient_norm_before_clip 0.13277308642864227 对应步数 7898
+
+========== 7. l1_lr5：评测完整性 ==========
+解析错误： []
+评测记录数： 10
+1K至10K完整按序： True
+缺失或非有限指标组数： 0
+
+========== 8. l1_lr5：最终权重×8结果 ==========
+最终评测步数： 10000
+集合 原982K_PSNR 最终PSNR ΔPSNR 原SSIM 最终SSIM ΔSSIM
+DIV2K_valid 36.35641934 36.35936699 +0.00294765 0.94692113 0.94697027 +0.00004913
+Set5 38.22088047 38.22618772 +0.00530725 0.96123025 0.96123882 +0.00000857
+Set14 33.85465001 33.87417128 +0.01952127 0.92005125 0.92015092 +0.00009968
+B100 32.30723468 32.30661466 -0.00062002 0.90120446 0.90122519 +0.00002072
+Urban100 32.70869712 32.71428382 +0.00558670 0.93262893 0.93269227 +0.00006334
+Manga109 39.35610985 39.37133845 +0.01522860 0.97868436 0.97871456 +0.00003019
+
+========== 9. l1_lr5：后5次×8均值 ==========
+包含步数： [6000, 7000, 8000, 9000, 10000]
+集合 平均PSNR ΔPSNR 平均SSIM ΔSSIM
+DIV2K_valid 36.36000851 +0.00358916 0.94697659 +0.00005546
+Set5 38.22571299 +0.00483252 0.96123574 +0.00000549
+Set14 33.87089005 +0.01624005 0.92010527 +0.00005402
+B100 32.30865652 +0.00142184 0.90124434 +0.00003988
+Urban100 32.71523327 +0.00653615 0.93271298 +0.00008405
+Manga109 39.36866089 +0.01255104 0.97871703 +0.00003266
+
+========== 10. l1_lr5：每1K的五集合×8趋势 ==========
+步数 Set5 Set14 B100 Urban100 Manga109 五集合平均Δ
+1000 38.222045 33.858264 32.307848 32.718444 39.368041 +0.005414
+2000 38.227907 33.864746 32.311033 32.725489 39.368938 +0.010108
+3000 38.224003 33.866705 32.313100 32.725120 39.364763 +0.009224
+4000 38.227859 33.866890 32.308668 32.726175 39.370720 +0.010548
+5000 38.225068 33.862497 32.305988 32.700154 39.369016 +0.003030
+6000 38.225467 33.866279 32.311670 32.716212 39.363513 +0.007114
+7000 38.225445 33.872332 32.308896 32.721536 39.371118 +0.010351
+8000 38.226847 33.870091 32.307650 32.703848 39.371166 +0.006406
+9000 38.224618 33.871576 32.308452 32.720286 39.366169 +0.008706
+10000 38.226188 33.874171 32.306615 32.714284 39.371338 +0.009005
+
+========== 11. l1_lr5：五集合×8平均分所选同一权重 ==========
+探索性选择，不是独立测试集上的无偏选型。
+所选步数： 4000
+所选权重存在： True
+集合 PSNR SSIM ΔPSNR
+DIV2K_valid 36.36127697 0.94700351 +0.00485763
+Set5 38.22785884 0.96124320 +0.00697837
+Set14 33.86689026 0.92010573 +0.01224026
+B100 32.30866803 0.90126206 +0.00143335
+Urban100 32.72617451 0.93286402 +0.01747739
+Manga109 39.37072016 0.97872839 +0.01461031
+
+========== 5. mse_lr5：协议、完成与断点 ==========
+运行目录： /home/featurize/work/span-x4-research/code/span-f0-x2-finetune-patch96-01/runs/FT-X2-982K-PC96-mse_lr5-10K-v1
+{
+  "arm": "mse_lr5",
+  "source_sha256": "3dae5537ca672813dc4e9870f97276d173eda6f15ef8ffaf9aaf1c8406ef3068",
+  "objective": "mse",
+  "lr": 5e-06,
+  "adam": "fresh for every arm",
+  "steps": 10000,
+  "seed": 10,
+  "clip": 0.1,
+  "model": "unchanged F0 x2 bound8",
+  "lr_patch": 96,
+  "hr_patch": 192,
+  "environment": {
+    "torch": "2.2.2+cu121",
+    "cuda": "12.1",
+    "device": "NVIDIA GeForce RTX 4090",
+    "cudnn_tf32": true,
+    "matmul_tf32": false
+  }
+}
+COMPLETE.json {
+  "step": 10000,
+  "arm": "mse_lr5",
+  "fingerprint": "1ec23377748e64510295cf3d6ccacc3c60975856872ca577ed27397bddb54aaa"
+}
+ANOMALY.json 未发现
+latest保存步数： 10000
+Adam学习率： [5e-06]
+模型和Adam状态全部有限： True
+随机状态字段： ['cuda', 'numpy', 'python', 'torch']
+latest大小MiB： 27.4
+latest SHA256： c48a0a27ba4dfee674391ca2798d7b6d34e1f1a50f7c302f13c399d94de8ca25
+
+========== 6. mse_lr5：每步损失与裁剪 ==========
+解析错误： []
+记录数： 10000
+步数从1连续至10K： True
+缺失或非有限记录数： 0
+首条： {'step': 1, 'objective': 0.0007257370089064352, 'rgb_l1': 0.0139586441218853, 'rgb_mse': 0.0007257370089064352, 'gradient_norm_before_clip': 0.001341237802989781, 'clip_applied': False, 'lr': 5e-06}
+末条： {'step': 10000, 'objective': 0.0007513126474805176, 'rgb_l1': 0.014337889850139618, 'rgb_mse': 0.0007513126474805176, 'gradient_norm_before_clip': 0.0016504487721249461, 'clip_applied': False, 'lr': 5e-06}
+实际学习率： [5e-06]
+裁剪次数和比例： 0 0.00%
+最大 rgb_l1 0.020570295164361596 对应步数 7527
+最大 rgb_mse 0.0016213048511417583 对应步数 7527
+最大 gradient_norm_before_clip 0.03465951234102249 对应步数 9108
+
+========== 7. mse_lr5：评测完整性 ==========
+解析错误： []
+评测记录数： 10
+1K至10K完整按序： True
+缺失或非有限指标组数： 0
+
+========== 8. mse_lr5：最终权重×8结果 ==========
+最终评测步数： 10000
+集合 原982K_PSNR 最终PSNR ΔPSNR 原SSIM 最终SSIM ΔSSIM
+DIV2K_valid 36.35641934 36.36386861 +0.00744926 0.94692113 0.94698706 +0.00006593
+Set5 38.22088047 38.23067645 +0.00979598 0.96123025 0.96128798 +0.00005773
+Set14 33.85465001 33.88525452 +0.03060452 0.92005125 0.92022036 +0.00016912
+B100 32.30723468 32.30440196 -0.00283272 0.90120446 0.90128227 +0.00007781
+Urban100 32.70869712 32.73466276 +0.02596564 0.93262893 0.93276172 +0.00013279
+Manga109 39.35610985 39.36646379 +0.01035394 0.97868436 0.97871540 +0.00003103
+
+========== 9. mse_lr5：后5次×8均值 ==========
+包含步数： [6000, 7000, 8000, 9000, 10000]
+集合 平均PSNR ΔPSNR 平均SSIM ΔSSIM
+DIV2K_valid 36.36502165 +0.00860231 0.94700226 +0.00008113
+Set5 38.23272405 +0.01184358 0.96129277 +0.00006252
+Set14 33.88319948 +0.02854947 0.92019276 +0.00014151
+B100 32.30716323 -0.00007145 0.90131149 +0.00010703
+Urban100 32.73490152 +0.02620440 0.93278283 +0.00015390
+Manga109 39.36377770 +0.00766785 0.97871923 +0.00003486
+
+========== 10. mse_lr5：每1K的五集合×8趋势 ==========
+步数 Set5 Set14 B100 Urban100 Manga109 五集合平均Δ
+1000 38.226727 33.857314 32.306995 32.726160 39.352906 +0.004506
+2000 38.233424 33.861121 32.307984 32.735816 39.356876 +0.009530
+3000 38.230790 33.872103 32.309493 32.733047 39.362075 +0.011987
+4000 38.233730 33.870034 32.305159 32.735740 39.373499 +0.014118
+5000 38.233409 33.870626 32.305971 32.723180 39.364066 +0.009936
+6000 38.234856 33.877202 32.311466 32.734573 39.359221 +0.013949
+7000 38.233506 33.885520 32.308729 32.743057 39.366671 +0.017982
+8000 38.230352 33.881659 32.304569 32.722185 39.363024 +0.010844
+9000 38.234229 33.886362 32.306650 32.740030 39.363508 +0.016641
+10000 38.230676 33.885255 32.304402 32.734663 39.366464 +0.014777
+
+========== 11. mse_lr5：五集合×8平均分所选同一权重 ==========
+探索性选择，不是独立测试集上的无偏选型。
+所选步数： 7000
+所选权重存在： True
+集合 PSNR SSIM ΔPSNR
+DIV2K_valid 36.36625901 0.94700453 +0.00983966
+Set5 38.23350595 0.96129107 +0.01262548
+Set14 33.88552008 0.92019159 +0.03087008
+B100 32.30872927 0.90132210 +0.00149459
+Urban100 32.74305672 0.93285065 +0.03435961
+Manga109 39.36667079 0.97872914 +0.01056094
+
+========== 只读CPU汇总结束 ==========
+未修改文件、未使用GPU、未启动训练、未触发关机。
+(base) ➜ ~ 

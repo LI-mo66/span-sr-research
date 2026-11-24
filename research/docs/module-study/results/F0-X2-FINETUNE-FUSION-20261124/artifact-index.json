@@ -1,0 +1,28 @@
+{
+  "record_date": "2026-11-24",
+  "evidence": "User-pasted server reports; raw full server artifacts are not in this Git archive",
+  "source_checkpoint": {
+    "file": "epoch00982_u982000.pt",
+    "sha256": "3dae5537ca672813dc4e9870f97276d173eda6f15ef8ffaf9aaf1c8406ef3068"
+  },
+  "code_commits": {
+    "original_model": "0748bd60c1eaddda4e0db7f01ba768a0f2a22be3",
+    "patch64": "c941063d6c72c1f694cd0f3b6b68674e19e45519",
+    "patch96": "8b615ff735c60cd65fd7ce05436c089d5e0f9613",
+    "fusion": "144ab0d4f81b92049b7f51999c63f4db6f12a89d"
+  },
+  "selected_deployed_weight": {
+    "path": "/home/featurize/work/span-x4-research/code/span-f0-x2-weight-fusion-01/logs/f0_x2_weight_fusion/FUSION-EVAL-01/l1_mse_alpha75/deployed.pt",
+    "sha256": null,
+    "sha256_status": "Not printed in supplied transcript; available in server COMPLETE.json, not yet collected",
+    "format": "F0-x2-deployed-weight-fusion-v1",
+    "resumable_training_checkpoint": false
+  },
+  "uncollected": [
+    "Model weight binaries",
+    "Original server comparison.json and protocols",
+    "Full per-image metrics JSON",
+    "Full training JSONL",
+    "Selected deployment checkpoint SHA256 from original receipt"
+  ]
+}

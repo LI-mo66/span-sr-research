@@ -1,0 +1,48 @@
+{
+  "model": "F0 x2 bound8",
+  "input_shape": [
+    1,
+    3,
+    180,
+    320
+  ],
+  "output_shape": [
+    1,
+    3,
+    360,
+    640
+  ],
+  "training_parameters": 2675759,
+  "deployed_parameters": 552003,
+  "torch": "2.9.1+cu128",
+  "device": "CPU",
+  "flops": 65961950793,
+  "operations": [
+    {
+      "op": "aten::conv2d",
+      "flops": 60682752000,
+      "calls": 55
+    },
+    {
+      "op": "aten::mul",
+      "flops": 156393033,
+      "calls": 62
+    },
+    {
+      "op": "aten::add",
+      "flops": 111636480,
+      "calls": 33
+    },
+    {
+      "op": "aten::addmm",
+      "flops": 2201272320,
+      "calls": 14
+    },
+    {
+      "op": "aten::bmm",
+      "flops": 2809896960,
+      "calls": 22
+    }
+  ],
+  "scope": "PyTorch profiler supported operators, multiply and add counted separately; includes convolution and attention matmul/linear. Unsupported operations are not counted. Single forward; no x8. Random weights, architecture efficiency only."
+}

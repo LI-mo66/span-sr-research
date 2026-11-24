@@ -1,0 +1,4 @@
+# Preserve transcript and manifest bytes across Windows/Linux clones.
+* -text whitespace=cr-at-eol
+# Transcripts preserve user-pasted spacing verbatim.
+evidence/*.txt -whitespace

@@ -1,0 +1,458 @@
+(base) ➜ ~ >....                                                                                                                                                                                        
+            f'{score["ssim"]:.8f}',
+            f'{row["delta_psnr_vs_982k"][key]:+.8f}',
+        )
+
+title("8. 融合版本相对MSE-7K的变化")
+reference = variants.get("mse_7k")
+if reference is None:
+    print("缺少MSE-7K对照")
+else:
+    print("版本 集合 ΔPSNR_vsMSE7K ΔSSIM_vsMSE7K")
+    for label, row in variants.items():
+        if label in ("original_982k", "l1_4k", "mse_7k"):
+            continue
+        deltas = []
+        for name in targets:
+            key = name + "_x8"
+            current = row["metrics"][key]
+            previous = reference["metrics"][key]
+            delta = current["psnr"] - previous["psnr"]
+            deltas.append(delta)
+            print(
+                label, name,
+                f"{delta:+.8f}",
+                f'{current["ssim"] - previous["ssim"]:+.8f}',
+            )
+        print(
+            label,
+            "五集合平均Δ",
+            f"{sum(deltas) / len(deltas):+.8f}",
+            "是否五集合均超过MSE-7K",
+            all(value > 0 for value in deltas),
+        )
+
+title("9. 普通推理指标")
+for label, row in variants.items():
+    print("\n版本：", label)
+    print("集合 PSNR SSIM")
+    for name in datasets:
+        score = row["metrics"][name]
+        print(name, f'{score["psnr"]:.8f}', f'{score["ssim"]:.8f}')
+
+title("10. 推理权重与逐图文件")
+for label in variants:
+    folder = out / label
+    weight = folder / "deployed.pt"
+    print(
+        label,
+        "权重存在：", weight.is_file(),
+        "逐图JSON数量：", len(list(folder.glob("*_epoch*.json"))),
+        "权重路径：", weight,
+    )
+
+title("结果适用范围")
+print(report.get("scope"))
+print("只读CPU汇总结束，未修改文件、未使用GPU、未触发关机。")
+PY
+BASH
+
+========== 1. 完成状态 ==========
+结果目录： /home/featurize/work/span-x4-research/code/span-f0-x2-weight-fusion-01/logs/f0_x2_weight_fusion/FUSION-EVAL-01
+RELEASING_INSTANCE
+
+验收状态： PASS
+来源权重未改变： True
+完成版本数： 7
+验收文件数： 94
+
+========== 2. 最近日志 ==========
+        "ssim": 0.0
+      },
+      "B100": {
+        "psnr": 0.0,
+        "ssim": 0.0
+      },
+      "B100_x8": {
+        "psnr": 0.0,
+        "ssim": 0.0
+      },
+      "Urban100": {
+        "psnr": 0.0,
+        "ssim": 0.0
+      },
+      "Urban100_x8": {
+        "psnr": 0.0,
+        "ssim": 0.0
+      },
+      "Manga109": {
+        "psnr": 0.0,
+        "ssim": 0.0
+      },
+      "Manga109_x8": {
+        "psnr": 0.0,
+        "ssim": 0.0
+      }
+    }
+  },
+  "scope": "No training. Exploratory selection using five test sets; no unseen-test or seed stability claim.",
+  "ranking": [
+    "l1_mse_alpha75",
+    "mse_7k",
+    "l1_mse_alpha50",
+    "mse_mean_6to10k",
+    "l1_mse_alpha25",
+    "l1_4k",
+    "original_982k"
+  ]
+}
+  ✅ 实例已释放
+
+
+========== 3. 实际融合配置 ==========
+format = "F0-x2-deployed-weight-fusion-v1"
+method = "Fuse every Conv3XC into deployment convolution BEFORE weight averaging"
+plans = {"original_982k": {"original_982k": 1.0}, "l1_4k": {"l1_4k": 1.0}, "mse_7k": {"mse_7k": 1.0}, "mse_mean_6to10k": {"mse_6k": 0.2, "mse_7k": 0.2, "mse_8k": 0.2, "mse_9k": 0.2, "mse_10k": 0.2}, "l1_mse_alpha25": {"l1_4k": 0.75, "mse_7k": 0.25}, "l1_mse_alpha50": {"l1_4k": 0.5, "mse_7k": 0.5}, "l1_mse_alpha75": {"l1_4k": 0.25, "mse_7k": 0.75}}
+deployed_parameters = 552003
+equivalence_absmax = {"original_982k": 0.0, "l1_4k": 0.0, "mse_6k": 0.0, "mse_7k": 0.0, "mse_8k": 0.0, "mse_9k": 0.0, "mse_10k": 0.0}
+environment = {"torch": "2.2.2+cu121", "cuda": "12.1", "device": "NVIDIA GeForce RTX 4090"}
+scope = "No training. Exploratory selection using five test sets; no unseen-test or seed stability claim."
+
+========== 4. 评测指标完整性 ==========
+版本数： 7
+缺失或非有限指标： []
+
+========== 5. 三个来源权重的指标复现差值 ==========
+{
+  "original_982k": {
+    "DIV2K_valid": {
+      "psnr": 0.0,
+      "ssim": 0.0
+    },
+    "DIV2K_valid_x8": {
+      "psnr": 0.0,
+      "ssim": 0.0
+    },
+    "Set5": {
+      "psnr": 0.0,
+      "ssim": 0.0
+    },
+    "Set5_x8": {
+      "psnr": 0.0,
+      "ssim": 0.0
+    },
+    "Set14": {
+      "psnr": 0.0,
+      "ssim": 0.0
+    },
+    "Set14_x8": {
+      "psnr": 0.0,
+      "ssim": 0.0
+    },
+    "B100": {
+      "psnr": 0.0,
+      "ssim": 0.0
+    },
+    "B100_x8": {
+      "psnr": 0.0,
+      "ssim": 0.0
+    },
+    "Urban100": {
+      "psnr": 0.0,
+      "ssim": 0.0
+    },
+    "Urban100_x8": {
+      "psnr": 0.0,
+      "ssim": 0.0
+    },
+    "Manga109": {
+      "psnr": 0.0,
+      "ssim": 0.0
+    },
+    "Manga109_x8": {
+      "psnr": 0.0,
+      "ssim": 0.0
+    }
+  },
+  "l1_4k": {
+    "DIV2K_valid": {
+      "psnr": 0.0,
+      "ssim": 0.0
+    },
+    "DIV2K_valid_x8": {
+      "psnr": 0.0,
+      "ssim": 0.0
+    },
+    "Set5": {
+      "psnr": 0.0,
+      "ssim": 0.0
+    },
+    "Set5_x8": {
+      "psnr": 0.0,
+      "ssim": 0.0
+    },
+    "Set14": {
+      "psnr": 0.0,
+      "ssim": 0.0
+    },
+    "Set14_x8": {
+      "psnr": 0.0,
+      "ssim": 0.0
+    },
+    "B100": {
+      "psnr": 0.0,
+      "ssim": 0.0
+    },
+    "B100_x8": {
+      "psnr": 0.0,
+      "ssim": 0.0
+    },
+    "Urban100": {
+      "psnr": 0.0,
+      "ssim": 0.0
+    },
+    "Urban100_x8": {
+      "psnr": 0.0,
+      "ssim": 0.0
+    },
+    "Manga109": {
+      "psnr": 0.0,
+      "ssim": 0.0
+    },
+    "Manga109_x8": {
+      "psnr": 0.0,
+      "ssim": 0.0
+    }
+  },
+  "mse_7k": {
+    "DIV2K_valid": {
+      "psnr": 0.0,
+      "ssim": 0.0
+    },
+    "DIV2K_valid_x8": {
+      "psnr": 0.0,
+      "ssim": 0.0
+    },
+    "Set5": {
+      "psnr": 0.0,
+      "ssim": 0.0
+    },
+    "Set5_x8": {
+      "psnr": 0.0,
+      "ssim": 0.0
+    },
+    "Set14": {
+      "psnr": 0.0,
+      "ssim": 0.0
+    },
+    "Set14_x8": {
+      "psnr": 0.0,
+      "ssim": 0.0
+    },
+    "B100": {
+      "psnr": 0.0,
+      "ssim": 0.0
+    },
+    "B100_x8": {
+      "psnr": 0.0,
+      "ssim": 0.0
+    },
+    "Urban100": {
+      "psnr": 0.0,
+      "ssim": 0.0
+    },
+    "Urban100_x8": {
+      "psnr": 0.0,
+      "ssim": 0.0
+    },
+    "Manga109": {
+      "psnr": 0.0,
+      "ssim": 0.0
+    },
+    "Manga109_x8": {
+      "psnr": 0.0,
+      "ssim": 0.0
+    }
+  }
+}
+
+========== 6. 五集合×8综合比较 ==========
+版本 平均ΔPSNR_vs982K 最小ΔPSNR_vs982K 五集合是否全部上涨
+l1_mse_alpha75 +0.01835122 +0.00268943 True
+mse_7k +0.01798214 +0.00149459 True
+l1_mse_alpha50 +0.01731068 +0.00309353 True
+mse_mean_6to10k +0.01657164 +0.00062387 True
+l1_mse_alpha25 +0.01469530 +0.00269264 True
+l1_4k +0.01054794 +0.00143335 True
+original_982k +0.00000000 +0.00000000 False
+
+========== 7. 所有版本同一权重的×8指标 ==========
+
+版本： original_982k
+集合 PSNR SSIM ΔPSNR_vs982K
+DIV2K_valid 36.35641934 0.94692113 +0.00000000
+Set5 38.22088047 0.96123025 +0.00000000
+Set14 33.85465001 0.92005125 +0.00000000
+B100 32.30723468 0.90120446 +0.00000000
+Urban100 32.70869712 0.93262893 +0.00000000
+Manga109 39.35610985 0.97868436 +0.00000000
+
+版本： l1_4k
+集合 PSNR SSIM ΔPSNR_vs982K
+DIV2K_valid 36.36127697 0.94700351 +0.00485763
+Set5 38.22785884 0.96124320 +0.00697837
+Set14 33.86689026 0.92010573 +0.01224026
+B100 32.30866803 0.90126206 +0.00143335
+Urban100 32.72617451 0.93286402 +0.01747739
+Manga109 39.37072016 0.97872839 +0.01461031
+
+版本： mse_7k
+集合 PSNR SSIM ΔPSNR_vs982K
+DIV2K_valid 36.36625901 0.94700453 +0.00983966
+Set5 38.23350595 0.96129107 +0.01262548
+Set14 33.88552008 0.92019159 +0.03087008
+B100 32.30872927 0.90132210 +0.00149459
+Urban100 32.74305672 0.93285065 +0.03435961
+Manga109 39.36667079 0.97872914 +0.01056094
+
+版本： mse_mean_6to10k
+集合 PSNR SSIM ΔPSNR_vs982K
+DIV2K_valid 36.36615035 0.94701192 +0.00973101
+Set5 38.23393413 0.96130010 +0.01305366
+Set14 33.88431589 0.92020717 +0.02966589
+B100 32.30785854 0.90132689 +0.00062387
+Urban100 32.73758716 0.93280523 +0.02889004
+Manga109 39.36673461 0.97872600 +0.01062476
+
+版本： l1_mse_alpha25
+集合 PSNR SSIM ΔPSNR_vs982K
+DIV2K_valid 36.36451753 0.94701094 +0.00809819
+Set5 38.22981866 0.96125443 +0.00893819
+Set14 33.87365425 0.92013706 +0.01900425
+B100 32.30992732 0.90127985 +0.00269264
+Urban100 32.73403397 0.93287806 +0.02533685
+Manga109 39.37361444 0.97873623 +0.01750459
+
+版本： l1_mse_alpha50
+集合 PSNR SSIM ΔPSNR_vs982K
+DIV2K_valid 36.36627978 0.94701372 +0.00986044
+Set5 38.23172164 0.96126921 +0.01084117
+Set14 33.87920265 0.92016282 +0.02455264
+B100 32.31032821 0.90129669 +0.00309353
+Urban100 32.73929075 0.93288030 +0.03059363
+Manga109 39.37358230 0.97873845 +0.01747245
+
+版本： l1_mse_alpha75
+集合 PSNR SSIM ΔPSNR_vs982K
+DIV2K_valid 36.36679790 0.94701261 +0.01037856
+Set5 38.23275801 0.96128282 +0.01187754
+Set14 33.88309784 0.92018394 +0.02844784
+B100 32.30992411 0.90131510 +0.00268943
+Urban100 32.74222043 0.93287264 +0.03352331
+Manga109 39.37132781 0.97873652 +0.01521796
+
+========== 8. 融合版本相对MSE-7K的变化 ==========
+版本 集合 ΔPSNR_vsMSE7K ΔSSIM_vsMSE7K
+mse_mean_6to10k Set5 +0.00042818 +0.00000903
+mse_mean_6to10k Set14 -0.00120419 +0.00001557
+mse_mean_6to10k B100 -0.00087072 +0.00000479
+mse_mean_6to10k Urban100 -0.00546956 -0.00004542
+mse_mean_6to10k Manga109 +0.00006382 -0.00000314
+mse_mean_6to10k 五集合平均Δ -0.00141049 是否五集合均超过MSE-7K False
+l1_mse_alpha25 Set5 -0.00368730 -0.00003664
+l1_mse_alpha25 Set14 -0.01186583 -0.00005453
+l1_mse_alpha25 B100 +0.00119806 -0.00004225
+l1_mse_alpha25 Urban100 -0.00902276 +0.00002740
+l1_mse_alpha25 Manga109 +0.00694365 +0.00000709
+l1_mse_alpha25 五集合平均Δ -0.00328684 是否五集合均超过MSE-7K False
+l1_mse_alpha50 Set5 -0.00178431 -0.00002186
+l1_mse_alpha50 Set14 -0.00631744 -0.00002878
+l1_mse_alpha50 B100 +0.00159894 -0.00002541
+l1_mse_alpha50 Urban100 -0.00376598 +0.00002965
+l1_mse_alpha50 Manga109 +0.00691151 +0.00000931
+l1_mse_alpha50 五集合平均Δ -0.00067146 是否五集合均超过MSE-7K False
+l1_mse_alpha75 Set5 -0.00074794 -0.00000825
+l1_mse_alpha75 Set14 -0.00242224 -0.00000765
+l1_mse_alpha75 B100 +0.00119484 -0.00000700
+l1_mse_alpha75 Urban100 -0.00083629 +0.00002199
+l1_mse_alpha75 Manga109 +0.00465702 +0.00000737
+l1_mse_alpha75 五集合平均Δ +0.00036908 是否五集合均超过MSE-7K False
+
+========== 9. 普通推理指标 ==========
+
+版本： original_982k
+集合 PSNR SSIM
+DIV2K_valid 36.28138006 0.94650567
+Set5 38.16922640 0.96102658
+Set14 33.82516026 0.91973635
+B100 32.27736801 0.90091938
+Urban100 32.55622609 0.93172282
+Manga109 39.20567049 0.97838410
+
+版本： l1_4k
+集合 PSNR SSIM
+DIV2K_valid 36.28618234 0.94659655
+Set5 38.18137551 0.96105608
+Set14 33.83357661 0.91974731
+B100 32.27823150 0.90096522
+Urban100 32.56897902 0.93189130
+Manga109 39.22288680 0.97844057
+
+版本： mse_7k
+集合 PSNR SSIM
+DIV2K_valid 36.29051724 0.94659291
+Set5 38.18830633 0.96110793
+Set14 33.84512651 0.91978337
+B100 32.27947452 0.90102047
+Urban100 32.58482234 0.93178287
+Manga109 39.21090991 0.97842949
+
+版本： mse_mean_6to10k
+集合 PSNR SSIM
+DIV2K_valid 36.29287632 0.94661082
+Set5 38.18772119 0.96111398
+Set14 33.84442179 0.91978604
+B100 32.27929677 0.90103818
+Urban100 32.58699096 0.93181659
+Manga109 39.21569226 0.97843247
+
+版本： l1_mse_alpha25
+集合 PSNR SSIM
+DIV2K_valid 36.28997365 0.94660791
+Set5 38.18398381 0.96107897
+Set14 33.83931874 0.91977380
+B100 32.28029450 0.90098613
+Urban100 32.57772534 0.93189963
+Manga109 39.22532358 0.97844870
+
+版本： l1_mse_alpha50
+集合 PSNR SSIM
+DIV2K_valid 36.29181854 0.94661078
+Set5 38.18661465 0.96109688
+Set14 33.84312469 0.91979022
+B100 32.28099023 0.90100386
+Urban100 32.58307081 0.93188152
+Manga109 39.22404472 0.97844936
+
+版本： l1_mse_alpha75
+集合 PSNR SSIM
+DIV2K_valid 36.29195354 0.94660717
+Set5 38.18884716 0.96110588
+Set14 33.84490974 0.91979634
+B100 32.28074642 0.90101901
+Urban100 32.58541264 0.93184378
+Manga109 39.21927089 0.97844363
+
+========== 10. 推理权重与逐图文件 ==========
+original_982k 权重存在： True 逐图JSON数量： 12 权重路径： /home/featurize/work/span-x4-research/code/span-f0-x2-weight-fusion-01/logs/f0_x2_weight_fusion/FUSION-EVAL-01/original_982k/deployed.pt
+l1_4k 权重存在： True 逐图JSON数量： 12 权重路径： /home/featurize/work/span-x4-research/code/span-f0-x2-weight-fusion-01/logs/f0_x2_weight_fusion/FUSION-EVAL-01/l1_4k/deployed.pt
+mse_7k 权重存在： True 逐图JSON数量： 12 权重路径： /home/featurize/work/span-x4-research/code/span-f0-x2-weight-fusion-01/logs/f0_x2_weight_fusion/FUSION-EVAL-01/mse_7k/deployed.pt
+mse_mean_6to10k 权重存在： True 逐图JSON数量： 12 权重路径： /home/featurize/work/span-x4-research/code/span-f0-x2-weight-fusion-01/logs/f0_x2_weight_fusion/FUSION-EVAL-01/mse_mean_6to10k/deployed.pt
+l1_mse_alpha25 权重存在： True 逐图JSON数量： 12 权重路径： /home/featurize/work/span-x4-research/code/span-f0-x2-weight-fusion-01/logs/f0_x2_weight_fusion/FUSION-EVAL-01/l1_mse_alpha25/deployed.pt
+l1_mse_alpha50 权重存在： True 逐图JSON数量： 12 权重路径： /home/featurize/work/span-x4-research/code/span-f0-x2-weight-fusion-01/logs/f0_x2_weight_fusion/FUSION-EVAL-01/l1_mse_alpha50/deployed.pt
+l1_mse_alpha75 权重存在： True 逐图JSON数量： 12 权重路径： /home/featurize/work/span-x4-research/code/span-f0-x2-weight-fusion-01/logs/f0_x2_weight_fusion/FUSION-EVAL-01/l1_mse_alpha75/deployed.pt
+
+========== 结果适用范围 ==========
+No training. Exploratory selection using five test sets; no unseen-test or seed stability claim.
+只读CPU汇总结束，未修改文件、未使用GPU、未触发关机。
+(base) ➜ ~ 
