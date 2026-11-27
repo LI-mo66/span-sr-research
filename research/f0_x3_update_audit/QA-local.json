@@ -1,0 +1,15 @@
+{
+  "date": "2026-11-27",
+  "torch": "2.9.1+cu128",
+  "devices": ["CPU", "RTX4060 Laptop GPU CUDA"],
+  "checks": [
+    "Traced sampler exactly preserves x3 pixel crop, enhancement draws and RNG",
+    "Actual F0 x3 graph: two reference versus instrumented updates have identical model, Adam, scheduler and all RNG states",
+    "Post-clip actual global gradient norm measured and <=0.100005",
+    "Forward hooks capture raw gate product and fusion taps without changing updates",
+    "Fixed training-mode no_grad probes do not change state or RNG",
+    "Immutable pre-step snapshot, saved to disk then restored, exactly reproduces next update",
+    "Python compile and Bash syntax"
+  ],
+  "scope": "Synthetic local instrumentation checks only. Real295K checkpoint,3450 training pair hashes and historical loss replay are server-only mandatory gates. No stability fix or PSNR improvement is claimed."
+}
