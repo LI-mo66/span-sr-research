@@ -22,6 +22,14 @@ busy=$(nvidia-smi --query-compute-apps=pid --format=csv,noheader)
 [[ -z "$busy" ]] || { echo "GPU_BUSY: $busy"; exit 75; }
 stage=STARTING
 trap 'code=$?; printf "STOPPED stage=%s exit=%s; no shutdown\n" "$stage" "$code" > "$PAPER_OUT/status.txt"' ERR
+if [[ ${PAPER_FIX_W_ENTRY:-0} == 1 ]]; then
+    stage=repair-W-entry-01
+    mkdir -p "$PAPER_OUT/$stage"
+    printf '%s\n' "$stage" > "$PAPER_OUT/status.txt"
+    echo "START $stage"
+    "$PYTHON_BIN" -u repair.py audit >> "$PAPER_OUT/$stage.log" 2>&1
+    echo "PASS $stage"
+fi
 step() {
     stage=$1
     local marker=$2
