@@ -124,6 +124,7 @@ def main():
     history=[references[u] for u in range(294377,295377)]
     hooks=a.FeatureTrace(model)
     a.restore(after_saved['rng'])
+    warning_before,warning_after=before_saved,after_saved
     previous_before=before_saved
     previous_batches=[tuple(t.cpu() for t in b) for b in frozen['batches']]
     previous_samples=frozen['samples']
@@ -199,7 +200,8 @@ def main():
                     sweeps={}
                     # Test both the current and preceding transition on the captured challenging batch.
                     for label,left,right in (('current_update',before['model'],after['model']),
-                                            ('previous_update',previous_before['model'],before['model'])):
+                                            ('previous_update',previous_before['model'],before['model']),
+                                            ('initial_gradient_warning',warning_before['model'],warning_after['model'])):
                         sweeps[label]=rollback_sweep(model,left,right,batches,groups,'cuda')
                     model.load_state_dict(after['model'],strict=True)
                     a.write_json(out/'rollback.json',sweeps)
