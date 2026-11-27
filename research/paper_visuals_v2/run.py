@@ -80,7 +80,7 @@ def preflight():
         if sha(dest)!=sha(source):raise ValueError('Persistent weight-copy hash mismatch')
     sources={}
     for path in Path(__file__).resolve().parent.iterdir():
-        if path.suffix in ['.py','.sh','.txt'] and path.is_file() and path.name not in ['probe_official.py']:
+        if path.suffix in ['.py','.sh','.txt','.json'] and path.is_file() and path.name not in ['probe_official.py']:
             dest=OUT/'suite-code'/path.name;dest.parent.mkdir(exist_ok=True)
             if not dest.exists():shutil.copy2(path,dest)
             if sha(dest)!=sha(path):raise ValueError('Suite code changed since first execution')
@@ -91,7 +91,9 @@ def preflight():
     for package in ['numpy','Pillow','opencv-python','opencv-python-headless','matplotlib','timm','einops','scipy']:
         try:packages[package]=importlib.metadata.version(package)
         except importlib.metadata.PackageNotFoundError:packages[package]=None
-    write_json(OUT/'preflight.json',dict(status='PASS',old_PNGs_verified=verified,ablation=refs,ablation_common_protocol=common_cfg,
+    suite_repo=Path(__file__).resolve().parents[2]
+    suite_commit=subprocess.check_output(['git','-C',str(suite_repo),'rev-parse','HEAD'],text=True).strip()
+    write_json(OUT/'preflight.json',dict(status='PASS',suite_commit=suite_commit,old_PNGs_verified=verified,ablation=refs,ablation_common_protocol=common_cfg,
         final=dict(checkpoint=str(final),sha256=FINAL_SHA,bound=str(bound),bound_sha256=BOUND_SHA,config=cfg),suite_sources=sources,
         environment=dict(python=sys.version,torch=torch.__version__,device=torch.cuda.get_device_name(),cuda=torch.version.cuda,packages=packages),
         candidate_selection='DDistill-SR and IMDN: official weights with exact git-blob verification; all methods single pass',
