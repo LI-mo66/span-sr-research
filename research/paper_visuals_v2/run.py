@@ -55,11 +55,12 @@ def preflight():
         weight=run/'epoch00048_u48000.pt'
         refs[name]=dict(run=str(run),checkpoint=str(weight),sha256=sha(weight),commit=commit,selected_update=48000)
         source=OUT/'source50'/name
-        if not source.exists():
+        source_marker=source/'SOURCE_COMMIT.txt'
+        if not source_marker.is_file():
             try:subprocess.run(['git','-C',str(PROJECT),'cat-file','-e',commit+'^{commit}'],check=True,stdout=subprocess.DEVNULL,stderr=subprocess.DEVNULL)
             except subprocess.CalledProcessError:
                 subprocess.run(['git','-C',str(PROJECT),'fetch','origin',commit],check=True)
-            source.mkdir(parents=True)
+            source.mkdir(parents=True,exist_ok=True)
             archive=OUT/f'source-{name}.tar'
             subprocess.run(['git','-C',str(PROJECT),'archive','--format=tar','--output',str(archive),commit],check=True)
             with tarfile.open(archive) as tar:
@@ -67,7 +68,13 @@ def preflight():
                     if not member.isfile():continue
                     target=source/member.name
                     if not target.resolve().is_relative_to(source.resolve()):raise ValueError('Unsafe source archive member')
-                    target.parent.mkdir(parents=True,exist_ok=True);target.write_bytes(tar.extractfile(member).read())
+                    target.parent.mkdir(parents=True,exist_ok=True)
+                    raw=tar.extractfile(member).read()
+                    if target.exists() and target.read_bytes()!=raw:raise ValueError('Historical snapshot differs: '+str(target))
+                    if not target.exists():target.write_bytes(raw)
+            source_marker.write_text(commit+'\n',encoding='utf-8')
+        elif source_marker.read_text(encoding='utf-8').strip()!=commit:
+            raise ValueError('Wrong historical source completion marker')
         print('PREFLIGHT_50K_PASS',name,flush=True)
     cfg=read_json(PROJECT/'logs/f0-finetune-five-01/FT2/config.json')
     final=BASE/'records/F0-X4-FT2-20K-FINAL-ARCHIVE-01/assets/F0-x4-FT2-20K-full.pt'
