@@ -10,7 +10,7 @@ import torch
 import audit as a
 from cap_screen import apply_cap
 from follow_on import equal
-from frontcap_train import checkpoint,committed_rows
+from frontcap_train import checkpoint,committed_rows,expected_lr
 
 
 def main(device):
@@ -18,6 +18,9 @@ def main(device):
     torch.backends.cudnn.benchmark=False;torch.backends.cudnn.deterministic=True
     torch.backends.cudnn.allow_tf32=True;torch.backends.cuda.matmul.allow_tf32=False
     torch.use_deterministic_algorithms(True);torch.manual_seed(10)
+    assert expected_lr(295000)==expected_lr(399999)==1e-4
+    assert expected_lr(400000)==expected_lr(599999)==5e-5
+    assert expected_lr(600000)==2.5e-5 and expected_lr(800000)==expected_lr(1000000)==1.25e-5
     cfg=json.loads((a.ROOT/'research/multiscale_f0/template.json').read_text())
     cfg['arm']='F0';cfg['model']['upscale']=3
     arch,_=a.fusion.components()

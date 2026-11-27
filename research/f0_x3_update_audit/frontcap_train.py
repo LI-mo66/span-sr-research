@@ -17,6 +17,10 @@ import audit as a
 from cap_screen import apply_cap
 
 
+def expected_lr(completed_update):
+    return 2e-4 * .5**sum(completed_update>=m for m in (200000,400000,600000,800000))
+
+
 def checkpoint(model,optimizer,scheduler,update,fingerprint,record):
     state=a.snapshot(model,optimizer,scheduler,update,a.rng())
     state.update(format='F0-X3-frontcap-candidate-v1',fingerprint=fingerprint,
@@ -48,9 +52,10 @@ def main():
     p.add_argument('--source-project',type=Path,required=True)
     p.add_argument('--output',type=Path,required=True)
     p.add_argument('--cache',type=Path,required=True)
-    p.add_argument('--until-update',type=int,choices=(296000,300000),required=True)
+    p.add_argument('--until-update',type=int,required=True)
     p.add_argument('--resume',action='store_true')
     args=p.parse_args()
+    assert 295000<args.until_update<=1000000 and args.until_update%1000==0
     out=args.output.resolve();source=args.source_project.resolve()
     assert out.is_relative_to(Path('/home/featurize/work').resolve())
     assert torch.__version__=='2.2.2+cu121' and torch.cuda.is_available()
@@ -117,11 +122,12 @@ def main():
         state=torch.load(original,map_location='cpu',weights_only=False)
         assert state['update']==295000 and state['fingerprint']==metadata['fingerprint']
     start=update=state['update']
-    assert 295000<=update<args.until_update<=300000
+    assert 295000<=update<args.until_update<=1000000
     assert state['scheduler']['last_epoch']==update and state['scheduler']['base_lrs']==[2e-4]
-    assert state['scheduler']['_last_lr']==[1e-4]
+    assert state['scheduler']['_last_lr']==[expected_lr(update)]
     assert dict(state['scheduler']['milestones'])=={200000:1,400000:1,600000:1,800000:1}
-    assert [g['lr'] for g in state['optimizer']['param_groups']]==[1e-4]
+    assert state['scheduler']['gamma']==.5
+    assert [g['lr'] for g in state['optimizer']['param_groups']]==[expected_lr(update)]
     arch,metrics=a.fusion.components()
     model=a.fusion.build_model(arch,cfg).cuda().train()
     model.load_state_dict(state['model'],strict=True)
@@ -183,7 +189,7 @@ def main():
                 loss=value['mean_l1']
                 assert loss<=max(.1,4*statistics.median(history)),('whole-step loss warning',loss)
                 assert not (probe_after>2*probe_before and probe_after-probe_before>.001),('probe jump',probe_before,probe_after)
-                assert [g['lr'] for g in optimizer.param_groups]==[1e-4]
+                assert [g['lr'] for g in optimizer.param_groups]==[expected_lr(update+1)]
                 assert all(torch.isfinite(p).all() for p in model.parameters())
             except Exception as error:
                 a.trainer.atomic_save(before,out/'failure-before.pt')
