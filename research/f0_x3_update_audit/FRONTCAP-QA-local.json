@@ -1,0 +1,13 @@
+{
+  "date": "2026-11-27",
+  "torch": "2.9.1+cu128",
+  "devices": ["CPU", "RTX4060 Laptop GPU CUDA"],
+  "checks": [
+    "Actual F0 x3 active rho0.0005 projection: saved2+2 continuation matches direct4 exactly for model, Adam, scheduler and RNG",
+    "Candidate checkpoint serialization and strict reload",
+    "Resume recorder retains committed updates, backs up uncommitted and partial tail, rejects committed gaps",
+    "Underlying cap arithmetic, frozen caches, untargeted parameters and inactive-cap exactness checked separately",
+    "Python compile and Bash syntax"
+  ],
+  "scope": "Synthetic local engineering checks. Server295K checkpoint/data SHA and six-set ordinary/x8 metric reproduction are mandatory before1K continuation. No PSNR gain or future stability claim."
+}
