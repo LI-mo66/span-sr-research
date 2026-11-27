@@ -75,6 +75,7 @@ def preflight():
             source_marker.write_text(commit+'\n',encoding='utf-8')
         elif source_marker.read_text(encoding='utf-8').strip()!=commit:
             raise ValueError('Wrong historical source completion marker')
+        if name in ABLATION_ENTRIES:check_ablation_entry(name,source)
         print('PREFLIGHT_50K_PASS',name,flush=True)
     cfg=read_json(PROJECT/'logs/f0-finetune-five-01/FT2/config.json')
     final=BASE/'records/F0-X4-FT2-20K-FINAL-ARCHIVE-01/assets/F0-x4-FT2-20K-full.pt'
@@ -142,6 +143,7 @@ def merge():
     manifest=dict(status='COMPUTED_PENDING_LOCAL_VISUAL_REVIEW_AND_DOWNLOAD_VERIFICATION',suite_directory=str(OUT),
         sources=read_json(OUT/'preflight.json'),models=[read_json(OUT/x) for x in ['ddistill-results.json','imdn-results.json']],
         figures=figures,metrics_file=str(path),metric_rows=len(rows),
+        repair_provenance=[read_json(p) for p in sorted(OUT.glob('repair-*/repair-provenance.json'))],
         new_fig3='All eight displayed blocks use single pass; no x8 or tiling',
         fig4='Historical independently trained same-protocol 50K models selected at48K; no late Bound8',
         LAM=[read_json(OUT/f'lam-{n}.json') for n in ['SPAN52','SwinIR-light','Ours']],features=read_json(OUT/'features.json'),
