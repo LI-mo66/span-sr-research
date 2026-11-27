@@ -10,6 +10,7 @@ import cv2
 import numpy as np
 import torch
 import audit
+import follow_on
 
 
 def equal(a,b):
@@ -66,6 +67,7 @@ def main(device):
         assert actual['gradient_norm_before_clip']==norm
         assert actual['gradient_norm_after_clip']<=.100005
         audit.probe(model,batches[0])
+        follow_on.batch_score(model,batches,device)
         equal(reference.state_dict(),model.state_dict())
         equal(opt1.state_dict(),opt2.state_dict());equal(sc1.state_dict(),sc2.state_dict())
         equal(expected_rng,audit.rng())
@@ -81,7 +83,19 @@ def main(device):
     sc2.load_state_dict(saved['scheduler']);audit.restore(saved['rng'])
     audit.step(model,opt2,sc2,batches)
     equal(expected,(model.state_dict(),opt2.state_dict(),sc2.state_dict()))
+    toy=torch.nn.Sequential(torch.nn.Conv2d(3,4,1),torch.nn.SiLU(),torch.nn.Conv2d(4,3,1)).to(device).train()
+    x=torch.rand(2,3,5,7,device=device)
+    with torch.no_grad(): y=toy(x).clone()
+    left=copy.deepcopy(toy.state_dict())
+    with torch.no_grad(): toy[2].bias.add_(.2)
+    right=copy.deepcopy(toy.state_dict())
+    output=follow_on.rollback_sweep(toy,left,right,[(x,y)],['0','2'],device)
+    assert output['before_l1']==0 and output['after_l1']>.19
+    assert output['rows'][1]['l1']==0
+    equal(toy.state_dict(),right)
+    assert not torch.equal(left['2.bias'],right['2.bias'])
     print('PASS traced sampler, exact native F0 two-step model/Adam/scheduler/RNG equivalence, real postclip norm, immutable snapshot',device,flush=True)
+    print('PASS same-batch probes preserve updates; frozen rollback recovers toy effect and leaves source states unchanged',flush=True)
 
 
 if __name__=='__main__':

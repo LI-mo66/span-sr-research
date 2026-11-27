@@ -9,6 +9,8 @@
     "Forward hooks capture raw gate product and fusion taps without changing updates",
     "Fixed training-mode no_grad probes do not change state or RNG",
     "Immutable pre-step snapshot, saved to disk then restored, exactly reproduces next update",
+    "Follow-on same-training-batch extra forwards preserve exact native updates and RNG on CPU/CUDA",
+    "Frozen per-group rollback restores the known toy effect and leaves source snapshots unchanged on CPU/CUDA",
     "Python compile and Bash syntax"
   ],
   "scope": "Synthetic local instrumentation checks only. Real295K checkpoint,3450 training pair hashes and historical loss replay are server-only mandatory gates. No stability fix or PSNR improvement is claimed."
