@@ -1,0 +1,15 @@
+W历史入口修复与原队列续跑
+
+原因：78cc1dda90a5bafcefa6c62225197f6eb95c92e2中的W构建函数在research/sg6_mid_window/model.py。
+初始工具错误地使用candidate.py；故W模型尚未载入就停止，没有执行后续图4至6及最终打包。
+
+修复范围：使用明确的W/U/F0入口映射，并核对三个历史源文件的Git blob。模型结构、历史权重、Bound8和评测实现均未改变。
+本地用三个精确历史提交完成了入口导入、模型构建、部署参数核对及真实影像矩形/奇数尺寸前向。三者均通过。
+服务器续跑前还会分别严格加载W/U/F0及SPAN52/SwinIR-light/Ours的真实权重，执行小尺寸CPU前向；历史完整图像指标仍由主队列核对。
+
+已完成的preflight、DDistill、IMDN、图3、B0和SG6阶段保留，不重复执行推理。
+旧preflight和suite-code快照不覆盖；修复源码和校验记录保存在repair-W-entry-01/，最终manifest附带修复来源。
+
+先生成fig3-v2-completed.zip和SHA256，供立即下载。该包只包含已经完成的图3及相关记录，不等于全任务完成。
+随后通过nohup续跑未完成阶段。所有图和最终备份均完成后，才生成paper-visuals-v2-review.zip及完整归档。
+不会自动关机；仍需完成下载、本地校验和实际图像审核。
