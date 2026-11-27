@@ -31,6 +31,9 @@ step() {
         echo "SKIP_COMPLETED $stage"
     else
         echo "START $stage"
+        if [[ -e "$PAPER_OUT/$stage.log" ]]; then
+            mv -n "$PAPER_OUT/$stage.log" "$PAPER_OUT/$stage.failed-$(date -u +%Y%m%dT%H%M%SZ)-$$.log"
+        fi
         "$PYTHON_BIN" -u "$@" > "$PAPER_OUT/$stage.log" 2>&1
         test -s "$PAPER_OUT/$marker"
         echo "PASS $stage"
