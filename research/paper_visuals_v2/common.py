@@ -35,6 +35,13 @@ RUNS = {
            'FEAT-SG6-W-UCAN-P24-LKSA5-FUSION-V1-50K-01-1793142163941762977/runs/FEAT-SG6-W-UCAN-P24-LKSA5-FUSION-V1-50K-01'),
 }
 
+# Actual files in the archived commits, checked against the GitHub trees.
+ABLATION_ENTRIES = {
+    'W': ('research/sg6_mid_window/model.py','b5aa9d8d24aa2dd4143ff70040bd70587c64d063'),
+    'U': ('research/ucan_p24_lksa5/candidate.py','7aa5cf8c6e3f4f86d4bfc458c3aba9130835a6de'),
+    'F0': ('research/fusion_wu/fusion.py','ab57d5a5e3a87bb7419a52497e29aa2733a6de0b'),
+}
+
 
 def sha(path):
     h=hashlib.sha256()
@@ -163,24 +170,44 @@ def final_model(device):
     return model.to(device).eval(),dict(path=str(checkpoint),sha256=sha(checkpoint),weight_key='model',bound8=str(boundpath),bound_sha256=sha(boundpath))
 
 
-def ablation_model(name,device):
-    _,run_relative=RUNS[name];run=BASE/'records'/run_relative
-    manifest=read_json(run/'manifest.json');cfg=manifest['config']
-    src=OUT/'source50'/name
+def check_ablation_entry(name,src):
+    relative,expected=ABLATION_ENTRIES[name]
+    path=Path(src)/relative
+    raw=path.read_bytes()
+    observed=hashlib.sha1(b'blob '+str(len(raw)).encode()+b'\0'+raw).hexdigest()
+    if observed!=expected:raise ValueError('Archived factory blob mismatch: '+str(path))
+    return path,observed
+
+
+def build_ablation(name,src,cfg):
+    """Use an isolated process per model, with its exact historical factory."""
+    src=Path(src)
     arch,_=runtime(src)
     for folder in ['linear_gate','gated_bypass','spatial_gate6']:
         sys.path.insert(0,str(src/'research'/folder))
     if name=='B0': model=arch.SPAN(**cfg['model'])
     elif name=='SG6': model=load('paper_sg6',src/'research/spatial_gate6/sg_model.py').build_model(arch,cfg)
     else:
-        sub={'W':'sg6_mid_window','U':'ucan_p24_lksa5','F0':'fusion_wu'}[name]
-        sys.path.insert(0,str(src/'research'/sub))
-        module=load('paper_candidate',src/'research'/sub/('fusion.py' if name=='F0' else 'candidate.py'))
+        entry,_=check_ablation_entry(name,src)
+        sys.path.insert(0,str(entry.parent))
+        module=load('paper_candidate',entry)
         model=module.build_model(arch,cfg)
+    return model
+
+
+def ablation_model(name,device):
+    _,run_relative=RUNS[name];run=BASE/'records'/run_relative
+    manifest=read_json(run/'manifest.json');cfg=manifest['config']
+    src=OUT/'source50'/name
+    model=build_ablation(name,src,cfg)
     checkpoint=run/'epoch00048_u48000.pt';state=torch.load(checkpoint,map_location='cpu',weights_only=False)
     if state['update']!=48000: raise ValueError('Wrong ablation update')
     model.load_state_dict(state['model'],strict=True)
-    return model.to(device).eval(),run,dict(path=str(checkpoint),sha256=sha(checkpoint),weight_key='model',source_commit=RUNS[name][0],bound8=False)
+    provenance=dict(path=str(checkpoint),sha256=sha(checkpoint),weight_key='model',source_commit=RUNS[name][0],bound8=False)
+    if name in ABLATION_ENTRIES:
+        entry,blob=check_ablation_entry(name,src)
+        provenance.update(factory_path=str(entry),factory_git_blob=blob)
+    return model.to(device).eval(),run,provenance
 
 
 def public_model(name,device):
