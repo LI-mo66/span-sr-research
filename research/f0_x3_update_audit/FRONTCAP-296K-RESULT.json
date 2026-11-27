@@ -1,0 +1,92 @@
+{
+  "date": "2026-11-27",
+  "source": "User-pasted CPU audit summary, eight decimal place metric output, not direct copy of original comparison JSON",
+  "update": 296000,
+  "start": 295000,
+  "lr": 0.0001,
+  "rho": 0.0005,
+  "anomaly_marker_found": false,
+  "steps_contiguous": true,
+  "steps": 1000,
+  "max_train_l1": 0.02720683440566063,
+  "max_preclip_gradient": 2.0795769691467285,
+  "cap_counts": {
+    "conv_1": 9,
+    "block_1": 59
+  },
+  "metrics": {
+    "DIV2K_valid": {
+      "psnr": 32.44553942,
+      "ssim": 0.88852092,
+      "delta_psnr_vs295k": -0.01974818,
+      "delta_ssim_vs295k": -7.448e-05
+    },
+    "DIV2K_valid_x8": {
+      "psnr": 32.52525998,
+      "ssim": 0.88941243,
+      "delta_psnr_vs295k": -0.00109083,
+      "delta_ssim_vs295k": 0.00010423
+    },
+    "Set5": {
+      "psnr": 34.47270781,
+      "ssim": 0.92785728,
+      "delta_psnr_vs295k": -0.01813887,
+      "delta_ssim_vs295k": -0.00015312
+    },
+    "Set5_x8": {
+      "psnr": 34.57156104,
+      "ssim": 0.92860397,
+      "delta_psnr_vs295k": -0.00886144,
+      "delta_ssim_vs295k": 1.25e-06
+    },
+    "Set14": {
+      "psnr": 30.4185691,
+      "ssim": 0.84386415,
+      "delta_psnr_vs295k": -0.01100541,
+      "delta_ssim_vs295k": 0.00014716
+    },
+    "Set14_x8": {
+      "psnr": 30.4884553,
+      "ssim": 0.84466801,
+      "delta_psnr_vs295k": 0.00420459,
+      "delta_ssim_vs295k": 0.00015321
+    },
+    "B100": {
+      "psnr": 29.15042887,
+      "ssim": 0.80686465,
+      "delta_psnr_vs295k": -0.01072544,
+      "delta_ssim_vs295k": 9.664e-05
+    },
+    "B100_x8": {
+      "psnr": 29.19770602,
+      "ssim": 0.80764719,
+      "delta_psnr_vs295k": -0.00106439,
+      "delta_ssim_vs295k": 0.0001567
+    },
+    "Urban100": {
+      "psnr": 28.28291911,
+      "ssim": 0.85476724,
+      "delta_psnr_vs295k": -0.02391171,
+      "delta_ssim_vs295k": -0.00067808
+    },
+    "Urban100_x8": {
+      "psnr": 28.42719604,
+      "ssim": 0.85673852,
+      "delta_psnr_vs295k": 0.00604118,
+      "delta_ssim_vs295k": -0.00048839
+    },
+    "Manga109": {
+      "psnr": 33.79916144,
+      "ssim": 0.9461053,
+      "delta_psnr_vs295k": -0.12266085,
+      "delta_ssim_vs295k": -0.00048145
+    },
+    "Manga109_x8": {
+      "psnr": 34.07454233,
+      "ssim": 0.94749087,
+      "delta_psnr_vs295k": -0.0874744,
+      "delta_ssim_vs295k": -0.00027523
+    }
+  },
+  "decision": "Numerical first screen passed; quality still requires review, especially Manga109"
+}
