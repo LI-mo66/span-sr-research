@@ -1,0 +1,68 @@
+{
+  "device": "cuda",
+  "torch": "2.9.1+cu128",
+  "models": {
+    "DDistill-SR": {
+      "strict_load": true,
+      "params": 675780,
+      "odd_rectangle_shapes": "PASS"
+    },
+    "IMDN": {
+      "strict_load": true,
+      "params": 715176,
+      "odd_rectangle_shapes": "PASS"
+    },
+    "F0 FT2 RAW Bound8": {
+      "strict_load": true,
+      "odd_rectangle_shape": [
+        1,
+        3,
+        124,
+        148
+      ],
+      "finite_input_gradient": true,
+      "gradient_absmax": 32991.31640625
+    }
+  },
+  "DDistill_random_stress_note": "Published weight produced nonfinite values on iid uniform random input on CPU/CUDA; zeros, constant, actual img004 crop and whole image were finite. No weights or architecture changed; server checks every actual test image and stops on nonfinite output.",
+  "LAM": {
+    "official_sources": [
+      {
+        "bytes": 6091,
+        "sha256": "66369d3a777ae392b9e78748b3aa72c57d86ddc9dd7e7d6172ddb67fb6ab249d",
+        "url": "https://raw.githubusercontent.com/X-Lowlevel-Vision/LAM_Demo/6e75cc026ee8570f3966a6f017e9152556400876/SaliencyModel/BackProp.py",
+        "git_blob": "1401bc836cf88b2eb255565e9c00e66b6ada4ce2"
+      },
+      {
+        "bytes": 7416,
+        "sha256": "207c41332a6411680dcded8c77682396856f39042b5d5430cc411fe59ea73e6c",
+        "url": "https://raw.githubusercontent.com/X-Lowlevel-Vision/LAM_Demo/6e75cc026ee8570f3966a6f017e9152556400876/SaliencyModel/utils.py",
+        "git_blob": "dc9d8f35c214eaa51b19b93bb921e47592b2c587"
+      },
+      {
+        "bytes": 1934,
+        "sha256": "9062bf77014bff6d6c804cafacf8dab726409c56f4d95388b8f2eb97bd80c7b8",
+        "url": "https://raw.githubusercontent.com/X-Lowlevel-Vision/LAM_Demo/6e75cc026ee8570f3966a6f017e9152556400876/SaliencyModel/attributes.py",
+        "git_blob": "abda92e9eeb6bc0a7684f5dee116aacd883e6c50"
+      }
+    ],
+    "target_value_and_gradient_equivalence": "PASS",
+    "flat_region_zero_subgradient_finite": "PASS",
+    "blur_path_shape": [
+      50,
+      3,
+      17,
+      19
+    ]
+  },
+  "date": "2026-11-27",
+  "scope": "Local actual-weight engineering and synthetic-layout checks only; server full datasets, historical48K pixel reproduction, actual LAM/feature tensors, output review and archive download remain pending",
+  "layout": {
+    "fig3_cm": [
+      16.6,
+      23.32222
+    ],
+    "all_four_figures_tested": true,
+    "actual_scientific_figures_generated": false
+  }
+}
