@@ -1,0 +1,14 @@
+{
+  "date": "2026-11-27",
+  "torch": "2.9.1+cu128",
+  "devices": ["CPU", "RTX4060 Laptop GPU CUDA"],
+  "checks": [
+    "Group actual parameter delta obeys rho times pre-step group norm within float32 rounding tolerance",
+    "Untargeted head parameters untouched",
+    "Inactive cap is bitwise inert after actual Adam proposals",
+    "Cap operation does not change Adam moments",
+    "Native F0 x3 group names match; frozen Conv3XC caches are not projected",
+    "Python compile and Bash syntax"
+  ],
+  "scope": "Synthetic engineering tests only. Server must reproduce both saved original model/Adam/scheduler transitions exactly before trying candidates. Fixed-batch improvement, PSNR effects and long stability are not locally verified."
+}
