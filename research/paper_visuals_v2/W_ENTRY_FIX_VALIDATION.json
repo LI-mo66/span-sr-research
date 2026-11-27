@@ -1,0 +1,74 @@
+{
+  "cause": "W original entry is model.py; initial loader incorrectly assumed candidate.py",
+  "models": [
+    {
+      "model": "W",
+      "entry": "research\\sg6_mid_window\\model.py",
+      "git_blob": "b5aa9d8d24aa2dd4143ff70040bd70587c64d063",
+      "deployed_params": 540580,
+      "output_shapes": [
+        [
+          1,
+          3,
+          128,
+          160
+        ],
+        [
+          1,
+          3,
+          124,
+          148
+        ]
+      ],
+      "finite": true,
+      "scope": "Exact historical source construction and real-input CPU forward; checkpoint strict-load/full historical metric reproduction pending server"
+    },
+    {
+      "model": "U",
+      "entry": "research\\ucan_p24_lksa5\\candidate.py",
+      "git_blob": "7aa5cf8c6e3f4f86d4bfc458c3aba9130835a6de",
+      "deployed_params": 565087,
+      "output_shapes": [
+        [
+          1,
+          3,
+          128,
+          160
+        ],
+        [
+          1,
+          3,
+          124,
+          148
+        ]
+      ],
+      "finite": true,
+      "scope": "Exact historical source construction and real-input CPU forward; checkpoint strict-load/full historical metric reproduction pending server"
+    },
+    {
+      "model": "F0",
+      "entry": "research\\fusion_wu\\fusion.py",
+      "git_blob": "ab57d5a5e3a87bb7419a52497e29aa2733a6de0b",
+      "deployed_params": 569895,
+      "output_shapes": [
+        [
+          1,
+          3,
+          128,
+          160
+        ],
+        [
+          1,
+          3,
+          124,
+          148
+        ]
+      ],
+      "finite": true,
+      "scope": "Exact historical source construction and real-input CPU forward; checkpoint strict-load/full historical metric reproduction pending server"
+    }
+  ],
+  "server_checkpoint_strict_loading": "performed by repair.py before continuation",
+  "completed_results": "preserved; new Figure3 stage-only ZIP",
+  "architecture_or_weights_changed": false
+}
