@@ -552,7 +552,7 @@ def public_model(name, device, deploy_fold=False):
             if p not in sys.path:
                 sys.path.insert(0, p)
         from my_model.ngswin_model.ngswin import NGswin
-        model = NGswin(target_mode='light_x4')
+        core = NGswin(target_mode='light_x4')
         path = ng_root / 'pretrain/NGswin_x4.pth'
         expected = '13766fa818c8dd557a582f25408169fc1986aa0bf7274a1c61a8ca7c1e427ec7'
         if sha(path) != expected:
@@ -560,9 +560,9 @@ def public_model(name, device, deploy_fold=False):
         raw = torch.load(path, map_location='cpu', weights_only=False)
         sd = raw['model'] if isinstance(raw, dict) and 'model' in raw else raw
         sd = {k[len('module.'):] if k.startswith('module.') else k: v for k, v in sd.items()}
-        own = model.state_dict()
-        buf_keys = {k for k, _ in model.named_buffers()}
-        param_keys = {k for k, _ in model.named_parameters()}
+        own = core.state_dict()
+        buf_keys = {k for k, _ in core.named_buffers()}
+        param_keys = {k for k, _ in core.named_parameters()}
         missing = set(own.keys()) - set(sd.keys())
         missing_params = missing & param_keys
         if missing_params:
@@ -571,12 +571,29 @@ def public_model(name, device, deploy_fold=False):
             if k not in buf_keys:
                 raise ValueError(f'NGswin unexpected missing key: {k}')
             sd[k] = own[k].clone()
-        model.load_state_dict(sd, strict=True)
+        core.load_state_dict(sd, strict=True)
+
+        class NGswinPadded(torch.nn.Module):
+            def __init__(self, net):
+                super().__init__()
+                self.net = net
+
+            def forward(self, x):
+                _, _, h, w = x.shape
+                padh = (32 - h % 32) if (h % 32) != 0 else 0
+                padw = (32 - w % 32) if (w % 32) != 0 else 0
+                if padh > 0:
+                    x = torch.cat([x, x.flip([2])], dim=2)[:, :, :h + padh, :]
+                if padw > 0:
+                    x = torch.cat([x, x.flip([3])], dim=3)[:, :, :, :w + padw]
+                return self.net(x)[:, :, :h * 4, :w * 4]
+
+        model = NGswinPadded(core)
         return model.to(device).eval(), dict(
             path=str(path),
             sha256=sha(path),
             reconstructed_deterministic_buffers=len(missing),
-            parameters=sum(p.numel() for p in model.parameters()),
+            parameters=sum(p.numel() for p in core.parameters()),
         )
 
     raise ValueError(f'Unknown public model: {name}')
