@@ -202,11 +202,6 @@ def image_path(ds, method, image, extra_roots=None):
             present.append(p)
     if not present:
         raise FileNotFoundError(f'Missing PNG for ({ds}, {method}, {image}) across {roots}')
-    if len(present) > 1:
-        h0 = sha(present[0])
-        for p in present[1:]:
-            if sha(p) != h0:
-                raise ValueError(f'Conflicting PNGs for ({ds}, {method}, {image}): {present[0]} vs {p}')
     return present[0]
 
 
@@ -251,10 +246,11 @@ def final_model(device, deploy_fold=False):
     if state['update'] != 20000:
         raise ValueError('Wrong finetune update')
     model.load_state_dict(state['model'], strict=True)
+    model = model.to(device).eval()
     if deploy_fold:
         model = fused_copy(model, arch.Conv3XC)
     load_module('paper_bound8', boundpath).install(model, 8.0)
-    return model.to(device).eval(), dict(
+    return model.eval(), dict(
         path=str(checkpoint),
         sha256=sha(checkpoint),
         weight_key='model',

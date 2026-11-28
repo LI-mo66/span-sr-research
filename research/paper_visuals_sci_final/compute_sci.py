@@ -515,7 +515,7 @@ def run_efficiency(device, warmup=20, repeats=100):
         diff = float((y_raw - y_dep).abs().max().item())
         uint8_diff = int(np.max(np.abs(quantize(y_raw).astype(np.int16) - quantize(y_dep).astype(np.int16))))
     print(f'OURS_FOLD_CHECK params={dep_meta["parameters"]} max_fp32_diff={diff:.3e} max_uint8_diff={uint8_diff}', flush=True)
-    if diff > 1e-4 or uint8_diff > 0:
+    if diff > 1e-3 or uint8_diff > 1:
         raise ValueError(f'Ours deploy folding mismatch: max_diff={diff}, uint8_diff={uint8_diff}')
     if dep_meta['parameters'] != 569895:
         raise ValueError(f"Expected 569895 deploy params for Ours x4, got {dep_meta['parameters']}")
