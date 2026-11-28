@@ -426,10 +426,17 @@ def run_features(device):
     )
 
 
+def _real_probe_tensor(lr_h, lr_w, device):
+    """Build a realistic [0, 1] RGB tensor from Urban100 img004 LR (avoids iid random-noise pathology in DDistill/SG6)."""
+    _, lr, _ = pair('Urban100', 'img004.png')
+    resized = cv2.resize(lr, (lr_w, lr_h), interpolation=cv2.INTER_CUBIC)
+    return tensor(resized, device)
+
+
 def _measure_one(method_label, scale, model, lr_h, lr_w, device, warmup=20, repeats=100, note=''):
     model = model.to(device).eval()
     params = sum(p.numel() for p in model.parameters())
-    x = torch.rand(1, 3, lr_h, lr_w, device=device, dtype=torch.float32)
+    x = _real_probe_tensor(lr_h, lr_w, device)
 
     # Exact FLOPs via PyTorch built-in FlopCounterMode (1 MAC = 2 FLOPs)
     with torch.inference_mode():
@@ -499,15 +506,17 @@ def run_efficiency(device, warmup=20, repeats=100):
     gpu_name = torch.cuda.get_device_name(device) if str(device).startswith('cuda') else 'CPU'
     rows = []
 
-    # Verify Ours deploy folding matches unfolded output in strict FP32 before benchmarking
+    # Verify Ours deploy folding matches unfolded output on real image input in strict FP32
     ours_raw, _ = final_model(device, deploy_fold=False)
     ours_dep, dep_meta = final_model(device, deploy_fold=True)
     with torch.inference_mode():
-        probe = torch.rand(1, 3, 32, 40, device=device)
-        diff = float((ours_raw(probe) - ours_dep(probe)).abs().max().item())
-    print(f'OURS_FOLD_CHECK params={dep_meta["parameters"]} max_fp32_diff={diff:.3e}', flush=True)
-    if diff > 1e-4:
-        raise ValueError(f'Ours deploy folding mismatch: max_diff={diff}')
+        probe = _real_probe_tensor(64, 96, device)
+        y_raw, y_dep = ours_raw(probe), ours_dep(probe)
+        diff = float((y_raw - y_dep).abs().max().item())
+        uint8_diff = int(np.max(np.abs(quantize(y_raw).astype(np.int16) - quantize(y_dep).astype(np.int16))))
+    print(f'OURS_FOLD_CHECK params={dep_meta["parameters"]} max_fp32_diff={diff:.3e} max_uint8_diff={uint8_diff}', flush=True)
+    if diff > 1e-4 or uint8_diff > 0:
+        raise ValueError(f'Ours deploy folding mismatch: max_diff={diff}, uint8_diff={uint8_diff}')
     if dep_meta['parameters'] != 569895:
         raise ValueError(f"Expected 569895 deploy params for Ours x4, got {dep_meta['parameters']}")
     del ours_raw
