@@ -438,14 +438,36 @@ def _measure_one(method_label, scale, model, lr_h, lr_w, device, warmup=20, repe
     params = sum(p.numel() for p in model.parameters())
     x = _real_probe_tensor(lr_h, lr_w, device)
 
-    # Exact FLOPs via PyTorch built-in FlopCounterMode (1 MAC = 2 FLOPs)
-    with torch.inference_mode():
-        fc = FlopCounterMode(display=False)
-        with fc:
-            y = model(x)
-        flops = int(fc.get_total_flops())
-        if y.shape != (1, 3, lr_h * scale, lr_w * scale):
-            raise ValueError(f'{method_label} unexpected 720p output shape: {y.shape}')
+    # Exact FLOPs via FlopCounterMode under torch.no_grad() (inference_mode disables TorchDispatchMode in PyTorch 2.2!)
+    hook_macs = [0]
+
+    def _conv_hook(m, inp, out):
+        hook_macs[0] += out.numel() * (m.in_channels // m.groups) * m.kernel_size[0] * m.kernel_size[1]
+
+    def _lin_hook(m, inp, out):
+        hook_macs[0] += (inp[0].numel() // m.in_features) * m.in_features * m.out_features
+
+    handles = []
+    for m in model.modules():
+        if isinstance(m, torch.nn.Conv2d):
+            handles.append(m.register_forward_hook(_conv_hook))
+        elif isinstance(m, torch.nn.Linear):
+            handles.append(m.register_forward_hook(_lin_hook))
+    try:
+        with torch.no_grad():
+            fc = FlopCounterMode(display=False)
+            with fc:
+                y = model(x)
+            flops = int(fc.get_total_flops())
+    finally:
+        for h in handles:
+            h.remove()
+    if flops == 0:
+        flops = int(2 * hook_macs[0])
+    if flops <= 0:
+        raise ValueError(f'{method_label} FLOPs counter returned 0')
+    if y.shape != (1, 3, lr_h * scale, lr_w * scale):
+        raise ValueError(f'{method_label} unexpected 720p output shape: {y.shape}')
 
     # Warmup & timed CUDA-synchronized runs
     times_ms = []

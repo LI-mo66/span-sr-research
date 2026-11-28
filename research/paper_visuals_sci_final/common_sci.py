@@ -264,18 +264,19 @@ def final_model(device, deploy_fold=False):
 def structural_ours_x2_deploy(device):
     """Build structural x2 deployed-folded F0 model for theoretical Params/FLOPs & runtime check."""
     cfg = copy.deepcopy(read_json(PROJECT / 'logs/f0-finetune-five-01/FT2/config.json'))
-    cfg['model']['upscale'] = 2
     fusion = load_module('paper_fusion_final', PROJECT / 'research/fusion_wu/fusion.py')
     arch, _ = runtime(PROJECT)
     model = fusion.build_model(arch, cfg)
-    # Match x2 PixelShuffle channels (3 * 2^2 = 12) for the image bypass residual branch
+    # Replace x4 PixelShuffle tail & image_residual with exact x2 (3 * 2^2 = 12 channels)
+    model.upsampler = arch.pixelshuffle_block(52, 3, upscale_factor=2, kernel_size=3)
     model.image_residual = torch.nn.Conv2d(3, 12, 3, padding=1, bias=True)
     torch.nn.init.zeros_(model.image_residual.weight)
     torch.nn.init.zeros_(model.image_residual.bias)
+    model = model.to(device).eval()
     model = fused_copy(model, arch.Conv3XC)
     boundpath = BASE / 'records/F0-FEATURE-BOUND8-1M-FINAL-01/candidate/feature_bound.py'
     load_module('paper_bound8', boundpath).install(model, 8.0)
-    return model.to(device).eval(), dict(
+    return model.eval(), dict(
         parameters=sum(p.numel() for p in model.parameters()),
         scope='structural_deploy_only_no_x2_checkpoint_on_server',
     )
