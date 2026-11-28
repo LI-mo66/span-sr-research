@@ -272,6 +272,10 @@ def structural_ours_x2_deploy(device):
     fusion = load_module('paper_fusion_final', PROJECT / 'research/fusion_wu/fusion.py')
     arch, _ = runtime(PROJECT)
     model = fusion.build_model(arch, cfg)
+    # Match x2 PixelShuffle channels (3 * 2^2 = 12) for the image bypass residual branch
+    model.image_residual = torch.nn.Conv2d(3, 12, 3, padding=1, bias=True)
+    torch.nn.init.zeros_(model.image_residual.weight)
+    torch.nn.init.zeros_(model.image_residual.bias)
     model = fused_copy(model, arch.Conv3XC)
     boundpath = BASE / 'records/F0-FEATURE-BOUND8-1M-FINAL-01/candidate/feature_bound.py'
     load_module('paper_bound8', boundpath).install(model, 8.0)
