@@ -52,9 +52,9 @@ def run_external(method_name, device):
                 model, meta = final_model(device, deploy_fold=False)
             elif method_name != 'Bicubic':
                 model, meta = public_model(method_name, device, deploy_fold=False)
-                # Odd-rectangle sanity check before full dataset inference
+                # Odd-rectangle sanity check (>=64x64 so 4x-downsampled window models like NGswin have >=2 windows)
                 with torch.no_grad():
-                    for h, w in [(32, 40), (31, 37)]:
+                    for h, w in [(64, 96), (65, 97)]:
                         y = model(torch.zeros(1, 3, h, w, device=device))
                         if y.shape != (1, 3, h * 4, w * 4) or not torch.isfinite(y).all():
                             raise ValueError(f'{method_name} forward sanity check failed on {(h, w)}')
@@ -117,9 +117,11 @@ def run_external(method_name, device):
                     lr_sha256=inp['lr_sha256'],
                     hr_sha256=inp['hr_sha256'],
                 ))
-                if i % 25 == 0 or i == count:
-                    print(f'EXT_PASS {method_name} {ds} {i}/{count} reused={reused} computed={computed} '
-                          f'elapsed={time.monotonic()-started:.1f}s', flush=True)
+                if i % 10 == 0 or i == count:
+                    el = time.monotonic() - started
+                    eta = el / i * (count - i) if i > 0 else 0.0
+                    print(f'EXT_PASS {method_name} {ds} {i}/{count} (reused={reused}, new={computed}, '
+                          f'elapsed={el:.1f}s, eta={eta:.1f}s)', flush=True)
 
     means = {}
     for ds, _ in ALL_DATASETS:
@@ -284,8 +286,10 @@ def run_lam(name, device, allow_skip=False):
                 attribution += gradient[0].detach().cpu().numpy() * velocity[i] / 50.0
                 objectives.append(float(objective.detach()))
                 del gradient, objective, prediction, value
-                if (i + 1) % 10 == 0:
-                    print(f'LAM_PROGRESS {name} {image} {i+1}/50 elapsed={time.monotonic()-started:.1f}s', flush=True)
+                if (i + 1) % 5 == 0 or (i + 1) == 50:
+                    el = time.monotonic() - started
+                    eta = el / (i + 1) * (50 - (i + 1))
+                    print(f'LAM_PROGRESS {name} {image} {i+1}/50 (elapsed={el:.1f}s, eta={eta:.1f}s)', flush=True)
             norm = fn['grad_abs_norm'](attribution)
             if not np.isfinite(norm).all() or norm.max() <= 0:
                 raise ValueError('Empty or invalid LAM map')

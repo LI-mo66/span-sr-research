@@ -30,21 +30,25 @@ busy=$(nvidia-smi --query-compute-apps=pid --format=csv,noheader || true)
 stage=STARTING
 trap 'code=$?; printf "STOPPED stage=%s exit=%s; no shutdown\n" "$stage" "$code" > "$PAPER_OUT/status.txt"' ERR
 
+TOTAL_STEPS=28
+CUR_STEP=0
+
 step() {
+    CUR_STEP=$((CUR_STEP + 1))
     stage=$1
     local marker=$2
     shift 2
     printf '%s\n' "$stage" > "$PAPER_OUT/status.txt"
     if [[ -s "$PAPER_OUT/$marker" ]]; then
-        echo "SKIP_COMPLETED $stage"
+        echo "[$CUR_STEP/$TOTAL_STEPS] SKIP_COMPLETED $stage"
     else
-        echo "START $stage"
+        echo "[$CUR_STEP/$TOTAL_STEPS] START $stage ($(date '+%H:%M:%S'))"
         if [[ -e "$PAPER_OUT/$stage.log" ]]; then
             mv -n "$PAPER_OUT/$stage.log" "$PAPER_OUT/$stage.failed-$(date -u +%Y%m%dT%H%M%SZ)-$$.log"
         fi
-        "$PYTHON_BIN" -u "$@" > "$PAPER_OUT/$stage.log" 2>&1
+        "$PYTHON_BIN" -u "$@" 2>&1 | tee "$PAPER_OUT/$stage.log"
         test -s "$PAPER_OUT/$marker"
-        echo "PASS $stage"
+        echo "[$CUR_STEP/$TOTAL_STEPS] PASS $stage ($(date '+%H:%M:%S'))"
     fi
 }
 
